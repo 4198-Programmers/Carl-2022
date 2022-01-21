@@ -7,6 +7,7 @@ public class Constants {
     public static final byte BACK_LEFT_MOTOR_DEVICE_ID = -0;
     public static final byte BACK_RIGHT_MOTOR_DEVICE_ID = -0;
     public static final byte FLY_WHEEL_MOTOR_DEVICE_ID = -0;
+    public static final byte BALL_MOVER_MOTOR_DEVICE_ID = -0;
 
     public static final byte LEFT_STICK_PORT = -0;
     public static final byte MID_STICK_PORT = -0;

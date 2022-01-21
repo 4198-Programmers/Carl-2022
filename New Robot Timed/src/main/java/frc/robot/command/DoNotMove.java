@@ -1,6 +1,9 @@
-package frc.robot;
+package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.DriveTrain;
+import frc.robot.Shooter;
 
 /** stops any and all motors */
 public class DoNotMove extends CommandBase {          
@@ -8,7 +11,7 @@ public class DoNotMove extends CommandBase {
     private DriveTrain vroomVroomDNM;
     private Shooter pewPewDNM;
     
-    DoNotMove(DriveTrain driveTrainArg, Shooter shooterArg){
+    public DoNotMove(DriveTrain driveTrainArg, Shooter shooterArg){
         vroomVroomDNM = driveTrainArg;
         pewPewDNM = shooterArg;
     }
@@ -17,7 +20,6 @@ public class DoNotMove extends CommandBase {
     public void execute() {
         vroomVroomDNM.greenLight(Constants.FREEZE, Constants.FREEZE);
         pewPewDNM.setFlySpeed(Constants.FREEZE);
-
     }
 
     

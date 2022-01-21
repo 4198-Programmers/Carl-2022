@@ -5,6 +5,9 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.command.DoNotMove;
+import frc.robot.command.TaxiAndShoot;
+import frc.robot.command.TaxiTarmac;
 
 public class Robot extends TimedRobot {
   private Command autoSelected;
@@ -19,13 +22,15 @@ public class Robot extends TimedRobot {
 
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
   TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
+  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
 
 
 
   @Override
   public void robotInit() {
     m_chooser.setDefaultOption("Default Auto", doNotMove);
-    m_chooser.addOption("My Auto", taxiAndShoot);
+    m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
+    m_chooser.addOption("Taxi", taxiTarmac);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 

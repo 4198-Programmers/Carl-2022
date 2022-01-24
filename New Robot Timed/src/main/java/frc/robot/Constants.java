@@ -2,12 +2,16 @@ package frc.robot;
 
 public class Constants {
     //all caps are established constants, all lowercase need an assignment
+    // -0 means it has a numerical value to be assigned to it, normal 0 is meant to be there
     public static final byte FRONT_RIGHT_MOTOR_DEVICE_ID = -0;
     public static final byte FRONT_LEFT_MOTOR_DEVICE_ID = -0;
     public static final byte BACK_LEFT_MOTOR_DEVICE_ID = -0;
     public static final byte BACK_RIGHT_MOTOR_DEVICE_ID = -0;
     public static final byte FLY_WHEEL_MOTOR_DEVICE_ID = -0;
     public static final byte BALL_MOVER_MOTOR_DEVICE_ID = -0;
+    public static final byte VERT_HOOKS_MOTOR_DEVICE_ID = -0;
+    public static final byte ANGLE_HOOKS_MOTOR_DEVICE_ID = -0;
+    public static final byte INTAKE_MOTOR_DEVICE_ID = -0;
 
     public static final byte LEFT_STICK_PORT = -0;
     public static final byte MID_STICK_PORT = -0;

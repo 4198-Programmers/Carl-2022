@@ -40,8 +40,9 @@ public class DriveTrain {
 
 
     /**
-     * Assigns two things to the xAxis of the Robot and the Rotation of the Robot. Negative Values of xAxis
-     * will move 
+     * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot. Negative values of xAxis
+     * will move backwards, negative values of the zRotation will rotate counter-clockwise.
+     * Joysticks allow these to be control by controller axes
      * @param xAxis
      * @param zRotate
      */

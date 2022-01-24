@@ -1,5 +1,7 @@
 package frc.robot.command;
 
+import java.net.CacheResponse;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.DriveTrain;
 
@@ -7,7 +9,8 @@ public class TaxiTarmac extends CommandBase {
     private DriveTrain vroomVroomTT;
     private OffTarmac runOff;
     private AutoState currentState = AutoState.Idle;
-
+    
+    /**Pulls in the current DriveTrain instance to use in the specific class **/
     public TaxiTarmac(DriveTrain driveTrainArg)
     {
         vroomVroomTT = driveTrainArg;
@@ -41,8 +44,10 @@ public class TaxiTarmac extends CommandBase {
             break;
 
             case Stop:
+            break;
 
-
+            default:
+            break;
 
         }
     }

@@ -2,10 +2,12 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.simulation.DifferentialDrivetrainSim;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.command.DoNotMove;
+import frc.robot.command.HooksByController;
 import frc.robot.command.TaxiAndShoot;
 import frc.robot.command.TaxiTarmac;
 
@@ -17,12 +19,16 @@ public class Robot extends TimedRobot {
   Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
 
+  //subsystems
   DriveTrain vroomVroom = new DriveTrain();
-  Shooter pewPew = new Shooter();
+  ShooterPathMovement pewPew = new ShooterPathMovement();
+  Hooks climber = new Hooks();
 
+  //commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
   TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
   TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
+  HooksByController hooksByController = new HooksByController(climber);
 
 
 
@@ -83,4 +89,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
+  // @Override 
+  // public void simulationInit() {Sim(1,1)}
+  
 }

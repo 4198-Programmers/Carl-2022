@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -6,8 +6,10 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class DriveTrain {
+public class DriveTrain extends SubsystemBase{
     private CANSparkMax frontR = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax frontL = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax backR = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
@@ -24,7 +26,7 @@ public class DriveTrain {
 
     private double conversionFactor = 12.75;
 
-    DriveTrain(){
+    public DriveTrain(){
         frontLEnc.setPositionConversionFactor(conversionFactor);
         frontREnc.setPositionConversionFactor(conversionFactor);
         backLEnc.setPositionConversionFactor(conversionFactor);

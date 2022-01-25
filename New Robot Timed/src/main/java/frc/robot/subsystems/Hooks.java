@@ -1,8 +1,10 @@
-package frc.robot;
+package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import frc.robot.Constants;
 
 public class Hooks {
     private CANSparkMax verticalHooks = new CANSparkMax(Constants.VERT_HOOKS_MOTOR_DEVICE_ID, MotorType.kBrushless);

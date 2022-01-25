@@ -22,6 +22,8 @@ public class Constants {
     public static final double FREEZE = 0;
     public static final double WHEEL_DIAMTER = 6;
 
+    public static final double VERT_HOOK_SPEED = 0.5;
+
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
     // public static final byte leftbuttonthree = 3;

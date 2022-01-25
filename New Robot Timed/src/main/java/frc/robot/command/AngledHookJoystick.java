@@ -2,16 +2,16 @@ package frc.robot.command;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Hooks;
+import frc.robot.subsystems.Hooks;
 
-public class HumanControl extends CommandBase{
+public class AngledHookJoystick extends CommandBase{
     private Hooks climberHC;
     private Joystick hookAxisStick;
 
     /**Allows driver to manually controll specifics 
      * (angled hooks angle)
     */
-    public HumanControl(Hooks hooksArg, Joystick controllingJoystick)
+    public AngledHookJoystick(Hooks hooksArg, Joystick controllingJoystick)
     {
         climberHC = hooksArg;
         hookAxisStick = controllingJoystick;

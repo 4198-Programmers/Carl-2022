@@ -1,7 +1,5 @@
 package frc.robot.command;
 
-import java.net.CacheResponse;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.DriveTrain;
 
@@ -47,6 +45,7 @@ public class TaxiTarmac extends CommandBase {
             break;
 
             default:
+            currentState = AutoState.Stop;
             break;
 
         }

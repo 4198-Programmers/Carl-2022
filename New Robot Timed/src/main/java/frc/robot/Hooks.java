@@ -7,7 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 public class Hooks {
     private CANSparkMax verticalHooks = new CANSparkMax(Constants.VERT_HOOKS_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax angledHooks = new CANSparkMax(Constants.ANGLE_HOOKS_MOTOR_DEVICE_ID, MotorType.kBrushless);
-    private RelativeEncoder verticalHooksEnc = verticalHooks.getEncoder();
+    //private RelativeEncoder verticalHooksEnc = verticalHooks.getEncoder();
     private RelativeEncoder angledHooksEnc = angledHooks.getEncoder();
 
     /**
@@ -20,7 +20,7 @@ public class Hooks {
     }
 
     /**
-     * Positive values will pull robot up, negative values will lower robot down
+     * Positive values will move hook more vertical, negative will move hook more horizontal
      * @param speed
      */
     public void moveAngledHooks(double speed)

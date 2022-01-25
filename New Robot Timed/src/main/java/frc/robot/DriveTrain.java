@@ -22,6 +22,15 @@ public class DriveTrain {
   
     private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
 
+    private double conversionFactor = 12.75;
+
+    DriveTrain(){
+        frontLEnc.setPositionConversionFactor(conversionFactor);
+        frontREnc.setPositionConversionFactor(conversionFactor);
+        backLEnc.setPositionConversionFactor(conversionFactor);
+        backREnc.setPositionConversionFactor(conversionFactor);
+    }
+
     /**Sets encoder positions to 0 */
     public void resetPosition(){
         frontLEnc.setPosition(0);

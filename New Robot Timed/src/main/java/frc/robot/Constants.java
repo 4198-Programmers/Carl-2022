@@ -20,7 +20,7 @@ public class Constants {
     public static final int DEFAULT_AUTO = 0;
     /**Wheel velocity = 0 */
     public static final double FREEZE = 0;
-    public static final double WHEEL_DIAMTER = -0;
+    public static final double WHEEL_DIAMTER = 6;
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
@@ -33,6 +33,7 @@ public class Constants {
     // public static final byte leftbuttonnine = 9;
     // public static final byte leftbuttonten = 10;
     // public static final byte leftbuttoneleven = 11;
+    // public static final byte button = 12;
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
@@ -48,16 +49,16 @@ public class Constants {
     // public static final byte leftbuttoneleven = 12;
 
     // public static final byte leftbuttonone = 1;
-    // public static final byte leftbuttontwo = 2;
-    // public static final byte leftbuttonthree = 3;
+    public static final byte HUMAN_OVERRIDE_BUTTON = 2;
+    // public static final byte leftbuttontwo = 3;
     // public static final byte leftbuttonfour = 4;
     // public static final byte leftbuttonfive = 5;
-    // public static final byte leftbuttonsix = 6;
-    // public static final byte leftbuttonseven = 7;
-    // public static final byte leftbuttoneight = 8;
+    public static final byte ANGLE_HOOK_UP_BUTTON = 6;
+    public static final byte ANGLE_HOOK_DOWN_BUTTON = 7;
+    ///public static final byte leftbuttoneight = 8;
     // public static final byte leftbuttonnine = 9;
-    // public static final byte leftbuttonten = 10;
-    // public static final byte leftbuttoneleven = 11;
+    public static final byte VERT_HOOK_DOWN_BUTTON = 10;
+    public static final byte VERT_HOOK_UP_BUTTON = 11;
     // public static final byte leftbuttoneleven = 12;
 
 

@@ -8,9 +8,6 @@ public class Robot extends TimedRobot {
   private Command autoSelected;
   RobotContainer container;
 
-
-
-
   @Override
   public void robotInit() {
     container = new RobotContainer();

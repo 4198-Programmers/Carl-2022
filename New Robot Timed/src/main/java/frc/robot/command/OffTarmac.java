@@ -1,38 +1,43 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.DriveTrain;
 import frc.robot.Maths;
+import frc.robot.subsystems.DriveTrain;
 
+<<<<<<< Updated upstream
 public class OffTarmac extends CommandBase{
+=======
+/** Autonomous movement used to exit the tarmac during Autonomous */
+public class OffTarmac extends CommandBase {
+>>>>>>> Stashed changes
     private DriveTrain vroomVroomOT;
     boolean youDone;
     double distanceOff;
 
+<<<<<<< Updated upstream
     OffTarmac(DriveTrain driveTrainArg)
     {
+=======
+    /** Pulls in the current DriveTrain instance to use in the specific class */
+    OffTarmac(DriveTrain driveTrainArg) {
+>>>>>>> Stashed changes
         vroomVroomOT = driveTrainArg;
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         distanceOff = 40;
         youDone = false;
     }
 
     @Override
-    public void execute()
-    {
+    public void execute() {
         double rotations = Maths.rotationConversion(distanceOff);
         double position = vroomVroomOT.findPosition();
 
-        if(position < rotations)
-        {
+        if (position < rotations) {
             vroomVroomOT.greenLight(-1, 0);
-        }
-        else
-        {
+        } else {
             vroomVroomOT.greenLight(0, 0);
             youDone = true;
 
@@ -40,9 +45,8 @@ public class OffTarmac extends CommandBase{
     }
 
     @Override
-    public boolean isFinished()
-    {
+    public boolean isFinished() {
         return youDone;
     }
-    
+
 }

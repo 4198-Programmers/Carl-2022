@@ -1,5 +1,7 @@
 package frc.robot;
 
-public class Limelight {
-    
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class Limelight extends SubsystemBase {
+
 }

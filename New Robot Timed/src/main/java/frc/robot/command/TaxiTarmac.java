@@ -1,48 +1,42 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.DriveTrain;
+import frc.robot.subsystems.DriveTrain;
 
 public class TaxiTarmac extends CommandBase {
     private DriveTrain vroomVroomTT;
     private OffTarmac runOff;
     private AutoState currentState = AutoState.Idle;
 
-    public TaxiTarmac(DriveTrain driveTrainArg)
-    {
+    public TaxiTarmac(DriveTrain driveTrainArg) {
         vroomVroomTT = driveTrainArg;
         runOff = new OffTarmac(vroomVroomTT);
     }
 
-    enum AutoState{
+    enum AutoState {
         Idle,
         Move,
         Stop
     }
 
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         currentState = AutoState.Idle;
     }
 
     @Override
-    public void execute()
-    {
-        switch(currentState)
-        {
+    public void execute() {
+        switch (currentState) {
             case Idle:
-            vroomVroomTT.resetPosition();
-            currentState = AutoState.Move;
-            break;
+                vroomVroomTT.resetPosition();
+                currentState = AutoState.Move;
+                break;
 
             case Move:
-            runOff.execute();
-            break;
+                runOff.execute();
+                break;
 
             case Stop:
-
-
 
         }
     }

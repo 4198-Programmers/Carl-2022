@@ -1,104 +1,59 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.command.DoNotMove;
-import frc.robot.command.PullVertHooksIn;
-import frc.robot.command.AngledHookJoystick;
-import frc.robot.command.ReachVertHooksUp;
-import frc.robot.command.TaxiAndShoot;
-import frc.robot.command.TaxiTarmac;
-import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Hooks;
-import frc.robot.subsystems.ShooterPathMovement;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   private Command autoSelected;
-  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+  RobotContainer container;
 
-  Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
-  Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
-  Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
 
-  //subsystems
-  DriveTrain vroomVroom = new DriveTrain();
-  ShooterPathMovement pewPew = new ShooterPathMovement();
-  Hooks climber = new Hooks();
-
-  //commands
-  DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-  TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
-  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
-  AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
-  ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
-  PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
-
-  //buttons
-  JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
-  JoystickButton verticalHookUp = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_BUTTON);
-  JoystickButton verticalHookDown = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_BUTTON);
-  JoystickButton angledHookUp = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
-  JoystickButton angledHookDown = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
-
-  public Robot(){
-    configureButtonBindings();
-  }
-
-  private void configureButtonBindings()
-  {
-    overrideButton.whileHeld(angledHookJoystick);
-    overrideButton.and(verticalHookUp).whileActiveContinuous(reachVertHooksUp);
-    overrideButton.and(verticalHookDown).whileActiveContinuous(pullVertHooksIn);
-
-  }
 
 
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", doNotMove);
-    m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", taxiTarmac);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    container = new RobotContainer();
+
   }
 
 
 
   @Override
   public void robotPeriodic() {
+    CommandScheduler.getInstance().run(); 
   }
 
  
 
   @Override
   public void autonomousInit() {
-    autoSelected = m_chooser.getSelected();
-    autoSelected.initialize();
+    autoSelected = container.getAutonomousCommand();
+
+    if (autoSelected != null) {
+      autoSelected.schedule();
+    }
 
   }
 
 
 
   @Override
-  public void autonomousPeriodic() {
-    autoSelected.execute();
-
-  }
+  public void autonomousPeriodic() {}
 
 
 
   @Override
   public void teleopInit() {
+    if (autoSelected != null) {
+      autoSelected.cancel();
+    }
 
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    vroomVroom.greenLight(leftStick.getRawAxis(0), rightStick.getRawAxis(0));
   }
 
   /** This function is called once when the robot is disabled. */

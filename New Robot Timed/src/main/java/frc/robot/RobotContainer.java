@@ -43,6 +43,7 @@ public class RobotContainer {
 
     // buttons
     JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
+<<<<<<< Updated upstream
     JoystickButton verticalHookUp = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_BUTTON);
     JoystickButton verticalHookDown = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_BUTTON);
     JoystickButton angledHookUp = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
@@ -63,6 +64,50 @@ public class RobotContainer {
         overrideButton.and(verticalHookDown).whileActiveContinuous(pullVertHooksIn);
         overrideButton.and(angledHookUp).whileActiveContinuous(moveCloserToNinetyDegrees);
         overrideButton.and(angledHookDown).whileActiveContinuous(moveCloserToNinetyDegrees);
+=======
+    JoystickButton verticalHookUpBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_BUTTON);
+    JoystickButton verticalHookDownBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_BUTTON);
+    JoystickButton angledHookUpBTN = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
+    JoystickButton angledHookDownBTN = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
+    JoystickButton flyWheelBTN = new JoystickButton(rightStick, Constants.FLY_WHEEL_BUTTON);
+    JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_FEEDER_FORWARDS_BUTTON);
+    JoystickButton internalFeederOutBTN = new JoystickButton(rightStick, Constants.INTAKE_FEEDER_BACKWARDS_BUTTON);
+    JoystickButton intakeBTN = new JoystickButton(rightStick, Constants.INTAKE_MOTOR_BUTTON);
+    JoystickButton outtakeBTN = new JoystickButton(rightStick, Constants.OUTTAKE_MOTOR_BUTTON);
+    //other 
+    private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+  
+    public RobotContainer(){
+      configureButtonBindings();
+      begin();
+      vroomVroom.setDefaultCommand(new RunCommand( () -> 
+      vroomVroom.greenLight(leftStick.getRawAxis(0), rightStick.getRawAxis(0)), vroomVroom));
+    }
+  
+    private void configureButtonBindings()
+    {
+      overrideButton.whileHeld(angledHookJoystick);
+      overrideButton.and(verticalHookUpBTN).whileActiveContinuous(reachVertHooksUp);
+      overrideButton.and(verticalHookDownBTN).whileActiveContinuous(pullVertHooksIn);
+      overrideButton.and(angledHookUpBTN).whileActiveContinuous(moveCloserToNinetyDegrees);
+      overrideButton.and(angledHookDownBTN).whileActiveContinuous(moveCloserToZeroDegrees);
+      //fly wheel, intake, and internal motor
+      overrideButton.and(flyWheelBTN).whileActiveContinuous(new RunCommand( () -> 
+      pewPew.setFlySpeed(Constants.FLY_WHEEL_SPEED), pewPew ));
+
+      overrideButton.and(internalFeederInBTN).whileActiveContinuous(new RunCommand( () ->
+      pewPew.setMoverSpeed(Constants.INTAKE_INTERNAL_FEEDER_SPEED), pewPew ));
+
+      overrideButton.and(internalFeederOutBTN).whileActiveContinuous(new RunCommand( () ->
+      pewPew.setMoverSpeed(Constants.OUTTAKE_INTERNAL_FEEDER_SPEED), pewPew ));
+
+      overrideButton.and(intakeBTN).whileActiveContinuous(new RunCommand( () -> 
+      pewPew.setIntakeSpeed(Constants.INTAKE_MOTOR_SPEED), pewPew ));
+    
+      overrideButton.and(outtakeBTN).whileActiveContinuous(new RunCommand( () -> 
+      pewPew.setIntakeSpeed(Constants.OUTTAKE_MOTOR_SPEED), pewPew ));
+  
+>>>>>>> Stashed changes
     }
 
     private void begin() {

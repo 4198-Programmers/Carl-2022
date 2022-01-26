@@ -20,10 +20,21 @@ public class Constants {
     public static final double FREEZE = 0;
     public static final double WHEEL_DIAMTER = -0;
 
+<<<<<<< Updated upstream
     public static final double VERT_HOOK_SPEED = -0;
 
     public static final double ANGLE_HOOK_SPEED = -0;
 
+=======
+    public static final double VERT_HOOK_SPEED = 0.5;
+    public static final double ANGLE_HOOK_SPEED = 0.5;
+    
+    public static final double OUTTAKE_MOTOR_SPEED = -0;
+    public static final double OUTTAKE_INTERNAL_FEEDER_SPEED = 0;
+    public static final double FLY_WHEEL_SPEED = -0;
+    public static final double INTAKE_INTERNAL_FEEDER_SPEED = -0;
+    public static final double INTAKE_MOTOR_SPEED = -0;
+>>>>>>> Stashed changes
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
     // public static final byte leftbuttonthree = 3;
@@ -61,5 +72,13 @@ public class Constants {
     // public static final byte leftbuttonten = 10;
     // public static final byte leftbuttoneleven = 11;
     // public static final byte leftbuttoneleven = 12;
+<<<<<<< Updated upstream
 
+=======
+    public static final byte FLY_WHEEL_BUTTON = -0;
+    public static final byte INTAKE_MOTOR_BUTTON = -0;
+    public static final byte INTERNAL_FEEDER_FORWARDS_BUTTON = -0;
+    public static final byte INTAKE_FEEDER_BACKWARDS_BUTTON = -0;
+    public static final byte OUTTAKE_MOTOR_BUTTON = 0;
+>>>>>>> Stashed changes
 }

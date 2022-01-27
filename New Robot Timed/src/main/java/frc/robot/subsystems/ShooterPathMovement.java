@@ -8,8 +8,7 @@ import frc.robot.Constants;
 
 public class ShooterPathMovement extends SubsystemBase {
     private CANSparkMax flyWheelMotor = new CANSparkMax(Constants.FLY_WHEEL_MOTOR_DEVICE_ID, MotorType.kBrushless);
-    private CANSparkMax internalMoverMotor = new CANSparkMax(Constants.BALL_MOVER_MOTOR_DEVICE_ID,
-            MotorType.kBrushless);
+    private CANSparkMax internalMoverMotor = new CANSparkMax(Constants.BALL_MOVER_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax intakeMotor = new CANSparkMax(Constants.INTAKE_MOTOR_DEVICE_ID, MotorType.kBrushless);
 
     /** top of shooter wheel speeds (go pew pew fast) */
@@ -17,6 +16,10 @@ public class ShooterPathMovement extends SubsystemBase {
         flyWheelMotor.set(speed);
     }
 
+    public double getFlySpeed(){
+        return flyWheelMotor.get();
+    }
+    
     public void setMoverSpeed(double speed) {
         internalMoverMotor.set(speed);
     }

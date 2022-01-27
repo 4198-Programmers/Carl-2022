@@ -4,9 +4,14 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
+import frc.robot.command.SetIntakeSpeed;
+import frc.robot.command.Shooter;
+import frc.robot.command.Targeting;
 import frc.robot.command.TaxiAndShoot;
 import frc.robot.command.TaxiTarmac;
 import frc.robot.command.hookcommands.AngledHookJoystick;
@@ -56,8 +61,8 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     begin();
-    vroomVroom.setDefaultCommand(
-        new RunCommand(() -> vroomVroom.greenLight(leftStick.getRawAxis(0), rightStick.getRawAxis(0)), vroomVroom));
+    vroomVroom.setDefaultCommand(new RunCommand( () -> 
+    vroomVroom.greenLight(leftStick.getRawAxis(0), rightStick.getRawAxis(0)), vroomVroom));
   }
 
   private void configureButtonBindings() {
@@ -67,20 +72,29 @@ public class RobotContainer {
     overrideButton.and(angledHookUpBTN).whileActiveContinuous(moveCloserToNinetyDegrees);
     overrideButton.and(angledHookDownBTN).whileActiveContinuous(moveCloserToZeroDegrees);
 
-    overrideButton.and(manualIntakeForwardsBTN)
-        .whileActiveContinuous(new RunCommand(() -> pewPew.setIntakeSpeed(Constants.MANUAL_INTAKE_SPEED), pewPew));
+    overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(new RunCommand( () -> 
+    pewPew.setIntakeSpeed(Constants.MANUAL_INTAKE_SPEED), pewPew));
 
-    overrideButton.and(flywheelSpinUpBTN)
-        .whileActiveContinuous(new RunCommand(() -> pewPew.setFlySpeed(Constants.FLYWHEEL_SPEED), pewPew));
+    overrideButton.and(flywheelSpinUpBTN).whileActiveContinuous(new RunCommand( () -> 
+    pewPew.setFlySpeed(Constants.FLYWHEEL_SPEED), pewPew));
 
-    overrideButton.and(internalFeederInBTN)
-        .whileActiveContinuous(new RunCommand(() -> pewPew.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED), pewPew));
+    overrideButton.and(internalFeederInBTN).whileActiveContinuous(new RunCommand( () -> 
+    pewPew.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED), pewPew));
 
-    overrideButton.and(internalFeederOutBTN).whileActiveContinuous(
-        new RunCommand(() -> pewPew.setMoverSpeed(Constants.INTERNAL_FEEDER_REVERSE_SPEED), pewPew));
+    overrideButton.and(internalFeederOutBTN).whileActiveContinuous(new RunCommand( () -> 
+    pewPew.setMoverSpeed(Constants.INTERNAL_FEEDER_REVERSE_SPEED), pewPew));
 
-    overrideButton.and(manualIntakeReverseBTN)
-        .whileActiveContinuous(new RunCommand(() -> pewPew.setIntakeSpeed(Constants.INTAKEOUT_BUTTON), pewPew));
+    overrideButton.and(manualIntakeReverseBTN).whileActiveContinuous(new RunCommand( () -> 
+    pewPew.setIntakeSpeed(Constants.INTAKEOUT_BUTTON), pewPew));
+
+    Targeting targeting = new Targeting();
+    Shooter shooter = new Shooter();
+    SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
+
+    ParallelCommandGroup group = new ParallelCommandGroup(targeting,setIntakeSpeed);
+    SequentialCommandGroup gRoup = new SequentialCommandGroup(group, shooter);
+  
+  
   }
 
   private void begin() {

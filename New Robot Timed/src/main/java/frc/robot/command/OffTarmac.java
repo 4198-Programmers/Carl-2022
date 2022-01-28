@@ -14,6 +14,7 @@ public class OffTarmac extends CommandBase{
     OffTarmac(DriveTrain driveTrainArg)
     {
         vroomVroomOT = driveTrainArg;
+        addRequirements(vroomVroomOT);
     }
 
     @Override

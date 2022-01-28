@@ -12,6 +12,7 @@ public class TaxiTarmac extends CommandBase {
     public TaxiTarmac(DriveTrain driveTrainArg)
     {
         vroomVroomTT = driveTrainArg;
+        addRequirements(vroomVroomTT);
         runOff = new OffTarmac(vroomVroomTT);
     }
 

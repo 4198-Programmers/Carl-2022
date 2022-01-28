@@ -4,9 +4,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Hooks {
+public class Hooks extends SubsystemBase{
     private CANSparkMax verticalHooks = new CANSparkMax(Constants.VERT_HOOKS_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax angledHooks = new CANSparkMax(Constants.ANGLE_HOOKS_MOTOR_DEVICE_ID, MotorType.kBrushless);
     //private RelativeEncoder verticalHooksEnc = verticalHooks.getEncoder();

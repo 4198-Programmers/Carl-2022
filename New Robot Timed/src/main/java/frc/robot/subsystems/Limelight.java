@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase{
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx");
+    public NetworkTableEntry tx = table.getEntry("tx");
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv"); 
     NetworkTableEntry ta = table.getEntry("ta");
@@ -19,4 +19,9 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
     NetworkTableEntry pipeline = table.getEntry("pipeline");
+
+    public double distanceFromCenter()
+    {
+        return tx.getDouble(1);                             //default is 1 to cause robot to spin to find target
+    }
 }

@@ -10,6 +10,7 @@ public class ReachVertHooksUp extends CommandBase{
     public ReachVertHooksUp(Hooks hooksArg)
     {
         grabbers = hooksArg;
+        addRequirements(grabbers);
     }
 
     @Override

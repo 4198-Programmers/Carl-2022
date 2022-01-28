@@ -10,6 +10,7 @@ public class MoveCloserToNinetyDegrees extends CommandBase{
     public MoveCloserToNinetyDegrees(Hooks hookArg)
     {
         elbow = hookArg;
+        addRequirements(elbow);
     }
 
     @Override

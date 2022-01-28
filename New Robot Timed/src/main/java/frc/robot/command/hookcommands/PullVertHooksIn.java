@@ -10,6 +10,7 @@ public class PullVertHooksIn extends CommandBase{
     public PullVertHooksIn(Hooks hooksArg)
     {
         grab = hooksArg;
+        addRequirements(grab);
     }
 
     @Override

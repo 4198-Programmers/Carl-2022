@@ -9,8 +9,7 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
-import frc.robot.command.SetIntakeSpeed;
-import frc.robot.command.Shooter;
+import frc.robot.command.SetFlySpeed;
 import frc.robot.command.Targeting;
 import frc.robot.command.TaxiAndShoot;
 import frc.robot.command.TaxiTarmac;
@@ -21,6 +20,7 @@ import frc.robot.command.hookcommands.PullVertHooksIn;
 import frc.robot.command.hookcommands.ReachVertHooksUp;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.ShooterPathMovement;
 
 public class RobotContainer {
@@ -32,6 +32,7 @@ public class RobotContainer {
   DriveTrain vroomVroom = new DriveTrain();
   ShooterPathMovement pewPew = new ShooterPathMovement();
   Hooks climber = new Hooks();
+  Limelight vision = new Limelight();
 
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
@@ -42,12 +43,11 @@ public class RobotContainer {
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
   MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(climber);
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(climber);
-  Targeting targeting = new Targeting();
-  Shooter shooter = new Shooter();
-  SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
+  Targeting targeting = new Targeting(vroomVroom, vision);
+  SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
 
-  ParallelCommandGroup group = new ParallelCommandGroup(targeting,setIntakeSpeed);
-  SequentialCommandGroup gRoup = new SequentialCommandGroup(group, shooter);
+  ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
+  SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, shooter);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -77,12 +77,10 @@ public class RobotContainer {
     overrideButton.and(verticalHookDownBTN).whileActiveContinuous(pullVertHooksIn);
     overrideButton.and(angledHookUpBTN).whileActiveContinuous(moveCloserToNinetyDegrees);
     overrideButton.and(angledHookDownBTN).whileActiveContinuous(moveCloserToZeroDegrees);
+    overrideButton.and(flywheelSpinUpBTN).whileActiveContinuous(setFlySpeed);
 
     overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(new RunCommand( () -> 
     pewPew.setIntakeSpeed(Constants.MANUAL_INTAKE_SPEED), pewPew));
-
-    overrideButton.and(flywheelSpinUpBTN).whileActiveContinuous(new RunCommand( () -> 
-    pewPew.setFlySpeed(Constants.FLYWHEEL_SPEED), pewPew));
 
     overrideButton.and(internalFeederInBTN).whileActiveContinuous(new RunCommand( () -> 
     pewPew.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED), pewPew));

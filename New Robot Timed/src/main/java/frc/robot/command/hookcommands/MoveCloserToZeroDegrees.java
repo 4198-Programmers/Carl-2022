@@ -10,6 +10,7 @@ public class MoveCloserToZeroDegrees extends CommandBase{
     public MoveCloserToZeroDegrees(Hooks hooksArg)
     {
         arm = hooksArg;
+        addRequirements(arm);
     }
 
     @Override

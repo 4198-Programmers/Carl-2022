@@ -15,6 +15,7 @@ public class DoNotMove extends CommandBase {
     public DoNotMove(DriveTrain driveTrainArg, ShooterPathMovement shooterArg){
         vroomVroomDNM = driveTrainArg;
         pewPewDNM = shooterArg;
+        addRequirements(vroomVroomDNM, pewPewDNM);
     }
 
     @Override

@@ -15,6 +15,7 @@ public class AngledHookJoystick extends CommandBase{
     {
         climberHC = hooksArg;
         hookAxisStick = controllingJoystick;
+        addRequirements(climberHC);
     }
 
     @Override

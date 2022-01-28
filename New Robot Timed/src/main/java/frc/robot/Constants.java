@@ -25,10 +25,10 @@ public class Constants {
 
     public static final double VERT_HOOK_SPEED = -0;
     public static final double ANGLE_HOOK_SPEED = -0;
-    public static final double MANUAL_INTAKE_SPEED = -0;
+    public static final double INTAKE_SPEED = -0;
     public static final double FLYWHEEL_SPEED = -0;
     public static final double INTERNAL_FEEDER_SPEED = -0;
-    public static final double MANUAL_INTAKE_REVERSE_SPEED = -0;
+    public static final double INTAKE_REVERSE_SPEED = -0;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = -0;
 
     // public static final byte leftbuttonone = 1;
@@ -57,15 +57,15 @@ public class Constants {
     // public static final byte leftbuttoneleven = 11;
     // public static final byte leftbuttoneleven = 12;
 
-    // public static final byte leftbuttonone = 1;
+    public static final byte RIGHT_STICK_TRIGGER = 1;
     public static final byte HUMAN_OVERRIDE_BUTTON = 2;
     public static final byte FLYWHEEL_BUTTON = 3;
     public static final byte INTAKEIN_BUTTON = 4;
-    public static final byte INTAKEOUT_BUTTON = 5;
+    public static final byte YEET_THE_BALLS_OUT_THE_BACK_BUTTON = 5;
     public static final byte ANGLE_HOOK_UP_BUTTON = 6;
     public static final byte ANGLE_HOOK_DOWN_BUTTON = 7;
     public static final byte INTERNAL_MOVER_FORWARDS_BUTTON = 8;
-    public static final byte INTERNAL_MOVER_REVERSE_BUTTON = 9;
+    //public static final byte no = 9;
     public static final byte VERT_HOOK_DOWN_BUTTON = 10;
     public static final byte VERT_HOOK_UP_BUTTON = 11;
     // public static final byte leftbuttoneleven = 12;

@@ -10,6 +10,9 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
 import frc.robot.command.SetFlySpeed;
+import frc.robot.command.SetIntakeSpeed;
+import frc.robot.command.SetInternalMoveSpeed;
+import frc.robot.command.SpitBalls;
 import frc.robot.command.Targeting;
 import frc.robot.command.TaxiAndShoot;
 import frc.robot.command.TaxiTarmac;
@@ -45,9 +48,12 @@ public class RobotContainer {
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(climber);
   Targeting targeting = new Targeting(vroomVroom, vision);
   SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
+  SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
+  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
+  SpitBalls spitBalls = new SpitBalls(pewPew);
 
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
-  SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, shooter);
+  SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -58,8 +64,8 @@ public class RobotContainer {
   JoystickButton manualIntakeForwardsBTN = new JoystickButton(rightStick, Constants.INTAKEIN_BUTTON);
   JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_BUTTON);
   JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
-  JoystickButton internalFeederOutBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_REVERSE_BUTTON);
-  JoystickButton manualIntakeReverseBTN = new JoystickButton(rightStick, Constants.INTAKEOUT_BUTTON);
+  JoystickButton spitBTN = new JoystickButton(rightStick, Constants.YEET_THE_BALLS_OUT_THE_BACK_BUTTON);
+  JoystickButton fullFIREEEE = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -78,18 +84,11 @@ public class RobotContainer {
     overrideButton.and(angledHookUpBTN).whileActiveContinuous(moveCloserToNinetyDegrees);
     overrideButton.and(angledHookDownBTN).whileActiveContinuous(moveCloserToZeroDegrees);
     overrideButton.and(flywheelSpinUpBTN).whileActiveContinuous(setFlySpeed);
+    overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(setIntakeSpeed);
+    overrideButton.and(internalFeederInBTN).whileActiveContinuous(setInternalMoveSpeed);
+    overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
+    fullFIREEEE.whenHeld(shootingGroup);
 
-    overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(new RunCommand( () -> 
-    pewPew.setIntakeSpeed(Constants.MANUAL_INTAKE_SPEED), pewPew));
-
-    overrideButton.and(internalFeederInBTN).whileActiveContinuous(new RunCommand( () -> 
-    pewPew.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED), pewPew));
-
-    overrideButton.and(internalFeederOutBTN).whileActiveContinuous(new RunCommand( () -> 
-    pewPew.setMoverSpeed(Constants.INTERNAL_FEEDER_REVERSE_SPEED), pewPew));
-
-    overrideButton.and(manualIntakeReverseBTN).whileActiveContinuous(new RunCommand( () -> 
-    pewPew.setIntakeSpeed(Constants.INTAKEOUT_BUTTON), pewPew));
   
   
   }

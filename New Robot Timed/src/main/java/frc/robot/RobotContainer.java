@@ -42,6 +42,12 @@ public class RobotContainer {
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
   MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(climber);
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(climber);
+  Targeting targeting = new Targeting();
+  Shooter shooter = new Shooter();
+  SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
+
+  ParallelCommandGroup group = new ParallelCommandGroup(targeting,setIntakeSpeed);
+  SequentialCommandGroup gRoup = new SequentialCommandGroup(group, shooter);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -86,13 +92,6 @@ public class RobotContainer {
 
     overrideButton.and(manualIntakeReverseBTN).whileActiveContinuous(new RunCommand( () -> 
     pewPew.setIntakeSpeed(Constants.INTAKEOUT_BUTTON), pewPew));
-
-    Targeting targeting = new Targeting();
-    Shooter shooter = new Shooter();
-    SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
-
-    ParallelCommandGroup group = new ParallelCommandGroup(targeting,setIntakeSpeed);
-    SequentialCommandGroup gRoup = new SequentialCommandGroup(group, shooter);
   
   
   }

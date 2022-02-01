@@ -59,7 +59,7 @@ public class DriveTrain extends SubsystemBase{
      */
     public void greenLight(double xAxis, double zRotate){
         
-        allDrive.arcadeDrive(xAxis, zRotate);
+        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER*xAxis, Constants.DRIVE_SPEED_MULTIPLIER*zRotate);
     }
 
   

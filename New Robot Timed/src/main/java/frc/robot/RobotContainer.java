@@ -74,7 +74,7 @@ public class RobotContainer {
     configureButtonBindings();
     begin();
     vroomVroom.setDefaultCommand(new RunCommand( () -> 
-    vroomVroom.greenLight(leftStick.getRawAxis(0), rightStick.getRawAxis(0)), vroomVroom));
+    vroomVroom.greenLight(midStick.getRawAxis(1), leftStick.getRawAxis(0)), vroomVroom));
   }
 
   private void configureButtonBindings() {

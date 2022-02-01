@@ -30,6 +30,8 @@ public class Constants {
     public static final double INTERNAL_FEEDER_SPEED = -0;
     public static final double INTAKE_REVERSE_SPEED = -0;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = -0;
+    public static final double DRIVE_SPEED_MULTIPLIER = .4;
+
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;

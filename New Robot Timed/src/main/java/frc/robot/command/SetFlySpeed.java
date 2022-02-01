@@ -12,9 +12,14 @@ public class SetFlySpeed extends CommandBase{
         addRequirements(pewPew);
     }
 
+    protected double catchWantedFlySpeed()
+    {
+        return Constants.FLYWHEEL_SPEED;
+    }
+
     @Override
     public void execute() {
-        pewPew.setFlySpeed(Constants.FLYWHEEL_SPEED);
+        pewPew.setFlySpeed(catchWantedFlySpeed());
     }
 
     @Override

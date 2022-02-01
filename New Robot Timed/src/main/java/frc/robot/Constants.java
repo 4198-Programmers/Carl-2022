@@ -4,6 +4,7 @@ public class Constants {
     // all caps are established constants, all lowercase need an assignment
     // -0 means it has a numerical value to be assigned to it, normal 0 is meant to
     // be there
+    //TODO set values
     public static final byte FRONT_RIGHT_MOTOR_DEVICE_ID = -0;
     public static final byte FRONT_LEFT_MOTOR_DEVICE_ID = -0;
     public static final byte BACK_LEFT_MOTOR_DEVICE_ID = -0;
@@ -32,6 +33,13 @@ public class Constants {
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = -0;
     public static final double DRIVE_SPEED_MULTIPLIER = .4;
 
+    //distance variables
+    public static final double LIMELIGHT_ANGLE_FROM_GROUND = -0;
+    public static final double LIMELIGHT_HEIGHT_TO_GROUND = -0; 
+    public static final double TARGET_HEIGHT_TOP_TO_GROUND = -0;
+
+    //other
+    public static final double OFFSET_TOLERANCE_INCHES = 1; //TODO Goal is for this to be measure with inches
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;

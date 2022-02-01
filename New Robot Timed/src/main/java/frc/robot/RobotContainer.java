@@ -65,7 +65,7 @@ public class RobotContainer {
   JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_BUTTON);
   JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
   JoystickButton spitBTN = new JoystickButton(rightStick, Constants.YEET_THE_BALLS_OUT_THE_BACK_BUTTON);
-  JoystickButton fullFIREEEE = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
+  JoystickButton fullFIREEEEBTN = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -87,7 +87,7 @@ public class RobotContainer {
     overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(setIntakeSpeed);
     overrideButton.and(internalFeederInBTN).whileActiveContinuous(setInternalMoveSpeed);
     overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
-    fullFIREEEE.whenHeld(shootingGroup);
+    fullFIREEEEBTN.whenHeld(shootingGroup);
 
   
   

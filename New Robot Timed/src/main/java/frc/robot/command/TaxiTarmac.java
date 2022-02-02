@@ -1,16 +1,18 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.DriveTrain;
+import frc.robot.subsystems.DriveTrain;
 
 public class TaxiTarmac extends CommandBase {
     private DriveTrain vroomVroomTT;
     private OffTarmac runOff;
     private AutoState currentState = AutoState.Idle;
-
+    
+    /**Pulls in the current DriveTrain instance to use in the specific class **/
     public TaxiTarmac(DriveTrain driveTrainArg)
     {
         vroomVroomTT = driveTrainArg;
+        addRequirements(vroomVroomTT);
         runOff = new OffTarmac(vroomVroomTT);
     }
 
@@ -41,8 +43,11 @@ public class TaxiTarmac extends CommandBase {
             break;
 
             case Stop:
+            break;
 
-
+            default:
+            currentState = AutoState.Stop;
+            break;
 
         }
     }

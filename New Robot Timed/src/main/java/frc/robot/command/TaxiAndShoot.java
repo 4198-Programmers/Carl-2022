@@ -1,19 +1,20 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.DriveTrain;
-import frc.robot.Shooter;
+import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.ShooterPathMovement;
 
 public class TaxiAndShoot extends CommandBase {
-    /**still vroomVroom from robot, just used in this class(TAS)*/
+    /**still vroomVroom from robot, just used in this class(TAS)**/
     private DriveTrain vroomVroomTAS;
-    private Shooter pewPewTAS;
+    private ShooterPathMovement pewPewTAS;
     private OffTarmac runOffTarmac;
     private DoNotMove stopEverything;
 
     private AutoState currentState = AutoState.Idle;
 
-    public TaxiAndShoot(DriveTrain driveTrainArg, Shooter shooterArg)
+    /**Pulls in the current DriveTrain and Shooter instances to use in the specific class**/
+    public TaxiAndShoot(DriveTrain driveTrainArg, ShooterPathMovement shooterArg)
     {
         vroomVroomTAS = driveTrainArg;
         pewPewTAS = shooterArg;

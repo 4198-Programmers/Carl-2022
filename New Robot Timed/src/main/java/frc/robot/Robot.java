@@ -1,71 +1,56 @@
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.command.DoNotMove;
-import frc.robot.command.TaxiAndShoot;
-import frc.robot.command.TaxiTarmac;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
   private Command autoSelected;
-  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
-
-  Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
-  Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
-  Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
-
-  DriveTrain vroomVroom = new DriveTrain();
-  Shooter pewPew = new Shooter();
-
-  DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-  TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
-  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
-
-
+  RobotContainer container;
 
   @Override
   public void robotInit() {
-    m_chooser.setDefaultOption("Default Auto", doNotMove);
-    m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", taxiTarmac);
-    SmartDashboard.putData("Auto choices", m_chooser);
+    container = new RobotContainer();
+
   }
 
 
 
   @Override
   public void robotPeriodic() {
+    CommandScheduler.getInstance().run(); 
   }
 
  
 
   @Override
   public void autonomousInit() {
-    autoSelected = m_chooser.getSelected();
-    autoSelected.initialize();
+    autoSelected = container.getAutonomousCommand();
+
+    if (autoSelected != null) {
+      autoSelected.schedule();
+    }
 
   }
 
 
 
   @Override
-  public void autonomousPeriodic() {
-    autoSelected.execute();
-
-  }
+  public void autonomousPeriodic() {}
 
 
 
   @Override
-  public void teleopInit() {}
+  public void teleopInit() {
+    if (autoSelected != null) {
+      autoSelected.cancel();
+    }
+
+  }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    vroomVroom.greenLight(leftStick.getRawAxis(0), leftStick.getRawAxis(1));
   }
 
   /** This function is called once when the robot is disabled. */
@@ -83,4 +68,8 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during test mode. */
   @Override
   public void testPeriodic() {}
+
+  // @Override 
+  // public void simulationInit() {}
+  
 }

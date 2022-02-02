@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
 import frc.robot.command.SetFlySpeed;
+import frc.robot.command.SetFlySpeedUsingCalculation;
 import frc.robot.command.SetIntakeSpeed;
 import frc.robot.command.SetInternalMoveSpeed;
 import frc.robot.command.SpitBalls;
@@ -51,6 +52,7 @@ public class RobotContainer {
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
+  SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
 
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);

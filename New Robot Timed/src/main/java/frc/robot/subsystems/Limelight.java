@@ -8,7 +8,7 @@ import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase{
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    public NetworkTableEntry tx = table.getEntry("tx"); //TODO math to convert to inches SOON
+    NetworkTableEntry tx = table.getEntry("tx"); //TODO math to convert to inches SOON
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv"); 
     NetworkTableEntry ta = table.getEntry("ta");

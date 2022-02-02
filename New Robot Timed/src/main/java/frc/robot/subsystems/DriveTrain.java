@@ -19,8 +19,8 @@ public class DriveTrain extends SubsystemBase{
     private RelativeEncoder backREnc = backR.getEncoder();
     private RelativeEncoder backLEnc = backL.getEncoder();
 
-    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontR, backR);
-    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontL, backL);
+    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontR, backR);
+    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontL, backL);
   
     private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
 

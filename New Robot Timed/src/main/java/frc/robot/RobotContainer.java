@@ -59,6 +59,7 @@ public class RobotContainer {
   MoveVerticalHookDown moveVerticalHookDown = new MoveVerticalHookDown();
   ResetDriveTrainPosition resetTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   OffTarmac offTarmac = new OffTarmac(vroomVroom);
+  /**It is just basically a parallelCommandGroup with Sequential Command groups */
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
     .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
 

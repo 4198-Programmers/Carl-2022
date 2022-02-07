@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
+import frc.robot.command.OffTarmac;
 import frc.robot.command.SetFlySpeed;
-import frc.robot.command.SetFlySpeedUsingCalculation;
+//import frc.robot.command.SetFlySpeedUsingCalculation;
 import frc.robot.command.SetIntakeSpeed;
 import frc.robot.command.SetInternalMoveSpeed;
 import frc.robot.command.SpitBalls;
 import frc.robot.command.Targeting;
 import frc.robot.command.TaxiAndShoot;
-import frc.robot.command.TaxiTarmac;
 import frc.robot.command.hookcommands.AngledHookJoystick;
 import frc.robot.command.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.command.hookcommands.MoveCloserToZeroDegrees;
@@ -41,7 +41,6 @@ public class RobotContainer {
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
   TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
-  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
@@ -52,7 +51,8 @@ public class RobotContainer {
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
-  SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
+  public OffTarmac taxiTarmac = new OffTarmac(vroomVroom);
+  //SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
 
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
@@ -76,7 +76,7 @@ public class RobotContainer {
     configureButtonBindings();
     begin();
     vroomVroom.setDefaultCommand(new RunCommand( () -> 
-    vroomVroom.greenLight(midStick.getRawAxis(1), leftStick.getRawAxis(0)), vroomVroom));
+    vroomVroom.greenLight(midStick.getRawAxis(0), (-1)*leftStick.getRawAxis(1)), vroomVroom));
   }
 
   private void configureButtonBindings() {

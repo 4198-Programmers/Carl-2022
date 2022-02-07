@@ -1,28 +1,30 @@
-package frc.robot.command;
+// package frc.robot.command;
 
-import frc.robot.Constants;
-import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.ShooterPathMovement;
+// import frc.robot.Constants;
+// import frc.robot.subsystems.Limelight;
+// import frc.robot.subsystems.ShooterPathMovement;
 
-public class SetFlySpeedUsingCalculation extends SetFlySpeed{
-    private Limelight visionSFSUC;
-    private ShooterPathMovement pewPewSFSUC;
+// public class SetFlySpeedUsingCalculation extends SetFlySpeed{
+//     private Limelight visionSFSUC;
+//     private ShooterPathMovement pewPewSFSUC;
 
 
-    public SetFlySpeedUsingCalculation(Limelight limelightArg, ShooterPathMovement shooterPathMovementArg)
-    {
-        super(shooterPathMovementArg);
-        visionSFSUC = limelightArg;
-    }
+//     public SetFlySpeedUsingCalculation(Limelight limelightArg, ShooterPathMovement shooterPathMovementArg)
+//     {
+//         super(shooterPathMovementArg);
+//         visionSFSUC = limelightArg;
+//         addRequirements(visionSFSUC);
+//         addRequirements(pewPewSFSUC);
+//     }
 
-    @Override
-    protected double catchWantedFlySpeed() {
+//     @Override
+//     protected double catchWantedFlySpeed() {
 
-        // double velocityCalculated = visionSFSUC.distanceToTarget(); //TODO this is very very wrong please add equation 
+//         // double velocityCalculated = visionSFSUC.distanceToTarget(); //TODO this is very very wrong please add equation 
 
-        // return velocityCalculated;
-        return Constants.FLYWHEEL_SPEED;
-    }
+//         // return velocityCalculated;
+//         return Constants.FLYWHEEL_SPEED;
+//     }
 
     
-}
+// }

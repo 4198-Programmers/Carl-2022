@@ -5,41 +5,42 @@ public class Constants {
     // -0 means it has a numerical value to be assigned to it, normal 0 is meant to
     // be there
     //TODO set values
-    public static final byte FRONT_RIGHT_MOTOR_DEVICE_ID = -0;
-    public static final byte FRONT_LEFT_MOTOR_DEVICE_ID = -0;
-    public static final byte BACK_LEFT_MOTOR_DEVICE_ID = -0;
-    public static final byte BACK_RIGHT_MOTOR_DEVICE_ID = -0;
-    public static final byte FLY_WHEEL_MOTOR_DEVICE_ID = -0;
-    public static final byte BALL_MOVER_MOTOR_DEVICE_ID = -0;
-    public static final byte VERT_HOOKS_MOTOR_DEVICE_ID = -0;
-    public static final byte ANGLE_HOOKS_MOTOR_DEVICE_ID = -0;
-    public static final byte INTAKE_MOTOR_DEVICE_ID = -0;
+    public static final byte FRONT_RIGHT_MOTOR_DEVICE_ID = 3;
+    public static final byte FRONT_LEFT_MOTOR_DEVICE_ID = 4;
+    public static final byte BACK_LEFT_MOTOR_DEVICE_ID = 2;
+    public static final byte BACK_RIGHT_MOTOR_DEVICE_ID = 1;
+    public static final byte FLY_WHEEL_MOTOR_DEVICE_ID = 5;
+    public static final byte BALL_MOVER_MOTOR_DEVICE_ID = 6;
+    public static final byte VERT_HOOKS_MOTOR_DEVICE_ID = 7;
+    public static final byte ANGLE_HOOKS_MOTOR_DEVICE_ID = 8;
+    public static final byte INTAKE_MOTOR_DEVICE_ID = 9;
 
-    public static final byte LEFT_STICK_PORT = -0;
-    public static final byte MID_STICK_PORT = -0;
-    public static final byte RIGHT_STICK_PORT = -0;
+    public static final byte LEFT_STICK_PORT = 0;
+    public static final byte MID_STICK_PORT = 1;
+    public static final byte RIGHT_STICK_PORT = 2;
 
     public static final int DEFAULT_AUTO = 0;
     /** Wheel velocity = 0 */
     public static final double FREEZE = 0;
     public static final double WHEEL_DIAMTER = 6;
+    public static final double WHEEL_CONVERSION_FACTOR = 12.75;
 
-    public static final double VERT_HOOK_SPEED = -0;
-    public static final double ANGLE_HOOK_SPEED = -0;
-    public static final double INTAKE_SPEED = -0;
-    public static final double FLYWHEEL_SPEED = -0;
-    public static final double INTERNAL_FEEDER_SPEED = -0;
-    public static final double INTAKE_REVERSE_SPEED = -0;
-    public static final double INTERNAL_FEEDER_REVERSE_SPEED = -0;
-    public static final double DRIVE_SPEED_MULTIPLIER = .4;
+    public static final double VERT_HOOK_SPEED = 0.5;
+    public static final double ANGLE_HOOK_SPEED = 0.5;
+    public static final double INTAKE_SPEED = 0.5;
+    public static final double FLYWHEEL_SPEED = 0.5;
+    public static final double INTERNAL_FEEDER_SPEED = 0.5;
+    public static final double INTAKE_REVERSE_SPEED = 0.5;
+    public static final double INTERNAL_FEEDER_REVERSE_SPEED = 0.5;
+    public static final double DRIVE_SPEED_MULTIPLIER = 1;
 
     //distance variables
-    public static final double LIMELIGHT_ANGLE_FROM_GROUND = -0;
-    public static final double LIMELIGHT_HEIGHT_TO_GROUND = -0; 
-    public static final double TARGET_HEIGHT_TOP_TO_GROUND = -0;
+    public static final double LIMELIGHT_ANGLE_FROM_GROUND = 1;
+    public static final double LIMELIGHT_HEIGHT_TO_GROUND = 1; 
+    public static final double TARGET_HEIGHT_TOP_TO_GROUND = 1;
 
     //other
-    public static final double OFFSET_TOLERANCE_INCHES = 1; //TODO Goal is for this to be measure with inches
+    public static final double OFFSET_TOLERANCE_INCHES = 1; //todo Goal is for this to be measure with inches
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;

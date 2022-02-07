@@ -22,6 +22,7 @@ public class Constants {
     /** Wheel velocity = 0 */
     public static final double FREEZE = 0;
     public static final double WHEEL_DIAMTER = 6;
+    public static final double ANGLE_DEGREES = -0;
 
     public static final double VERT_HOOK_SPEED = -0;
     public static final double ANGLE_HOOK_SPEED = -0;

@@ -9,16 +9,20 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
+import frc.robot.command.ResetDriveTrainPosition;
 import frc.robot.command.SetFlySpeed;
 import frc.robot.command.SetIntakeSpeed;
 import frc.robot.command.SetInternalMoveSpeed;
 import frc.robot.command.SpitBalls;
 import frc.robot.command.Targeting;
-import frc.robot.command.TaxiAndShoot;
-import frc.robot.command.TaxiTarmac;
+import frc.robot.command.OffTarmac;
 import frc.robot.command.hookcommands.AngledHookJoystick;
+import frc.robot.command.hookcommands.MoveAngledHookDown;
 import frc.robot.command.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.command.hookcommands.MoveCloserToZeroDegrees;
+import frc.robot.command.hookcommands.MoveVerticalHookDown;
+import frc.robot.command.hookcommands.MoveVerticalHookUp;
+import frc.robot.command.hookcommands.MoveAngledHookUp;
 import frc.robot.command.hookcommands.PullVertHooksIn;
 import frc.robot.command.hookcommands.ReachVertHooksUp;
 import frc.robot.subsystems.DriveTrain;
@@ -39,8 +43,6 @@ public class RobotContainer {
 
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-  TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
-  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
@@ -51,6 +53,14 @@ public class RobotContainer {
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
+  MoveAngledHookUp moveAngledHookUp = new MoveAngledHookUp();
+  MoveAngledHookDown moveAngledHookDown = new MoveAngledHookDown();
+  MoveVerticalHookUp moveVerticalHookUp = new MoveVerticalHookUp();
+  MoveVerticalHookDown moveVerticalHookDown = new MoveVerticalHookDown();
+  ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
+  OffTarmac offTarmac = new OffTarmac(vroomVroom);
+  Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
+    .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
 
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
@@ -96,7 +106,7 @@ public class RobotContainer {
   private void begin() {
     m_chooser.setDefaultOption("Default Auto", doNotMove);
     m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", taxiTarmac);
+    m_chooser.addOption("Taxi", offTarmac);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 

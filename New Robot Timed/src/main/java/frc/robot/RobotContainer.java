@@ -9,6 +9,10 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
+<<<<<<< Updated upstream
+=======
+import frc.robot.command.OffTarmac;
+>>>>>>> Stashed changes
 import frc.robot.command.ResetDriveTrainPosition;
 import frc.robot.command.SetFlySpeed;
 import frc.robot.command.SetIntakeSpeed;
@@ -43,6 +47,10 @@ public class RobotContainer {
 
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
+<<<<<<< Updated upstream
+=======
+  ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
+>>>>>>> Stashed changes
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
@@ -62,6 +70,8 @@ public class RobotContainer {
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
     .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
 
+  command taxiAndShoot = resetDriveTrainPosition.andThen(taxiTarmac).alongWith(setFlySpeed).
+  andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove);
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
 

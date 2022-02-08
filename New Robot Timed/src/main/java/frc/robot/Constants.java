@@ -32,7 +32,7 @@ public class Constants {
     public static final double INTERNAL_FEEDER_SPEED = 0.5;
     public static final double INTAKE_REVERSE_SPEED = 0.5;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = 0.5;
-    public static final double DRIVE_SPEED_MULTIPLIER = 1;
+    public static final double DRIVE_SPEED_MULTIPLIER = 0.5;
 
     //distance variables
     public static final double LIMELIGHT_ANGLE_FROM_GROUND = 1;
@@ -41,6 +41,8 @@ public class Constants {
 
     //other
     public static final double OFFSET_TOLERANCE_INCHES = 1; //todo Goal is for this to be measure with inches
+    public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
+    public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
@@ -65,8 +67,8 @@ public class Constants {
     // public static final byte leftbuttoneight = 8;
     // public static final byte leftbuttonnine = 9;
     // public static final byte leftbuttonten = 10;
-    // public static final byte leftbuttoneleven = 11;
-    // public static final byte leftbuttoneleven = 12;
+    public static final byte LIMELIGHT_OFF_BUTTON = 11;
+    public static final byte LIMELIGHT_ON_BUTTON = 12;
 
     public static final byte RIGHT_STICK_TRIGGER = 1;
     public static final byte HUMAN_OVERRIDE_BUTTON = 2;

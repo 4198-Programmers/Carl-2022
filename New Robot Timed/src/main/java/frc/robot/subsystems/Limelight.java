@@ -16,10 +16,10 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry tvert = table.getEntry("tvert");
     NetworkTableEntry tlong = table.getEntry("tlong");
     NetworkTableEntry tshort = table.getEntry("tshort");
-    NetworkTableEntry ledMode = table.getEntry("ledMode");
+    public NetworkTableEntry ledMode = table.getEntry("ledMode");
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
-    NetworkTableEntry pipeline = table.getEntry("pipeline");
+    public NetworkTableEntry pipeline = table.getEntry("pipeline");
 
     public double xOffsetFromCenter()
     {
@@ -36,5 +36,10 @@ public class Limelight extends SubsystemBase{
     {
         double yAngle = ty.getDouble(0);
         return Maths.distanceFromTarget(yAngle);
+    }
+
+    public void setPipeline(double pipe)
+    {
+        pipeline.setDouble(pipe);
     }
 }

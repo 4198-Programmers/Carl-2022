@@ -13,6 +13,7 @@ import frc.robot.command.ResetDriveTrainPosition;
 import frc.robot.command.SetFlySpeed;
 import frc.robot.command.SetIntakeSpeed;
 import frc.robot.command.SetInternalMoveSpeed;
+import frc.robot.command.SetLimelightMode;
 import frc.robot.command.SpitBalls;
 import frc.robot.command.Targeting;
 import frc.robot.command.OffTarmac;
@@ -30,7 +31,6 @@ public class RobotContainer {
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
   Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
-
   // subsystems
   DriveTrain vroomVroom = new DriveTrain();
   ShooterPathMovement pewPew = new ShooterPathMovement();
@@ -54,6 +54,8 @@ public class RobotContainer {
   MoveVerticalHookUp moveVerticalHookUp = new MoveVerticalHookUp();
   MoveVerticalHookDown moveVerticalHookDown = new MoveVerticalHookDown();
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
+  SetLimelightMode setLimelightModeOff = new SetLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
+  SetLimelightMode setLimelightModeOn = new SetLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
   OffTarmac offTarmac = new OffTarmac(vroomVroom);
   /**It is just basically a parallelCommandGroup with Sequential Command groups */
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
@@ -73,10 +75,11 @@ public class RobotContainer {
   JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
   JoystickButton spitBTN = new JoystickButton(rightStick, Constants.YEET_THE_BALLS_OUT_THE_BACK_BUTTON);
   JoystickButton fullFIREEEE = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
+  JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_BUTTON);
+  JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
-
   public RobotContainer() {
     configureButtonBindings();
     begin();
@@ -94,7 +97,10 @@ public class RobotContainer {
     overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(setIntakeSpeed);
     overrideButton.and(internalFeederInBTN).whileActiveContinuous(setInternalMoveSpeed);
     overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
+    limelightOffBTN.whenPressed(setLimelightModeOff);
+    limelightOnBTN.whenPressed(setLimelightModeOn);
     fullFIREEEE.whenHeld(shootingGroup);
+
 
   
   

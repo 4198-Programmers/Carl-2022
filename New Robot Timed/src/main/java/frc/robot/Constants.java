@@ -31,6 +31,8 @@ public class Constants {
     public static final double INTERNAL_FEEDER_SPEED = -0;
     public static final double INTAKE_REVERSE_SPEED = -0;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = -0;
+    public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
+    public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
@@ -45,6 +47,7 @@ public class Constants {
     // public static final byte leftbuttoneleven = 11;
     // public static final byte button = 12;
 
+
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
     // public static final byte leftbuttonthree = 3;
@@ -55,8 +58,8 @@ public class Constants {
     // public static final byte leftbuttoneight = 8;
     // public static final byte leftbuttonnine = 9;
     // public static final byte leftbuttonten = 10;
-    // public static final byte leftbuttoneleven = 11;
-    // public static final byte leftbuttoneleven = 12;
+    public static final byte LIMELIGHT_OFF_BUTTON = 11;
+    public static final byte LIMELIGHT_ON_BUTTON = 12;    
 
     public static final byte RIGHT_STICK_TRIGGER = 1;
     public static final byte HUMAN_OVERRIDE_BUTTON = 2;

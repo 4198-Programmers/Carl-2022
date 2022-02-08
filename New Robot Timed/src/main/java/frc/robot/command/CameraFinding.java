@@ -1,5 +1,7 @@
 package frc.robot.command;
 
-public class CameraFinding {
+import frc.robot.CommandBase;
+
+public class CameraFinding extends CommandBase{
     
 }

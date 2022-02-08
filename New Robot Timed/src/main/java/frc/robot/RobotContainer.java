@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
 import frc.robot.command.ResetDriveTrainPosition;
 import frc.robot.command.SetFlySpeed;
+//import frc.robot.command.SetFlySpeedUsingCalculation;
 import frc.robot.command.SetIntakeSpeed;
 import frc.robot.command.SetInternalMoveSpeed;
 import frc.robot.command.SetLimelightMode;
@@ -37,6 +38,7 @@ public class RobotContainer {
   Hooks climber = new Hooks();
   Limelight vision = new Limelight();
 
+
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
@@ -60,6 +62,7 @@ public class RobotContainer {
   /**It is just basically a parallelCommandGroup with Sequential Command groups */
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
     .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
+    //SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
 
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
@@ -74,7 +77,7 @@ public class RobotContainer {
   JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_BUTTON);
   JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
   JoystickButton spitBTN = new JoystickButton(rightStick, Constants.YEET_THE_BALLS_OUT_THE_BACK_BUTTON);
-  JoystickButton fullFIREEEE = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
+  JoystickButton fullFIREEEEBTN = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
   JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_BUTTON);
   JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_BUTTON);
 
@@ -84,7 +87,7 @@ public class RobotContainer {
     configureButtonBindings();
     begin();
     vroomVroom.setDefaultCommand(new RunCommand( () -> 
-    vroomVroom.greenLight(leftStick.getRawAxis(0), rightStick.getRawAxis(0)), vroomVroom));
+    vroomVroom.greenLight(midStick.getRawAxis(0), (-1)*leftStick.getRawAxis(1)), vroomVroom));
   }
 
   private void configureButtonBindings() {
@@ -99,7 +102,8 @@ public class RobotContainer {
     overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
     limelightOffBTN.whenPressed(setLimelightModeOff);
     limelightOnBTN.whenPressed(setLimelightModeOn);
-    fullFIREEEE.whenHeld(shootingGroup);
+    fullFIREEEEBTN.whenHeld(shootingGroup);
+    // limelightTestBTN.whenHeld(new RunCommand(() -> vision.setPipeline(0), vision));
 
 
   

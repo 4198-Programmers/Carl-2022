@@ -19,11 +19,11 @@ public class Targeting extends CommandBase{
     
     @Override
     public void execute() {
-        if(visionT.distanceFromCenter() < -0.1) 
+        if(!visionT.hasTarget() || visionT.xOffsetFromCenter() < -Constants.OFFSET_TOLERANCE_INCHES) 
         {
             vroomVroomT.greenLight(0, -0.2);
         }
-        else if(visionT.distanceFromCenter() > 0.1)
+        else if(visionT.xOffsetFromCenter() > Constants.OFFSET_TOLERANCE_INCHES) 
         {
             vroomVroomT.greenLight(0, 0.2);
         }
@@ -36,6 +36,6 @@ public class Targeting extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        return(visionT.distanceFromCenter() > -0.1 && visionT.distanceFromCenter() < 0.1);
+        return(visionT.xOffsetFromCenter() > -0.1 && visionT.xOffsetFromCenter() < 0.1);
     }
 }

@@ -19,34 +19,37 @@ public class DriveTrain extends SubsystemBase{
     private RelativeEncoder backREnc = backR.getEncoder();
     private RelativeEncoder backLEnc = backL.getEncoder();
 
-    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontR, backR);
-    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontL, backL);
+    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontR, backR);
+    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontL, backL);
   
     private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
 
-    private double conversionFactor = 12.75;
 
-    public DriveTrain(){
-        frontLEnc.setPositionConversionFactor(conversionFactor);
-        frontREnc.setPositionConversionFactor(conversionFactor);
-        backLEnc.setPositionConversionFactor(conversionFactor);
-        backREnc.setPositionConversionFactor(conversionFactor);
-    }
+    public DriveTrain(){}
 
     /**Sets encoder positions to 0 */
     public void resetPosition(){
-        frontLEnc.setPosition(0);
-        frontREnc.setPosition(0);
-        backLEnc.setPosition(0);
-        backREnc.setPosition(0);
+        frontLEnc.setPosition(0d);
+        frontREnc.setPosition(0d);
+        backLEnc.setPosition(0d);
+        backREnc.setPosition(0d);
+        frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);   //here for redundancy, code needs the added time
+        frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+
     }
 
     public double findPosition(){
-        double encCurrentPosition = frontLEnc.getPosition();
-        encCurrentPosition += frontREnc.getPosition();
-        encCurrentPosition += backREnc.getPosition();
-        encCurrentPosition += backLEnc.getPosition();
-        return encCurrentPosition/4d ;
+        double encCurrentPosition = Math.abs(frontLEnc.getPosition());
+        encCurrentPosition += Math.abs(frontREnc.getPosition());
+        encCurrentPosition += Math.abs(backREnc.getPosition());
+        encCurrentPosition += Math.abs(backLEnc.getPosition());
+        return encCurrentPosition/(4d*Constants.WHEEL_CONVERSION_FACTOR);
     }
 
 
@@ -57,9 +60,9 @@ public class DriveTrain extends SubsystemBase{
      * @param xAxis
      * @param zRotate
      */
-    public void greenLight(double xAxis, double zRotate){
+    public void greenLight(double zRotate, double xAxis){
         
-        allDrive.arcadeDrive(xAxis, zRotate);
+        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER*zRotate, Constants.DRIVE_SPEED_MULTIPLIER*xAxis);  //negative for drive direction switch
     }
 
   

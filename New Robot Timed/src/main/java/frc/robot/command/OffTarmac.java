@@ -22,6 +22,7 @@ public class OffTarmac extends CommandBase{
         vroomVroomOT.resetPosition();
         distanceOff = 40;
         youDone = false;
+        vroomVroomOT.resetPosition();
     }
 
     @Override
@@ -30,14 +31,15 @@ public class OffTarmac extends CommandBase{
         double rotations = Maths.rotationConversion(distanceOff);
         double position = vroomVroomOT.findPosition();
 
-        if(position < rotations)
+        if(Math.abs(position) < Math.abs(rotations)) //just reads the values, does not care about direction
         {
-            vroomVroomOT.greenLight(-1, 0);
+            vroomVroomOT.greenLight(0, -1);
         }
         else
         {
             vroomVroomOT.greenLight(0, 0);
             youDone = true;
+            System.out.println("success mother");
 
         }
     }

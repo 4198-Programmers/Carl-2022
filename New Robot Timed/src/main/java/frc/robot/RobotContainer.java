@@ -17,12 +17,8 @@ import frc.robot.command.SpitBalls;
 import frc.robot.command.Targeting;
 import frc.robot.command.OffTarmac;
 import frc.robot.command.hookcommands.AngledHookJoystick;
-import frc.robot.command.hookcommands.MoveAngledHookDown;
 import frc.robot.command.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.command.hookcommands.MoveCloserToZeroDegrees;
-import frc.robot.command.hookcommands.MoveVerticalHookDown;
-import frc.robot.command.hookcommands.MoveVerticalHookUp;
-import frc.robot.command.hookcommands.MoveAngledHookUp;
 import frc.robot.command.hookcommands.PullVertHooksIn;
 import frc.robot.command.hookcommands.ReachVertHooksUp;
 import frc.robot.subsystems.DriveTrain;
@@ -57,7 +53,7 @@ public class RobotContainer {
   MoveAngledHookDown moveAngledHookDown = new MoveAngledHookDown();
   MoveVerticalHookUp moveVerticalHookUp = new MoveVerticalHookUp();
   MoveVerticalHookDown moveVerticalHookDown = new MoveVerticalHookDown();
-  ResetDriveTrainPosition resetTrainPosition = new ResetDriveTrainPosition(vroomVroom);
+  ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   OffTarmac offTarmac = new OffTarmac(vroomVroom);
   /**It is just basically a parallelCommandGroup with Sequential Command groups */
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)

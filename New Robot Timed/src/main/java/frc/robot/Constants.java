@@ -27,6 +27,8 @@ public class Constants {
 
 
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
+    public static final double MOTOR_DIAMETER = -0;
+    public static final double DISTANCE_UP = -0;
 
     public static final double VERT_HOOK_SPEED = 0.5;
     public static final double ANGLE_HOOK_SPEED = 0.5;

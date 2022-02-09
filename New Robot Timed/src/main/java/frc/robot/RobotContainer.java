@@ -19,6 +19,7 @@ import frc.robot.command.SpitBalls;
 import frc.robot.command.Targeting;
 import frc.robot.command.OffTarmac;
 import frc.robot.command.hookcommands.AngledHookJoystick;
+import frc.robot.command.hookcommands.ReachNextRung;
 import frc.robot.command.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.command.hookcommands.MoveCloserToZeroDegrees;
 import frc.robot.command.hookcommands.PullVertHooksIn;
@@ -63,7 +64,9 @@ public class RobotContainer {
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
     .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
     //SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
-
+  Command getOnFirstRung = reachVertHooksUp.andThen(offTarmac).andThen(pullVertHooksIn);
+  Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
+  alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
 

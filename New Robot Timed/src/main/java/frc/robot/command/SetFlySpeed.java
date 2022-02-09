@@ -4,16 +4,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.ShooterPathMovement;
 
-public class SetFlySpeed extends CommandBase{
+public class SetFlySpeed extends CommandBase {
     private ShooterPathMovement pewPew;
 
-    public SetFlySpeed(ShooterPathMovement pewPewArg){
+    public SetFlySpeed(ShooterPathMovement pewPewArg) {
         pewPew = pewPewArg;
         addRequirements(pewPew);
     }
 
-    protected double catchWantedFlySpeed()
-    {
+    protected double catchWantedFlySpeed() {
         return Constants.FLYWHEEL_SPEED;
     }
 
@@ -28,6 +27,6 @@ public class SetFlySpeed extends CommandBase{
         final double tolerance = 0.01;
         double expectedFlywheelSpeed = catchWantedFlySpeed();
         return (speed > expectedFlywheelSpeed - tolerance && speed < expectedFlywheelSpeed + tolerance);
-        
+
     }
 }

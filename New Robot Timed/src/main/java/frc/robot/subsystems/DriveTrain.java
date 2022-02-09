@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -9,7 +10,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class DriveTrain extends SubsystemBase{
+public class DriveTrain extends SubsystemBase {
     private CANSparkMax frontR = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax frontL = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax backR = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
@@ -21,50 +22,56 @@ public class DriveTrain extends SubsystemBase{
 
     private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontR, backR);
     private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontL, backL);
-  
+
     private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
 
+    public DriveTrain() {
+    }
 
-    public DriveTrain(){}
-
-    
-    /**Sets encoder positions to 0 */
-    public void resetPosition(){
+    /** Sets encoder positions to 0 */
+    public void resetPosition() {
+        REVLibError factorError;
         frontLEnc.setPosition(0d);
         frontREnc.setPosition(0d);
         backLEnc.setPosition(0d);
         backREnc.setPosition(0d);
-        frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);   //here for redundancy, code needs the added time
-        frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        // frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        // frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        // backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        // backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        do {
+            factorError = frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+            if (REVLibError.kOk == factorError) {
+                factorError = frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+                if (REVLibError.kOk == factorError) {
+                    factorError = backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+                    if (REVLibError.kOk == factorError) {
+                        factorError = backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+                    }
+                }
+            }
+            System.out.println("I can't because: " + factorError);
+        } while (REVLibError.kOk != factorError);
 
     }
 
-    public double findPosition(){
+    public double findPosition() {
         double encCurrentPosition = Math.abs(frontLEnc.getPosition());
         encCurrentPosition += Math.abs(frontREnc.getPosition());
         encCurrentPosition += Math.abs(backREnc.getPosition());
         encCurrentPosition += Math.abs(backLEnc.getPosition());
-        return encCurrentPosition/(4d*Constants.WHEEL_CONVERSION_FACTOR);
+        return encCurrentPosition / (4d * Constants.WHEEL_CONVERSION_FACTOR);
     }
 
-
     /**
-     * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot. Negative values of xAxis
-     * will move backwards, negative values of the zRotation will rotate counter-clockwise.
+     * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot.
+     * Negative values of xAxis
+     * will move backwards, negative values of the zRotation will rotate
+     * counter-clockwise.
      * Joysticks allow these to be control by controller axes
+     * 
      * @param xAxis
      * @param zRotate
      */
-    public void greenLight(double zRotate, double xAxis){
-        
-        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER*zRotate, Constants.DRIVE_SPEED_MULTIPLIER*xAxis);  //negative for drive direction switch
+    public void greenLight(double zRotate, double xAxis) {
+
+        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * zRotate, Constants.DRIVE_SPEED_MULTIPLIER * xAxis);
     }
 
-  
 }

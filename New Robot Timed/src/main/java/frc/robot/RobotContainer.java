@@ -40,7 +40,6 @@ public class RobotContainer {
   Hooks climber = new Hooks();
   Limelight vision = new Limelight();
 
-
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
   TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
@@ -57,11 +56,15 @@ public class RobotContainer {
   public OffTarmac taxiTarmac = new OffTarmac(vroomVroom);
   PickLimelightMode setLimelightModeOff = new PickLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
   PickLimelightMode setLimelightModeOn = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
-  //SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
+  // SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new
+  // SetFlySpeedUsingCalculation(vision, pewPew);
 
-  //ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
-  //SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
-  // SequentialCommandGroup limelightTargeting = new SequentialCommandGroup(setLimelightModeOn, targeting);
+  // ParallelCommandGroup parallelGroupShootPrep = new
+  // ParallelCommandGroup(targeting,setFlySpeed);
+  // SequentialCommandGroup shootingGroup = new
+  // SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
+  // SequentialCommandGroup limelightTargeting = new
+  // SequentialCommandGroup(setLimelightModeOn, targeting);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -81,26 +84,26 @@ public class RobotContainer {
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-
-  
   public RobotContainer() {
 
-    
   }
 
-  public void initialize()
-  {
+  public void initialize() {
     configureButtonBindings();
     begin();
-    vroomVroom.setDefaultCommand(new RunCommand( () -> 
-    vroomVroom.greenLight(midStick.getRawAxis(0), (-1)*leftStick.getRawAxis(1)), vroomVroom));
+    vroomVroom.setDefaultCommand(new RunCommand(
+        () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom));
     CommandScheduler.getInstance().onCommandExecute((command) -> {
-      if(!command.getName().equals("RunCommand")){
-      System.out.println("running command " + command.getName());
+      if (!command.getName().equals("RunCommand")) {
+        System.out.println("running command " + command.getName());
       }
     });
-    CommandScheduler.getInstance().onCommandFinish((command) -> {System.out.println("finished command " + command.getName());});
-    CommandScheduler.getInstance().onCommandInterrupt((command) -> {System.out.println("interrupted command " + command.getName());});
+    CommandScheduler.getInstance().onCommandFinish((command) -> {
+      System.out.println("finished command " + command.getName());
+    });
+    CommandScheduler.getInstance().onCommandInterrupt((command) -> {
+      System.out.println("interrupted command " + command.getName());
+    });
   }
 
   private void configureButtonBindings() {
@@ -116,8 +119,7 @@ public class RobotContainer {
     limelightTargetingBTN.whileActiveContinuous(targeting);
     limelightOffBTN.whenPressed(setLimelightModeOff);
     limelightOnBTN.whenPressed(setLimelightModeOn);
-    //fullFIREEEEBTN.whenHeld(shootingGroup);
-  
+    // fullFIREEEEBTN.whenHeld(shootingGroup);
   }
 
   private void begin() {

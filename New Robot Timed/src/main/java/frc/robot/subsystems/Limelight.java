@@ -42,4 +42,8 @@ public class Limelight extends SubsystemBase{
     {
         pipeline.setDouble(pipe);
     }
+
+    public double getPipeline() {
+        return pipeline.getDouble(-1);
+    }
 }

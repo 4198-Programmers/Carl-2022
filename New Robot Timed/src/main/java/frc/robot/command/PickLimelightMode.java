@@ -19,5 +19,9 @@ public class PickLimelightMode extends CommandBase{
     {
         visionSLM.setPipeline(mode);
     }
+    @Override
+    public boolean isFinished() {
+        return (visionSLM.getPipeline() == mode);
+    }
     
 }

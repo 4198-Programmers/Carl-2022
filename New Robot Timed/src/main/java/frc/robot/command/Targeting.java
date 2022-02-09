@@ -21,21 +21,24 @@ public class Targeting extends CommandBase{
     public void execute() {
         if(!visionT.hasTarget() || visionT.xOffsetFromCenter() < -Constants.OFFSET_TOLERANCE_INCHES) 
         {
-            vroomVroomT.greenLight(0, -0.2);
+            vroomVroomT.greenLight(-0.35, 0);
+            System.out.println("targeting left");
         }
         else if(visionT.xOffsetFromCenter() > Constants.OFFSET_TOLERANCE_INCHES) 
         {
-            vroomVroomT.greenLight(0, 0.2);
+            vroomVroomT.greenLight(0.35, 0);
+            System.out.println("targeting right");
         }
         else
         {
             vroomVroomT.greenLight(Constants.FREEZE, Constants.FREEZE);
+            System.out.println("I am frozen");
         }
 
     }
 
     @Override
     public boolean isFinished() {
-        return(visionT.xOffsetFromCenter() > -0.1 && visionT.xOffsetFromCenter() < 0.1);
+        return(visionT.hasTarget() && visionT.xOffsetFromCenter() > -0.1 && visionT.xOffsetFromCenter() < 0.1); 
     }
 }

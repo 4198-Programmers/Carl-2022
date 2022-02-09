@@ -27,6 +27,7 @@ public class DriveTrain extends SubsystemBase{
 
     public DriveTrain(){}
 
+    
     /**Sets encoder positions to 0 */
     public void resetPosition(){
         frontLEnc.setPosition(0d);
@@ -37,10 +38,10 @@ public class DriveTrain extends SubsystemBase{
         frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
         backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
         backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        // frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        // frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        // backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        // backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
 
     }
 

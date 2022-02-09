@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 //import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-//import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
 import frc.robot.command.OffTarmac;
@@ -56,6 +55,7 @@ public class RobotContainer {
   public OffTarmac taxiTarmac = new OffTarmac(vroomVroom);
   PickLimelightMode setLimelightModeOff = new PickLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
   PickLimelightMode setLimelightModeOn = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
+  Command limelightTargeting = setLimelightModeOn.andThen(targeting);
   // SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new
   // SetFlySpeedUsingCalculation(vision, pewPew);
 
@@ -63,8 +63,6 @@ public class RobotContainer {
   // ParallelCommandGroup(targeting,setFlySpeed);
   // SequentialCommandGroup shootingGroup = new
   // SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
-  // SequentialCommandGroup limelightTargeting = new
-  // SequentialCommandGroup(setLimelightModeOn, targeting);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -80,6 +78,7 @@ public class RobotContainer {
   JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_BUTTON);
   JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_BUTTON);
   JoystickButton limelightTargetingBTN = new JoystickButton(rightStick, Constants.LIMELIGHT_TARGETING_BUTTON);
+  JoystickButton limelightOnThenTargetBTN = new JoystickButton(rightStick, Constants.TARGETING_LIMELIGHT_SIMULTANEOUS);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -116,9 +115,10 @@ public class RobotContainer {
     overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(setIntakeSpeed);
     overrideButton.and(internalFeederInBTN).whileActiveContinuous(setInternalMoveSpeed);
     overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
-    limelightTargetingBTN.whileActiveContinuous(targeting);
-    limelightOffBTN.whenPressed(setLimelightModeOff);
-    limelightOnBTN.whenPressed(setLimelightModeOn);
+    limelightOnThenTargetBTN.whenHeld(limelightTargeting);
+    // limelightTargetingBTN.whileActiveContinuous(targeting);
+    // limelightOffBTN.whenPressed(setLimelightModeOff);
+    // limelightOnBTN.whenPressed(setLimelightModeOn);
     // fullFIREEEEBTN.whenHeld(shootingGroup);
   }
 

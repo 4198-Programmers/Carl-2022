@@ -72,7 +72,8 @@ public class Constants {
 
     public static final byte RIGHT_STICK_TRIGGER = 1;
     public static final byte HUMAN_OVERRIDE_BUTTON = 2;
-    public static final byte FLYWHEEL_BUTTON = 3;
+    public static final byte FLYWHEEL_BUTTON = 3; //button when override active
+    public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 3;
     public static final byte INTAKEIN_BUTTON = 4;
     public static final byte YEET_THE_BALLS_OUT_THE_BACK_BUTTON = 5;
     public static final byte ANGLE_HOOK_UP_BUTTON = 6;

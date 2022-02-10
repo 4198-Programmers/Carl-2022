@@ -4,9 +4,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+//import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
 import frc.robot.command.ResetDriveTrainPosition;
@@ -37,7 +37,6 @@ public class RobotContainer {
   ShooterPathMovement pewPew = new ShooterPathMovement();
   Hooks climber = new Hooks();
   Limelight vision = new Limelight();
-
 
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
@@ -78,14 +77,31 @@ public class RobotContainer {
   JoystickButton fullFIREEEEBTN = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
   JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_BUTTON);
   JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_BUTTON);
+  JoystickButton limelightTargetingBTN = new JoystickButton(rightStick, Constants.LIMELIGHT_TARGETING_BUTTON);
+  JoystickButton limelightOnThenTargetBTN = new JoystickButton(rightStick, Constants.TARGETING_LIMELIGHT_SIMULTANEOUS);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
   public RobotContainer() {
+
+  }
+
+  public void initialize() {
     configureButtonBindings();
     begin();
-    vroomVroom.setDefaultCommand(new RunCommand( () -> 
-    vroomVroom.greenLight(midStick.getRawAxis(0), (-1)*leftStick.getRawAxis(1)), vroomVroom));
+    vroomVroom.setDefaultCommand(new RunCommand(
+        () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom));
+    CommandScheduler.getInstance().onCommandExecute((command) -> {
+      if (!command.getName().equals("RunCommand")) {
+        System.out.println("running command " + command.getName());
+      }
+    });
+    CommandScheduler.getInstance().onCommandFinish((command) -> {
+      System.out.println("finished command " + command.getName());
+    });
+    CommandScheduler.getInstance().onCommandInterrupt((command) -> {
+      System.out.println("interrupted command " + command.getName());
+    });
   }
 
   private void configureButtonBindings() {
@@ -98,14 +114,11 @@ public class RobotContainer {
     overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(setIntakeSpeed);
     overrideButton.and(internalFeederInBTN).whileActiveContinuous(setInternalMoveSpeed);
     overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
-    limelightOffBTN.whenPressed(setLimelightModeOff);
-    limelightOnBTN.whenPressed(setLimelightModeOn);
-    fullFIREEEEBTN.whenHeld(shootingGroup);
-    // limelightTestBTN.whenHeld(new RunCommand(() -> vision.setPipeline(0), vision));
-
-
-  
-  
+    limelightOnThenTargetBTN.whenHeld(limelightTargeting);
+    // limelightTargetingBTN.whileActiveContinuous(targeting);
+    // limelightOffBTN.whenPressed(setLimelightModeOff);
+    // limelightOnBTN.whenPressed(setLimelightModeOn);
+    // fullFIREEEEBTN.whenHeld(shootingGroup);
   }
 
   private void begin() {

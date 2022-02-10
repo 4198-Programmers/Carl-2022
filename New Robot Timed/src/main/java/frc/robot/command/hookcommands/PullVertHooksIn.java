@@ -4,12 +4,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Hooks;
 
-public class PullVertHooksIn extends CommandBase{
+public class PullVertHooksIn extends CommandBase {
     Hooks grab;
     private double distanceDown;
 
-    public PullVertHooksIn(Hooks hooksArg)
-    {
+    public PullVertHooksIn(Hooks hooksArg) {
         grab = hooksArg;
         addRequirements(grab);
 
@@ -20,8 +19,7 @@ public class PullVertHooksIn extends CommandBase{
     }
 
     @Override
-    public void execute()
-    {
+    public void execute() {
         grab.moveVertHooks(-Constants.VERT_HOOK_SPEED);
     }
 

@@ -88,5 +88,6 @@ public class Constants {
     public static final byte VERT_HOOK_DOWN_BUTTON = 10;
     public static final byte VERT_HOOK_UP_BUTTON = 11;
     // public static final byte leftbuttoneleven = 12;
+    public static final double VERT_HOOK_DISTANCE_DOWN = -0;
 
 }

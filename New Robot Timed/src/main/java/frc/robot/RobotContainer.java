@@ -19,7 +19,6 @@ import frc.robot.command.SpitBalls;
 import frc.robot.command.Targeting;
 import frc.robot.command.OffTarmac;
 import frc.robot.command.hookcommands.AngledHookJoystick;
-import frc.robot.command.hookcommands.ReachNextRung;
 import frc.robot.command.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.command.hookcommands.MoveCloserToZeroDegrees;
 import frc.robot.command.hookcommands.PullVertHooksIn;
@@ -52,10 +51,6 @@ public class RobotContainer {
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
-  MoveAngledHookUp moveAngledHookUp = new MoveAngledHookUp();
-  MoveAngledHookDown moveAngledHookDown = new MoveAngledHookDown();
-  MoveVerticalHookUp moveVerticalHookUp = new MoveVerticalHookUp();
-  MoveVerticalHookDown moveVerticalHookDown = new MoveVerticalHookDown();
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   SetLimelightMode setLimelightModeOff = new SetLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
   SetLimelightMode setLimelightModeOn = new SetLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);

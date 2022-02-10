@@ -26,5 +26,11 @@ public class ReachVertHooksUp extends CommandBase{
     {
         grabbers.moveVertHooks(Constants.VERT_HOOK_SPEED);
     }
+
+    @Override
+    public boolean isFinished() {
+        double height = grabbers.getVerticalHookHeight();
+        return height >= distanceUp;
+    }
     
 }

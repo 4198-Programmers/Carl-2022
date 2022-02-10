@@ -34,8 +34,19 @@ public class Hooks extends SubsystemBase {
         angledHooks.set(speed);
     }
 
-    public void resetPosition() {
+    public void resetAllHooksPosition() {
+        angledHookEncoder.setPosition(0d);
+        vertHookEncoder.setPosition(0d);
     }
+    
+    public void resetAngleHooksPosition(){
+        angledHookEncoder.setPosition(0d);
+    }
+    
+    public void resetVertHooksPosition(){
+        vertHookEncoder.setPosition(0d);
+    }
+
 
     public double getVerticalHookHeight() {
         return Maths.motorConversion(vertHookEncoder.getPosition());
@@ -44,4 +55,5 @@ public class Hooks extends SubsystemBase {
     public double getAngledHookDegree() {
         return Maths.motorConversion(angledHookEncoder.getPosition());
     }
+
 }

@@ -27,6 +27,7 @@ public final class Maths {
 
     public static double flyWheelVelocityByDistance(double Distance) {
         return 0;// TODO create equation
+        // 
     }
 
 }

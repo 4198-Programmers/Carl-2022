@@ -1,3 +1,4 @@
+package frc.robot.simplecommands;
 // package frc.robot.command;
 
 // import frc.robot.Constants;
@@ -20,8 +21,7 @@
 // @Override
 // protected double catchWantedFlySpeed() {
 
-// // double velocityCalculated = visionSFSUC.distanceToTarget(); //TODO this is
-// very very wrong please add equation
+// // double velocityCalculated = visionSFSUC.distanceToTarget(); //TODO this is very very wrong please add equation
 
 // // return velocityCalculated;
 // return Constants.FLYWHEEL_SPEED;

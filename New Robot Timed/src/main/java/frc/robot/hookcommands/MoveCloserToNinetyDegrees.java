@@ -16,8 +16,8 @@ public class MoveCloserToNinetyDegrees extends CommandBase {
     public void initialize()
     {
         elbow.resetPosition();
-        double hookDegrees = Constants.ANGLE_DEGREES;
-        boolean youDone = false;
+        // double hookDegrees = Constants.ANGLE_DEGREES;
+        // boolean youDone = false;
     }
     @Override
     public void execute() {

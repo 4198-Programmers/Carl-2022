@@ -5,7 +5,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-//import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
@@ -53,6 +54,7 @@ public class RobotContainer {
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   SetLimelightMode setLimelightModeOff = new SetLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
   SetLimelightMode setLimelightModeOn = new SetLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
+  Targeting limelightTargeting = new Targeting(vroomVroom, vision);
   OffTarmac offTarmac = new OffTarmac(vroomVroom);
   /**It is just basically a parallelCommandGroup with Sequential Command groups */
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)

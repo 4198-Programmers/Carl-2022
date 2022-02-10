@@ -13,6 +13,7 @@ public class Hooks extends SubsystemBase {
     private CANSparkMax angledHooks = new CANSparkMax(Constants.ANGLE_HOOKS_MOTOR_DEVICE_ID, MotorType.kBrushless);
     
     RelativeEncoder vertHookEncoder = verticalHooks.getEncoder();
+    RelativeEncoder angledHookEncoder = angledHooks.getEncoder();
 
     /**
      * Positive values will pull robot up, negative values will lower robot down
@@ -38,5 +39,9 @@ public class Hooks extends SubsystemBase {
 
     public double getVerticalHookHeight() {
         return Maths.motorConversion(vertHookEncoder.getPosition());
+    }
+
+    public double getAngledHookDegree() {
+        return Maths.motorConversion(angledHookEncoder.getPosition());
     }
 }

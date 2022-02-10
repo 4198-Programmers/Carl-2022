@@ -31,7 +31,6 @@ public class RobotContainer {
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
   Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
-
   // subsystems
   DriveTrain vroomVroom = new DriveTrain();
   ShooterPathMovement pewPew = new ShooterPathMovement();
@@ -40,7 +39,7 @@ public class RobotContainer {
 
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-  TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew, vision);
+  //TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew, vision); taken out to see emily code
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
@@ -58,10 +57,22 @@ public class RobotContainer {
   // SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new
   // SetFlySpeedUsingCalculation(vision, pewPew);
 
+  //Command Groups
   // ParallelCommandGroup parallelGroupShootPrep = new
   // ParallelCommandGroup(targeting,setFlySpeed);
   // SequentialCommandGroup shootingGroup = new
   // SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
+
+  //Nested Command Lines
+  ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
+  OffTarmac offTarmac = new OffTarmac(vroomVroom);
+  /**It is just basically a parallelCommandGroup with Sequential Command groups */
+  Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
+    .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
+    //SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
+  Command getOnFirstRung = reachVertHooksUp.andThen(offTarmac).andThen(pullVertHooksIn);
+  Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
+  alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -81,7 +92,6 @@ public class RobotContainer {
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
-
   public RobotContainer() {
 
   }
@@ -124,7 +134,7 @@ public class RobotContainer {
   private void begin() {
     m_chooser.setDefaultOption("Default Auto", doNotMove);
     m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", taxiTarmac);
+    m_chooser.addOption("Taxi", offTarmac);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 

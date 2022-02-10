@@ -21,6 +21,9 @@ public class PullVertHooksIn extends CommandBase {
     @Override
     public void execute() {
         grab.moveVertHooks(-Constants.VERT_HOOK_SPEED);
+        if(isFinished() == true){
+            grab.moveVertHooks(Constants.FREEZE);
+        }
     }
 
     @Override

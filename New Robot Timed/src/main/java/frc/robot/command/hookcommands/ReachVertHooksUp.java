@@ -7,7 +7,6 @@ import frc.robot.subsystems.Hooks;
 public class ReachVertHooksUp extends CommandBase {
     private Hooks grabbers;
     double distanceUp;
-    boolean isDone;
 
     public ReachVertHooksUp(Hooks hooksArg) {
         grabbers = hooksArg;
@@ -23,6 +22,9 @@ public class ReachVertHooksUp extends CommandBase {
     @Override
     public void execute() {
         grabbers.moveVertHooks(Constants.VERT_HOOK_SPEED);
+        if(isFinished() == true){
+            grabbers.moveVertHooks(Constants.FREEZE);
+        }
     }
 
     @Override

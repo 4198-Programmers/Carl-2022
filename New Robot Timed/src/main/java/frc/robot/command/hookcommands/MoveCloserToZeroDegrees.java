@@ -20,6 +20,9 @@ public class MoveCloserToZeroDegrees extends CommandBase {
     @Override
     public void execute() {
         arm.moveAngledHooks(Constants.ANGLE_HOOK_SPEED);
+        if(isFinished() == true){
+            arm.moveAngledHooks(Constants.FREEZE);
+        }
     }
     @Override
     public boolean isFinished() {

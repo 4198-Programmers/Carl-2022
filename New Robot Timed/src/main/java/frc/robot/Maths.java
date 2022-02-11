@@ -9,7 +9,7 @@ public final class Maths {
     }
     public static double motorConversion(double distanceForMotors)
     {
-        double circumference = (Math.PI*(Constants.MOTOR_DIAMETER));
+        double circumference = (Math.PI*(Constants.VERT_HOOK_WHEEL_DIAMETER));
         double rotations = (distanceForMotors/circumference)*Constants.WHEEL_CONVERSION_FACTOR;
         return rotations;
     }

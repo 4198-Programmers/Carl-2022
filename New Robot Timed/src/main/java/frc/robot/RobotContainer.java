@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 //import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -53,27 +54,25 @@ public class RobotContainer {
   SpitBalls spitBalls = new SpitBalls(pewPew);
   OffTarmac taxiTarmac = new OffTarmac(vroomVroom);
   PickLimelightMode setLimelightModeOff = new PickLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
+  PickLimelightMode setLimelightModeOnLTGROUP = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
   PickLimelightMode setLimelightModeOn = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
-  Command limelightTargeting = setLimelightModeOn.andThen(targeting);
   // SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new
   // SetFlySpeedUsingCalculation(vision, pewPew);
+  ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
+  
 
-  //Command Groups
-  // ParallelCommandGroup parallelGroupShootPrep = new
-  // ParallelCommandGroup(targeting,setFlySpeed);
-  // SequentialCommandGroup shootingGroup = new
-  // SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
+  //commands
+  Command limelightTargeting = setLimelightModeOnLTGROUP.andThen(targeting);
+  RunCommand driveSticks = new RunCommand(
+    () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom);
+  Command manualDriveCheck = driveSticks.alongWith(new PrintCommand("driveSticks working"));
 
   //Nested Command Lines
-  ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
-  OffTarmac offTarmac = new OffTarmac(vroomVroom);
-  /**It is just basically a parallelCommandGroup with Sequential Command groups */
-  Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
-    .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
-    //SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
-  Command getOnFirstRung = reachVertHooksUp.andThen(offTarmac).andThen(pullVertHooksIn);
-  Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
-  alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
+  // Command taxiAndShoot = resetDriveTrainPosition.andThen(taxiTarmac.alongWith(setFlySpeed)
+  //   .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
+  // Command getOnFirstRung = reachVertHooksUp.andThen(taxiTarmac).andThen(pullVertHooksIn);
+  // Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
+  // alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -100,8 +99,8 @@ public class RobotContainer {
   public void initialize() {
     configureButtonBindings();
     begin();
-    vroomVroom.setDefaultCommand(new RunCommand(
-        () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom));
+    vroomVroom.setDefaultCommand(manualDriveCheck);
+
     CommandScheduler.getInstance().onCommandExecute((command) -> {
       if (!command.getName().equals("RunCommand")) {
         System.out.println("running command " + command.getName());
@@ -127,15 +126,15 @@ public class RobotContainer {
     overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
     limelightOnThenTargetBTN.whenHeld(limelightTargeting);
     // limelightTargetingBTN.whileActiveContinuous(targeting);
-    // limelightOffBTN.whenPressed(setLimelightModeOff);
-    // limelightOnBTN.whenPressed(setLimelightModeOn);
+    limelightOffBTN.whenPressed(setLimelightModeOff);
+    limelightOnBTN.whenPressed(setLimelightModeOn);
     // fullFIREEEEBTN.whenHeld(shootingGroup);
   }
 
   private void begin() {
     m_chooser.setDefaultOption("Default Auto", doNotMove);
-    m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", offTarmac);
+    //m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
+    m_chooser.addOption("Taxi", taxiTarmac);
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 

@@ -17,7 +17,8 @@ public class Targeting extends CommandBase {
 
     @Override
     public void execute() {
-        if (!visionT.hasTarget() || visionT.xOffsetFromCenter() < -Constants.OFFSET_TOLERANCE_INCHES) {
+
+        if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.OFFSET_TOLERANCE_INCHES) {
             vroomVroomT.greenLight(-0.35, 0);
             System.out.println("targeting left");
         } else if (visionT.xOffsetFromCenter() > Constants.OFFSET_TOLERANCE_INCHES) {
@@ -32,6 +33,6 @@ public class Targeting extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (visionT.hasTarget() && visionT.xOffsetFromCenter() > -0.1 && visionT.xOffsetFromCenter() < 0.1);
+        return (visionT.hasTarget() && visionT.xOffsetFromCenter() >= -Constants.OFFSET_TOLERANCE_INCHES && visionT.xOffsetFromCenter() < Constants.OFFSET_TOLERANCE_INCHES);
     }
 }

@@ -41,11 +41,6 @@ public class RobotContainer {
 
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-<<<<<<< Updated upstream
-=======
-  DoNotMove doNotMoveTAS = new DoNotMove(vroomVroom, pewPew);
-  //TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew, vision); taken out to see emily code
->>>>>>> Stashed changes
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
@@ -65,7 +60,6 @@ public class RobotContainer {
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeedTAS = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
-<<<<<<< Updated upstream
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   SetLimelightMode setLimelightModeOff = new SetLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
   SetLimelightMode setLimelightModeOn = new SetLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
@@ -80,32 +74,6 @@ public class RobotContainer {
   //alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
-=======
-  OffTarmac taxiTarmacTAS = new OffTarmac(vroomVroom);
-  OffTarmac taxiTarmacGONFR = new OffTarmac(vroomVroom);
-  PickLimelightMode setLimelightModeOff = new PickLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
-  PickLimelightMode setLimelightModeOnLTGROUP = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
-  PickLimelightMode setLimelightModeOn = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
-  // SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new
-  // SetFlySpeedUsingCalculation(vision, pewPew);
-  ResetDriveTrainPosition resetDriveTrainPositionTAS = new ResetDriveTrainPosition(vroomVroom);
-  Targeting targetingLLT = new Targeting(vroomVroom, vision);
-
-  
-
-  //commands
-  Command limelightTargeting = setLimelightModeOnLTGROUP.andThen(targetingLLT);
-  RunCommand driveSticks = new RunCommand(
-    () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom);
-  Command manualDriveCheck = driveSticks.alongWith(new PrintCommand("driveSticks working"));
-
-  //Nested Command Lines
-   Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(taxiTarmacTAS.alongWith(setFlySpeedTAS)
-   .andThen(targetingTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS));
-  Command getOnFirstRung = reachVertHooksUpFONFR.andThen(taxiTarmacGONFR).andThen(pullVertHooksInFONFR);
-  Command moveToNextRung = moveCloserToZeroDegreesMTNR.andThen(moveCloserToNinetyDegreesMTNR).andThen(reachVertHooksUpMTNR).
-  alongWith(moveCloserToNinetyDegreesMTNR).andThen(pullVertHooksInMTNR);
->>>>>>> Stashed changes
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -166,13 +134,8 @@ public class RobotContainer {
 
   private void begin() {
     m_chooser.setDefaultOption("Default Auto", doNotMove);
-<<<<<<< Updated upstream
     m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
     m_chooser.addOption("Taxi", offTarmac);
-=======
-    //m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", taxiTarmacTAS);
->>>>>>> Stashed changes
     SmartDashboard.putData("Auto choices", m_chooser);
   }
 

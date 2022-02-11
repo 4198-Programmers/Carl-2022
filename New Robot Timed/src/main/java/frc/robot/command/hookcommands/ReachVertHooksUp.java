@@ -15,7 +15,7 @@ public class ReachVertHooksUp extends CommandBase {
     @Override
     public void initialize()
     {
-        grabbers.resetPosition();
+        grabbers.resetVertHooksPosition();
         distanceUp = Constants.DISTANCE_UP;
     }
 

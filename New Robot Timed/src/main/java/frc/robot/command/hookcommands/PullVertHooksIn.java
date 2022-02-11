@@ -16,6 +16,7 @@ public class PullVertHooksIn extends CommandBase {
     @Override
     public void initialize() {
         distanceDown = Constants.VERT_HOOK_DISTANCE_DOWN;
+        grab.resetVertHooksPosition();
     }
 
     @Override

@@ -15,6 +15,7 @@ public class MoveCloserToZeroDegrees extends CommandBase {
     @Override
     public void initialize() {
         degreesDown = Constants.ANGLED_HOOK_DEGREES_DOWN;
+        arm.resetAngleHooksPosition();
     }
 
     @Override

@@ -60,9 +60,9 @@ public class RobotContainer {
   Command taxiAndShoot = resetDriveTrainPosition.andThen(offTarmac.alongWith(setFlySpeed)
     .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
     //SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
-  Command getOnFirstRung = reachVertHooksUp.andThen(offTarmac).andThen(pullVertHooksIn);
-  Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
-  alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
+  //Command getOnFirstRung = reachVertHooksUp.andThen(offTarmac).andThen(pullVertHooksIn);
+  //Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
+  //alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
   ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
   SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
 

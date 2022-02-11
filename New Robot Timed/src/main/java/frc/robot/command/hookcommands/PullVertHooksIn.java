@@ -32,4 +32,8 @@ public class PullVertHooksIn extends CommandBase {
         double height = grab.getVerticalHookHeight();
         return height >= distanceDown;
     }
+    @Override
+    public void end(boolean interrupted) {
+        grab.moveVertHooks(Constants.FREEZE);
+    }
 }

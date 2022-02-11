@@ -30,5 +30,9 @@ public class MoveCloserToZeroDegrees extends CommandBase {
         double angle = arm.getAngledHookDegree();
         return angle >= degreesDown;
     }
+    @Override
+    public void end(boolean interrupted) {
+        arm.moveAngledHooks(Constants.FREEZE);
+    }
 
 }

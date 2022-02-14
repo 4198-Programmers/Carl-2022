@@ -49,6 +49,9 @@ public class Constants {
     public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
     public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
 
+    //velocity constants
+    public static final double GRAVITATIONAL_VELOCITY = 9.8; //in meters per second
+
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
     // public static final byte leftbuttonthree = 3;

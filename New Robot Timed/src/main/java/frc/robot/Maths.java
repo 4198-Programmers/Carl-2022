@@ -1,5 +1,5 @@
 package frc.robot;
-
+import frc.robot.Constants;
 public final class Maths {
 
     public static double rotationConversion(double distanceInInches) {
@@ -24,9 +24,18 @@ public final class Maths {
 
         return distance;
     }
-
+    
     public static double flyWheelVelocityByDistance(double Distance) {
-        return 0;// TODO create equation
+        /*  u = initial velocity
+            u = +,- sqr root((gx²)/2(xtan(Θ)-y)(cos²Θ))
+
+        */
+        // double u_x = u(Math.cos(Constants.ANGLE_DEGREES));
+        double time = distance/(u(Math.cos(Constants.ANGLE_DEGREES)));
+        // double (u(Math.cos(Constants.ANGLE_DEGREES))) = distance/time
+        double u = Math.sqrt((Constants.GRAVITATIONAL_VELOCITY*Math.pow(time, 2))/(2*(time*Math.tan(Math.toRadians(Constants.ANGLE_DEGREES)
+         - Constants.TARGET_HEIGHT)*(cos(Math.toRadians(Constants.ANGLE_DEGREES))^2))));
+        return u;// TODO create equation
     }
 
 }

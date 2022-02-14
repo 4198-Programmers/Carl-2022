@@ -5,13 +5,13 @@ import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
 /** Autonomous movement used to exit the tarmac during Autonomous */
-public class OffTarmac extends CommandBase {
+public class TaxiTarmac extends CommandBase {
     private DriveTrain vroomVroomOT;
     boolean youDone;
     double distanceOff;
 
     /** Pulls in the current DriveTrain instance to use in the specific class */
-    public OffTarmac(DriveTrain driveTrainArg) {
+    public TaxiTarmac(DriveTrain driveTrainArg) {
         vroomVroomOT = driveTrainArg;
         addRequirements(vroomVroomOT);
     }

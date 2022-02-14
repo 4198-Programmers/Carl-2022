@@ -5,12 +5,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
-//import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.simplecommands.DoNotMove;
-import frc.robot.simplecommands.OffTarmac;
+import frc.robot.simplecommands.TaxiTarmac;
 import frc.robot.simplecommands.PickLimelightMode;
 import frc.robot.simplecommands.ResetDriveTrainPosition;
 import frc.robot.simplecommands.SetFlySpeed;
@@ -41,38 +39,53 @@ public class RobotContainer {
 
   // commands
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-  //TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew, vision); taken out to see emily code
+  DoNotMove doNotMoveTASGROUP = new DoNotMove(vroomVroom, pewPew);
+  // TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew, vision);
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
+  ReachVertHooksUp reachVertHooksUpFRGROUP = new ReachVertHooksUp(climber);
+  ReachVertHooksUp reachVertHooksUpTNRGROUP = new ReachVertHooksUp(climber);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
+  PullVertHooksIn pullVertHooksInFRGROUP = new PullVertHooksIn(climber);
+  PullVertHooksIn pullVertHooksInTNRGROUP = new PullVertHooksIn(climber);
   MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(climber);
+  MoveCloserToNinetyDegrees moveCloserToNinetyDegreesTNRGROUP = new MoveCloserToNinetyDegrees(climber);
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(climber);
+  MoveCloserToZeroDegrees moveCloserToZeroDegreesTNRGROUP = new MoveCloserToZeroDegrees(climber);
   Targeting targeting = new Targeting(vroomVroom, vision);
+  Targeting targetingTASGROUP = new Targeting(vroomVroom, vision);
+  Targeting targetingLT = new Targeting(vroomVroom, vision);
   SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
+  SetFlySpeed setFlySpeedTASGROUP = new SetFlySpeed(pewPew);
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
+  SetInternalMoveSpeed setInternalMoveSpeedTASGROUP = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
-  OffTarmac taxiTarmac = new OffTarmac(vroomVroom);
+  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
+  TaxiTarmac taxiTarmacTASGROUP = new TaxiTarmac(vroomVroom);
+  TaxiTarmac taxiTarmacFRGROUP = new TaxiTarmac(vroomVroom);
   PickLimelightMode setLimelightModeOff = new PickLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
-  PickLimelightMode setLimelightModeOnLTGROUP = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
+  PickLimelightMode setLimelightModeOnLTGROUP = new PickLimelightMode(vision,
+      Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
   PickLimelightMode setLimelightModeOn = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
   // SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new
   // SetFlySpeedUsingCalculation(vision, pewPew);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
-  
+  ResetDriveTrainPosition resetDriveTrainPositionTASGROUP = new ResetDriveTrainPosition(vroomVroom);
 
-  //commands
-  Command limelightTargeting = setLimelightModeOnLTGROUP.andThen(targeting);
+  // command groups
+  Command limelightTargeting = setLimelightModeOnLTGROUP.andThen(targetingLT);
   RunCommand driveSticks = new RunCommand(
-    () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom);
-  Command manualDriveCheck = driveSticks.alongWith(new PrintCommand("driveSticks working"));
+      () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom);
+  // Command manualDriveCheck = driveSticks.alongWith(new
+  // PrintCommand("driveSticks working"));
 
-  //Nested Command Lines
-  // Command taxiAndShoot = resetDriveTrainPosition.andThen(taxiTarmac.alongWith(setFlySpeed)
-  //   .andThen(targeting).andThen(setInternalMoveSpeed).andThen(doNotMove));
-  // Command getOnFirstRung = reachVertHooksUp.andThen(taxiTarmac).andThen(pullVertHooksIn);
-  // Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
-  // alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
+  // Nested Command Lines
+  Command taxiAndShoot = resetDriveTrainPositionTASGROUP.andThen(taxiTarmacTASGROUP.alongWith(setFlySpeedTASGROUP)
+      .andThen(targetingTASGROUP).andThen(setInternalMoveSpeedTASGROUP).andThen(doNotMoveTASGROUP));
+  Command getOnFirstRung = reachVertHooksUpFRGROUP.andThen(taxiTarmacFRGROUP).andThen(pullVertHooksInFRGROUP);
+  Command moveToNextRung = moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
+      .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -92,6 +105,7 @@ public class RobotContainer {
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+
   public RobotContainer() {
 
   }
@@ -99,7 +113,8 @@ public class RobotContainer {
   public void initialize() {
     configureButtonBindings();
     begin();
-    vroomVroom.setDefaultCommand(manualDriveCheck);
+    vroomVroom.setDefaultCommand(driveSticks);
+    // manualDriveCheck.perpetually().schedule();
 
     CommandScheduler.getInstance().onCommandExecute((command) -> {
       if (!command.getName().equals("RunCommand")) {
@@ -133,7 +148,7 @@ public class RobotContainer {
 
   private void begin() {
     m_chooser.setDefaultOption("Default Auto", doNotMove);
-    //m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
+    // m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
     m_chooser.addOption("Taxi", taxiTarmac);
     SmartDashboard.putData("Auto choices", m_chooser);
   }

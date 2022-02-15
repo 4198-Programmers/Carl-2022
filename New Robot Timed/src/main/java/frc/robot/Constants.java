@@ -51,6 +51,8 @@ public class Constants {
 
     //velocity constants
     public static final double GRAVITATIONAL_VELOCITY = 9.8; //in meters per second
+    public static final double TARGET_HEIGHT = 108; //in inches
+    public static final double MAX_FLYWHEEL_VELOCITY = -0;
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;

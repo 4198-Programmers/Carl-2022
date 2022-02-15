@@ -1,5 +1,4 @@
 package frc.robot;
-import frc.robot.Constants;
 public final class Maths {
 
     public static double rotationConversion(double distanceInInches) {
@@ -30,14 +29,14 @@ public final class Maths {
             u = +,- sqr root((gx²)/2(xtan(Θ)-y)(cos²Θ))
 
         */
-        // double u_x = u(Math.cos(Constants.ANGLE_DEGREES));
+        
         
         // double (u(Math.cos(Constants.ANGLE_DEGREES))) = distance/time
 
         double targetDistance = distance+48;
-        double radiansForLaunch = Math.toRadians(Constants.ANGLE_DEGREES);
+        double radiansForLaunch = Math.toRadians(Constants.SHOOTER_LAUNCH_ANGLE);
         double targetVelocityForFlywheel = Math.sqrt((Constants.GRAVITATIONAL_VELOCITY*Math.pow(targetDistance, 2))
-        /(2*(targetDistance*Math.tan(Math.toRadians(Constants.ANGLE_DEGREES)
+        /(2*(targetDistance*Math.tan(radiansForLaunch
          - Constants.TARGET_HEIGHT)*(Math.pow(Math.cos(radiansForLaunch), 2))))); //Velocity
         return targetVelocityForFlywheel;
     }

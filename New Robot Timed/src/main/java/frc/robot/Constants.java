@@ -50,7 +50,8 @@ public class Constants {
     public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
 
     //velocity constants
-    public static final double GRAVITATIONAL_VELOCITY = 9.8; //in meters per second
+    public static final double SHOOTER_LAUNCH_ANGLE = -0;
+    public static final double GRAVITATIONAL_VELOCITY = 9.81; //in meters per second
     public static final double TARGET_HEIGHT = 108; //in inches
     public static final double MAX_FLYWHEEL_VELOCITY = -0;
 

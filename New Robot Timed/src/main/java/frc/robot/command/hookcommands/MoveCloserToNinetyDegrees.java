@@ -6,7 +6,7 @@ import frc.robot.subsystems.Hooks;
 
 public class MoveCloserToNinetyDegrees extends CommandBase {
     private Hooks elbow;
-    double hookDegrees = Constants.ANGLE_DEGREES;
+    double hookDegrees = Constants.ANGLE_HOOK_DEGREES;
 
     public MoveCloserToNinetyDegrees(Hooks hookArg) {
         elbow = hookArg;

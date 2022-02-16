@@ -32,12 +32,30 @@ public final class Maths {
         double velocityEquationDivisor = (2 * ((targetDistance * Math.tan(radiansForLaunch)) - Constants.TARGET_HEIGHT) * radiansForLaunchSquared);
         double velocityEquationNumerator = (Constants.GRAVITATIONAL_VELOCITY * Math.pow(targetDistance, 2));
         double targetVelocityForFlywheel = Math.sqrt(velocityEquationDivisor / velocityEquationNumerator); // Velocity
+        System.out.println(targetVelocityForFlywheel);
         return targetVelocityForFlywheel;
+
     }
 
     public static double flywheelMotorVelocityConversion(double targetVelocityForFlywheel) {
         double flywheelTargetSpeed = targetVelocityForFlywheel / Constants.MAX_FLYWHEEL_VELOCITY;
         return flywheelTargetSpeed;
+    }
+
+    public static final double SHOOTER_LAUNCH_ANGLE = 45;
+    public static final double GRAVITATIONAL_VELOCITY = -9.81; //in meters per second
+    public static final double TARGET_HEIGHT = 2.6416; //in meters
+    public static final double MAX_FLYWHEEL_VELOCITY = 5;
+    
+     public static double flyWheelVelocityByDistanceTest(double distance) {
+        double targetDistance = distance + .6096;
+        double radiansForLaunch = Math.toRadians(SHOOTER_LAUNCH_ANGLE);
+        double radiansForLaunchSquared = Math.pow(Math.cos(radiansForLaunch), 2);
+        double velocityEquationDivisor = (2 * ((targetDistance * Math.tan(radiansForLaunch)) - TARGET_HEIGHT) * radiansForLaunchSquared);
+        double velocityEquationNumerator = (GRAVITATIONAL_VELOCITY * Math.pow(targetDistance, 2));
+        double targetVelocityForFlywheel = velocityEquationDivisor / velocityEquationNumerator; // Velocity
+        return targetVelocityForFlywheel;
+
     }
 
 }

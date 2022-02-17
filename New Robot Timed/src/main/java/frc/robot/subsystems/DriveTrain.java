@@ -12,8 +12,8 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase{
     private CANSparkMax frontR = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_PORT, MotorType.kBrushless);
-    private CANSparkMax frontL = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_PORT, MotorType.kBrushless);
-    private CANSparkMax backR = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_PORT, MotorType.kBrushless);
+    private CANSparkMax frontL = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_PORT, MotorType.kBrushless);
+    private CANSparkMax backR = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_PORT, MotorType.kBrushless);
     private CANSparkMax backL = new CANSparkMax(Constants.BACK_LEFT_MOTOR_PORT, MotorType.kBrushless);
     private RelativeEncoder frontREnc = frontR.getEncoder();
     private RelativeEncoder frontLEnc = frontL.getEncoder();
@@ -22,7 +22,7 @@ public class DriveTrain extends SubsystemBase{
 
     MotorControllerGroup leftDrive = new MotorControllerGroup(frontL, backL);
     MotorControllerGroup rightDrive = new MotorControllerGroup(frontR, backR);
-    private DifferentialDrive allDrive = new DifferentialDrive(leftDrive, rightDrive);
+    DifferentialDrive allDrive = new DifferentialDrive(leftDrive, rightDrive);
 
 
     public DriveTrain(){
@@ -43,5 +43,6 @@ public class DriveTrain extends SubsystemBase{
     }
     public void greenLight(double xAxis, double zRotate){
         allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * xAxis, Constants.DRIVE_SPEED_MULTIPLIER *zRotate);
+        System.out.println("help");
     }
 }

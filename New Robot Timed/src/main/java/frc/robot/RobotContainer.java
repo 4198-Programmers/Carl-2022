@@ -7,7 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.Drive;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.commands.ResetDriveTrainPosition;
 import frc.robot.subsystems.DriveTrain;
 
@@ -23,7 +23,7 @@ public class RobotContainer {
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
 
   DriveTrain vroomVroom = new DriveTrain();
-  Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
+  //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   //Command move = resetDriveTrainPosition.andThen(drive);
 
@@ -34,7 +34,7 @@ public class RobotContainer {
   public void initialize() {
     // Configure the button bindings
     configureButtonBindings();
-    vroomVroom.setDefaultCommand(drive);
+    vroomVroom.setDefaultCommand(new RunCommand(() -> vroomVroom.greenLight(midStick.getRawAxis(0), leftStick.getRawAxis(1)), vroomVroom));
   }
 
   /**

@@ -7,7 +7,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.RunCommand;
+import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.Drive;
 import frc.robot.commands.OffTarmac;
 import frc.robot.commands.ResetDriveTrainPosition;
 import frc.robot.subsystems.DriveTrain;
@@ -19,17 +20,17 @@ import frc.robot.subsystems.DriveTrain;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  Command m_autonomousCommand;
+  DriveTrain vroomVroom = new DriveTrain();
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
   Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
-  ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition();
-  OffTarmac offTarmacAuto = new OffTarmac();
+  ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition(vroomVroom);
+  OffTarmac offTarmacAuto = new OffTarmac(vroomVroom);
 
-  DriveTrain vroomVroom = new DriveTrain();
   //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   //Command move = resetDriveTrainPosition.andThen(drive);
-  Command auto = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
 
   // The robot's subsystems and commands are defined here...
  
@@ -38,8 +39,9 @@ public class RobotContainer {
   public void initialize() {
     // Configure the button bindings
     configureButtonBindings();
-    vroomVroom.setDefaultCommand(new RunCommand(() -> vroomVroom.greenLight(midStick.getRawAxis(0), 
-    leftStick.getRawAxis(1)), vroomVroom));
+    // vroomVroom.setDefaultCommand(new RunCommand(() -> vroomVroom.greenLight(midStick.getRawAxis(0), 
+    // leftStick.getRawAxis(1)), vroomVroom));
+    vroomVroom.setDefaultCommand(new Drive(midStick, leftStick, vroomVroom));
     m_autonomousCommand = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
   }
 

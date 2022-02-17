@@ -1,16 +1,17 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class Drive extends CommandBase{
-    double forward;
-    double turning;
+    Joystick forward;
+    Joystick turn;
     DriveTrain robotPosition;
 
-    public Drive(double forwardArg, double turningArg, DriveTrain robotPositionArg){
-        forward = forwardArg;
-        turning = turningArg;
+    public Drive(Joystick forward, Joystick turn, DriveTrain robotPositionArg){
+        this.forward = forward;
+        this.turn = turn;
         robotPosition = robotPositionArg;
         addRequirements(robotPosition);
     }
@@ -20,6 +21,6 @@ public class Drive extends CommandBase{
     // }
     @Override
     public void execute() {
-        robotPosition.greenLight(forward, turning);
+        robotPosition.greenLight(forward.getRawAxis(0), turn.getRawAxis(1));
     }
 }

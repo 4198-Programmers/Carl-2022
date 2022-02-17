@@ -1,32 +1,35 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Maths;
 import frc.robot.subsystems.BRRR;
 
-public class NO extends CommandBase{
-    private final BRRR ZOOMYNO;
+public class MORELEGSGONOMORE extends CommandBase{
+    private final BRRR ZOOMYGONOMORE;
     private boolean ENDIT;
-    private double whereIGo = 40;
-    public NO(BRRR zoomy) {
-        ZOOMYNO = zoomy;
+
+    public MORELEGSGONOMORE(BRRR zoomy) {
+        ZOOMYGONOMORE = zoomy;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(zoomy);
       }
 
+    @Override
     public void initialize() {
-        ZOOMYNO.AMNESIA();
+        ZOOMYGONOMORE.AMNESIA();
     }
 
+    @Override
     public void execute() {
-    ZOOMYNO.GOGOGONO(0,0);
+            ZOOMYGONOMORE.GOGOGOBRRR(0, 0);
             ENDIT = true;
-        }
+    }
 
+    @Override
     public void end(boolean interrupted) {
 
     }
 
+    @Override
     public boolean isFinished() {
         return ENDIT;
       }

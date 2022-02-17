@@ -14,27 +14,31 @@ public class MORELEGSGOBZZZ extends CommandBase{
         addRequirements(zoomy);
       }
 
+    @Override
     public void initialize() {
         ZOOMYGOBZZZ.AMNESIA();
     }
 
+    @Override
     public void execute() {
         
-        double locaton = ZOOMYGOBZZZ.LOCAIONCRISIS();
+        double locaton = ZOOMYGOBZZZ.SOLVELOCAIONCRISIS();
         double rotations = Maths.BadWheelMath(whereIGo);
         if(Math.abs(locaton) < rotations) {
-            ZOOMYGOBZZZ.GOGOGOBZZZ(0, 1);
+            ZOOMYGOBZZZ.GOGOGOBRRR(0, 1);
         }
         else {
-            ZOOMYGOBZZZ.GOGOGOBZZZ(0, 0);
+            ZOOMYGOBZZZ.GOGOGOBRRR(0, 0);
             ENDIT = true;
         }
     }
 
+    @Override
     public void end(boolean interrupted) {
 
     }
 
+    @Override
     public boolean isFinished() {
         return ENDIT;
       }

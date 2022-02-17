@@ -14,19 +14,23 @@ public class MORELEGSGOAMNESIA extends CommandBase{
         addRequirements(zoomy);
       }
 
+    @Override
     public void initialize() {
         
     }
 
+    @Override
     public void execute() {
         ZOOMYGOAMNESIA.AMNESIA();
         ENDIT = true;
     }
 
+    @Override
     public void end(boolean interrupted) {
 
     }
 
+    @Override
     public boolean isFinished() {
         return ENDIT;
       }

@@ -15,10 +15,10 @@ package frc.robot;
 public final class GUDNumbers {
 
     //motor insersion locations definitely
-    public static final byte FRONT_LEFT_INSERTION_THINGY = 4;
-    public static final byte FRONT_RIGHT_INSERTION_THINGY = 3;
-    public static final byte BACK_LEFT_INSERTION_THINGY = 2;
-    public static final byte BACK_RIGHT_INSERTION_THINGY = 1;
+    public static final byte FRONT_LEFT_INSERTION_THINGY = 3;
+    public static final byte FRONT_RIGHT_INSERTION_THINGY = 4;
+    public static final byte BACK_LEFT_INSERTION_THINGY = 1;
+    public static final byte BACK_RIGHT_INSERTION_THINGY = 2;
 
     //joystick insersion locations definitely
     public static final byte WIGGLE_INSERT_LOCATION = 0;
@@ -55,7 +55,6 @@ public final class GUDNumbers {
     // public static final byte leftbuttonthree = 3;
     // public static final byte leftbuttonfour = 4;
     // public static final byte leftbuttonfive = 5;
-
     // public static final byte leftbuttonsix = 6;
     // public static final byte leftbuttonseven = 7;
     // public static final byte leftbuttoneight = 8;
@@ -74,11 +73,12 @@ public final class GUDNumbers {
      public static final byte MOVE_LEGS_GO_BRRR = 7;
      public static final byte MOVE_LEGS_GO_BZZZ = 8;
     // public static final byte LIMELIGHT_TARGETING_BUTTON = 8;
-     public static final byte NO = 9;
+    public static final byte MOVE_LEGS_GO_NO_MORE = 9;
     // public static final byte VERT_HOOK_DOWN_BUTTON = 10;
     // public static final byte VERT_HOOK_UP_BUTTON = 11;
     // // public static final byte leftbuttoneleven = 12;
     // public static final double VERT_HOOK_DISTANCE_DOWN = -0;
     // public static final double ANGLED_HOOK_DEGREES_DOWN = -0;
+    
 
 }

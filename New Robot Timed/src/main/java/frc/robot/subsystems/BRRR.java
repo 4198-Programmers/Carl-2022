@@ -1,8 +1,5 @@
 package frc.robot.subsystems;
 
-
-import edu.wpi.first.wpilibj.Joystick;
-
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,6 +14,7 @@ public class BRRR extends SubsystemBase {
     private CANSparkMax frontRL = new CANSparkMax(GUDNumbers.FRONT_RIGHT_INSERTION_THINGY, MotorType.kBrushless);
     private CANSparkMax backLL = new CANSparkMax(GUDNumbers.BACK_LEFT_INSERTION_THINGY, MotorType.kBrushless);
     private CANSparkMax backRL = new CANSparkMax(GUDNumbers.BACK_RIGHT_INSERTION_THINGY, MotorType.kBrushless);
+
     private RelativeEncoder frontLEncoder = frontLL.getEncoder();
     private RelativeEncoder frontREncoder = frontRL.getEncoder();
     private RelativeEncoder backLEncoder = backLL.getEncoder();
@@ -36,12 +34,12 @@ public class BRRR extends SubsystemBase {
         backREncoder.setPosition(0);
     }
 
-    public double LOCAIONCRISIS() {
+    public double SOLVELOCAIONCRISIS() {
         double WHYHERE = Math.abs(frontLEncoder.getPosition()); 
         WHYHERE += Math.abs(frontREncoder.getPosition());
         WHYHERE += Math.abs(backLEncoder.getPosition());
         WHYHERE += Math.abs(backREncoder.getPosition());
-        return WHYHERE / (4d * GUDNumbers.WHEEL_SIZE_CRISIS);
+        return (WHYHERE / 4d);
     }
 
     public void GOGOGOBRRR(double OneDirection, double OtherDirection) {
@@ -50,8 +48,6 @@ public class BRRR extends SubsystemBase {
     public void GOGOGOBZZZ(double OneDirection, double OtherDirection) {
         MORELEGS.arcadeDrive(GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OneDirection, GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OtherDirection);
     }
-    public void GOGOGONO(double OneDirection, double OtherDirection) {
-        MORELEGS.arcadeDrive(GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OneDirection, GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OtherDirection);
-    }
+
 
 }

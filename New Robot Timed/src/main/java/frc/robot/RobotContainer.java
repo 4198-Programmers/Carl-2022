@@ -1,5 +1,7 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -10,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.simplecommands.DoNotMove;
 import frc.robot.simplecommands.TaxiTarmac;
 import frc.robot.simplecommands.PickLimelightMode;
+import frc.robot.simplecommands.RedFollower;
 import frc.robot.simplecommands.ResetDriveTrainPosition;
 import frc.robot.simplecommands.SetFlySpeed;
 import frc.robot.simplecommands.SetIntakeSpeed;
@@ -36,8 +39,10 @@ public class RobotContainer {
   ShooterPathMovement pewPew = new ShooterPathMovement();
   Hooks climber = new Hooks();
   Limelight vision = new Limelight();
+  // UsbCamera ballFinder = CameraServer.startAutomaticCapture();
 
   // commands
+  // RealizeBall realizeBall = new RealizeBall(ballFinder);
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
   DoNotMove doNotMoveTASGROUP = new DoNotMove(vroomVroom, pewPew);
   // TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew, vision);

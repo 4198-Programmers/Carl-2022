@@ -30,7 +30,7 @@ public final class GUDNumbers {
     public static final byte WIGGLE_WIGGLE_WIGGLE_INSERT_LOCATION = 2;
 
     // motor crisis
-    public static final double WHEEL_SIZE_CRISIS = 12.75;
+    public static final double WHEEL_SIZE_CRISIS = 1/12.75;
     public static final double WHEEL_SIZE = 6;
     public static final double WHEEL_GO_ZOOM_ZOOM = 2;
     public static final double WHEEL_GO_ZOOM = 1;

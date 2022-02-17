@@ -16,6 +16,7 @@ public class TokyoDrift extends CommandBase {
         this.sideToSide = sideToSide;
 
         this.runningInThe90s = runningInThe90s;
+        addRequirements(runningInThe90s);
 
     }
 

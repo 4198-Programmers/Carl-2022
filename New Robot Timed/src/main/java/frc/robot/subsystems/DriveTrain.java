@@ -25,33 +25,36 @@ public class DriveTrain extends SubsystemBase{
 
     DifferentialDrive dejaVu = new DifferentialDrive(leftSide, rightSide);
 
-    private double convert;
 
     public DriveTrain() {
-        frMotorEnc.setPositionConversionFactor(convert);
-        flMotorEnc.setPositionConversionFactor(convert);
-        brMotorEnc.setPositionConversionFactor(convert);
-        blMotorEnc.setPositionConversionFactor(convert);
+        frMotorEnc.setPositionConversionFactor(1/Constants.WHEEL_CONVERSION_FACTOR);
+        flMotorEnc.setPositionConversionFactor(1/Constants.WHEEL_CONVERSION_FACTOR);
+        brMotorEnc.setPositionConversionFactor(1/Constants.WHEEL_CONVERSION_FACTOR);
+        blMotorEnc.setPositionConversionFactor(1/Constants.WHEEL_CONVERSION_FACTOR);
     }
     
     public void resetPosition() {
 
-        frMotorEnc.setPositionConversionFactor(0);
-        flMotorEnc.setPositionConversionFactor(0);
-        brMotorEnc.setPositionConversionFactor(0);
-        blMotorEnc.setPositionConversionFactor(0);
+        frMotorEnc.setPosition(0d);
+        flMotorEnc.setPosition(0d);
+        brMotorEnc.setPosition(0d);
+        blMotorEnc.setPosition(0d);
 
     }
 
     public double whereAmI() {
 
-        return (frMotorEnc.getPosition() + flMotorEnc.getPosition() + brMotorEnc.getPosition() + blMotorEnc.getPosition()) / 4;
+        return Math.abs(frMotorEnc.getPosition());
+        // + Math.abs(flMotorEnc.getPosition()) 
+        // + Math.abs(brMotorEnc.getPosition()) 
+        // + Math.abs(blMotorEnc.getPosition()) 
+        // / 4);
 
     }
 
     public void tokyo(double xAxis, double zAxis) {
 
-        dejaVu.arcadeDrive(xAxis, zAxis);
+        dejaVu.arcadeDrive(xAxis * Constants.SPEED_CONVERSION_FACTOR, zAxis * Constants.SPEED_CONVERSION_FACTOR);
     }
 
 }

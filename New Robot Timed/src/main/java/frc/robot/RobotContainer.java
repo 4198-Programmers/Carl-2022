@@ -6,6 +6,7 @@ import frc.robot.commands.NeoDrift;
 import frc.robot.commands.TokyoDrift;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 
 public class RobotContainer {
 
@@ -27,7 +28,8 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    gasGasGas.setDefaultCommand(tokyoDrift);
+    //gasGasGas.setDefaultCommand(tokyoDrift);
+    gasGasGas.setDefaultCommand(new RunCommand(() -> gasGasGas.tokyo(middleShaft.getRawAxis(0), leftShaft.getRawAxis(1)), gasGasGas));
 
     configureButtonBindings();
   }

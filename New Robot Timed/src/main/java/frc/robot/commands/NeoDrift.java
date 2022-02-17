@@ -13,11 +13,12 @@ public class NeoDrift extends CommandBase {
     public NeoDrift(DriveTrain NeoYokio) {
 
         this.neoYokio = NeoYokio;
+        addRequirements(neoYokio);
     }
 
     @Override
     public void initialize() {
-
+        neoYokio.resetPosition();
         complete = false;
     }
 
@@ -27,8 +28,8 @@ public class NeoDrift extends CommandBase {
         double rotations = Maths.rotationConversion(50);
         double position = neoYokio.whereAmI();
 
-        if (rotations < position) {
-            neoYokio.tokyo(-1, 0);
+        if (rotations > position) {
+            neoYokio.tokyo(0, -1);
         } else {
             neoYokio.tokyo(0, 0);
             complete = true;

@@ -8,7 +8,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-
 public class BRRR extends SubsystemBase {
     private CANSparkMax frontLL = new CANSparkMax(GUDNumbers.FRONT_LEFT_INSERTION_THINGY, MotorType.kBrushless);
     private CANSparkMax frontRL = new CANSparkMax(GUDNumbers.FRONT_RIGHT_INSERTION_THINGY, MotorType.kBrushless);
@@ -25,8 +24,6 @@ public class BRRR extends SubsystemBase {
 
     private DifferentialDrive MORELEGS = new DifferentialDrive(rightLegs, leftLegs);
 
-
-    
     public void AMNESIA() {
         frontLEncoder.setPosition(0);
         backLEncoder.setPosition(0);
@@ -35,7 +32,7 @@ public class BRRR extends SubsystemBase {
     }
 
     public double SOLVELOCAIONCRISIS() {
-        double WHYHERE = Math.abs(frontLEncoder.getPosition()); 
+        double WHYHERE = Math.abs(frontLEncoder.getPosition());
         WHYHERE += Math.abs(frontREncoder.getPosition());
         WHYHERE += Math.abs(backLEncoder.getPosition());
         WHYHERE += Math.abs(backREncoder.getPosition());
@@ -43,11 +40,13 @@ public class BRRR extends SubsystemBase {
     }
 
     public void GOGOGOBRRR(double OneDirection, double OtherDirection) {
-        MORELEGS.arcadeDrive(GUDNumbers.WHEEL_GO_ZOOM * OneDirection, GUDNumbers.WHEEL_GO_ZOOM * OtherDirection);
+        MORELEGS.arcadeDrive(OneDirection, OtherDirection);
     }
+
     public void GOGOGOBZZZ(double OneDirection, double OtherDirection) {
-        MORELEGS.arcadeDrive(GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OneDirection, GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OtherDirection);
+        MORELEGS.arcadeDrive(OneDirection, OtherDirection);
     }
+
 
 
 }

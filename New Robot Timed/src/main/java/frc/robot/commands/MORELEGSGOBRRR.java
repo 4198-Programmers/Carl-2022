@@ -8,11 +8,12 @@ public class MORELEGSGOBRRR extends CommandBase {
     private final BRRR ZOOMYGOBRRR;
     private boolean ENDIT;
     private double whereIGo = 40;
+
     public MORELEGSGOBRRR(BRRR zoomy) {
         ZOOMYGOBRRR = zoomy;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(zoomy);
-      }
+    }
 
     @Override
     public void initialize() {
@@ -21,13 +22,12 @@ public class MORELEGSGOBRRR extends CommandBase {
 
     @Override
     public void execute() {
-        
+
         double locaton = ZOOMYGOBRRR.SOLVELOCAIONCRISIS();
         double rotations = Maths.BadWheelMath(whereIGo);
-        if(Math.abs(locaton) < rotations) {
+        if (Math.abs(locaton) < rotations) {
             ZOOMYGOBRRR.GOGOGOBRRR(1, 0);
-        }
-        else {
+        } else {
             ZOOMYGOBRRR.GOGOGOBRRR(0, 0);
             ENDIT = true;
         }
@@ -41,5 +41,5 @@ public class MORELEGSGOBRRR extends CommandBase {
     @Override
     public boolean isFinished() {
         return ENDIT;
-      }
+    }
 }

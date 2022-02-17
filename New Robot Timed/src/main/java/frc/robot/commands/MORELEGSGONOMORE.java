@@ -3,7 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.BRRR;
 
-public class MORELEGSGONOMORE extends CommandBase{
+public class MORELEGSGONOMORE extends CommandBase {
     private final BRRR ZOOMYGONOMORE;
     private boolean ENDIT;
 
@@ -11,7 +11,7 @@ public class MORELEGSGONOMORE extends CommandBase{
         ZOOMYGONOMORE = zoomy;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(zoomy);
-      }
+    }
 
     @Override
     public void initialize() {
@@ -20,8 +20,8 @@ public class MORELEGSGONOMORE extends CommandBase{
 
     @Override
     public void execute() {
-            ZOOMYGONOMORE.GOGOGOBRRR(0, 0);
-            ENDIT = true;
+        ZOOMYGONOMORE.GOGOGOBRRR(0, 0);
+        ENDIT = true;
     }
 
     @Override
@@ -32,5 +32,5 @@ public class MORELEGSGONOMORE extends CommandBase{
     @Override
     public boolean isFinished() {
         return ENDIT;
-      }
+    }
 }

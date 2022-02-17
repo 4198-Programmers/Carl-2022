@@ -4,15 +4,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.BRRR;
 
-public class MORELEGSGOBZZZ extends CommandBase{
+public class MORELEGSGOBZZZ extends CommandBase {
     private final BRRR ZOOMYGOBZZZ;
     private boolean ENDIT;
     private double whereIGo = 40;
+
     public MORELEGSGOBZZZ(BRRR zoomy) {
         ZOOMYGOBZZZ = zoomy;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(zoomy);
-      }
+    }
 
     @Override
     public void initialize() {
@@ -21,13 +22,12 @@ public class MORELEGSGOBZZZ extends CommandBase{
 
     @Override
     public void execute() {
-        
+
         double locaton = ZOOMYGOBZZZ.SOLVELOCAIONCRISIS();
         double rotations = Maths.BadWheelMath(whereIGo);
-        if(Math.abs(locaton) < rotations) {
+        if (Math.abs(locaton) < rotations) {
             ZOOMYGOBZZZ.GOGOGOBRRR(0, 1);
-        }
-        else {
+        } else {
             ZOOMYGOBZZZ.GOGOGOBRRR(0, 0);
             ENDIT = true;
         }
@@ -41,5 +41,5 @@ public class MORELEGSGOBZZZ extends CommandBase{
     @Override
     public boolean isFinished() {
         return ENDIT;
-      }
+    }
 }

@@ -25,6 +25,10 @@ public class BRRR extends SubsystemBase {
     private DifferentialDrive MORELEGS = new DifferentialDrive(rightLegs, leftLegs);
 
     public void AMNESIA() {
+        frontLEncoder.setPositionConversionFactor(GUDNumbers.WHEEL_SIZE_CRISIS);
+        frontREncoder.setPositionConversionFactor(GUDNumbers.WHEEL_SIZE_CRISIS);
+        backLEncoder.setPositionConversionFactor(GUDNumbers.WHEEL_SIZE_CRISIS);
+        backREncoder.setPositionConversionFactor(GUDNumbers.WHEEL_SIZE_CRISIS);
         frontLEncoder.setPosition(0);
         backLEncoder.setPosition(0);
         frontREncoder.setPosition(0);

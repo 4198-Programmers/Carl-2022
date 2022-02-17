@@ -11,6 +11,7 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.MORELEGSGOAMNESIA;
 import frc.robot.commands.MORELEGSGOBRRR;
 import frc.robot.commands.MORELEGSGOBZZZ;
+import frc.robot.commands.NO;
 import frc.robot.subsystems.BRRR;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -35,11 +36,13 @@ public class RobotContainer {
   JoystickButton morelegsgobrrrbutton = new JoystickButton(wiggleWiggleWiggle, GUDNumbers.MOVE_LEGS_GO_BRRR);
   JoystickButton morelegsgobzzzbutton = new JoystickButton(wiggleWiggleWiggle, GUDNumbers.MOVE_LEGS_GO_BZZZ);
   JoystickButton morelegsgoamnesiabuttion = new JoystickButton(wiggleWiggleWiggle, GUDNumbers.MOVE_LEGS_GO_AMNESIA);
+  JoystickButton nobutton = new JoystickButton(wiggleWiggleWiggle, GUDNumbers.NO);
 
   //commands
   MORELEGSGOBRRR morelegsgobrrr = new MORELEGSGOBRRR(brr);
   MORELEGSGOBZZZ morelegsgobzzz = new MORELEGSGOBZZZ(brr);
   MORELEGSGOAMNESIA morelegsgoamnesia = new MORELEGSGOAMNESIA(brr);
+  NO no = new NO(brr);
 
 
   // The robot's subsystems and commands are defined here...
@@ -63,6 +66,7 @@ public class RobotContainer {
     morelegsgobrrrbutton.whenPressed(morelegsgobrrr);
     morelegsgobzzzbutton.whenPressed(morelegsgobzzz);
     morelegsgoamnesiabuttion.whenPressed(morelegsgoamnesia);
+    nobutton.whenPressed(no);
   }
 
   /**

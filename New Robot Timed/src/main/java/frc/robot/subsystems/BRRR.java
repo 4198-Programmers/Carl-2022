@@ -50,6 +50,8 @@ public class BRRR extends SubsystemBase {
     public void GOGOGOBZZZ(double OneDirection, double OtherDirection) {
         MORELEGS.arcadeDrive(GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OneDirection, GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OtherDirection);
     }
-
+    public void GOGOGONO(double OneDirection, double OtherDirection) {
+        MORELEGS.arcadeDrive(GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OneDirection, GUDNumbers.WHEEL_GO_ZOOM_ZOOM * OtherDirection);
+    }
 
 }

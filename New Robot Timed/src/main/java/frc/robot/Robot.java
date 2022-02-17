@@ -1,3 +1,4 @@
+
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -5,71 +6,62 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Robot extends TimedRobot {
-  private Command autoSelected;
-  RobotContainer container;
+  private Command m_autonomousCommand;
+
+  private RobotContainer m_robotContainer;
 
   @Override
   public void robotInit() {
-    container = new RobotContainer();
 
+    m_robotContainer = new RobotContainer();
   }
-
-
 
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run(); 
+
+    CommandScheduler.getInstance().run();
   }
 
- 
+  @Override
+  public void disabledInit() {
+  }
+
+  @Override
+  public void disabledPeriodic() {
+  }
 
   @Override
   public void autonomousInit() {
-    autoSelected = container.getAutonomousCommand();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    if (autoSelected != null) {
-      autoSelected.schedule();
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
     }
-
   }
 
-
-
   @Override
-  public void autonomousPeriodic() {}
-
-
+  public void autonomousPeriodic() {
+  }
 
   @Override
   public void teleopInit() {
-    if (autoSelected != null) {
-      autoSelected.cancel();
-    }
 
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.cancel();
+    }
   }
 
-  /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
   }
 
-  /** This function is called once when the robot is disabled. */
   @Override
-  public void disabledInit() {}
+  public void testInit() {
 
-  /** This function is called periodically when disabled. */
+    CommandScheduler.getInstance().cancelAll();
+  }
+
   @Override
-  public void disabledPeriodic() {}
-
-  /** This function is called once when test mode is enabled. */
-  @Override
-  public void testInit() {}
-
-  /** This function is called periodically during test mode. */
-  @Override
-  public void testPeriodic() {}
-
-  // @Override 
-  // public void simulationInit() {}
-  
+  public void testPeriodic() {
+  }
 }

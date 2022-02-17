@@ -9,58 +9,49 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+
 public class DriveTrain extends SubsystemBase{
-    private CANSparkMax frontR = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
-    private CANSparkMax frontL = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_DEVICE_ID, MotorType.kBrushless);
-    private CANSparkMax backR = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
-    private CANSparkMax backL = new CANSparkMax(Constants.BACK_LEFT_MOTOR_DEVICE_ID, MotorType.kBrushless);
-    private RelativeEncoder frontREnc = frontR.getEncoder();
-    private RelativeEncoder frontLEnc = frontL.getEncoder();
-    private RelativeEncoder backREnc = backR.getEncoder();
-    private RelativeEncoder backLEnc = backL.getEncoder();
+    private CANSparkMax frMotor = new CANSparkMax(Constants.FR_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax flMotor = new CANSparkMax(Constants.FL_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax brMotor = new CANSparkMax(Constants.BR_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax blMotor = new CANSparkMax(Constants.BL_MOTOR_ID, MotorType.kBrushless);
+    private RelativeEncoder frMotorEnc = frMotor.getEncoder();
+    private RelativeEncoder flMotorEnc = flMotor.getEncoder();
+    private RelativeEncoder brMotorEnc = brMotor.getEncoder();
+    private RelativeEncoder blMotorEnc = brMotor.getEncoder();
 
-    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontR, backR);
-    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontL, backL);
-  
-    private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
+    MotorControllerGroup rightSide = new MotorControllerGroup(frMotor, brMotor);
+    MotorControllerGroup leftSide = new MotorControllerGroup(flMotor, blMotor);
 
-    private double conversionFactor = 12.75;
+    DifferentialDrive dejaVu = new DifferentialDrive(leftSide, rightSide);
 
-    public DriveTrain(){
-        frontLEnc.setPositionConversionFactor(conversionFactor);
-        frontREnc.setPositionConversionFactor(conversionFactor);
-        backLEnc.setPositionConversionFactor(conversionFactor);
-        backREnc.setPositionConversionFactor(conversionFactor);
+    private double convert;
+
+    public DriveTrain() {
+        frMotorEnc.setPositionConversionFactor(convert);
+        flMotorEnc.setPositionConversionFactor(convert);
+        brMotorEnc.setPositionConversionFactor(convert);
+        blMotorEnc.setPositionConversionFactor(convert);
+    }
+    
+    public void resetPosition() {
+
+        frMotorEnc.setPositionConversionFactor(0);
+        flMotorEnc.setPositionConversionFactor(0);
+        brMotorEnc.setPositionConversionFactor(0);
+        blMotorEnc.setPositionConversionFactor(0);
+
     }
 
-    /**Sets encoder positions to 0 */
-    public void resetPosition(){
-        frontLEnc.setPosition(0);
-        frontREnc.setPosition(0);
-        backLEnc.setPosition(0);
-        backREnc.setPosition(0);
+    public double whereAmI() {
+
+        return (frMotorEnc.getPosition() + flMotorEnc.getPosition() + brMotorEnc.getPosition() + blMotorEnc.getPosition()) / 4;
+
     }
 
-    public double findPosition(){
-        double encCurrentPosition = frontLEnc.getPosition();
-        encCurrentPosition += frontREnc.getPosition();
-        encCurrentPosition += backREnc.getPosition();
-        encCurrentPosition += backLEnc.getPosition();
-        return encCurrentPosition/4d ;
+    public void tokyo(double xAxis, double zAxis) {
+
+        dejaVu.arcadeDrive(xAxis, zAxis);
     }
 
-
-    /**
-     * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot. Negative values of xAxis
-     * will move backwards, negative values of the zRotation will rotate counter-clockwise.
-     * Joysticks allow these to be control by controller axes
-     * @param xAxis
-     * @param zRotate
-     */
-    public void greenLight(double xAxis, double zRotate){
-        
-        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER*xAxis, Constants.DRIVE_SPEED_MULTIPLIER*zRotate);
-    }
-
-  
 }

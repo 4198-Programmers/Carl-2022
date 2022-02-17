@@ -14,12 +14,12 @@ package frc.robot;
  */
 public final class Constants {
     public static final byte LEFT_STICK_PORT = 0;
-    public static final byte MID_STICK_PORT = 1;
+    public static final byte MID_STICK_PORT =1;
     public static final byte RIGHT_STICK_PORT = 2;
-    public static final byte FRONT_RIGHT_MOTOR_PORT = -0;
-    public static final byte FRONT_LEFT_MOTOR_PORT = -0;
-    public static final byte BACK_RIGHT_MOTOR_PORT = -0;
-    public static final byte BACK_LEFT_MOTOR_PORT = -0;
+    public static final byte FRONT_RIGHT_MOTOR_PORT = 3;
+    public static final byte FRONT_LEFT_MOTOR_PORT = 4;
+    public static final byte BACK_RIGHT_MOTOR_PORT = 2;
+    public static final byte BACK_LEFT_MOTOR_PORT = 1;
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
     public static final int WHEEL_DIAMETER = 6;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;

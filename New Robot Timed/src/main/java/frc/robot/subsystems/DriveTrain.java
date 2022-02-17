@@ -22,7 +22,6 @@ public class DriveTrain extends SubsystemBase{
 
     MotorControllerGroup leftDrive = new MotorControllerGroup(frontL, backL);
     MotorControllerGroup rightDrive = new MotorControllerGroup(frontR, backR);
-    MotorControllerGroup motorControllerGroup = new MotorControllerGroup(frontR, frontL, backR, backL);
     private DifferentialDrive allDrive = new DifferentialDrive(leftDrive, rightDrive);
 
 
@@ -37,12 +36,12 @@ public class DriveTrain extends SubsystemBase{
     }
     public double getPosition(){
         double encCurrentPosition = (frontREnc.getPosition());
-        encCurrentPosition =+ (frontLEnc.getPosition());
-        encCurrentPosition =+ (backREnc.getPosition());
-        encCurrentPosition =+ (backLEnc.getPosition());
+        encCurrentPosition += (frontLEnc.getPosition());
+        encCurrentPosition += (backREnc.getPosition());
+        encCurrentPosition += (backLEnc.getPosition());
         return encCurrentPosition/4d;
     }
-    public void greenLight(double zRotate, double xAxis){
-        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * zRotate, Constants.DRIVE_SPEED_MULTIPLIER *xAxis);
+    public void greenLight(double xAxis, double zRotate){
+        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * xAxis, Constants.DRIVE_SPEED_MULTIPLIER *zRotate);
     }
 }

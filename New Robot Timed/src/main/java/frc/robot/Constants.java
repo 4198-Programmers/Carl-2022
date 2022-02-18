@@ -23,4 +23,5 @@ public final class Constants {
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
     public static final double WHEEL_DIAMETER = 5.875;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
+    public static final double OFF_SET_FACTOR = -0;
 }

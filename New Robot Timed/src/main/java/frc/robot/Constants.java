@@ -24,4 +24,15 @@ public final class Constants {
     public static final double WHEEL_DIAMETER = 5.875;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
     public static final double OFF_SET_FACTOR = -0;
+    public static final int TARGET_BUTTON = 0;
+    public static final int TURN_LIMELIGHT_OFF_BUTTON = 0;
+    public static final int TURN_LIMELIGHT_ON_BUTTON = 0;
+    public static final double TURN_LIMELIGHT_MODE_ON = 0;
+    public static final double TURN_LIMELIGHT_MODE_OFF = 0;
+    public static final int FEEDER_MOTOR = 0;
+    public static final int INTERNAL_MOTOR = 0;
+    public static final int FLY_WHEEL_MOTOR = 0;
+    public static final int TURN_ON_ANNOYANCE_MODE_BUTTON = 0;
+    public static final double EXPECTED_FLYWHEEL_SPEED = 0;
+    public static final double WANTED_FLY_WHEEL_SPEED = 0;
 }

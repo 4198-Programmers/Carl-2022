@@ -8,10 +8,15 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ChooseLimelightLedMode;
 import frc.robot.commands.Drive;
 import frc.robot.commands.OffTarmac;
 import frc.robot.commands.ResetDriveTrainPosition;
+import frc.robot.commands.Targeting;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Limelight.LedMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,16 +27,27 @@ import frc.robot.subsystems.DriveTrain;
 public class RobotContainer {
   Command m_autonomousCommand;
   DriveTrain vroomVroom = new DriveTrain();
+  Limelight vision = new Limelight();
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
   Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
   ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition(vroomVroom);
   OffTarmac offTarmacAuto = new OffTarmac(vroomVroom);
+  Targeting targeting = new Targeting(vroomVroom, vision);
+  ChooseLimelightLedMode turnLimelightLedModeOn = new ChooseLimelightLedMode(vision, LedMode.forceOn);
+  ChooseLimelightLedMode turnLimelightLedModeOff = new ChooseLimelightLedMode(vision, LedMode.forceOff);
+  ChooseLimelightLedMode AnnoyanceMode = new ChooseLimelightLedMode(vision, LedMode.forceBlink);
+
 
   //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   //Command move = resetDriveTrainPosition.andThen(drive);
-
+  JoystickButton turnLimelightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
+  JoystickButton turnLimelightOffButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_OFF_BUTTON);
+  JoystickButton targetTheHoop = new JoystickButton(midStick, Constants.TARGET_BUTTON);
+  JoystickButton turnLimeLightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
+  JoystickButton turnLimeLightOffButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_OFF_BUTTON);
+  JoystickButton turnOnAnnoyanceModeButton = new JoystickButton(rightStick, Constants.TURN_ON_ANNOYANCE_MODE_BUTTON);
   // The robot's subsystems and commands are defined here...
  
   /** The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -51,8 +67,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    turnLimelightOnButton.whileHeld(turnLimelightLedModeOn);
+    turnLimelightOffButton.whenPressed(turnLimelightLedModeOn);
+    turnOnAnnoyanceModeButton.whenPressed(AnnoyanceMode);
+    targetTheHoop.whileHeld(targeting);
+  }
 
+
+//Commands
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *

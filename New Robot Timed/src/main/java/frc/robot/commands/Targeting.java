@@ -8,7 +8,7 @@ import frc.robot.subsystems.Limelight;
 public class Targeting extends CommandBase{
     Limelight limelight;
     DriveTrain vroomVroom;
-    Targeting(DriveTrain drivetrainArg, Limelight limelightArg){
+    public Targeting(DriveTrain drivetrainArg, Limelight limelightArg){
         vroomVroom = drivetrainArg;
         limelight = limelightArg;
         addRequirements(vroomVroom, limelight);

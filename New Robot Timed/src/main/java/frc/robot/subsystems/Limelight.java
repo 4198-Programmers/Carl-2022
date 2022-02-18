@@ -40,7 +40,7 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry stream = table.getEntry("stream");
  /**pipeline	Sets limelight’s current pipeline
 0 .. 9	Select pipeline 0..9 */
-    NetworkTableEntry pipeline = table.getEntry("pipeline");
+    public NetworkTableEntry pipeline = table.getEntry("pipeline");
 
     public double xOffsetTarget(){
         return tx.getDouble(1);
@@ -48,7 +48,7 @@ public class Limelight extends SubsystemBase{
     public boolean hasTarget(){
         return tv.getDouble(0) == 1;
     }
-    public double ledMode(){
-        return ledMode.getDouble(0);
+    public double pipeLine(){
+        return pipeline.getDouble(-1);
     }
     }

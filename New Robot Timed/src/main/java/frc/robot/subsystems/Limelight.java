@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.networktables.NetworkTableValue;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase{
@@ -48,5 +47,8 @@ public class Limelight extends SubsystemBase{
     }
     public boolean hasTarget(){
         return tv.getDouble(0) == 1;
+    }
+    public double ledMode(){
+        return ledMode.getDouble(0);
     }
     }

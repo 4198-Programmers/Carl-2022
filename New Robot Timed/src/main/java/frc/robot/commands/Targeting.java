@@ -21,10 +21,10 @@ public class Targeting extends CommandBase{
     public void execute(){
         if( !limelight.hasTarget() || limelight.xOffsetTarget() < - Constants.OFF_SET_FACTOR || limelight.xOffsetTarget() > Constants.OFF_SET_FACTOR){
             if(limelight.xOffsetTarget() < - Constants.OFF_SET_FACTOR){
-                vroomVroom.greenLight(1, -1);
+                vroomVroom.greenLight(-0.35, 0);
             }
             if(limelight.xOffsetTarget() > Constants.OFF_SET_FACTOR){
-                vroomVroom.greenLight(-1, 1);
+                vroomVroom.greenLight(0.35, 0);
             }
         }
     }

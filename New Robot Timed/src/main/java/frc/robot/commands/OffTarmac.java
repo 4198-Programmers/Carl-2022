@@ -5,10 +5,9 @@ import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
 public class OffTarmac extends CommandBase{
-    DriveTrain vroomVroomDT;
-    Drive drive;
-    boolean youDone;
-    double distanceOff;
+    private DriveTrain vroomVroomDT;
+    private boolean youDone;
+    private double distanceOff;
     public OffTarmac (DriveTrain vroomVroomArg){
         vroomVroomDT = vroomVroomArg;
         addRequirements(vroomVroomDT);

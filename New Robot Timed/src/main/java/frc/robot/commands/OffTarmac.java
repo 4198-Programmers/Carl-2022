@@ -23,7 +23,7 @@ public class OffTarmac extends CommandBase{
         double rotations = Maths.rotationConversion(distanceOff);
         double position = vroomVroomDT.getPosition();
         if (Math.abs(position) < rotations){
-            vroomVroomDT.greenLight(0, -1);
+            vroomVroomDT.greenLight(0, 1);
         }
         else{
             vroomVroomDT.greenLight(0, 0);

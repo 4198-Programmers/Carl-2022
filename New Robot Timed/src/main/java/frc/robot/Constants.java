@@ -20,7 +20,7 @@ public final class Constants {
     public static final byte FRONT_LEFT_MOTOR_PORT = 3;
     public static final byte BACK_RIGHT_MOTOR_PORT = 2;
     public static final byte BACK_LEFT_MOTOR_PORT = 1;
-    public static final double DRIVE_SPEED_MULTIPLIER = 1;
+    public static final double DRIVE_SPEED_MULTIPLIER = 0.25;
     public static final double WHEEL_DIAMETER = 5.875;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
 }

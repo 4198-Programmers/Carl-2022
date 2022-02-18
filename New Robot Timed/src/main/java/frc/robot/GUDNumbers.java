@@ -31,7 +31,7 @@ public final class GUDNumbers {
 
     // motor crisis
     public static final double WHEEL_SIZE_CRISIS = 1/12.75;
-    public static final double WHEEL_SIZE = 6;
+    public static final double WHEEL_SIZE = 5.875;
     public static final double WHEEL_GO_ZOOM_ZOOM = 2;
     public static final double WHEEL_GO_ZOOM = 1;
 

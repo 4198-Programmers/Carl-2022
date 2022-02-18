@@ -74,7 +74,7 @@ public class RobotContainer {
     morelegsgobzzzbutton.whileHeld(morelegsgobzzz);
     morelegsgoamnesiabuttion.whileHeld(morelegsgoamnesia);
     morelegsgonomorebutton.whileHeld(morelegsgonomore);
-    brr.setDefaultCommand(new RunCommand(() -> brr.GOGOGOBRRR(-wiggle.getRawAxis(1), wiggleWiggle.getRawAxis(0)), brr));
+    brr.setDefaultCommand(new RunCommand(() -> brr.GOGOGOBRRR(wiggleWiggle.getRawAxis(0), wiggle.getRawAxis(1)), brr));
   }
 
   /**

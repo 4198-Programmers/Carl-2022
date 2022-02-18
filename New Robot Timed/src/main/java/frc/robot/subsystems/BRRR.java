@@ -19,10 +19,10 @@ public class BRRR extends SubsystemBase {
     private RelativeEncoder backLEncoder = backLL.getEncoder();
     private RelativeEncoder backREncoder = backRL.getEncoder();
 
-    private MotorControllerGroup rightLegs = new MotorControllerGroup(frontLL, backLL);
+    private MotorControllerGroup rightLegs = new MotorControllerGroup(frontRL, backRL);
     private MotorControllerGroup leftLegs = new MotorControllerGroup(frontLL, backLL);
 
-    private DifferentialDrive MORELEGS = new DifferentialDrive(rightLegs, leftLegs);
+    private DifferentialDrive MORELEGS = new DifferentialDrive(leftLegs, rightLegs);
 
     public void AMNESIA() {
         frontLEncoder.setPositionConversionFactor(GUDNumbers.WHEEL_SIZE_CRISIS);

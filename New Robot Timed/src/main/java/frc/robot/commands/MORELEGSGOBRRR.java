@@ -26,7 +26,7 @@ public class MORELEGSGOBRRR extends CommandBase {
         double locaton = ZOOMYGOBRRR.SOLVELOCAIONCRISIS();
         double rotations = Maths.BadWheelMath(whereIGo);
         if (Math.abs(locaton) < rotations) {
-            ZOOMYGOBRRR.GOGOGOBRRR(1, 0);
+            ZOOMYGOBRRR.GOGOGOBRRR(0.5, 0);
         } else {
             ZOOMYGOBRRR.GOGOGOBRRR(0, 0);
             ENDIT = true;

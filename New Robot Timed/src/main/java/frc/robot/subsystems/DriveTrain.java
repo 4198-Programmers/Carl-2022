@@ -26,6 +26,11 @@ public class DriveTrain extends SubsystemBase{
 
 
     public DriveTrain(){
+        double conversionFactor = 1/Constants.WHEEL_CONVERSION_FACTOR;
+        frontREnc.setPositionConversionFactor(conversionFactor);
+        frontLEnc.setPositionConversionFactor(conversionFactor);
+        backREnc.setPositionConversionFactor(conversionFactor);
+        backLEnc.setPositionConversionFactor(conversionFactor);
     }
             
     public void resetPosition(){
@@ -35,10 +40,10 @@ public class DriveTrain extends SubsystemBase{
             backREnc.setPosition(0d);
     }
     public double getPosition(){
-        double encCurrentPosition = (frontREnc.getPosition());
-        encCurrentPosition += (frontLEnc.getPosition());
-        encCurrentPosition += (backREnc.getPosition());
-        encCurrentPosition += (backLEnc.getPosition());
+        double encCurrentPosition = (Math.abs(frontREnc.getPosition()));
+        encCurrentPosition += Math.abs((frontLEnc.getPosition()));
+        encCurrentPosition += Math.abs((backREnc.getPosition()));
+        encCurrentPosition += Math.abs((backLEnc.getPosition()));
         return encCurrentPosition/4d;
     }
     public void greenLight(double xAxis, double zRotate){

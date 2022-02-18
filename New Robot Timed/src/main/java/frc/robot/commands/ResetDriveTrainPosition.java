@@ -14,4 +14,8 @@ public class ResetDriveTrainPosition extends CommandBase{
     public void initialize() {
         vroomVroomRDTS.resetPosition();
     }
+    @Override
+    public boolean isFinished() {
+        return true;
+    }
 }

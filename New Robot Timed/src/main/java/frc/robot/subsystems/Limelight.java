@@ -43,12 +43,10 @@ public class Limelight extends SubsystemBase{
 0 .. 9	Select pipeline 0..9 */
     NetworkTableEntry pipeline = table.getEntry("pipeline");
 
-    double offsetTarget(){
-        return tv.getDouble(1);
+    public double xOffsetTarget(){
+        return tx.getDouble(1);
     }
-    boolean hasTarget(){
+    public boolean hasTarget(){
         return tv.getDouble(0) == 1;
     }
     }
-
-}

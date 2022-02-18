@@ -19,22 +19,18 @@ public class Targeting extends CommandBase{
     }
     @Override
     public void execute(){
-        if(limelight.offsetTarget < -(Constants.OFF_SET_FACTOR))
-        {
-            vroomVroom.greenLight(1,-1);
-        }
-        else if(limelight.offsetTarget > Constants.OFF_SET_FACTOR)
-        {
-            vroomVroom.greenLight(-1,1);
-        }
-        else if(isFinished ==true){
-            vroomVroom.greenLight(0,0);
-        }
+        if( !limelight.hasTarget() || limelight.xOffsetTarget() < - Constants.OFF_SET_FACTOR || limelight.xOffsetTarget() > Constants.OFF_SET_FACTOR){
+            if(limelight.xOffsetTarget() < - Constants.OFF_SET_FACTOR){
+                vroomVroom.greenLight(1, -1);
+            }
+            if(limelight.xOffsetTarget() > Constants.OFF_SET_FACTOR){
+                vroomVroom.greenLight(-1, 1);
+            }
         }
     }
     @Override
     public boolean isFinished() {
-        return 
+        return limelight.hasTarget() && limelight.xOffsetTarget() > -(Constants.OFF_SET_FACTOR) && limelight.xOffsetTarget() < Constants.OFF_SET_FACTOR;
     }
     
 }

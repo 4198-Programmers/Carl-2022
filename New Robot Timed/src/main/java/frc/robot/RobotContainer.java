@@ -10,14 +10,15 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ChooseLimelightLedMode;
+import frc.robot.commands.DoNotMove;
 import frc.robot.commands.Drive;
 import frc.robot.commands.FeederMotor;
 import frc.robot.commands.ManualClimb;
 import frc.robot.commands.OffTarmac;
 import frc.robot.commands.ResetDriveTrainPosition;
-import frc.robot.commands.SetInternalMoveSpeed;
-import frc.robot.commands.SpinUpFlyWheel;
-import frc.robot.commands.Targeting;
+import frc.robot.commands.ShootingCommands.SetInternalMoveSpeed;
+import frc.robot.commands.ShootingCommands.SpinUpFlyWheel;
+import frc.robot.commands.ShootingCommands.Targeting;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hooks;
 import frc.robot.subsystems.Limelight;
@@ -34,16 +35,21 @@ public class RobotContainer {
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
   Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
-  Command m_autonomousCommand;
-  Shooter shooter = new Shooter();
-  SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
-  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(shooter);
-  FeederMotor feederMotor = new FeederMotor(shooter);
   DriveTrain vroomVroom = new DriveTrain();
   Limelight vision = new Limelight();
   Hooks hooks = new Hooks();
+  Shooter shooter = new Shooter();
+  Command m_autonomousCommand;
+  SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
+  SpinUpFlyWheel spinUpFlyWheelTAS = new SpinUpFlyWheel(shooter);
+  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(shooter);
+  SetInternalMoveSpeed setInternalMoveSpeedTAS = new SetInternalMoveSpeed(shooter);
+  FeederMotor feederMotor = new FeederMotor(shooter);
   ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition(vroomVroom);
+  ResetDriveTrainPosition resetDriveTrainPositionTAS = new ResetDriveTrainPosition(vroomVroom);
+  DoNotMove doNotMoveTAS = new DoNotMove(vroomVroom);
   OffTarmac offTarmacAuto = new OffTarmac(vroomVroom);
+  OffTarmac offTarmacTAS = new OffTarmac(vroomVroom);
   Targeting targeting = new Targeting(vroomVroom, vision);
   Targeting targetingS = new Targeting(vroomVroom, vision);
   Command shoot = targetingS.alongWith(spinUpFlyWheel).andThen(setInternalMoveSpeed);
@@ -72,6 +78,7 @@ public class RobotContainer {
     vroomVroom.setDefaultCommand(new Drive(midStick, leftStick, vroomVroom));
     hooks.setDefaultCommand(new ManualClimb(rightStick, rightStick, hooks));
     m_autonomousCommand = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
+    Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
   }
 
   /**

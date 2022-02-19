@@ -43,4 +43,10 @@ public final class Constants {
     public static final double WANTED_FEEDER_SPEED = 0;
     public static final double FEEDER_SPEED = 0;
     public static final int SHOOT_BUTTON = 0;
+    public static final int FEEDER_BUTTON = 0;
+    public static final int VERT_RIGHT_HOOK = 0;
+    public static final int VERT_LEFT_HOOK = 0;
+    public static final int ANGLED_RIGHT_HOOK = 0;
+    public static final int ANGLED_LEFT_HOOK = 0;
+    public static final double WANTED_VERT_HOOK_HEIGHT = 0;
 }

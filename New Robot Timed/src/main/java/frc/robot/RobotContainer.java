@@ -12,12 +12,14 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ChooseLimelightLedMode;
 import frc.robot.commands.Drive;
 import frc.robot.commands.FeederMotor;
+import frc.robot.commands.ManualClimb;
 import frc.robot.commands.OffTarmac;
 import frc.robot.commands.ResetDriveTrainPosition;
 import frc.robot.commands.SetInternalMoveSpeed;
 import frc.robot.commands.SpinUpFlyWheel;
 import frc.robot.commands.Targeting;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Hooks;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Limelight.LedMode;
@@ -29,6 +31,9 @@ import frc.robot.subsystems.Limelight.LedMode;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
+  Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
+  Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
   Command m_autonomousCommand;
   Shooter shooter = new Shooter();
   SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
@@ -36,9 +41,7 @@ public class RobotContainer {
   FeederMotor feederMotor = new FeederMotor(shooter);
   DriveTrain vroomVroom = new DriveTrain();
   Limelight vision = new Limelight();
-  Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
-  Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
-  Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
+  Hooks hooks = new Hooks();
   ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition(vroomVroom);
   OffTarmac offTarmacAuto = new OffTarmac(vroomVroom);
   Targeting targeting = new Targeting(vroomVroom, vision);
@@ -47,11 +50,8 @@ public class RobotContainer {
   ChooseLimelightLedMode turnLimelightLedModeOn = new ChooseLimelightLedMode(vision, LedMode.forceOn);
   ChooseLimelightLedMode turnLimelightLedModeOff = new ChooseLimelightLedMode(vision, LedMode.forceOff);
   ChooseLimelightLedMode AnnoyanceMode = new ChooseLimelightLedMode(vision, LedMode.forceBlink);
-
-
   //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
-  //Command move = resetDriveTrainPosition.andThen(drive);
   JoystickButton turnLimelightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
   JoystickButton turnLimelightOffButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_OFF_BUTTON);
   JoystickButton targetTheHoop = new JoystickButton(midStick, Constants.TARGET_BUTTON);
@@ -59,6 +59,7 @@ public class RobotContainer {
   JoystickButton turnLimeLightOffButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_OFF_BUTTON);
   JoystickButton turnOnAnnoyanceModeButton = new JoystickButton(rightStick, Constants.TURN_ON_ANNOYANCE_MODE_BUTTON);
   JoystickButton shootButton = new JoystickButton(midStick, Constants.SHOOT_BUTTON);
+  JoystickButton feederButton = new JoystickButton(midStick, Constants.FEEDER_BUTTON);
   // The robot's subsystems and commands are defined here...
  
   /** The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -69,6 +70,7 @@ public class RobotContainer {
     // vroomVroom.setDefaultCommand(new RunCommand(() -> vroomVroom.greenLight(midStick.getRawAxis(0), 
     // leftStick.getRawAxis(1)), vroomVroom));
     vroomVroom.setDefaultCommand(new Drive(midStick, leftStick, vroomVroom));
+    hooks.setDefaultCommand(new ManualClimb(rightStick, rightStick, hooks));
     m_autonomousCommand = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
   }
 
@@ -79,11 +81,13 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    turnLimelightOnButton.whileHeld(turnLimelightLedModeOn);
+    turnLimelightOnButton.whenPressed(turnLimelightLedModeOn);
     turnLimelightOffButton.whenPressed(turnLimelightLedModeOn);
     turnOnAnnoyanceModeButton.whenPressed(AnnoyanceMode);
     targetTheHoop.whileHeld(targeting);
     shootButton.whenHeld(shoot);
+    feederButton.whenHeld(feederMotor);
+    
   }
 
 

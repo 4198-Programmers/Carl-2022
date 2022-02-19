@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ChooseLimelightLedMode;
@@ -39,7 +40,6 @@ public class RobotContainer {
   Limelight vision = new Limelight();
   Hooks hooks = new Hooks();
   Shooter shooter = new Shooter();
-  Command m_autonomousCommand;
   SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
   SpinUpFlyWheel spinUpFlyWheelTAS = new SpinUpFlyWheel(shooter);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(shooter);
@@ -56,6 +56,8 @@ public class RobotContainer {
   ChooseLimelightLedMode turnLimelightLedModeOn = new ChooseLimelightLedMode(vision, LedMode.forceOn);
   ChooseLimelightLedMode turnLimelightLedModeOff = new ChooseLimelightLedMode(vision, LedMode.forceOff);
   ChooseLimelightLedMode AnnoyanceMode = new ChooseLimelightLedMode(vision, LedMode.forceBlink);
+  Command taxi = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
+  Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
   //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   JoystickButton turnLimelightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
@@ -67,7 +69,7 @@ public class RobotContainer {
   JoystickButton shootButton = new JoystickButton(midStick, Constants.SHOOT_BUTTON);
   JoystickButton feederButton = new JoystickButton(midStick, Constants.FEEDER_BUTTON);
   // The robot's subsystems and commands are defined here...
- 
+  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
   /** The container for the robot. Contains subsystems, OI devices, and commands. 
    * @return */
   public void initialize() {
@@ -77,8 +79,6 @@ public class RobotContainer {
     // leftStick.getRawAxis(1)), vroomVroom));
     vroomVroom.setDefaultCommand(new Drive(midStick, leftStick, vroomVroom));
     hooks.setDefaultCommand(new ManualClimb(rightStick, rightStick, hooks));
-    m_autonomousCommand = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
-    Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
   }
 
   /**
@@ -104,8 +104,12 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  public void begin(){
+    m_chooser.setDefaultOption("taxi", taxi);
+    m_chooser.addOption("TaxiAndShoot", taxiAndShoot);
+  }
 
   public Command getAutonomousCommand(){
-    return m_autonomousCommand;
+    return m_chooser.getSelected();
   }
 }

@@ -11,14 +11,18 @@ public class SpinUpFlyWheel extends CommandBase{
         shooter = shooterArg;
         addRequirements(shooter);
     }
-    protected double expectedFlyWheelSpeed(){
+    protected double wantedFlyWheelSpeed(){
         return Constants.EXPECTED_FLYWHEEL_SPEED;
     }
     @Override
     public void execute() {
-        shooter.flywheelspeed(expectedFlyWheelSpeed());
+        shooter.flywheelspeed(wantedFlyWheelSpeed());
     }
     @Override
     public boolean isFinished(){
+        double speed = Constants.FLY_WHEEL_SPEED;
+        final double tolerance = 0.01;
+        double expectedFlyWheelSpeed = wantedFlyWheelSpeed();
+        return(speed > expectedFlyWheelSpeed - tolerance && speed < expectedFlyWheelSpeed + tolerance);
     }
 }

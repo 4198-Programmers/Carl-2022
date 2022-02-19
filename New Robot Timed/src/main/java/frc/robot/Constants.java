@@ -35,4 +35,12 @@ public final class Constants {
     public static final int TURN_ON_ANNOYANCE_MODE_BUTTON = 0;
     public static final double EXPECTED_FLYWHEEL_SPEED = 0;
     public static final double WANTED_FLY_WHEEL_SPEED = 0;
+    public static final double INTERNAL_MOTOR_SPEED = 0;
+    public static final double WANTED_INTERNAL_MOTOR_SPEED = 0;
+    public static final double GET_INTERNAL_MOTOR_SPEED = 0;
+    public static final double GET_FLY_WHEEL_SPEED = 0;
+    public static final double FLY_WHEEL_SPEED = 0;
+    public static final double WANTED_FEEDER_SPEED = 0;
+    public static final double FEEDER_SPEED = 0;
+    public static final int SHOOT_BUTTON = 0;
 }

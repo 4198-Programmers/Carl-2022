@@ -11,11 +11,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ChooseLimelightLedMode;
 import frc.robot.commands.Drive;
+import frc.robot.commands.FeederMotor;
 import frc.robot.commands.OffTarmac;
 import frc.robot.commands.ResetDriveTrainPosition;
+import frc.robot.commands.SetInternalMoveSpeed;
+import frc.robot.commands.SpinUpFlyWheel;
 import frc.robot.commands.Targeting;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Limelight.LedMode;
 
 /**
@@ -26,6 +30,10 @@ import frc.robot.subsystems.Limelight.LedMode;
  */
 public class RobotContainer {
   Command m_autonomousCommand;
+  Shooter shooter = new Shooter();
+  SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
+  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(shooter);
+  FeederMotor feederMotor = new FeederMotor(shooter);
   DriveTrain vroomVroom = new DriveTrain();
   Limelight vision = new Limelight();
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
@@ -34,6 +42,8 @@ public class RobotContainer {
   ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition(vroomVroom);
   OffTarmac offTarmacAuto = new OffTarmac(vroomVroom);
   Targeting targeting = new Targeting(vroomVroom, vision);
+  Targeting targetingS = new Targeting(vroomVroom, vision);
+  Command shoot = targetingS.alongWith(spinUpFlyWheel).andThen(setInternalMoveSpeed);
   ChooseLimelightLedMode turnLimelightLedModeOn = new ChooseLimelightLedMode(vision, LedMode.forceOn);
   ChooseLimelightLedMode turnLimelightLedModeOff = new ChooseLimelightLedMode(vision, LedMode.forceOff);
   ChooseLimelightLedMode AnnoyanceMode = new ChooseLimelightLedMode(vision, LedMode.forceBlink);
@@ -48,6 +58,7 @@ public class RobotContainer {
   JoystickButton turnLimeLightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
   JoystickButton turnLimeLightOffButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_OFF_BUTTON);
   JoystickButton turnOnAnnoyanceModeButton = new JoystickButton(rightStick, Constants.TURN_ON_ANNOYANCE_MODE_BUTTON);
+  JoystickButton shootButton = new JoystickButton(midStick, Constants.SHOOT_BUTTON);
   // The robot's subsystems and commands are defined here...
  
   /** The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -72,6 +83,7 @@ public class RobotContainer {
     turnLimelightOffButton.whenPressed(turnLimelightLedModeOn);
     turnOnAnnoyanceModeButton.whenPressed(AnnoyanceMode);
     targetTheHoop.whileHeld(targeting);
+    shootButton.whenHeld(shoot);
   }
 
 

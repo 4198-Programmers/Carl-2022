@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ChooseLimelightLedMode;
+import frc.robot.commands.DeathSpin;
 import frc.robot.commands.DoNotMove;
 import frc.robot.commands.Drive;
 import frc.robot.commands.FeederMotor;
@@ -47,16 +48,21 @@ public class RobotContainer {
   FeederMotor feederMotor = new FeederMotor(shooter);
   ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition(vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPositionTAS = new ResetDriveTrainPosition(vroomVroom);
+  ResetDriveTrainPosition resetDriveTrainPositionTAT = new ResetDriveTrainPosition(vroomVroom);
   DoNotMove doNotMoveTAS = new DoNotMove(vroomVroom);
   OffTarmac offTarmacAuto = new OffTarmac(vroomVroom);
   OffTarmac offTarmacTAS = new OffTarmac(vroomVroom);
+  OffTarmac offTarmacTAT = new OffTarmac(vroomVroom);
   Targeting targeting = new Targeting(vroomVroom, vision);
   Targeting targetingS = new Targeting(vroomVroom, vision);
+  Targeting targetingTAT = new Targeting(vroomVroom, vision);
+  DeathSpin deathSpin = new DeathSpin(vroomVroom);
   Command shoot = targetingS.alongWith(spinUpFlyWheel).andThen(setInternalMoveSpeed);
   ChooseLimelightLedMode turnLimelightLedModeOn = new ChooseLimelightLedMode(vision, LedMode.forceOn);
   ChooseLimelightLedMode turnLimelightLedModeOff = new ChooseLimelightLedMode(vision, LedMode.forceOff);
   ChooseLimelightLedMode AnnoyanceMode = new ChooseLimelightLedMode(vision, LedMode.forceBlink);
   Command taxi = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
+  Command taxiandTarget = resetDriveTrainPositionTAT.andThen(offTarmacTAT).andThen(targetingTAT);
   Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
   //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
@@ -68,6 +74,7 @@ public class RobotContainer {
   JoystickButton turnOnAnnoyanceModeButton = new JoystickButton(rightStick, Constants.TURN_ON_ANNOYANCE_MODE_BUTTON);
   JoystickButton shootButton = new JoystickButton(midStick, Constants.SHOOT_BUTTON);
   JoystickButton feederButton = new JoystickButton(midStick, Constants.FEEDER_BUTTON);
+  JoystickButton deathSpinButton = new JoystickButton(rightStick, Constants.DEATH_SPIN_BUTTON);
   // The robot's subsystems and commands are defined here...
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
   /** The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -94,6 +101,7 @@ public class RobotContainer {
     targetTheHoop.whileHeld(targeting);
     shootButton.whenHeld(shoot);
     feederButton.whenHeld(feederMotor);
+    deathSpinButton.whileHeld(deathSpin);
     
   }
 
@@ -107,6 +115,7 @@ public class RobotContainer {
   public void begin(){
     m_chooser.setDefaultOption("taxi", taxi);
     m_chooser.addOption("TaxiAndShoot", taxiAndShoot);
+    m_chooser.addOption("TaxiAndTarget", taxiandTarget);
   }
 
   public Command getAutonomousCommand(){

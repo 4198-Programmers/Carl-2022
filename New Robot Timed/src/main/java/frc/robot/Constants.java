@@ -27,18 +27,20 @@ public final class Constants {
     public static final int FEEDER_MOTOR_ID = 0;
     public static final int INTERNAL_MOTOR_ID = 0;
     public static final int FLY_WHEEL_MOTOR_ID = 0;
+
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
     public static final double WHEEL_DIAMETER = 5.875;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
     public static final double OFF_SET_FACTOR = -0;
-    public static final int TARGET_BUTTON = 0;
-    public static final int TURN_LIMELIGHT_OFF_BUTTON = 0;
-    public static final int TURN_LIMELIGHT_ON_BUTTON = 0;
-    public static final double TURN_LIMELIGHT_MODE_ON = 0;
-    public static final double TURN_LIMELIGHT_MODE_OFF = 0;
-    public static final int TURN_ON_ANNOYANCE_MODE_BUTTON = 0;
-    public static final int SHOOT_BUTTON = 0;
-    public static final int FEEDER_BUTTON = 0;
+
+    public static final int TARGET_BUTTON = 1;
+    public static final int TURN_LIMELIGHT_OFF_BUTTON = 2;
+    public static final int TURN_LIMELIGHT_ON_BUTTON = 3;
+    public static final int TURN_ON_ANNOYANCE_MODE_BUTTON = 4;
+    public static final int SHOOT_BUTTON = 1;
+    public static final int FEEDER_BUTTON = 2;
+    public static final int DEATH_SPIN_BUTTON = 3;
+
     public static final double EXPECTED_FLYWHEEL_SPEED = 0;
     public static final double WANTED_FLY_WHEEL_SPEED = 0;
     public static final double INTERNAL_MOTOR_SPEED = 0;

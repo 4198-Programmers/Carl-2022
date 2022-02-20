@@ -8,9 +8,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase{
-    private CANSparkMax flywheel = new CANSparkMax(Constants.FLY_WHEEL_MOTOR, MotorType.kBrushless);
-    private CANSparkMax internalMotor = new CANSparkMax(Constants.INTERNAL_MOTOR, MotorType.kBrushless);
-    private CANSparkMax feeder = new CANSparkMax(Constants.FEEDER_MOTOR, MotorType.kBrushless);
+    private CANSparkMax flywheel = new CANSparkMax(Constants.FLY_WHEEL_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax internalMotor = new CANSparkMax(Constants.INTERNAL_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax feeder = new CANSparkMax(Constants.FEEDER_MOTOR_ID, MotorType.kBrushless);
     private RelativeEncoder flywheelEncoder = flywheel.getEncoder();
     private RelativeEncoder internalMotorEncoder = internalMotor.getEncoder();
     private RelativeEncoder feederEncoder = feeder.getEncoder();

@@ -33,9 +33,9 @@ import frc.robot.subsystems.Limelight.LedMode;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
-  Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
-  Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
+  Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT_ID);
+  Joystick midStick = new Joystick(Constants.MID_STICK_PORT_ID);
+  Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT_ID);
   DriveTrain vroomVroom = new DriveTrain();
   Limelight vision = new Limelight();
   Hooks hooks = new Hooks();

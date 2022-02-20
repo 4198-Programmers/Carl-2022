@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Hooks extends SubsystemBase{
-    private CANSparkMax vertHookRight = new CANSparkMax(Constants.VERT_RIGHT_HOOK, MotorType.kBrushless);
-    private CANSparkMax vertHookLeft = new CANSparkMax(Constants.VERT_LEFT_HOOK, MotorType.kBrushless);
-    private CANSparkMax angledHookRight = new CANSparkMax(Constants.ANGLED_RIGHT_HOOK, MotorType.kBrushless);
-    private CANSparkMax angledHookLeft = new CANSparkMax(Constants.ANGLED_LEFT_HOOK, MotorType.kBrushless);
+    private CANSparkMax vertHookRight = new CANSparkMax(Constants.VERT_RIGHT_HOOK_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax vertHookLeft = new CANSparkMax(Constants.VERT_LEFT_HOOK_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax angledHookRight = new CANSparkMax(Constants.ANGLED_RIGHT_HOOK_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax angledHookLeft = new CANSparkMax(Constants.ANGLED_LEFT_HOOK_MOTOR_ID, MotorType.kBrushless);
     private RelativeEncoder vertHookRightEnc = vertHookRight.getEncoder();
     private RelativeEncoder vertHookLeftEnc = vertHookLeft.getEncoder();
     private RelativeEncoder angledHookRightEnc = angledHookRight.getEncoder();

@@ -8,6 +8,7 @@ public class NeoDrift extends CommandBase {
 
     boolean complete;
     double farGone;
+    boolean autoResetSuccess;
     private DriveTrain neoYokio;
 
     public NeoDrift(DriveTrain NeoYokio) {
@@ -18,7 +19,8 @@ public class NeoDrift extends CommandBase {
 
     @Override
     public void initialize() {
-        neoYokio.resetPosition();
+        System.out.println("init");
+        autoResetSuccess = false;
         complete = false;
     }
 
@@ -27,10 +29,21 @@ public class NeoDrift extends CommandBase {
 
         double rotations = Maths.rotationConversion(50);
         double position = neoYokio.whereAmI();
+        System.out.println("trying to go" + rotations);
 
-        if (rotations > position) {
+        if(Math.abs(neoYokio.whereAmI()) >= 0.05 && !autoResetSuccess){
+            neoYokio.resetPosition();
+            System.out.println("resetting");
+        }
+        else if(Math.abs(neoYokio.whereAmI()) < 0.05){
+        autoResetSuccess = true;
+        System.out.println("Funky");
+        }
+
+        if (rotations > position && autoResetSuccess) {
             neoYokio.tokyo(0, -1);
-        } else {
+        } 
+        else {
             neoYokio.tokyo(0, 0);
             complete = true;
         }

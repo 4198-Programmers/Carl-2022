@@ -23,7 +23,12 @@ public class Constants {
     /** Wheel velocity = 0 */
     public static final double FREEZE = 0;
     public static final double WHEEL_DIAMTER = 6;
+    public static final double ANGLE_DEGREES = -0;
+
+
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
+    public static final double VERT_HOOK_WHEEL_DIAMETER = -0;
+    public static final double VERT_HOOK_DISTANCE_UP = -0;
 
     public static final double VERT_HOOK_SPEED = 0.5;
     public static final double ANGLE_HOOK_SPEED = 0.5;
@@ -32,7 +37,7 @@ public class Constants {
     public static final double INTERNAL_FEEDER_SPEED = 0.5;
     public static final double INTAKE_REVERSE_SPEED = 0.5;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = 0.5;
-    public static final double DRIVE_SPEED_MULTIPLIER = 0.5;
+    public static final double DRIVE_SPEED_MULTIPLIER = 1;
 
     //distance variables
     public static final double LIMELIGHT_ANGLE_FROM_GROUND = 1;
@@ -40,7 +45,7 @@ public class Constants {
     public static final double TARGET_HEIGHT_TOP_TO_GROUND = 1;
 
     //other
-    public static final double OFFSET_TOLERANCE_INCHES = 1; //todo Goal is for this to be measure with inches
+    public static final double OFFSET_TOLERANCE_INCHES = 2.3; //todo Goal is for this to be measure with inches
     public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
     public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
 
@@ -57,6 +62,7 @@ public class Constants {
     // public static final byte leftbuttoneleven = 11;
     // public static final byte button = 12;
 
+
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
     // public static final byte leftbuttonthree = 3;
@@ -72,15 +78,18 @@ public class Constants {
 
     public static final byte RIGHT_STICK_TRIGGER = 1;
     public static final byte HUMAN_OVERRIDE_BUTTON = 2;
-    public static final byte FLYWHEEL_BUTTON = 3;
+    public static final byte FLYWHEEL_BUTTON = 3; //button when override active
+    public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 3;
     public static final byte INTAKEIN_BUTTON = 4;
     public static final byte YEET_THE_BALLS_OUT_THE_BACK_BUTTON = 5;
     public static final byte ANGLE_HOOK_UP_BUTTON = 6;
     public static final byte ANGLE_HOOK_DOWN_BUTTON = 7;
-    public static final byte INTERNAL_MOVER_FORWARDS_BUTTON = 8;
+    public static final byte INTERNAL_MOVER_FORWARDS_BUTTON = 8; //button when override is active
+    public static final byte LIMELIGHT_TARGETING_BUTTON = 8;
     //public static final byte no = 9;
     public static final byte VERT_HOOK_DOWN_BUTTON = 10;
     public static final byte VERT_HOOK_UP_BUTTON = 11;
     // public static final byte leftbuttoneleven = 12;
+    public static final double VERT_HOOK_DISTANCE_DOWN = -0;
 
 }

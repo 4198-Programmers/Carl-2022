@@ -11,6 +11,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     container = new RobotContainer();
+    container.initialize();
 
   }
 
@@ -19,9 +20,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run(); 
-  }
 
- 
+    }
+
+
 
   @Override
   public void autonomousInit() {

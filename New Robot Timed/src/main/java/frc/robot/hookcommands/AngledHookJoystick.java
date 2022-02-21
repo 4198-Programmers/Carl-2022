@@ -1,26 +1,25 @@
-package frc.robot.command.hookcommands;
+package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Hooks;
 
-public class AngledHookJoystick extends CommandBase{
+public class AngledHookJoystick extends CommandBase {
     private Hooks climberHC;
     private Joystick hookAxisStick;
 
-    /**Allows driver to manually controll specifics 
+    /**
+     * Allows driver to manually controll specifics
      * (angled hooks angle)
-    */
-    public AngledHookJoystick(Hooks hooksArg, Joystick controllingJoystick)
-    {
+     */
+    public AngledHookJoystick(Hooks hooksArg, Joystick controllingJoystick) {
         climberHC = hooksArg;
         hookAxisStick = controllingJoystick;
         addRequirements(climberHC);
     }
 
     @Override
-    public void execute()
-    {
+    public void execute() {
         climberHC.moveAngledHooks(hookAxisStick.getRawAxis(0));
     }
 }

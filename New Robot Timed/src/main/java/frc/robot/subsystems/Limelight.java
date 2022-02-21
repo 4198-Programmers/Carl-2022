@@ -6,40 +6,40 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Maths;
 
-public class Limelight extends SubsystemBase{
+public class Limelight extends SubsystemBase {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx"); //TODO math to convert to inches SOON
+    NetworkTableEntry tx = table.getEntry("tx"); // TODO math to convert to inches SOON
     NetworkTableEntry ty = table.getEntry("ty");
-    NetworkTableEntry tv = table.getEntry("tv"); 
+    NetworkTableEntry tv = table.getEntry("tv");
     NetworkTableEntry ta = table.getEntry("ta");
     NetworkTableEntry ts = table.getEntry("ts");
     NetworkTableEntry tvert = table.getEntry("tvert");
     NetworkTableEntry tlong = table.getEntry("tlong");
     NetworkTableEntry tshort = table.getEntry("tshort");
-    public NetworkTableEntry ledMode = table.getEntry("ledMode");
+    NetworkTableEntry ledMode = table.getEntry("ledMode");
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
-    public NetworkTableEntry pipeline = table.getEntry("pipeline");
+    NetworkTableEntry pipeline = table.getEntry("pipeline");
 
-    public double xOffsetFromCenter()
-    {
-        /**Default is 1 to cause robot to spin to find target */
-        return tx.getDouble(1);                             
+    public double xOffsetFromCenter() {
+        /** Default is 1 to cause robot to spin to find target */
+        return tx.getDouble(1);
     }
 
-    public boolean hasTarget()
-    {
+    public boolean hasTarget() {
         return tv.getDouble(0) == 1;
     }
 
-    public double distanceToTarget()
-    {
+    public double distanceToTarget() {
         double yAngle = ty.getDouble(0);
         return Maths.distanceFromTarget(yAngle);
     }
 
-    public void setPipeline(double pipe)
-    {
+    public void setPipeline(double pipe) {
         pipeline.setDouble(pipe);
+    }
+
+    public double getPipeline() {
+        return pipeline.getDouble(-1);
     }
 }

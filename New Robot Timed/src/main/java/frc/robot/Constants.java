@@ -20,18 +20,18 @@ public final class Constants {
     public static final byte FRONT_LEFT_MOTOR_PORT_ID = 3;
     public static final byte BACK_RIGHT_MOTOR_PORT_ID = 2;
     public static final byte BACK_LEFT_MOTOR_PORT_ID = 1;
-    public static final int VERT_RIGHT_HOOK_MOTOR_ID = 0;
-    public static final int VERT_LEFT_HOOK_MOTOR_ID = 0;
-    public static final int ANGLED_RIGHT_HOOK_MOTOR_ID = 0;
-    public static final int ANGLED_LEFT_HOOK_MOTOR_ID = 0;
-    public static final int FEEDER_MOTOR_ID = 0;
-    public static final int INTERNAL_MOTOR_ID = 0;
-    public static final int FLY_WHEEL_MOTOR_ID = 0;
+    // public static final int VERT_RIGHT_HOOK_MOTOR_ID = -0;
+    // public static final int VERT_LEFT_HOOK_MOTOR_ID = -0;
+    // public static final int ANGLED_RIGHT_HOOK_MOTOR_ID = -0;
+    // public static final int ANGLED_LEFT_HOOK_MOTOR_ID = -0;
+    // public static final int FEEDER_MOTOR_ID = -0;
+    // public static final int INTERNAL_MOTOR_ID = -0;
+    // public static final int FLY_WHEEL_MOTOR_ID = -0;
 
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
     public static final double WHEEL_DIAMETER = 5.875;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
-    public static final double OFF_SET_FACTOR = -0;
+    public static final double OFF_SET_FACTOR = 0.01;
 
     public static final int TARGET_BUTTON = 1;
     public static final int TURN_LIMELIGHT_OFF_BUTTON = 2;
@@ -41,14 +41,14 @@ public final class Constants {
     public static final int FEEDER_BUTTON = 2;
     public static final int DEATH_SPIN_BUTTON = 3;
 
-    public static final double EXPECTED_FLYWHEEL_SPEED = 0;
-    public static final double WANTED_FLY_WHEEL_SPEED = 0;
-    public static final double INTERNAL_MOTOR_SPEED = 0;
-    public static final double WANTED_INTERNAL_MOTOR_SPEED = 0;
-    public static final double GET_INTERNAL_MOTOR_SPEED = 0;
-    public static final double GET_FLY_WHEEL_SPEED = 0;
-    public static final double FLY_WHEEL_SPEED = 0;
-    public static final double WANTED_FEEDER_SPEED = 0;
-    public static final double FEEDER_SPEED = 0;
-    public static final double WANTED_VERT_HOOK_HEIGHT = 0;
+    // public static final double EXPECTED_FLYWHEEL_SPEED = 0;
+    // public static final double WANTED_FLY_WHEEL_SPEED = 0;
+    // public static final double INTERNAL_MOTOR_SPEED = 0;
+    // public static final double WANTED_INTERNAL_MOTOR_SPEED = 0;
+    // public static final double GET_INTERNAL_MOTOR_SPEED = 0;
+    // public static final double GET_FLY_WHEEL_SPEED = 0;
+    // public static final double FLY_WHEEL_SPEED = 0;
+    // public static final double WANTED_FEEDER_SPEED = 0;
+    // public static final double FEEDER_SPEED = 0;
+    // public static final double WANTED_VERT_HOOK_HEIGHT = 0;
 }

@@ -7,25 +7,23 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ChooseLimelightLedMode;
+import frc.robot.commands.ChooseLimelightMode;
 import frc.robot.commands.DeathSpin;
 import frc.robot.commands.DoNotMove;
 import frc.robot.commands.Drive;
-import frc.robot.commands.FeederMotor;
-import frc.robot.commands.ManualClimb;
+// import frc.robot.commands.FeederMotor;
 import frc.robot.commands.OffTarmac;
 import frc.robot.commands.ResetDriveTrainPosition;
-import frc.robot.commands.ShootingCommands.SetInternalMoveSpeed;
-import frc.robot.commands.ShootingCommands.SpinUpFlyWheel;
+//import frc.robot.commands.ShootingCommands.SetInternalMoveSpeed;
+//import frc.robot.commands.ShootingCommands.SpinUpFlyWheel;
 import frc.robot.commands.ShootingCommands.Targeting;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Hooks;
+//import frc.robot.subsystems.Hooks;
 import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.Limelight.LedMode;
+//import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Limelight.LimelightMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -39,13 +37,13 @@ public class RobotContainer {
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT_ID);
   DriveTrain vroomVroom = new DriveTrain();
   Limelight vision = new Limelight();
-  Hooks hooks = new Hooks();
-  Shooter shooter = new Shooter();
-  SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
-  SpinUpFlyWheel spinUpFlyWheelTAS = new SpinUpFlyWheel(shooter);
-  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(shooter);
-  SetInternalMoveSpeed setInternalMoveSpeedTAS = new SetInternalMoveSpeed(shooter);
-  FeederMotor feederMotor = new FeederMotor(shooter);
+  //Hooks hooks = new Hooks();
+  //Shooter shooter = new Shooter();
+//  SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
+//SpinUpFlyWheel spinUpFlyWheelTAS = new SpinUpFlyWheel(shooter);
+//  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(shooter);
+//SetInternalMoveSpeed setInternalMoveSpeedTAS = new SetInternalMoveSpeed(shooter);
+//  FeederMotor feederMotor = new FeederMotor(shooter);
   ResetDriveTrainPosition resetDriveTrainPositionAuto = new ResetDriveTrainPosition(vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPositionTAS = new ResetDriveTrainPosition(vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPositionTAT = new ResetDriveTrainPosition(vroomVroom);
@@ -57,13 +55,13 @@ public class RobotContainer {
   Targeting targetingS = new Targeting(vroomVroom, vision);
   Targeting targetingTAT = new Targeting(vroomVroom, vision);
   DeathSpin deathSpin = new DeathSpin(vroomVroom);
-  Command shoot = targetingS.alongWith(spinUpFlyWheel).andThen(setInternalMoveSpeed);
-  ChooseLimelightLedMode turnLimelightLedModeOn = new ChooseLimelightLedMode(vision, LedMode.forceOn);
-  ChooseLimelightLedMode turnLimelightLedModeOff = new ChooseLimelightLedMode(vision, LedMode.forceOff);
-  ChooseLimelightLedMode AnnoyanceMode = new ChooseLimelightLedMode(vision, LedMode.forceBlink);
+  //Command shoot = targetingS.alongWith(spinUpFlyWheel).andThen(setInternalMoveSpeed);
+  ChooseLimelightMode turnLimelightLedModeOn = new ChooseLimelightMode(vision, LimelightMode.forceOn);
+  ChooseLimelightMode turnLimelightLedModeOff = new ChooseLimelightMode(vision, LimelightMode.forceOff);
+  ChooseLimelightMode AnnoyanceMode = new ChooseLimelightMode(vision, LimelightMode.forceBlink);
   Command taxi = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
   Command taxiandTarget = resetDriveTrainPositionTAT.andThen(offTarmacTAT).andThen(targetingTAT);
-  Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
+  //Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
   //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   JoystickButton turnLimelightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
@@ -76,7 +74,7 @@ public class RobotContainer {
   JoystickButton feederButton = new JoystickButton(midStick, Constants.FEEDER_BUTTON);
   JoystickButton deathSpinButton = new JoystickButton(rightStick, Constants.DEATH_SPIN_BUTTON);
   // The robot's subsystems and commands are defined here...
-  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+  //private final SendableChooser<Command> m_chooser = new SendableChooser<>();
   /** The container for the robot. Contains subsystems, OI devices, and commands. 
    * @return */
   public void initialize() {
@@ -85,7 +83,7 @@ public class RobotContainer {
     // vroomVroom.setDefaultCommand(new RunCommand(() -> vroomVroom.greenLight(midStick.getRawAxis(0), 
     // leftStick.getRawAxis(1)), vroomVroom));
     vroomVroom.setDefaultCommand(new Drive(midStick, leftStick, vroomVroom));
-    hooks.setDefaultCommand(new ManualClimb(rightStick, rightStick, hooks));
+    //hooks.setDefaultCommand(new ManualClimb(rightStick, rightStick, hooks));
   }
 
   /**
@@ -99,8 +97,8 @@ public class RobotContainer {
     turnLimelightOffButton.whenPressed(turnLimelightLedModeOn);
     turnOnAnnoyanceModeButton.whenPressed(AnnoyanceMode);
     targetTheHoop.whileHeld(targeting);
-    shootButton.whenHeld(shoot);
-    feederButton.whenHeld(feederMotor);
+  //  shootButton.whenHeld(shoot);
+    //feederButton.whenHeld(feederMotor);
     deathSpinButton.whileHeld(deathSpin);
     
   }
@@ -112,13 +110,14 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public void begin(){
-    m_chooser.setDefaultOption("taxi", taxi);
-    m_chooser.addOption("TaxiAndShoot", taxiAndShoot);
-    m_chooser.addOption("TaxiAndTarget", taxiandTarget);
-  }
+  // public void begin(){
+  //   m_chooser.setDefaultOption("taxi", taxi);
+  //   m_chooser.addOption("TaxiAndShoot", taxiAndShoot);
+  //   m_chooser.addOption("TaxiAndTarget", taxiandTarget);
+  // }
 
   public Command getAutonomousCommand(){
-    return m_chooser.getSelected();
+   // return m_chooser.getSelected();
+   return taxi;
   }
 }

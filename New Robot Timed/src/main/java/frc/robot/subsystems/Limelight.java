@@ -7,14 +7,14 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase{
-    public enum LedMode{
+    public enum LimelightMode{
         forceOff(1),
         forceBlink(2),
         forceOn(3),
         invalid(-1);
         private double mode;
 
-        private LedMode(double mode){
+        private LimelightMode(double mode){
             this.mode = mode;
         }
         protected double getModeValue(){
@@ -43,7 +43,7 @@ public class Limelight extends SubsystemBase{
      1	force off
      2	force blink
      3	force on*/
-    private NetworkTableEntry ledMode = table.getEntry("ledMode");
+   // private NetworkTableEntry ledMode = table.getEntry("ledMode");
     /**camMode	Sets limelight’s operation mode
 0	Vision processor
 1	Driver Camera (Increases exposure, disables vision processing) */
@@ -66,22 +66,22 @@ public class Limelight extends SubsystemBase{
     public double getPipeLine(){
         return pipeline.getDouble(-1);
     }
-    public void setLedMode(LedMode mode)
+    public void setLedMode(LimelightMode mode)
     {
-    ledMode.setDouble(mode.getModeValue());     
+    pipeline.setDouble(mode.getModeValue());     
     }
-    public LedMode getLedMode() {
-        double getMode = ledMode.getDouble(LedMode.invalid.getModeValue());
-        LedMode ledMode = LedMode.invalid;
+    public LimelightMode getLimelightMode() {
+        double getMode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
+        LimelightMode pipeline = LimelightMode.invalid;
        if(getMode == 1){
-           ledMode = LedMode.forceOff;
+           pipeline = LimelightMode.forceOff;
        }
        else if(getMode == 2){
-           ledMode = LedMode.forceBlink;
+           pipeline = LimelightMode.forceBlink;
        }
        else if(getMode ==3){
-           ledMode = LedMode.forceOn;
+           pipeline = LimelightMode.forceOn;
        }
-        return ledMode;
+        return pipeline;
     }
     }

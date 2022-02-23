@@ -20,6 +20,8 @@ public class DriveTrain extends SubsystemBase{
     private RelativeEncoder brMotorEnc = brMotor.getEncoder();
     private RelativeEncoder blMotorEnc = brMotor.getEncoder();
 
+    public boolean autoResetSuccess;
+
     MotorControllerGroup rightSide = new MotorControllerGroup(frMotor, brMotor);
     MotorControllerGroup leftSide = new MotorControllerGroup(flMotor, blMotor);
 
@@ -34,27 +36,26 @@ public class DriveTrain extends SubsystemBase{
     }
     
     public void resetPosition() {
-
         frMotorEnc.setPosition(0d);
         flMotorEnc.setPosition(0d);
         brMotorEnc.setPosition(0d);
         blMotorEnc.setPosition(0d);
+        System.out.println(whereAmI());
 
     }
 
     public double whereAmI() {
-
-        return Math.abs(frMotorEnc.getPosition());
-        // + Math.abs(flMotorEnc.getPosition()) 
-        // + Math.abs(brMotorEnc.getPosition()) 
-        // + Math.abs(blMotorEnc.getPosition()) 
-        // / 4);
+        return (Math.abs(frMotorEnc.getPosition())
+        + Math.abs(flMotorEnc.getPosition()) 
+        + Math.abs(brMotorEnc.getPosition()) 
+        + Math.abs(blMotorEnc.getPosition()) 
+        / 4);
 
     }
 
     public void tokyo(double xAxis, double zAxis) {
 
-        dejaVu.arcadeDrive(xAxis * Constants.SPEED_CONVERSION_FACTOR, zAxis * Constants.SPEED_CONVERSION_FACTOR);
+        dejaVu.arcadeDrive(xAxis * Constants.SPEED_CONVERSION_FACTOR, zAxis * Constants.SPEED_CONVERSION_FACTOR * -1);
     }
 
 }

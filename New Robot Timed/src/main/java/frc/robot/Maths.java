@@ -28,10 +28,9 @@ public final class Maths {
     public static double flyWheelVelocityByDistance(double distance) {
         double targetDistance = distance + 24;
         double radiansForLaunch = Math.toRadians(Constants.SHOOTER_LAUNCH_ANGLE);
-        double radiansForLaunchSquared = Math.pow(Math.cos(radiansForLaunch), 2);
-        double velocityEquationDivisor = (2 * ((targetDistance * Math.tan(radiansForLaunch)) - Constants.TARGET_HEIGHT) * radiansForLaunchSquared);
-        double velocityEquationNumerator = (Constants.GRAVITATIONAL_VELOCITY * Math.pow(targetDistance, 2));
-        double targetVelocityForFlywheel = Math.sqrt(velocityEquationDivisor / velocityEquationNumerator); // Velocity
+        double targetVelocityForFlywheel = Math.sqrt((-1/2 * (Constants.GRAVITATIONAL_VELOCITY) 
+        * ((Math.pow(targetDistance / Math.cos(radiansForLaunch), 2)))) 
+        / (Constants.TARGET_HEIGHT - Constants.SHOOTER_HEIGHT_TO_GROUND - (targetDistance * Math.tan(radiansForLaunch))));
         System.out.println(targetVelocityForFlywheel);
         return targetVelocityForFlywheel;
 

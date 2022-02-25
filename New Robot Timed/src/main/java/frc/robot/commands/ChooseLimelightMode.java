@@ -14,7 +14,7 @@ public class ChooseLimelightMode extends CommandBase{
     }
     @Override
     public void execute() {
-        limelight.setLedMode(mode); 
+        limelight.setPipelineMode(mode); 
     }
 
     @Override

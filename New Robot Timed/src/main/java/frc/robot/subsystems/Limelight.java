@@ -8,9 +8,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase{
     public enum LimelightMode{
-        forceOff(1),
-        forceBlink(2),
-        forceOn(3),
+        forceOff(0),
+        forceOn(1),
         invalid(-1);
         private double mode;
 
@@ -66,20 +65,17 @@ public class Limelight extends SubsystemBase{
     public double getPipeLine(){
         return pipeline.getDouble(-1);
     }
-    public void setLedMode(LimelightMode mode)
+    public void setPipelineMode(LimelightMode mode)
     {
     pipeline.setDouble(mode.getModeValue());     
     }
     public LimelightMode getLimelightMode() {
         double getMode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
         LimelightMode pipeline = LimelightMode.invalid;
-       if(getMode == 1){
+       if(getMode == 0){
            pipeline = LimelightMode.forceOff;
        }
-       else if(getMode == 2){
-           pipeline = LimelightMode.forceBlink;
-       }
-       else if(getMode ==3){
+       else if(getMode ==1){
            pipeline = LimelightMode.forceOn;
        }
         return pipeline;

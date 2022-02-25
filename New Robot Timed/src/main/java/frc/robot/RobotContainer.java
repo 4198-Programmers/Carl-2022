@@ -51,14 +51,13 @@ public class RobotContainer {
   OffTarmac offTarmacAuto = new OffTarmac(vroomVroom);
   OffTarmac offTarmacTAS = new OffTarmac(vroomVroom);
   OffTarmac offTarmacTAT = new OffTarmac(vroomVroom);
-  Targeting targeting = new Targeting(vroomVroom, vision);
-  Targeting targetingS = new Targeting(vroomVroom, vision);
-  Targeting targetingTAT = new Targeting(vroomVroom, vision);
   DeathSpin deathSpin = new DeathSpin(vroomVroom);
   //Command shoot = targetingS.alongWith(spinUpFlyWheel).andThen(setInternalMoveSpeed);
   ChooseLimelightMode turnLimelightLedModeOn = new ChooseLimelightMode(vision, LimelightMode.forceOn);
   ChooseLimelightMode turnLimelightLedModeOff = new ChooseLimelightMode(vision, LimelightMode.forceOff);
-  ChooseLimelightMode AnnoyanceMode = new ChooseLimelightMode(vision, LimelightMode.forceBlink);
+  Targeting targeting = new Targeting(vroomVroom, vision);
+  Targeting targetingS = new Targeting(vroomVroom, vision);
+  Targeting targetingTAT = new Targeting(vroomVroom, vision);
   Command taxi = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
   Command taxiandTarget = resetDriveTrainPositionTAT.andThen(offTarmacTAT).andThen(targetingTAT);
   //Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
@@ -66,10 +65,9 @@ public class RobotContainer {
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   JoystickButton turnLimelightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
   JoystickButton turnLimelightOffButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_OFF_BUTTON);
-  JoystickButton targetTheHoop = new JoystickButton(midStick, Constants.TARGET_BUTTON);
+  JoystickButton targetTheHoop = new JoystickButton(rightStick, Constants.TARGET_BUTTON);
   JoystickButton turnLimeLightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
   JoystickButton turnLimeLightOffButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_OFF_BUTTON);
-  JoystickButton turnOnAnnoyanceModeButton = new JoystickButton(rightStick, Constants.TURN_ON_ANNOYANCE_MODE_BUTTON);
   JoystickButton shootButton = new JoystickButton(midStick, Constants.SHOOT_BUTTON);
   JoystickButton feederButton = new JoystickButton(midStick, Constants.FEEDER_BUTTON);
   JoystickButton deathSpinButton = new JoystickButton(rightStick, Constants.DEATH_SPIN_BUTTON);
@@ -94,9 +92,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     turnLimelightOnButton.whenPressed(turnLimelightLedModeOn);
-    turnLimelightOffButton.whenPressed(turnLimelightLedModeOn);
-    turnOnAnnoyanceModeButton.whenPressed(AnnoyanceMode);
-    targetTheHoop.whileHeld(targeting);
+    turnLimelightOffButton.whenPressed(turnLimelightLedModeOff);
+    targetTheHoop.whenActive(targetingS);
   //  shootButton.whenHeld(shoot);
     //feederButton.whenHeld(feederMotor);
     deathSpinButton.whileHeld(deathSpin);

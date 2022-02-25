@@ -3,14 +3,14 @@ package frc.robot;
 public final class Maths {
 
     public static double rotationConversion(double distanceInInches) {
-        double circumference = (Math.PI * (Constants.WHEEL_DIAMTER));
+        double circumference = (Math.PI * (Constants.MOTOR_DIAMETER));
         double rotations = (distanceInInches / circumference) * Constants.WHEEL_CONVERSION_FACTOR;
         return rotations;
     }
-
-    public static double motorConversion(double distanceForMotors) {
-        double circumference = (Math.PI * (Constants.MOTOR_DIAMETER));
-        double rotations = (distanceForMotors / circumference) * Constants.WHEEL_CONVERSION_FACTOR;
+    public static double motorConversion(double distanceForMotors)
+    {
+        double circumference = (Math.PI*(Constants.WHEEL_DIAMETER));
+        double rotations = (distanceForMotors/circumference)*Constants.WHEEL_CONVERSION_FACTOR;
         return rotations;
     }
 

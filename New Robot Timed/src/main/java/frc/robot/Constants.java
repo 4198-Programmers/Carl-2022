@@ -22,7 +22,7 @@ public class Constants {
     public static final int DEFAULT_AUTO = 0;
     /** Wheel velocity = 0 */
     public static final double FREEZE = 0;
-    public static final double WHEEL_DIAMTER = 6;
+    public static final double WHEEL_DIAMETER = 6;
     public static final double ANGLE_HOOK_DEGREES = -0;
 
 
@@ -52,9 +52,10 @@ public class Constants {
     //velocity constants
     public static final double SHOOTER_LAUNCH_ANGLE = -0;
     public static final double GRAVITATIONAL_VELOCITY = 9.81; //in meters per second
-    public static final double TARGET_HEIGHT = 108; //in inches
+    public static final double TARGET_HEIGHT = 108 * 0.0254; //in meters due to the conversion
     public static final double MAX_FLYWHEEL_VELOCITY = -0;
     public static final double SHOOTER_HEIGHT_TO_GROUND = -0;
+    public static final double MAX_FLYWHEEL_VELOCITY_RATIO = -0;
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
@@ -84,6 +85,7 @@ public class Constants {
     public static final byte LIMELIGHT_ON_BUTTON = 12;
 
     public static final byte RIGHT_STICK_TRIGGER = 1;
+    public static final byte FLYWHEEL_VELOCITY_EQUATION_BUTTON = 1; //button when override is active
     public static final byte HUMAN_OVERRIDE_BUTTON = 2;
     public static final byte FLYWHEEL_BUTTON = 3; //button when override active
     public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 3;

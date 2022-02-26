@@ -85,7 +85,7 @@ public class RobotContainer {
   Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
   alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
 
-  ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
+  ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting, setFlySpeed);
   ParallelCommandGroup flywheelVelocityShootPrep = new ParallelCommandGroup(targeting, setFlySpeedVelocity);
   ParallelCommandGroup flywheelVelocityShootNow = new ParallelCommandGroup(setFlySpeed, setInternalMoveSpeed);
 
@@ -139,6 +139,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     overrideButton.whileHeld(angledHookJoystick);
+    testVelocity.whileActiveContinuous(parallelGroupShootPrep);
     overrideButton.and(verticalHookUpBTN).whileActiveContinuous(reachVertHooksUp);
     overrideButton.and(verticalHookDownBTN).whileActiveContinuous(pullVertHooksIn);
     overrideButton.and(angledHookUpBTN).whileActiveContinuous(moveCloserToNinetyDegrees);

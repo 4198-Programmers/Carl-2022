@@ -6,6 +6,7 @@ import frc.robot.subsystems.ShooterPathMovement;
 
 public class SetFlySpeed extends CommandBase {
     private ShooterPathMovement pewPew;
+    private SetFlySpeedVelocity velocityTest;
 
     public SetFlySpeed(ShooterPathMovement pewPewArg) {
         pewPew = pewPewArg;
@@ -19,6 +20,7 @@ public class SetFlySpeed extends CommandBase {
     @Override
     public void execute() {
         pewPew.setFlySpeed(catchWantedFlySpeed());
+        System.out.println(velocityTest.catchWantedFlySpeed());
     }
 
     @Override

@@ -95,6 +95,7 @@ public class RobotContainer {
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
+  JoystickButton testVelocity = new JoystickButton(leftStick, Constants.FLYWHEEL_VELOCITY_TEST_BUTTON);
   JoystickButton verticalHookUpBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_BUTTON);
   JoystickButton verticalHookDownBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_BUTTON);
   JoystickButton angledHookUpBTN = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
@@ -147,6 +148,7 @@ public class RobotContainer {
     overrideButton.and(internalFeederInBTN).whileActiveContinuous(setInternalMoveSpeed);
     overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
     overrideButton.and(flywheelSpinUpVelocityBTN).whileActiveContinuous(flywheelShootWithVelocityGroup);
+
     limelightOnThenTargetBTN.whenHeld(limelightTargeting);
     // limelightTargetingBTN.whileActiveContinuous(targeting);
     limelightOffBTN.whenPressed(setLimelightModeOff);

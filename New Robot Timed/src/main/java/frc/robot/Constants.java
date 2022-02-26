@@ -80,7 +80,7 @@ public class Constants {
     // public static final byte leftbuttonseven = 7;
     // public static final byte leftbuttoneight = 8;
     // public static final byte leftbuttonnine = 9;
-    // public static final byte leftbuttonten = 10;
+    public static final byte FLYWHEEL_VELOCITY_TEST_BUTTON = 10;
     public static final byte LIMELIGHT_OFF_BUTTON = 11;
     public static final byte LIMELIGHT_ON_BUTTON = 12;
 

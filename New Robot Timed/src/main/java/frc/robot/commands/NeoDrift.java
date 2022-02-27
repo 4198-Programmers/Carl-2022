@@ -27,7 +27,7 @@ public class NeoDrift extends CommandBase {
     @Override
     public void execute() {
 
-        double rotations = Maths.rotationConversion(50);
+        double rotations = Maths.rotationConversion(10);
         double position = neoYokio.whereAmI();
         System.out.println("trying to go" + rotations);
 

@@ -17,26 +17,25 @@ public class NeoDrift extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("init");
-        autoResetSuccess = false;
         complete = false;
     }
 
     @Override
     public void execute() {
 
-        double rotations = Maths.rotationConversion(10);
+        double rotations = Maths.rotationConversion(11);
         double position = neoYokio.whereAmI();
         System.out.println("trying to go" + rotations);
 
         if(Math.abs(rotations) > Math.abs(position)){
 
-            neoYokio.tokyo)(0, -1)
+            neoYokio.tokyo(0, -1);
         }
         else {
-            neoYokio.tokyo(0, 0)
+            neoYokio.tokyo(0, 0);
             complete = true;
             neoYokio.resetPosition();
+            System.out.println(complete);
         }
     }
 

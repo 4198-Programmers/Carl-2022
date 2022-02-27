@@ -45,7 +45,6 @@ public class DriveTrain extends SubsystemBase{
 
         REVLibError factorError;
         do {
-            System.out.println("Hey bitch");
             factorError = flMotorEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
             if (REVLibError.kOk == factorError) {
                 factorError = frMotorEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);

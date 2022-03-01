@@ -4,13 +4,13 @@ public final class Maths {
 
     public static double rotationConversion(double distanceInInches) {
         double circumference = (Math.PI * (Constants.WHEEL_DIAMTER));
-        double rotations = (distanceInInches / circumference) * Constants.WHEEL_CONVERSION_FACTOR;
+        double rotations = (distanceInInches / circumference);
         return rotations;
     }
     public static double motorConversion(double distanceForMotors)
     {
         double circumference = (Math.PI*(Constants.VERT_HOOK_WHEEL_DIAMETER));
-        double rotations = (distanceForMotors/circumference)*Constants.WHEEL_CONVERSION_FACTOR;
+        double rotations = (distanceForMotors/circumference);
         return rotations;
     }
 

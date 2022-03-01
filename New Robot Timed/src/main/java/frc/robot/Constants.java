@@ -26,7 +26,7 @@ public class Constants {
     public static final double ANGLE_DEGREES = -0;
 
 
-    public static final double WHEEL_CONVERSION_FACTOR = 12.75;
+    public static final double WHEEL_CONVERSION_FACTOR = 1/12.75;
     public static final double VERT_HOOK_WHEEL_DIAMETER = -0;
     public static final double VERT_HOOK_DISTANCE_UP = -0;
 
@@ -85,7 +85,6 @@ public class Constants {
     public static final byte ANGLE_HOOK_UP_BUTTON = 6;
     public static final byte ANGLE_HOOK_DOWN_BUTTON = 7;
     public static final byte INTERNAL_MOVER_FORWARDS_BUTTON = 8; //button when override is active
-    public static final byte LIMELIGHT_TARGETING_BUTTON = 8;
     //public static final byte no = 9;
     public static final byte VERT_HOOK_DOWN_BUTTON = 10;
     public static final byte VERT_HOOK_UP_BUTTON = 11;

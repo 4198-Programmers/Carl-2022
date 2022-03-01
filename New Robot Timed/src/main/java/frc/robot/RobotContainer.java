@@ -21,7 +21,6 @@ import frc.robot.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.hookcommands.MoveCloserToZeroDegrees;
 import frc.robot.hookcommands.PullVertHooksIn;
 import frc.robot.hookcommands.ReachVertHooksUp;
-//import frc.robot.ubernestedcommands.TaxiAndShoot;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Hooks;
 import frc.robot.subsystems.Limelight;
@@ -42,7 +41,6 @@ public class RobotContainer {
   // RealizeBall realizeBall = new RealizeBall(ballFinder);
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
   DoNotMove doNotMoveTASGROUP = new DoNotMove(vroomVroom, pewPew);
-  //TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew, vision);
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
   ReachVertHooksUp reachVertHooksUpFRGROUP = new ReachVertHooksUp(climber);
@@ -59,9 +57,11 @@ public class RobotContainer {
   Targeting targetingLT = new Targeting(vroomVroom, vision);
   SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
   SetFlySpeed setFlySpeedTASGROUP = new SetFlySpeed(pewPew);
+  SetFlySpeed setFlySpeedSGROUP = new SetFlySpeed(pewPew);
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeedTASGROUP = new SetInternalMoveSpeed(pewPew);
+  SetInternalMoveSpeed setInternalMoveSpeedSGROUP = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
   TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
   TaxiTarmac taxiTarmacTASGROUP = new TaxiTarmac(vroomVroom);
@@ -75,12 +75,11 @@ public class RobotContainer {
   Command limelightTargeting = setLimelightModeOnLTGROUP.andThen(targetingLT);
   RunCommand driveSticks = new RunCommand(
       () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom);
-
-  // Nested Command Lines
   Command taxiAndShoot = (taxiTarmacTASGROUP.alongWith(setFlySpeedTASGROUP)).andThen(targetingTASGROUP).andThen(setInternalMoveSpeedTASGROUP).andThen(doNotMoveTASGROUP);
-  Command getOnFirstRung = reachVertHooksUpFRGROUP.andThen(taxiTarmacFRGROUP).andThen(pullVertHooksInFRGROUP);
-  Command moveToNextRung = moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
-      .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
+  // Command getOnFirstRung = reachVertHooksUpFRGROUP.andThen(taxiTarmacFRGROUP).andThen(pullVertHooksInFRGROUP);
+  // Command moveToNextRung = moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
+  //     .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
+  Command shooting = (setFlySpeedSGROUP.andThen(setInternalMoveSpeedSGROUP));
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -92,10 +91,9 @@ public class RobotContainer {
   JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_BUTTON);
   JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
   JoystickButton spitBTN = new JoystickButton(rightStick, Constants.YEET_THE_BALLS_OUT_THE_BACK_BUTTON);
-  JoystickButton fullFIREEEEBTN = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
+  JoystickButton shootingBTN = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
   JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_BUTTON);
   JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_BUTTON);
-  JoystickButton limelightTargetingBTN = new JoystickButton(rightStick, Constants.LIMELIGHT_TARGETING_BUTTON);
   JoystickButton limelightOnThenTargetBTN = new JoystickButton(rightStick, Constants.TARGETING_LIMELIGHT_SIMULTANEOUS);
 
   // other
@@ -136,7 +134,8 @@ public class RobotContainer {
     limelightOnThenTargetBTN.whenHeld(limelightTargeting);
     limelightOffBTN.whenPressed(setLimelightModeOff);
     limelightOnBTN.whenPressed(setLimelightModeOn);
-    // fullFIREEEEBTN.whenHeld(shootingGroup);
+    shootingBTN.whenHeld(shooting);
+
   }
 
   private void begin() {

@@ -15,6 +15,7 @@ public class SetInternalMoveSpeed extends CommandBase {
     @Override
     public void execute() {
         pewPewSIMS.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
+        System.out.println("internal movement");
     }
 
 }

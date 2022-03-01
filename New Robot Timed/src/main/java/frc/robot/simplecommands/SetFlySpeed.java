@@ -19,6 +19,7 @@ public class SetFlySpeed extends CommandBase {
     @Override
     public void execute() {
         pewPew.setFlySpeed(catchWantedFlySpeed());
+        System.out.println("set fly speed");
     }
 
     @Override
@@ -26,7 +27,8 @@ public class SetFlySpeed extends CommandBase {
         double speed = pewPew.getFlySpeed();
         final double tolerance = 0.01;
         double expectedFlywheelSpeed = catchWantedFlySpeed();
-        return (speed > expectedFlywheelSpeed - tolerance && speed < expectedFlywheelSpeed + tolerance);
+        //return (speed > expectedFlywheelSpeed - tolerance && speed < expectedFlywheelSpeed + tolerance);
+        return true;
 
     }
 }

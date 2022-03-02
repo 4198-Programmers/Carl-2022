@@ -41,19 +41,44 @@ public final class Maths {
         return flywheelTargetSpeed;
     }
 
-    public static final double SHOOTER_LAUNCH_ANGLE = 45;
-    public static final double GRAVITATIONAL_VELOCITY = -9.81; //in meters per second
-    public static final double TARGET_HEIGHT = 2.6416; //in meters
-    public static final double MAX_FLYWHEEL_VELOCITY = 5;
+
     
      public static double flyWheelVelocityByDistanceTest(double distance) {
-        double targetDistance = distance + .6096;
-        double radiansForLaunch = Math.toRadians(SHOOTER_LAUNCH_ANGLE);
-        double radiansForLaunchSquared = Math.pow(Math.cos(radiansForLaunch), 2);
-        double velocityEquationDivisor = (2 * ((targetDistance * Math.tan(radiansForLaunch)) - TARGET_HEIGHT) * radiansForLaunchSquared);
-        double velocityEquationNumerator = (GRAVITATIONAL_VELOCITY * Math.pow(targetDistance, 2));
-        double targetVelocityForFlywheel = velocityEquationDivisor / velocityEquationNumerator; // Velocity
-        return targetVelocityForFlywheel;
+    //         public static final double INCHES_TO_METERS = 0.0254;
+    // public static final double SHOOTER_LAUNCH_ANGLE = 71;
+    // public static final double GRAVITATIONAL_VELOCITY = 9.81; //in meters per second
+    // public static final double TARGET_HEIGHT = 108 * 0.0254; //in meters due to the conversion
+    // public static final double MAX_FLYWHEEL_VELOCITY = 30;
+    // public static final double DISTANCE_TO_TARGET = 324;
+    // public static final double SHOOTER_HEIGHT_TO_GROUND = 24 * INCHES_TO_METERS;
+    // public static final double MAX_FLYWHEEL_SPEED = 1;
+    
+    // public static final double TARGET_RADIUS_INCHES = 24;
+    //  public static void main(String []args){
+        
+    //     double targetVelocityForFlywheel = flyWheelVelocityByDistance(DISTANCE_TO_TARGET);
+    //     flywheelMotorVelocityConversion(targetVelocityForFlywheel);
+    //     System.out.println("VELOCITY");
+        
+    //  }
+
+    
+    // public static double flyWheelVelocityByDistance(double distanceInInches) {
+    //     double targetDistance = (distanceInInches + TARGET_RADIUS_INCHES) * INCHES_TO_METERS;
+    //     double radiansForLaunch = Math.toRadians(SHOOTER_LAUNCH_ANGLE);
+    //     double targetVelocityForFlywheel = Math.sqrt((-0.5 * (GRAVITATIONAL_VELOCITY) 
+    //     * ((Math.pow(targetDistance / Math.cos(radiansForLaunch), 2)))) 
+    //     / (TARGET_HEIGHT - SHOOTER_HEIGHT_TO_GROUND - (targetDistance * Math.tan(radiansForLaunch))));
+    //     System.out.println(targetVelocityForFlywheel);
+    //     return targetVelocityForFlywheel;
+    // }
+    
+    // public static double flywheelMotorVelocityConversion(double targetVelocityForFlywheel) {
+    //     double flywheelTargetSpeed = targetVelocityForFlywheel / MAX_FLYWHEEL_VELOCITY;
+    //     System.out.println(flywheelTargetSpeed);
+    //     return flywheelTargetSpeed;
+    // }
+    return 0;
 
     }
 

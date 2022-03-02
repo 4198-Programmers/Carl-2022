@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Maths;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class NeoDrift extends CommandBase {
@@ -18,17 +18,20 @@ public class NeoDrift extends CommandBase {
     @Override
     public void initialize() {
         complete = false;
+        neoYokio.resetPosition();
     }
 
     @Override
     public void execute() {
 
-        double rotations = Maths.rotationConversion(11);
+//        double rotations = Maths.rotationConversion(100);
+        double rotations =50/(Math.PI * (Constants.JAKE_WHEELS));
         double position = neoYokio.whereAmI();
         System.out.println("trying to go" + rotations);
 
         if(Math.abs(rotations) > Math.abs(position)){
 
+            System.out.println("I am " + position);
             neoYokio.tokyo(0, -1);
         }
         else {

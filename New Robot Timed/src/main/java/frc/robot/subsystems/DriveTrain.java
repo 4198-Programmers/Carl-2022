@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.REVLibError;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -41,32 +40,15 @@ public class DriveTrain extends SubsystemBase{
         flMotorEnc.setPosition(0d);
         brMotorEnc.setPosition(0d);
         blMotorEnc.setPosition(0d);
-        System.out.println(whereAmI());
-
-        REVLibError factorError;
-        do {
-            factorError = flMotorEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-            if (REVLibError.kOk == factorError) {
-                factorError = frMotorEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-                if (REVLibError.kOk == factorError) {
-                    factorError = blMotorEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-                    if (REVLibError.kOk == factorError) {
-                        factorError = brMotorEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-                    }
-                }
-            }
-            System.out.println("I can't because: " + factorError);
-        } while (REVLibError.kOk != factorError);
-
-
+        System.out.println("starting at " +whereAmI());
     }
 
     public double whereAmI() {
-        return (Math.abs(frMotorEnc.getPosition())
+        return ((Math.abs(frMotorEnc.getPosition())
         + Math.abs(flMotorEnc.getPosition()) 
         + Math.abs(brMotorEnc.getPosition()) 
-        + Math.abs(blMotorEnc.getPosition()) 
-        / 4);
+        + Math.abs(blMotorEnc.getPosition())) 
+        / 4d);
     }
 
     public void tokyo(double xAxis, double zAxis) {

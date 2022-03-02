@@ -3,7 +3,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import frc.robot.commands.NeoDrift;
-import frc.robot.commands.TokyoDrift;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -19,7 +18,6 @@ public class RobotContainer {
   DriveTrain gasGasGas = new DriveTrain();
 
   // commands
-  TokyoDrift tokyoDrift = new TokyoDrift(leftShaft.getRawAxis(1), middleShaft.getRawAxis(0), gasGasGas);
   NeoDrift neoDrift = new NeoDrift(gasGasGas);
 
   // buttons

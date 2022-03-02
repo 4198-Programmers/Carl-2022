@@ -55,7 +55,9 @@ public class Constants {
     public static final double TARGET_HEIGHT = 108 * 0.0254; //in meters due to the conversion
     public static final double MAX_FLYWHEEL_VELOCITY = -0;
     public static final double SHOOTER_HEIGHT_TO_GROUND = -0;
-    public static final double MAX_FLYWHEEL_VELOCITY_RATIO = -0;
+    public static final double MAX_FLYWHEEL_SPEED = -0;
+    public static final double INCHES_TO_METERS = -0;
+    public static final double TARGET_RADIUS_INCHES = 24;
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;

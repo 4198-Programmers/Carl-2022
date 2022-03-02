@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.DoNotMove;
-import frc.robot.command.FlyspeedMoveCantMakeIt;
 import frc.robot.command.OffTarmac;
 import frc.robot.command.PickLimelightMode;
 import frc.robot.command.ResetDriveTrainPosition;
@@ -63,7 +62,6 @@ public class RobotContainer {
   SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
   SetFlySpeed setFlySpeedTASGROUP = new SetFlySpeed(pewPew);
   SetFlySpeedVelocity setFlySpeedVelocity = new SetFlySpeedVelocity(pewPew, vision);
-  FlyspeedMoveCantMakeIt flyspeedMoveCantMakeIt = new FlyspeedMoveCantMakeIt(vroomVroom);
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeedTASGROUP = new SetInternalMoveSpeed(pewPew);
@@ -85,13 +83,11 @@ public class RobotContainer {
   Command moveToNextRung = moveCloserToZeroDegrees.andThen(moveCloserToNinetyDegrees).andThen(reachVertHooksUp).
   alongWith(moveCloserToNinetyDegrees).andThen(pullVertHooksIn);
 
-  ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting, setFlySpeed);
   ParallelCommandGroup flywheelVelocityShootPrep = new ParallelCommandGroup(targeting, setFlySpeedVelocity);
-  ParallelCommandGroup flywheelVelocityShootNow = new ParallelCommandGroup(setFlySpeed, setInternalMoveSpeed);
+  ParallelCommandGroup flywheelVelocityShootNow = new ParallelCommandGroup(setInternalMoveSpeed);
 
-  SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
-  SequentialCommandGroup flywheelCheckGroup = new SequentialCommandGroup(flywheelVelocityShootPrep, flyspeedMoveCantMakeIt);
-  SequentialCommandGroup flywheelShootWithVelocityGroup = new SequentialCommandGroup(flywheelCheckGroup, flywheelVelocityShootNow);
+  SequentialCommandGroup shootingGroup = new SequentialCommandGroup(flywheelVelocityShootPrep, setInternalMoveSpeed);
+  SequentialCommandGroup flywheelShootWithVelocityGroup = new SequentialCommandGroup(flywheelVelocityShootPrep, flywheelVelocityShootNow);
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -139,7 +135,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     overrideButton.whileHeld(angledHookJoystick);
-    testVelocity.whileActiveContinuous(parallelGroupShootPrep);
+    testVelocity.whileActiveContinuous(setFlySpeedVelocity);
     overrideButton.and(verticalHookUpBTN).whileActiveContinuous(reachVertHooksUp);
     overrideButton.and(verticalHookDownBTN).whileActiveContinuous(pullVertHooksIn);
     overrideButton.and(angledHookUpBTN).whileActiveContinuous(moveCloserToNinetyDegrees);

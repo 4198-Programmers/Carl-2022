@@ -23,7 +23,8 @@ public class SetFlySpeedVelocity extends SetFlySpeed {
         double distanceFromTarget = visionSFSV.distanceToTarget();
         double targetVelocityForFlywheel = Maths.flyWheelVelocityByDistance(distanceFromTarget);
         double targetVelocityForFlywheelRatio = Maths.flywheelMotorVelocityConversion(targetVelocityForFlywheel);
-        
+        System.out.println(targetVelocityForFlywheel);
+        System.out.println(targetVelocityForFlywheelRatio);
         return targetVelocityForFlywheelRatio;
     }
 

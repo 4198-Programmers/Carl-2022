@@ -6,7 +6,6 @@ import frc.robot.subsystems.ShooterPathMovement;
 
 public class SetFlySpeed extends CommandBase {
     private ShooterPathMovement pewPew;
-    private SetFlySpeedVelocity velocityTest;
 
     public SetFlySpeed(ShooterPathMovement pewPewArg) {
         pewPew = pewPewArg;
@@ -17,18 +16,26 @@ public class SetFlySpeed extends CommandBase {
         return Constants.FLYWHEEL_SPEED;
     }
 
+    private double getWantedFlySpeed() {
+        double checkWantedFlySpeed = catchWantedFlySpeed();
+        if (checkWantedFlySpeed <= Constants.MAX_FLYWHEEL_SPEED) {
+            return checkWantedFlySpeed;
+        } else {
+            return Constants.MAX_FLYWHEEL_SPEED;
+        }
+    }
+
     @Override
     public void execute() {
-        pewPew.setFlySpeed(catchWantedFlySpeed());
-        System.out.println(velocityTest.catchWantedFlySpeed());
+        double flySpeed = getWantedFlySpeed();
+        pewPew.setFlySpeed(flySpeed);
     }
 
     @Override
     public boolean isFinished() {
         double speed = pewPew.getFlySpeed();
         final double tolerance = 0.01;
-        double expectedFlywheelSpeed = catchWantedFlySpeed();
+        double expectedFlywheelSpeed = getWantedFlySpeed();
         return (speed > expectedFlywheelSpeed - tolerance && speed < expectedFlywheelSpeed + tolerance);
-
     }
 }

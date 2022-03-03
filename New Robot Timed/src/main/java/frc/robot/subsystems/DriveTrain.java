@@ -25,10 +25,10 @@ public class DriveTrain extends SubsystemBase {
     private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
 
     public DriveTrain() {
-        frontLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        frontREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        backLEnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
-        backREnc.setPositionConversionFactor(Constants.WHEEL_CONVERSION_FACTOR);
+        frontLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        frontREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        backLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        backREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
     }
 
     /** Sets encoder positions to 0 */

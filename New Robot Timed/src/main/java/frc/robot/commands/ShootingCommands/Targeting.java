@@ -28,15 +28,13 @@ public class Targeting extends CommandBase{
             if(limelight.xOffsetTarget() > Constants.OFF_SET_FACTOR){
                 vroomVroom.greenLight(0.35, 0);
             }
+            if (isFinished() == true){
+                limelight.setPipelineMode(LimelightMode.forceOff);
+            }
         }
     }
     @Override
     public boolean isFinished() {
         return limelight.hasTarget() && limelight.xOffsetTarget() > -(Constants.OFF_SET_FACTOR) && limelight.xOffsetTarget() < Constants.OFF_SET_FACTOR;
     }
-    @Override
-    public void end(boolean interrupted) {
-        limelight.setPipelineMode(LimelightMode.forceOff);
-    }
-    
 }

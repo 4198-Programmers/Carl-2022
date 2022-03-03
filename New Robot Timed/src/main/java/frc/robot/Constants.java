@@ -33,7 +33,7 @@ public final class Constants {
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
     public static final double OFF_SET_FACTOR = 0.25;
 
-    public static final int TARGET_BUTTON = 8;
+    public static final int TARGET_BUTTON = 1;
     public static final int TURN_LIMELIGHT_OFF_BUTTON = 7;
     public static final int TURN_LIMELIGHT_ON_BUTTON = 6;
     public static final int SHOOT_BUTTON = 1;

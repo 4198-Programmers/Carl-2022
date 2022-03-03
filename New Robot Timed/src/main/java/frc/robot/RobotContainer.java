@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
@@ -10,9 +6,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ChooseLimelightMode;
+import frc.robot.commands.Dance;
 import frc.robot.commands.DeathSpin;
 import frc.robot.commands.DoNotMove;
 import frc.robot.commands.Drive;
+import frc.robot.commands.ManualClimb;
 // import frc.robot.commands.FeederMotor;
 import frc.robot.commands.OffTarmac;
 import frc.robot.commands.ResetDriveTrainPosition;
@@ -20,24 +18,20 @@ import frc.robot.commands.ResetDriveTrainPosition;
 //import frc.robot.commands.ShootingCommands.SpinUpFlyWheel;
 import frc.robot.commands.ShootingCommands.Targeting;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Hooks;
 //import frc.robot.subsystems.Hooks;
 import frc.robot.subsystems.Limelight;
 //import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Limelight.LimelightMode;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT_ID);
   Joystick midStick = new Joystick(Constants.MID_STICK_PORT_ID);
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT_ID);
   DriveTrain vroomVroom = new DriveTrain();
   Limelight vision = new Limelight();
-  //Hooks hooks = new Hooks();
+  Hooks hooks = new Hooks();
+  ManualClimb manualClimb = new ManualClimb(rightStick, rightStick, hooks);
   //Shooter shooter = new Shooter();
 //  SpinUpFlyWheel spinUpFlyWheel =  new SpinUpFlyWheel(shooter);
 //SpinUpFlyWheel spinUpFlyWheelTAS = new SpinUpFlyWheel(shooter);
@@ -58,6 +52,7 @@ public class RobotContainer {
   Targeting targeting = new Targeting(vroomVroom, vision);
   Targeting targetingS = new Targeting(vroomVroom, vision);
   Targeting targetingTAT = new Targeting(vroomVroom, vision);
+  Dance dance = new Dance(hooks);
   Command taxi = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
   Command taxiandTarget = resetDriveTrainPositionTAT.andThen(offTarmacTAT).andThen(targetingTAT);
   //Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
@@ -71,10 +66,8 @@ public class RobotContainer {
   JoystickButton shootButton = new JoystickButton(midStick, Constants.SHOOT_BUTTON);
   JoystickButton feederButton = new JoystickButton(midStick, Constants.FEEDER_BUTTON);
   JoystickButton deathSpinButton = new JoystickButton(rightStick, Constants.DEATH_SPIN_BUTTON);
-  // The robot's subsystems and commands are defined here...
+  JoystickButton danceButton = new JoystickButton(rightStick, Constants.DANCE_BUTTON);
   //private final SendableChooser<Command> m_chooser = new SendableChooser<>();
-  /** The container for the robot. Contains subsystems, OI devices, and commands. 
-   * @return */
   public void initialize() {
     // Configure the button bindings
     configureButtonBindings();
@@ -97,6 +90,7 @@ public class RobotContainer {
   //  shootButton.whenHeld(shoot);
     //feederButton.whenHeld(feederMotor);
     deathSpinButton.whileHeld(deathSpin);
+    danceButton.whileHeld(dance);
     
   }
 

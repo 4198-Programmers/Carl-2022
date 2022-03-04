@@ -40,46 +40,42 @@ public class RobotContainer {
   // commands
   // RealizeBall realizeBall = new RealizeBall(ballFinder);
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-  DoNotMove doNotMoveTASGROUP = new DoNotMove(vroomVroom, pewPew);
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
-  ReachVertHooksUp reachVertHooksUpFRGROUP = new ReachVertHooksUp(climber);
-  ReachVertHooksUp reachVertHooksUpTNRGROUP = new ReachVertHooksUp(climber);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
-  PullVertHooksIn pullVertHooksInFRGROUP = new PullVertHooksIn(climber);
-  PullVertHooksIn pullVertHooksInTNRGROUP = new PullVertHooksIn(climber);
   MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(climber);
-  MoveCloserToNinetyDegrees moveCloserToNinetyDegreesTNRGROUP = new MoveCloserToNinetyDegrees(climber);
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(climber);
-  MoveCloserToZeroDegrees moveCloserToZeroDegreesTNRGROUP = new MoveCloserToZeroDegrees(climber);
   Targeting targeting = new Targeting(vroomVroom, vision);
-  Targeting targetingTASGROUP = new Targeting(vroomVroom, vision);
-  Targeting targetingLT = new Targeting(vroomVroom, vision);
   SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
-  SetFlySpeed setFlySpeedTASGROUP = new SetFlySpeed(pewPew);
-  SetFlySpeed setFlySpeedSGROUP = new SetFlySpeed(pewPew);
   SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
   SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
-  SetInternalMoveSpeed setInternalMoveSpeedTASGROUP = new SetInternalMoveSpeed(pewPew);
-  SetInternalMoveSpeed setInternalMoveSpeedSGROUP = new SetInternalMoveSpeed(pewPew);
   SpitBalls spitBalls = new SpitBalls(pewPew);
   TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
-  TaxiTarmac taxiTarmacTASGROUP = new TaxiTarmac(vroomVroom);
-  TaxiTarmac taxiTarmacFRGROUP = new TaxiTarmac(vroomVroom);
   PickLimelightMode setLimelightModeOff = new PickLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
-  PickLimelightMode setLimelightModeOnLTGROUP = new PickLimelightMode(vision,
-      Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
+
   PickLimelightMode setLimelightModeOn = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
 
   // command groups
-  Command limelightTargeting = setLimelightModeOnLTGROUP.andThen(targetingLT);
+  Command limelightTargeting = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE)
+      .andThen(new Targeting(vroomVroom, vision));
+
   RunCommand driveSticks = new RunCommand(
       () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom);
-  Command taxiAndShoot = (taxiTarmacTASGROUP.alongWith(setFlySpeedTASGROUP)).andThen(targetingTASGROUP).andThen(setInternalMoveSpeedTASGROUP).andThen(doNotMoveTASGROUP);
-  // Command getOnFirstRung = reachVertHooksUpFRGROUP.andThen(taxiTarmacFRGROUP).andThen(pullVertHooksInFRGROUP);
-  // Command moveToNextRung = moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
-  //     .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
-  Command shooting = (setFlySpeedSGROUP.andThen(setInternalMoveSpeedSGROUP));
+
+  Command taxiAndShoot = new TaxiTarmac(vroomVroom)
+      .alongWith(new SetFlySpeed(pewPew))
+      .andThen(new Targeting(vroomVroom, vision))
+      .andThen(new SetInternalMoveSpeed(pewPew))
+      .andThen(new DoNotMove(vroomVroom, pewPew));
+
+  // Command getOnFirstRung =
+  // reachVertHooksUpFRGROUP.andThen(taxiTarmacFRGROUP).andThen(pullVertHooksInFRGROUP);
+  // Command moveToNextRung =
+  // moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
+  // .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
+
+  Command shooting = (new SetFlySpeed(pewPew)
+      .andThen(new SetInternalMoveSpeed(pewPew)));
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);

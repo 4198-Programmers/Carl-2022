@@ -37,7 +37,7 @@ public class Constants {
     public static final double INTERNAL_FEEDER_SPEED = 0.5;
     public static final double INTAKE_REVERSE_SPEED = 0.5;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = 0.5;
-    public static final double DRIVE_SPEED_MULTIPLIER = 0.5;
+    public static final double DRIVE_SPEED_MULTIPLIER = 1;
 
     //distance variables
     public static final double LIMELIGHT_ANGLE_FROM_GROUND = 1;

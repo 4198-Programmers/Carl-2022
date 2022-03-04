@@ -21,6 +21,12 @@ public class TaxiTarmac extends CommandBase {
         distanceOff = 40;
         youDone = false;
         vroomVroomOT.resetPosition();
+        System.out.println(vroomVroomOT.findPosition());
+        if (vroomVroomOT.findPosition() >= 0.05) {
+            System.out.println("pt.2");
+            vroomVroomOT.resetPosition();
+            System.out.println(vroomVroomOT.findPosition());
+        }
     }
 
     @Override

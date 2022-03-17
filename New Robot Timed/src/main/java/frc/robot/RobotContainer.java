@@ -24,11 +24,8 @@ import frc.robot.simplecommands.SetIntakeSpeedOut;
 import frc.robot.simplecommands.SetInternalMoveSpeedIn;
 import frc.robot.simplecommands.SetInternalMoveSpeedOut;
 import frc.robot.simplecommands.SpitBalls;
-<<<<<<< Updated upstream
-=======
 import frc.robot.simplecommands.StableHooks;
 import frc.robot.simplecommands.StableIntestines;
->>>>>>> Stashed changes
 import frc.robot.simplecommands.Targeting;
 import frc.robot.simplecommands.TaxiTarmac;
 import frc.robot.subsystems.AngleHooks;
@@ -53,25 +50,6 @@ public class RobotContainer {
   // ungrouped commands
   // RealizeBall realizeBall = new RealizeBall(ballFinder);
   DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-<<<<<<< Updated upstream
-  AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
-  ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
-  PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
-  MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(climber);
-  MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(climber);
-  Targeting targeting = new Targeting(vroomVroom, vision);
-  SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
-  SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
-  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
-  SpitBalls spitBalls = new SpitBalls(pewPew);
-  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
-  PickLimelightMode setLimelightModeOff = new PickLimelightMode(vision, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
-
-  PickLimelightMode setLimelightModeOn = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
-
-  // command groups
-  Command limelightTargeting = new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE)
-=======
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(angleHooks, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(vertHooks);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(vertHooks);
@@ -93,43 +71,27 @@ public class RobotContainer {
 
   // command groups
   Command limelightTargeting = (new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
->>>>>>> Stashed changes
       .andThen(new Targeting(vroomVroom, vision));
 
   RunCommand driveSticks = new RunCommand(
       () -> vroomVroom.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroom);
 
-<<<<<<< Updated upstream
-  Command taxiAndShoot = new TaxiTarmac(vroomVroom)
-      .alongWith(new SetFlySpeed(pewPew))
-      .andThen(new Targeting(vroomVroom, vision))
-      .andThen(new SetInternalMoveSpeed(pewPew))
-      .andThen(new DoNotMove(vroomVroom, pewPew));
-
-=======
   Command taxiAndShoot = (new ResetWheels(vroomVroom))
       .andThen((new TaxiTarmac(vroomVroom)
           .alongWith(new SetFlySpeed(pewPew))))
       .andThen(new Targeting(vroomVroom, vision))
       .andThen(new SetInternalMoveSpeedOut(pewPew))
       .andThen(new DoNotMove(vroomVroom, pewPew));
->>>>>>> Stashed changes
   // Command getOnFirstRung =
   // reachVertHooksUpFRGROUP.andThen(taxiTarmacFRGROUP).andThen(pullVertHooksInFRGROUP);
   // Command moveToNextRung =
   // moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
   // .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
-<<<<<<< Updated upstream
-
-  Command shooting = (new SetFlySpeed(pewPew)
-      .andThen(new SetInternalMoveSpeed(pewPew)));
-=======
   Command shooting = ((new SetFlySpeed(pewPew))
       .andThen(new SetInternalMoveSpeedOut(pewPew)));
 
   Command taxi = (new ResetWheels(vroomVroom))
       .andThen(new TaxiTarmac(vroomVroom));
->>>>>>> Stashed changes
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -157,12 +119,9 @@ public class RobotContainer {
     configureButtonBindings();
     begin();
     vroomVroom.setDefaultCommand(driveSticks);
-<<<<<<< Updated upstream
-=======
     vertHooks.setDefaultCommand(stableHooks);
     angleHooks.setDefaultCommand(stableHooks);
     pewPew.setDefaultCommand(stableIntestines);
->>>>>>> Stashed changes
 
     CommandScheduler.getInstance().onCommandExecute((command) -> {
       if (!command.getName().equals("RunCommand") && !command.getName().equals("StableHooks")

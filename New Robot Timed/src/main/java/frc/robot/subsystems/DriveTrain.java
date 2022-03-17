@@ -37,6 +37,12 @@ public class DriveTrain extends SubsystemBase {
         frontREnc.setPosition(0d);
         backLEnc.setPosition(0d);
         backREnc.setPosition(0d);
+        System.out.println("resetting");
+        System.out.println("FL " +frontLEnc.getPosition());
+        System.out.println("FR " +frontREnc.getPosition());
+        System.out.println("BL " +backLEnc.getPosition());
+        System.out.println("BR " +backREnc.getPosition());
+
     }
 
     public double findPosition() {

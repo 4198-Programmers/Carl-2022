@@ -2,12 +2,12 @@ package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.AngleHooks;
 
 public class MoveCloserToZeroDegrees extends CommandBase {
-    private Hooks arm;
+    private AngleHooks arm;
 
-    public MoveCloserToZeroDegrees(Hooks hooksArg) {
+    public MoveCloserToZeroDegrees(AngleHooks hooksArg) {
         arm = hooksArg;
         addRequirements(arm);
     }

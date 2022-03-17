@@ -2,21 +2,18 @@ package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.VertHooks;
 
 public class PullVertHooksIn extends CommandBase {
-    Hooks grab;
+    VertHooks grab;
     private double distanceDown;
 
-    public PullVertHooksIn(Hooks hooksArg) {
+    public PullVertHooksIn(VertHooks hooksArg) {
         grab = hooksArg;
         addRequirements(grab);
 
     }
-    @Override
-    public void initialize() {
-        distanceDown = Constants.VERT_HOOK_DISTANCE_DOWN;
-    }
+
 
     @Override
     public void execute() {

@@ -1,0 +1,21 @@
+package frc.robot.simplecommands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
+import frc.robot.subsystems.ShooterPathMovement;
+
+public class SetInternalMoveSpeedIn extends CommandBase {
+    private ShooterPathMovement pewPewSIMS;
+
+    public SetInternalMoveSpeedIn(ShooterPathMovement shooterPathMovementArg) {
+        pewPewSIMS = shooterPathMovementArg;
+        addRequirements(pewPewSIMS);
+    }
+
+    @Override
+    public void execute() {
+        pewPewSIMS.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
+        System.out.println("internal movement");
+    }
+
+}

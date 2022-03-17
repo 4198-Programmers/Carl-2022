@@ -26,6 +26,7 @@ public class SetFlySpeed extends CommandBase {
         double speed = pewPew.getFlySpeed();
         final double tolerance = 0.01;
         double expectedFlywheelSpeed = catchWantedFlySpeed();
+        System.out.println(pewPew.getFlySpeed());
         return (speed > expectedFlywheelSpeed - tolerance && speed < expectedFlywheelSpeed + tolerance);
 
     }

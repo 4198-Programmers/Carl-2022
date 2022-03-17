@@ -2,13 +2,13 @@ package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.VertHooks;
 
 public class ReachVertHooksUp extends CommandBase {
-    private Hooks grabbers;
+    private VertHooks grabbers;
     double distanceUp;
 
-    public ReachVertHooksUp(Hooks hooksArg) {
+    public ReachVertHooksUp(VertHooks hooksArg) {
         grabbers = hooksArg;
         addRequirements(grabbers);
     }

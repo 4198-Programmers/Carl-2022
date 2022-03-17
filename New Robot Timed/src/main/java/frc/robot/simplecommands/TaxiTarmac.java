@@ -20,13 +20,6 @@ public class TaxiTarmac extends CommandBase {
     public void initialize() {
         distanceOff = 40;
         youDone = false;
-        vroomVroomOT.resetPosition();
-        System.out.println(vroomVroomOT.findPosition());
-        if (vroomVroomOT.findPosition() >= 0.05) {
-            System.out.println("pt.2");
-            vroomVroomOT.resetPosition();
-            System.out.println(vroomVroomOT.findPosition());
-        }
     }
 
     @Override
@@ -36,7 +29,7 @@ public class TaxiTarmac extends CommandBase {
 
         if (Math.abs(position) < Math.abs(rotations)) // just reads the values, does not care about direction
         {
-            vroomVroomOT.greenLight(0, -1);
+            vroomVroomOT.greenLight(0, -0.25);
         } else {
             vroomVroomOT.greenLight(0, 0);
             youDone = true;

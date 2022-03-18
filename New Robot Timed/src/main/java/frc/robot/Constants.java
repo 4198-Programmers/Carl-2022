@@ -37,24 +37,23 @@ public class Constants {
     public static final double VERT_HOOK_SPEED = 0.5;
     public static final double ANGLE_HOOK_SPEED = 0.5;
     public static final double INTAKE_FORWARD_SPEED = -1;
-    public static final double FLYWHEEL_SPEED = -1;
-    public static final double INTERNAL_FEEDER_SPEED = 1;
+    public static final double FLYWHEEL_SPEED = 1;
+    public static final double INTERNAL_FEEDER_SPEED = 0.75;
     public static final double INTAKE_REVERSE_SPEED = -1;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = -1;
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
 
     //distance variables
-    public static final double LIMELIGHT_ANGLE_FROM_GROUND = 1;
-    public static final double LIMELIGHT_HEIGHT_TO_GROUND = 1; 
-    public static final double TARGET_HEIGHT_TOP_TO_GROUND = 1;
+    public static final double LIMELIGHT_ANGLE_FROM_GROUND = 65;
+    public static final double LIMELIGHT_HEIGHT_TO_GROUND = 25; 
+    public static final double TARGET_HEIGHT_TOP_TO_GROUND = 104;
 
     //other
-    public static final double OFFSET_TOLERANCE_INCHES = 2.3; //TODO Goal is for this to be measure with inches
+    public static final double OFFSET_TOLERANCE_INCHES = 4; //TODO Goal is for this to be measure with inches
     public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
     public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
 
     //left joystick buttons
-    public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 2;
 
     // public static final byte leftbuttonthree = 4;
     // public static final byte leftbuttonfour = 5;
@@ -67,6 +66,7 @@ public class Constants {
     public static final byte CRUEL_BUTTON = 12;
 
 
+    public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 1;
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
     // public static final byte leftbuttonthree = 3;

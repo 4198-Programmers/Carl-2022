@@ -20,6 +20,7 @@ public class PullVertHooksIn extends CommandBase {
         grab.moveVertHooks(-Constants.VERT_HOOK_SPEED);
     }
 
+
     @Override
     public boolean isFinished() {
         double height = grab.getVerticalHookHeight();

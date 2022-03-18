@@ -2,20 +2,23 @@ package frc.robot.simplecommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.ShooterPathMovement;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Tunnel;
 
 public class SpitBalls extends CommandBase {
-    private ShooterPathMovement pewPewSB;
+    private Intake intake;
+    private Tunnel tunnel;
 
-    public SpitBalls(ShooterPathMovement shooterPathMovementArg) {
-        pewPewSB = shooterPathMovementArg;
-        addRequirements(pewPewSB);
+    public SpitBalls(Intake intakeArg, Tunnel tunnelArg) {
+        intake = intakeArg;
+        tunnel = tunnelArg;
+        addRequirements(intake, tunnel);
     }
 
     @Override
     public void execute() {
-        pewPewSB.setMoverSpeed(Constants.INTERNAL_FEEDER_REVERSE_SPEED);
-        pewPewSB.setIntakeSpeed(Constants.INTAKE_REVERSE_SPEED);
+        tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_REVERSE_SPEED);
+        intake.setIntakeSpeed(Constants.INTAKE_REVERSE_SPEED);
     }
 
 }

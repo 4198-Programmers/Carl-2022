@@ -2,20 +2,22 @@ package frc.robot.simplecommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.ShooterPathMovement;
+import frc.robot.subsystems.Tunnel;
 
 public class SetInternalMoveSpeedIn extends CommandBase {
-    private ShooterPathMovement pewPewSIMS;
+    private Tunnel tunnel;
 
-    public SetInternalMoveSpeedIn(ShooterPathMovement shooterPathMovementArg) {
-        pewPewSIMS = shooterPathMovementArg;
-        addRequirements(pewPewSIMS);
+    public SetInternalMoveSpeedIn(Tunnel shooterPathMovementArg) {
+        tunnel = shooterPathMovementArg;
+        addRequirements(tunnel);
     }
 
     @Override
     public void execute() {
-        pewPewSIMS.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
+        tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
         System.out.println("internal movement");
     }
+
+
 
 }

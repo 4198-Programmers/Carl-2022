@@ -1,12 +1,12 @@
 package frc.robot.simplecommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ShooterPathMovement;
+import frc.robot.subsystems.FlyAndSensors;
 
 public class PrintBallStatus extends CommandBase{
-    private ShooterPathMovement tummy;
+    private FlyAndSensors tummy;
 
-    public PrintBallStatus(ShooterPathMovement tummyArg){
+    public PrintBallStatus(FlyAndSensors tummyArg){
         tummy = tummyArg;
         addRequirements(tummyArg);
     }

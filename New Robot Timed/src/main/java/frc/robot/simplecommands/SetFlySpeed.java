@@ -1,25 +1,29 @@
 package frc.robot.simplecommands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
-import frc.robot.subsystems.ShooterPathMovement;
+import frc.robot.subsystems.FlyAndSensors;
 
 public class SetFlySpeed extends CommandBase {
-    private ShooterPathMovement pewPew;
+    private FlyAndSensors pewPew;
+    private Joystick throttle;
 
-    public SetFlySpeed(ShooterPathMovement pewPewArg) {
+    public SetFlySpeed(FlyAndSensors pewPewArg, Joystick joystickArg) {
         pewPew = pewPewArg;
+        throttle = joystickArg;
         addRequirements(pewPew);
     }
 
     protected double catchWantedFlySpeed() {
-        return Constants.FLYWHEEL_SPEED;
+        return -((throttle.getRawAxis(3)+1)/2);
     }
 
     @Override
     public void execute() {
         pewPew.setFlySpeed(catchWantedFlySpeed());
     }
+
+
 
     @Override
     public boolean isFinished() {

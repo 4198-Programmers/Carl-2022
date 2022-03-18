@@ -19,10 +19,10 @@ public class Targeting extends CommandBase {
     public void execute() {
 
         if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.OFFSET_TOLERANCE_INCHES) {
-            vroomVroomT.greenLight(-0.35, 0);
+            vroomVroomT.greenLight(-0.25, 0);
             System.out.println("targeting left");
         } else if (visionT.xOffsetFromCenter() > Constants.OFFSET_TOLERANCE_INCHES) {
-            vroomVroomT.greenLight(0.35, 0);
+            vroomVroomT.greenLight(0.25, 0);
             System.out.println("targeting right");
         } else {
             vroomVroomT.greenLight(Constants.FREEZE, Constants.FREEZE);

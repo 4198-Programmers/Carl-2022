@@ -12,9 +12,9 @@ public class ReachVertHooksUp extends CommandBase {
         grabbers = hooksArg;
         addRequirements(grabbers);
     }
+
     @Override
-    public void initialize()
-    {
+    public void initialize() {
         grabbers.resetHookPosition();
         distanceUp = Constants.VERT_HOOK_DISTANCE_UP;
     }
@@ -29,5 +29,5 @@ public class ReachVertHooksUp extends CommandBase {
         double height = grabbers.getVerticalHookHeight();
         return height >= distanceUp;
     }
-    
+
 }

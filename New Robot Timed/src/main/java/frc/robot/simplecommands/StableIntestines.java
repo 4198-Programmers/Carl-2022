@@ -2,20 +2,26 @@ package frc.robot.simplecommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.ShooterPathMovement;
+import frc.robot.subsystems.FlyAndSensors;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Tunnel;
 
 public class StableIntestines extends CommandBase {
-    private ShooterPathMovement pewPewSI;
+    private FlyAndSensors pewPewSI;
+    private Tunnel tunnel;
+    private Intake intake;
 
-    public StableIntestines(ShooterPathMovement pewPewArg) {
+    public StableIntestines(FlyAndSensors pewPewArg, Tunnel tunnelArg, Intake intakeArg) {
         pewPewSI = pewPewArg;
-        addRequirements(pewPewArg);
+        tunnel = tunnelArg;
+        intake = intakeArg;
+        addRequirements(pewPewArg, tunnel, intake);
     }
 
     @Override
     public void execute() {
         pewPewSI.setFlySpeed(Constants.FREEZE);
-        pewPewSI.setIntakeSpeed(Constants.FREEZE);
-        pewPewSI.setMoverSpeed(Constants.FREEZE);
+        intake.setIntakeSpeed(Constants.FREEZE);
+        tunnel.setMoverSpeed(Constants.FREEZE);
     }
 }

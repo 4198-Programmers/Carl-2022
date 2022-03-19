@@ -17,7 +17,7 @@ public class Constants {
     public static final byte VERT_HOOKS_FOLLOWER_MOTOR_DEVICE_ID = 6;
 
     public static final byte BALL_IN_SENSOR_PORT = 1;
-    public static final byte BALL_OUT_SENSOR_PORT = 2;
+    public static final byte BALL_OUT_SENSOR_PORT = 0;
 
     public static final byte LEFT_STICK_PORT = 0;
     public static final byte MID_STICK_PORT = 1;
@@ -29,7 +29,7 @@ public class Constants {
     public static final double FLYWHEEL_SPEED = 1;
     public static final double INTERNAL_FEEDER_SPEED = 0.75;
     public static final double INTAKE_REVERSE_SPEED = 1;
-    public static final double INTERNAL_FEEDER_REVERSE_SPEED = -1;
+    public static final double INTERNAL_FEEDER_REVERSE_SPEED = -0.75;
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
     /** Wheel velocity = 0 */
     public static final double FREEZE = 0;
@@ -40,7 +40,9 @@ public class Constants {
     public static final double TARGET_HEIGHT_TOP_TO_GROUND = 104;
 
     // other
-    public static final double OFFSET_TOLERANCE_INCHES = 3.75; // TODO Goal is for this to be measure with inches
+    public static final double WIDE_OFFSET_TOLERANCE = 3.75;
+    public static final double MID_OFFSET_TOLERANCE = 2.75;
+    public static final double SLIM_OFFSET_TOLERANCE = 1;
     public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
     public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
     public static final double WHEEL_DIAMTER = 5.875;
@@ -59,7 +61,7 @@ public class Constants {
     public static final byte HUMAN_OVERRIDE_BUTTON = 11;
     public static final byte CRUEL_BUTTON = 12;
 
-    //middle stick buttons
+    // middle stick buttons
     public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 1;
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;
@@ -76,11 +78,11 @@ public class Constants {
 
     // start of mostly right stick buttons
     public static final byte FLYWHEEL_BUTTON = 1;
-    public static final byte QUOTE_AUTO_UNQUOTE_SHOOTING_BUTTON = 6;
+    public static final byte QUOTE_AUTO_UNQUOTE_SHOOTING_BUTTON = 2;
     public static final byte INTERNAL_MOVER_BACKWARDS_BUTTON = 3;
     public static final byte FORCE_SPIT_BUTTON = 4;
     public static final byte INTERNAL_MOVER_FORWARDS_BUTTON = 5;
-    public static final byte ANGLE_JOYSTICK_BUTTON = 2;
+    public static final byte ANGLE_JOYSTICK_BUTTON = 6;
     public static final byte INTAKE_IN_BUTTON = 7;
     public static final byte INTAKE_OUT_BUTTON = 8;
     public static final byte ANGLE_HOOK_UP_BUTTON = 11;

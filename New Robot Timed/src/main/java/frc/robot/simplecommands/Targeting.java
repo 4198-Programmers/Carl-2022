@@ -9,6 +9,7 @@ import frc.robot.subsystems.Limelight;
 public class Targeting extends CommandBase {
     private DriveTrain vroomVroomT;
     private Limelight visionT;
+    double autoTime;
 
     public Targeting(DriveTrain driveTrainArg, Limelight limelightArg) {
         vroomVroomT = driveTrainArg;
@@ -17,25 +18,43 @@ public class Targeting extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        autoTime = System.currentTimeMillis();
+    }
+
+    @Override
     public void execute() {
         SmartDashboard.putNumber("Distance", visionT.distanceToTarget());
 
-        if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.OFFSET_TOLERANCE_INCHES) {
+        if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.WIDE_OFFSET_TOLERANCE) {
             vroomVroomT.greenLight(-0.25, 0);
             System.out.println("targeting left");
-        } else if (visionT.xOffsetFromCenter() > Constants.OFFSET_TOLERANCE_INCHES) {
+        } else if (visionT.xOffsetFromCenter() > Constants.WIDE_OFFSET_TOLERANCE) {
             vroomVroomT.greenLight(0.25, 0);
+            System.out.println("targeting right");
+        } else if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.MID_OFFSET_TOLERANCE) {
+            vroomVroomT.greenLight(-0.15, 0);
+            System.out.println("targeting left");
+        } else if (visionT.xOffsetFromCenter() > Constants.MID_OFFSET_TOLERANCE) {
+            vroomVroomT.greenLight(0.15, 0);
+            System.out.println("targeting right");
+        } else if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.SLIM_OFFSET_TOLERANCE) {
+            vroomVroomT.greenLight(-0.075, 0);
+            System.out.println("targeting left");
+        } else if (visionT.xOffsetFromCenter() > Constants.SLIM_OFFSET_TOLERANCE) {
+            vroomVroomT.greenLight(0.075, 0);
             System.out.println("targeting right");
         } else {
             vroomVroomT.greenLight(Constants.FREEZE, Constants.FREEZE);
-            System.out.println("I am frozen");
+            System.out.println("I got time");
         }
 
     }
 
     @Override
     public boolean isFinished() {
-        return (visionT.hasTarget() && visionT.xOffsetFromCenter() >= -Constants.OFFSET_TOLERANCE_INCHES
-                && visionT.xOffsetFromCenter() < Constants.OFFSET_TOLERANCE_INCHES);
+        return (visionT.hasTarget() && visionT.xOffsetFromCenter() >= -Constants.SLIM_OFFSET_TOLERANCE
+                && visionT.xOffsetFromCenter() < Constants.SLIM_OFFSET_TOLERANCE
+                && (System.currentTimeMillis() - autoTime) >= 1500);
     }
 }

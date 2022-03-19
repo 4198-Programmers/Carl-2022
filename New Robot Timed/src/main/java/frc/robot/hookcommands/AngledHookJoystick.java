@@ -7,6 +7,7 @@ import frc.robot.subsystems.AngleHooks;
 public class AngledHookJoystick extends CommandBase {
     private AngleHooks climberHC;
     private Joystick hookAxisStick;
+    boolean done;
 
     /**
      * Allows driver to manually controll specifics
@@ -19,7 +20,18 @@ public class AngledHookJoystick extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        done = false;
+    }
+
+    @Override
     public void execute() {
         climberHC.moveAngledHooks(hookAxisStick.getRawAxis(0));
+        done = true;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return done;
     }
 }

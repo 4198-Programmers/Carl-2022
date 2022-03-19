@@ -20,13 +20,12 @@ public final class Maths {
     }
 
     public static double flyWheelSpeedByDistance(double Distance) {
-        double invTest = -Distance;
-        double a = -0.0000535235;
-        double b = 0.00766854;
-        double c = -0.630631;
-        System.out.println("math" + Distance);
+        double invTest = Distance;
+        double a = 0.000188428;
+        double b = -0.00228743;
+        double c = 0.710835;
 
-        return (((a * (invTest * invTest)) + (b * invTest) + c));
+        return (-((a * (invTest * invTest)) + (b * invTest) + c));
     }
 
     public static double spinDistanceByDegree(double Degrees) {

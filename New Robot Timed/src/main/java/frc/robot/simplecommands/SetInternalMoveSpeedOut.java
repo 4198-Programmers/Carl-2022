@@ -15,7 +15,6 @@ public class SetInternalMoveSpeedOut extends CommandBase {
     @Override
     public void execute() {
         tunnel.setMoverSpeed(-Constants.INTERNAL_FEEDER_SPEED);
-        System.out.println("internal movement");
     }
 
 }

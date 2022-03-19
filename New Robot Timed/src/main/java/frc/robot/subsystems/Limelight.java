@@ -33,7 +33,6 @@ public class Limelight extends SubsystemBase {
     public double distanceToTarget() {
         double yAngle = ty.getDouble(0);
         double distance = Maths.distanceFromTarget(yAngle);
-        System.out.println("lime" + distance);
         return distance;
     }
 

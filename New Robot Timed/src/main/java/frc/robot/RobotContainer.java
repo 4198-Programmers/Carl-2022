@@ -68,6 +68,7 @@ public class RobotContainer {
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(angleHooks);
   Targeting targeting = new Targeting(vroomVroom, vision);
   SetFlySpeed setFlySpeed = new SetFlySpeed(flyAndSensors, midStick, vision);
+  SetFlySpeedVelocity setFlySpeedVelocity = new SetFlySpeedVelocity(flyAndSensors, vision);
   SetIntakeSpeedIn setIntakeSpeedIn = new SetIntakeSpeedIn(intakeSub);
   SetIntakeSpeedOut setIntakeSpeedOut = new SetIntakeSpeedOut(intakeSub);
   SetInternalMoveSpeedIn setInternalMoveSpeedIn = new SetInternalMoveSpeedIn(tunnelSub);
@@ -173,7 +174,7 @@ public class RobotContainer {
     verticalHookDownBTN.whileHeld(pullVertHooksIn);
     angledHookUpBTN.whileHeld(moveCloserToNinetyDegrees);
     angledHookDownBTN.whileHeld(moveCloserToZeroDegrees);
-    flywheelSpinUpBTN.whileHeld(setFlySpeed);
+    flywheelSpinUpBTN.whileHeld(setFlySpeedVelocity);
     intakeInBTN.whileHeld(setIntakeSpeedIn);
     intakeOutBTN.whileHeld(setIntakeSpeedOut);
     internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);

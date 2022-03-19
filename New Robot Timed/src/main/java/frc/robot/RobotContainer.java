@@ -97,10 +97,10 @@ public class RobotContainer {
   RunCommand driveSticks = new RunCommand(
       () -> vroomVroomSub.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroomSub);
 
-  Command taxiAndShoot = (new ResetWheels(vroomVroom))
-      .andThen((new TaxiOffTarmac(vroomVroom)
-          .alongWith(new SetFlySpeedVelocity(flyAndSensors, vision))))
-      .andThen(new Targeting(vroomVroom, vision))
+  Command taxiAndShoot = (new ResetWheels(vroomVroomSub))
+      .andThen((new TaxiOffTarmac(vroomVroomSub)
+          .alongWith(new SetFlySpeedVelocity(flyAndSensorsSub, visionSub))))
+      .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub))
       .andThen(new DoNotMove(vroomVroomSub, flyAndSensorsSub));
   // Command getOnFirstRung =
@@ -108,9 +108,9 @@ public class RobotContainer {
   // Command moveToNextRung =
   // moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
   // .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
-  Command shooting = (new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
-      .andThen(new Targeting(vroomVroom, vision))
-      .andThen(new SetFlySpeedVelocity(flyAndSensors, vision))
+  Command shooting = (new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+      .andThen(new Targeting(vroomVroomSub, visionSub))
+      .andThen(new SetFlySpeedVelocity(flyAndSensorsSub, visionSub))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub));
 
   Command taxi = (new ResetWheels(vroomVroomSub))

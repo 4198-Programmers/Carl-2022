@@ -1,5 +1,6 @@
-package frc.robot.command;
+package frc.robot.simplecommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -17,11 +18,13 @@ public class Targeting extends CommandBase {
 
     @Override
     public void execute() {
-        if (!visionT.hasTarget() || visionT.xOffsetFromCenter() < -Constants.OFFSET_TOLERANCE_INCHES) {
-            vroomVroomT.greenLight(-0.35, 0);
+        SmartDashboard.putNumber("Distance", visionT.distanceToTarget());
+
+        if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.OFFSET_TOLERANCE_INCHES) {
+            vroomVroomT.greenLight(-0.25, 0);
             System.out.println("targeting left");
         } else if (visionT.xOffsetFromCenter() > Constants.OFFSET_TOLERANCE_INCHES) {
-            vroomVroomT.greenLight(0.35, 0);
+            vroomVroomT.greenLight(0.25, 0);
             System.out.println("targeting right");
         } else {
             vroomVroomT.greenLight(Constants.FREEZE, Constants.FREEZE);
@@ -32,6 +35,7 @@ public class Targeting extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (visionT.hasTarget() && visionT.xOffsetFromCenter() > -0.1 && visionT.xOffsetFromCenter() < 0.1);
+        return (visionT.hasTarget() && visionT.xOffsetFromCenter() >= -Constants.OFFSET_TOLERANCE_INCHES
+                && visionT.xOffsetFromCenter() < Constants.OFFSET_TOLERANCE_INCHES);
     }
 }

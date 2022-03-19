@@ -2,34 +2,19 @@ package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.AngleHooks;
 
 public class MoveCloserToNinetyDegrees extends CommandBase {
-    private Hooks elbow;
-    double hookDegrees = Constants.ANGLE_HOOK_DEGREES;
+    private AngleHooks elbow;
 
-    public MoveCloserToNinetyDegrees(Hooks hookArg) {
-        elbow = hookArg;
+    public MoveCloserToNinetyDegrees(AngleHooks angleHookArg) {
+        elbow = angleHookArg;
         addRequirements(elbow);
     }
 
     @Override
-    public void initialize()
-    {
-        elbow.resetAngleHooksPosition();
-    }
-
-    @Override
     public void execute() {
-        elbow.moveAngledHooks(Constants.ANGLE_HOOK_SPEED);
+        elbow.moveAngledHooks(-Constants.ANGLE_HOOK_SPEED);
     }
 
-    public boolean isFinished(){
-        double endingHookAngle = elbow.getAngledHookDegree();
-        return endingHookAngle >= hookDegrees;
-    }
-    @Override
-    public void end(boolean interrupted) {
-        elbow.moveAngledHooks(Constants.FREEZE);
-    }
 }

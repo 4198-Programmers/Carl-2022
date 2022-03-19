@@ -1,17 +1,17 @@
-package frc.robot.command;
+package frc.robot.simplecommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
 /** Autonomous movement used to exit the tarmac during Autonomous */
-public class OffTarmac extends CommandBase {
+public class TaxiOffTarmac extends CommandBase {
     private DriveTrain vroomVroomOT;
     boolean youDone;
     double distanceOff;
 
     /** Pulls in the current DriveTrain instance to use in the specific class */
-    public OffTarmac(DriveTrain driveTrainArg) {
+    public TaxiOffTarmac(DriveTrain driveTrainArg) {
         vroomVroomOT = driveTrainArg;
         addRequirements(vroomVroomOT);
     }
@@ -20,7 +20,6 @@ public class OffTarmac extends CommandBase {
     public void initialize() {
         distanceOff = 40;
         youDone = false;
-        vroomVroomOT.resetPosition();
     }
 
     @Override
@@ -30,11 +29,11 @@ public class OffTarmac extends CommandBase {
 
         if (Math.abs(position) < Math.abs(rotations)) // just reads the values, does not care about direction
         {
-            vroomVroomOT.greenLight(0, -1);
+            vroomVroomOT.greenLight(0, 0.25);
         } else {
             vroomVroomOT.greenLight(0, 0);
             youDone = true;
-            System.out.println("success mother");
+            System.out.println("Successfully Completed");
 
         }
     }

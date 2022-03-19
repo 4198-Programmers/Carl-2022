@@ -16,10 +16,10 @@ public class Limelight extends SubsystemBase {
     NetworkTableEntry tvert = table.getEntry("tvert");
     NetworkTableEntry tlong = table.getEntry("tlong");
     NetworkTableEntry tshort = table.getEntry("tshort");
-    public NetworkTableEntry ledMode = table.getEntry("ledMode");
+    NetworkTableEntry ledMode = table.getEntry("ledMode");
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
-    public NetworkTableEntry pipeline = table.getEntry("pipeline");
+    NetworkTableEntry pipeline = table.getEntry("pipeline");
 
     public double xOffsetFromCenter() {
         /** Default is 1 to cause robot to spin to find target */
@@ -32,7 +32,9 @@ public class Limelight extends SubsystemBase {
 
     public double distanceToTarget() {
         double yAngle = ty.getDouble(0);
-        return Maths.distanceFromTarget(yAngle);
+        double distance = Maths.distanceFromTarget(yAngle);
+        System.out.println("lime" + distance);
+        return distance;
     }
 
     public void setPipeline(double pipe) {

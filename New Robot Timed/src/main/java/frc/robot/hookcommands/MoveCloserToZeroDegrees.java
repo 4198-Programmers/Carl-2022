@@ -1,21 +1,19 @@
-package frc.robot.command.hookcommands;
+package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.AngleHooks;
 
 public class MoveCloserToZeroDegrees extends CommandBase {
-    private Hooks arm;
-    private double degreesDown;
+    private AngleHooks arm;
 
-    public MoveCloserToZeroDegrees(Hooks hooksArg) {
-        arm = hooksArg;
+    public MoveCloserToZeroDegrees(AngleHooks angleHooksArg) {
+        arm = angleHooksArg;
         addRequirements(arm);
     }
     @Override
     public void initialize() {
-        degreesDown = Constants.ANGLED_HOOK_DEGREES_DOWN;
-        arm.resetAngleHooksPosition();
+        
     }
 
     @Override
@@ -27,8 +25,8 @@ public class MoveCloserToZeroDegrees extends CommandBase {
     }
     @Override
     public boolean isFinished() {
-        double angle = arm.getAngledHookDegree();
-        return angle >= degreesDown;
+        return true;
     }
+
 
 }

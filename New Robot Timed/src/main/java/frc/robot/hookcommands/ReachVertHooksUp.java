@@ -2,35 +2,31 @@ package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.VertHooks;
 
 public class ReachVertHooksUp extends CommandBase {
-    private Hooks grabbers;
+    private VertHooks grabbers;
     double distanceUp;
 
-    public ReachVertHooksUp(Hooks hooksArg) {
-        grabbers = hooksArg;
+    public ReachVertHooksUp(VertHooks vertHooksArg) {
+        grabbers = vertHooksArg;
         addRequirements(grabbers);
     }
+
     @Override
-    public void initialize()
-    {
-        grabbers.resetVertHooksPosition();
-        distanceUp = Constants.DISTANCE_UP;
+    public void initialize() {
+        grabbers.resetHookPosition();
     }
 
     @Override
     public void execute() {
         grabbers.moveVertHooks(Constants.VERT_HOOK_SPEED);
-        if(isFinished() == true){
-            grabbers.moveVertHooks(Constants.FREEZE);
-        }
     }
 
-    @Override
-    public boolean isFinished() {
-        double height = grabbers.getVerticalHookHeight();
-        return height >= distanceUp;
-    }
-    
+    // @Override
+    // public boolean isFinished() {
+    // double height = grabbers.getVerticalHookHeight();
+    // return height >= distanceUp;
+    // }
+
 }

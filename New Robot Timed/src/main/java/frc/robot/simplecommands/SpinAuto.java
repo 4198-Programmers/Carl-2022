@@ -4,20 +4,20 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class SpinOneEighty extends CommandBase {
+public class SpinAuto extends CommandBase {
     DriveTrain driver;
     double calculatedDistance;
     double degreesOfRotation;
     boolean youDone;
 
-    public SpinOneEighty(DriveTrain driveArg) {
+    public SpinAuto(DriveTrain driveArg, double degrees) {
         driver = driveArg;
+        degreesOfRotation = degrees;
         addRequirements(driveArg);
     }
 
     @Override
     public void initialize() {
-        degreesOfRotation = 180;
         youDone = false;
     }
 

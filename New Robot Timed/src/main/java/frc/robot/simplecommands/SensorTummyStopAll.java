@@ -33,4 +33,9 @@ public class SensorTummyStopAll extends CommandBase {
             finished = true;
         }
     }
+
+    @Override
+    public boolean isFinished() {
+        return finished;
+    }
 }

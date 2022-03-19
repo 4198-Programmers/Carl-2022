@@ -6,6 +6,7 @@ import frc.robot.subsystems.Tunnel;
 
 public class SetInternalMoveSpeedIn extends CommandBase {
     private Tunnel tunnel;
+    boolean done;
 
     public SetInternalMoveSpeedIn(Tunnel tunnelSub) {
         tunnel = tunnelSub;
@@ -13,9 +14,19 @@ public class SetInternalMoveSpeedIn extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        done = false;
+    }
+
+    @Override
     public void execute() {
         tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
-        System.out.println("internal movement");
+        done = true;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return done;
     }
 
 }

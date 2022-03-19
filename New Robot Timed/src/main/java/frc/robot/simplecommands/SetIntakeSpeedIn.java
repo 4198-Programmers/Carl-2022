@@ -6,6 +6,8 @@ import frc.robot.subsystems.Intake;
 
 public class SetIntakeSpeedIn extends CommandBase {
     private Intake intake;
+    boolean done;
+    double autoTime;
 
     public SetIntakeSpeedIn(Intake intakeSub) {
         intake = intakeSub;
@@ -13,8 +15,20 @@ public class SetIntakeSpeedIn extends CommandBase {
     }
 
     @Override
+    public void initialize() {
+        done = false;
+        autoTime = System.currentTimeMillis();
+    }
+
+    @Override
     public void execute() {
         intake.setIntakeSpeed(Constants.INTAKE_FORWARD_SPEED);
+        done = true;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return (done && (System.currentTimeMillis() - autoTime) >= 250);
     }
 
 }

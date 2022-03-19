@@ -198,6 +198,8 @@ public class RobotContainer {
     internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);
     internalFeederOutBTN.whileHeld(setInternalMoveSpeedOut);
     limelightOnThenTargetBTN.whileHeld(limelightTargeting);
+    spitBTN.whenHeld(spitBalls);
+
 
     angleJoystickButton.whenReleased(new AngleStop(angleHooksSub));
     verticalHookUpBTN.whenReleased(hookStop);
@@ -210,8 +212,6 @@ public class RobotContainer {
     internalFeederInBTN.whenReleased(tunnelStop);
     internalFeederOutBTN.whenReleased(tunnelStop);
     limelightOnThenTargetBTN.whenReleased(setLimelightModeOff);
-
-    spitBTN.whenHeld(spitBalls);
 
     limelightOffBTN.whenPressed(setLimelightModeOff);
     limelightOnBTN.whenPressed(setLimelightModeOn);

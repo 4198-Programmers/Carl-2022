@@ -22,6 +22,7 @@ import frc.robot.simplecommands.ResetWheels;
 import frc.robot.simplecommands.SensorTummyStopAll;
 //import frc.robot.simplecommands.RedFollower;
 import frc.robot.simplecommands.SetFlySpeed;
+import frc.robot.simplecommands.SetFlySpeedVelocity;
 import frc.robot.simplecommands.SetIntakeSpeedIn;
 import frc.robot.simplecommands.SetIntakeSpeedOut;
 import frc.robot.simplecommands.SetInternalMoveSpeedIn;
@@ -92,7 +93,7 @@ public class RobotContainer {
 
   Command taxiAndShoot = (new ResetWheels(vroomVroom))
       .andThen((new TaxiOffTarmac(vroomVroom)
-          .alongWith(new SetFlySpeed(flyAndSensors, midStick, vision))))
+          .alongWith(new SetFlySpeedVelocity(flyAndSensors, vision))))
       .andThen(new Targeting(vroomVroom, vision))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub))
       .andThen(new DoNotMove(vroomVroom, flyAndSensors));
@@ -103,7 +104,7 @@ public class RobotContainer {
   // .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
   Command shooting = (new PickLimelightMode(vision, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
       .andThen(new Targeting(vroomVroom, vision))
-      .andThen(new SetFlySpeed(flyAndSensors, midStick, vision))
+      .andThen(new SetFlySpeedVelocity(flyAndSensors, vision))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub));
 
   Command taxi = (new ResetWheels(vroomVroom))
@@ -114,9 +115,10 @@ public class RobotContainer {
           .alongWith(new TaxiOffTarmac(vroomVroom)))
       .andThen((new IntakeStop(intakeSub))
           .alongWith(new SpinOneEighty(vroomVroom)))
-      .andThen(new SetFlySpeed(flyAndSensors, midStick, vision))
+      .andThen(new SetFlySpeedVelocity(flyAndSensors, vision))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub))
       .andThen(new SensorTummyStopAll(flyAndSensors, tunnelSub, intakeSub));
+      
   Command spinOneEighty = new ResetWheels(vroomVroom)
       .andThen(new SpinOneEighty(vroomVroom));
 

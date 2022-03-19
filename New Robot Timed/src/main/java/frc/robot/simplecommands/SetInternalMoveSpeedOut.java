@@ -7,8 +7,8 @@ import frc.robot.subsystems.Tunnel;
 public class SetInternalMoveSpeedOut extends CommandBase {
     private Tunnel tunnel;
 
-    public SetInternalMoveSpeedOut(Tunnel shooterPathMovementArg) {
-        tunnel = shooterPathMovementArg;
+    public SetInternalMoveSpeedOut(Tunnel tunnelSub) {
+        tunnel = tunnelSub;
         addRequirements(tunnel);
     }
 

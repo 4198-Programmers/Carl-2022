@@ -4,18 +4,29 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.VertHooks;
 
-public class HookStop extends CommandBase{
+public class HookStop extends CommandBase {
+    private VertHooks vertHooks;
+    boolean done;
 
-    private VertHooks intake;
+    public HookStop(VertHooks vertHooksArg) {
+        vertHooks = vertHooksArg;
+        addRequirements(vertHooks);
+    }
 
-    public HookStop(VertHooks shooterPathMovementArg) {
-        intake = shooterPathMovementArg;
-        addRequirements(intake);
+    @Override
+    public void initialize() {
+        done = false;
     }
 
     @Override
     public void execute() {
-        intake.moveVertHooks(Constants.FREEZE);
+        vertHooks.moveVertHooks(Constants.FREEZE);
+        done = true;
     }
-    
+
+    @Override
+    public boolean isFinished() {
+        return done;
+    }
+
 }

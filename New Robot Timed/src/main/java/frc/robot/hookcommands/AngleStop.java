@@ -4,17 +4,29 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.AngleHooks;
 
-public class AngleStop extends CommandBase{
+public class AngleStop extends CommandBase {
     private AngleHooks intake;
+    boolean done;
 
-    public AngleStop(AngleHooks shooterPathMovementArg) {
-        intake = shooterPathMovementArg;
-        addRequirements(intake);
+    @Override
+    public void initialize() {
+        done = false;
+    }
+
+    public AngleStop(AngleHooks intakeSub) {
+        intake = intakeSub;
+        addRequirements(intakeSub);
     }
 
     @Override
     public void execute() {
         intake.moveAngledHooks(Constants.FREEZE);
+        done = true;
     }
-    
+
+    @Override
+    public boolean isFinished() {
+        return done;
+    }
+
 }

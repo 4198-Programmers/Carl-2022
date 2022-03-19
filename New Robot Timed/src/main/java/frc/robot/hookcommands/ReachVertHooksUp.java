@@ -8,15 +8,14 @@ public class ReachVertHooksUp extends CommandBase {
     private VertHooks grabbers;
     double distanceUp;
 
-    public ReachVertHooksUp(VertHooks hooksArg) {
-        grabbers = hooksArg;
+    public ReachVertHooksUp(VertHooks vertHooksArg) {
+        grabbers = vertHooksArg;
         addRequirements(grabbers);
     }
 
     @Override
     public void initialize() {
         grabbers.resetHookPosition();
-        distanceUp = Constants.VERT_HOOK_DISTANCE_UP;
     }
 
     @Override
@@ -24,10 +23,10 @@ public class ReachVertHooksUp extends CommandBase {
         grabbers.moveVertHooks(Constants.VERT_HOOK_SPEED);
     }
 
-    @Override
-    public boolean isFinished() {
-        double height = grabbers.getVerticalHookHeight();
-        return height >= distanceUp;
-    }
+    // @Override
+    // public boolean isFinished() {
+    // double height = grabbers.getVerticalHookHeight();
+    // return height >= distanceUp;
+    // }
 
 }

@@ -7,12 +7,6 @@ public final class Maths {
         double rotations = ((distanceInInches / circumference));
         return rotations;
     }
-    public static double motorConversion(double distanceForMotors)
-    {
-        double circumference = (Math.PI*(Constants.VERT_HOOK_WHEEL_DIAMETER));
-        double rotations = (distanceForMotors/circumference);
-        return rotations;
-    }
 
     public static double distanceFromTarget(double YAngle) {
         double D = Constants.TARGET_HEIGHT_TOP_TO_GROUND;
@@ -25,8 +19,21 @@ public final class Maths {
         return distance;
     }
 
-    public static double flyWheelVelocityByDistance(double Distance) {
-        return 0;// TODO create equation
+    public static double flyWheelSpeedByDistance(double Distance) {
+        double invTest = -Distance;
+        double a = -0.0000535235;
+        double b = 0.00766854;
+        double c = -0.630631;
+        System.out.println("math" + Distance);
+
+        return (((a * (invTest * invTest)) + (b * invTest) + c));
+    }
+
+    public static double spinDistanceByDegree(double Degrees) {
+        double circleDistance = (Degrees / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;
+        double wheelCircumference = (Math.PI * (Constants.WHEEL_DIAMTER));
+        double totalRotations = ((circleDistance / wheelCircumference));
+        return totalRotations;
     }
 
 }

@@ -7,8 +7,8 @@ import frc.robot.subsystems.Intake;
 public class SetIntakeSpeedIn extends CommandBase {
     private Intake intake;
 
-    public SetIntakeSpeedIn(Intake shooterPathMovementArg) {
-        intake = shooterPathMovementArg;
+    public SetIntakeSpeedIn(Intake intakeSub) {
+        intake = intakeSub;
         addRequirements(intake);
     }
 
@@ -16,7 +16,5 @@ public class SetIntakeSpeedIn extends CommandBase {
     public void execute() {
         intake.setIntakeSpeed(Constants.INTAKE_FORWARD_SPEED);
     }
-
-
 
 }

@@ -7,8 +7,8 @@ import frc.robot.subsystems.Intake;
 public class SetIntakeSpeedOut extends CommandBase {
     private Intake intake;
 
-    public SetIntakeSpeedOut(Intake shooterPathMovementArg) {
-        intake = shooterPathMovementArg;
+    public SetIntakeSpeedOut(Intake intakeSub) {
+        intake = intakeSub;
         addRequirements(intake);
     }
 

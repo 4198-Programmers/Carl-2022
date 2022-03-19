@@ -6,7 +6,6 @@ import frc.robot.subsystems.AngleHooks;
 
 public class MoveCloserToNinetyDegrees extends CommandBase {
     private AngleHooks elbow;
-    
 
     public MoveCloserToNinetyDegrees(AngleHooks angleHookArg) {
         elbow = angleHookArg;
@@ -17,6 +16,5 @@ public class MoveCloserToNinetyDegrees extends CommandBase {
     public void execute() {
         elbow.moveAngledHooks(-Constants.ANGLE_HOOK_SPEED);
     }
-
 
 }

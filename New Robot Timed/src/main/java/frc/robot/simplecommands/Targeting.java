@@ -1,5 +1,6 @@
 package frc.robot.simplecommands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
@@ -17,6 +18,7 @@ public class Targeting extends CommandBase {
 
     @Override
     public void execute() {
+        SmartDashboard.putNumber("Distance", visionT.distanceToTarget());
 
         if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.OFFSET_TOLERANCE_INCHES) {
             vroomVroomT.greenLight(-0.25, 0);
@@ -33,6 +35,7 @@ public class Targeting extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (visionT.hasTarget() && visionT.xOffsetFromCenter() >= -Constants.OFFSET_TOLERANCE_INCHES && visionT.xOffsetFromCenter() < Constants.OFFSET_TOLERANCE_INCHES);
+        return (visionT.hasTarget() && visionT.xOffsetFromCenter() >= -Constants.OFFSET_TOLERANCE_INCHES
+                && visionT.xOffsetFromCenter() < Constants.OFFSET_TOLERANCE_INCHES);
     }
 }

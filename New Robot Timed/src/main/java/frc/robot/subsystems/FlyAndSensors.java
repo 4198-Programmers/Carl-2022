@@ -21,11 +21,11 @@ public class FlyAndSensors extends SubsystemBase {
         return flyWheelMotor.get();
     }
 
-    public boolean ballIn(){
+    public boolean ballIn() {
         return ballInSensor.get();
     }
 
-    public boolean ballOut(){
+    public boolean ballOut() {
         return ballOutSensor.get();
     }
 

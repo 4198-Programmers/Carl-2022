@@ -10,30 +10,27 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.GripPipelineRed;
 
-public class RedFollower extends CommandBase{
+public class RedFollower extends CommandBase {
     private GripPipelineRed redDetect = new GripPipelineRed();
     UsbCamera camera = CameraServer.startAutomaticCapture();
     CvSink sink = new CvSink("Sink Name");
 
-    public RedFollower(UsbCamera cameraArg)
-    {
+    public RedFollower(UsbCamera cameraArg) {
         camera = cameraArg;
     }
 
     @Override
     public void execute() {
         Mat matImage = new Mat();
-        if (sink.grabFrame(matImage) == 0)
-        {
+        if (sink.grabFrame(matImage) == 0) {
             redDetect.process(matImage);
             MatOfKeyPoint blobs = redDetect.findBlobsOutput();
             KeyPoint[] blobPoints = blobs.toArray();
 
-            if (blobPoints.length > 0)
-            {
-                
+            if (blobPoints.length > 0) {
+
             }
         }
     }
-    
+
 }

@@ -50,7 +50,7 @@ public class Constants {
     public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5; // 23.5 inches is distance between sheels
 
     //velocity constants
-    public static final double SHOOTER_LAUNCH_ANGLE = -0;
+    public static final double SHOOTER_LAUNCH_ANGLE = 70.5;
     public static final double GRAVITATIONAL_VELOCITY = 9.81; //in meters per second
     
     public static final double MAX_FLYWHEEL_VELOCITY = 10;

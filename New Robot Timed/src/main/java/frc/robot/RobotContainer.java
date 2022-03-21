@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -56,6 +55,7 @@ public class RobotContainer {
   Targeting targeting = new Targeting(vroomVroom, vision);
   Targeting targetingS = new Targeting(vroomVroom, vision);
   Targeting targetingTAT = new Targeting(vroomVroom, vision);
+  Targeting targetingTAS = new Targeting(vroomVroom, vision);
   DeathSpin deathSpin = new DeathSpin(vroomVroom);
   Command shoot = targetingS.alongWith(spinUpFlyWheel).andThen(setInternalMoveSpeed);
   ChooseLimelightLedMode turnLimelightLedModeOn = new ChooseLimelightLedMode(vision, LedMode.forceOn);
@@ -63,7 +63,8 @@ public class RobotContainer {
   ChooseLimelightLedMode AnnoyanceMode = new ChooseLimelightLedMode(vision, LedMode.forceBlink);
   Command taxi = resetDriveTrainPositionAuto.andThen(offTarmacAuto);
   Command taxiandTarget = resetDriveTrainPositionTAT.andThen(offTarmacTAT).andThen(targetingTAT);
-  Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).alongWith(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
+  Command taxiAndShoot = resetDriveTrainPositionTAS.andThen(offTarmacTAS).andThen(targetingTAS).andThen(spinUpFlyWheelTAS).andThen(setInternalMoveSpeedTAS).andThen(doNotMoveTAS);
+  Command taxiAndShootTwoBalls = (new ResetDriveTrainPosition(vroomVroom)).andThen(new OffTarmac(vroomVroom)).alongWith(new FeederMotor(shooter)).
   //Drive drive = new Drive(leftStick.getRawAxis(1), midStick.getRawAxis(0), vroomVroom);
   ResetDriveTrainPosition resetDriveTrainPosition = new ResetDriveTrainPosition(vroomVroom);
   JoystickButton turnLimelightOnButton = new JoystickButton(rightStick, Constants.TURN_LIMELIGHT_ON_BUTTON);
@@ -75,6 +76,7 @@ public class RobotContainer {
   JoystickButton shootButton = new JoystickButton(midStick, Constants.SHOOT_BUTTON);
   JoystickButton feederButton = new JoystickButton(midStick, Constants.FEEDER_BUTTON);
   JoystickButton deathSpinButton = new JoystickButton(rightStick, Constants.DEATH_SPIN_BUTTON);
+  JoystickButton angledOverride = new JoystickButton(rightStick, Constants.ANGLED_OVERRIDE_BUTTON);
   // The robot's subsystems and commands are defined here...
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
   /** The container for the robot. Contains subsystems, OI devices, and commands. 
@@ -104,6 +106,7 @@ public class RobotContainer {
     deathSpinButton.whileHeld(deathSpin);
     
   }
+  
 
 
 //Commands

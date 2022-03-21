@@ -40,15 +40,19 @@ public final class Constants {
     public static final int SHOOT_BUTTON = 1;
     public static final int FEEDER_BUTTON = 2;
     public static final int DEATH_SPIN_BUTTON = 3;
+    public static final int ANGLED_OVERRIDE_BUTTON = 2;
 
     public static final double EXPECTED_FLYWHEEL_SPEED = 0;
     public static final double WANTED_FLY_WHEEL_SPEED = 0;
     public static final double INTERNAL_MOTOR_SPEED = 0;
-    public static final double WANTED_INTERNAL_MOTOR_SPEED = 0;
+    public static final double WANTED_INTERNAL_MOTOR_SPEED = 0.5;
     public static final double GET_INTERNAL_MOTOR_SPEED = 0;
     public static final double GET_FLY_WHEEL_SPEED = 0;
     public static final double FLY_WHEEL_SPEED = 0;
     public static final double WANTED_FEEDER_SPEED = 0;
     public static final double FEEDER_SPEED = 0;
     public static final double WANTED_VERT_HOOK_HEIGHT = 0;
+    public static final double TARGET_HEIGHT_TOP_TO_GROUND = 104;
+    public static final double LIMELIGHT_HEIGHT_TO_GROUND = 25;
+    public static final double LIMELGIHT_ANGLE_FROM_GROUND = 65;
 }

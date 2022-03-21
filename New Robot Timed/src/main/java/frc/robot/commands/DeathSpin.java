@@ -23,7 +23,7 @@ public class DeathSpin extends CommandBase{
         double rotations = Maths.rotationConversion(distanceTurning);
         double position = vroomVroom.getPosition();
         if(Math.abs(position) < rotations)
-        vroomVroom.greenLight(-1, 1);
+        vroomVroom.greenLight(-1, 0);
         else if(youDone == true){
             vroomVroom.greenLight(0, 0);
         }

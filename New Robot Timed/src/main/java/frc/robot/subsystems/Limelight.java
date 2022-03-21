@@ -9,14 +9,13 @@ import frc.robot.Maths;
 import frc.robot.commands.ShootingCommands.SpinUpFlyWheel;
 
 public class Limelight extends SubsystemBase{
-    public enum LedMode{
-        forceOff(1),
-        forceBlink(2),
-        forceOn(3),
+    public enum LimelightMode{
+        forceOff(0),
+        forceOn(1),
         invalid(-1);
         private double mode;
 
-        private LedMode(double mode){
+        private LimelightMode(double mode){
             this.mode = mode;
         }
         protected double getModeValue(){
@@ -26,11 +25,11 @@ public class Limelight extends SubsystemBase{
     private NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     /**Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27 degrees | LL2: -29.8 to 29.8 degrees)**/
     private NetworkTableEntry tx = table.getEntry("tx");
-    // /**Vertical Offset From Crosshair To Target (LL1: -20.5 degrees to 20.5 degrees | LL2: -24.85 to 24.85 degrees)*/
-    private NetworkTableEntry ty = table.getEntry("ty");
-    /**Whether the limelight has any valid targets (0 or 1) */
+    /**Vertical Offset From Crosshair To Target (LL1: -20.5 degrees to 20.5 degrees | LL2: -24.85 to 24.85 degrees)*/
+    // private NetworkTableEntry ty = table.getEntry("ty");
+    // /**Whether the limelight has any valid targets (0 or 1) */
     private NetworkTableEntry tv = table.getEntry("tv");
-    /**Target Area (0% of image to 100% of image) */
+    // /**Target Area (0% of image to 100% of image) */
     // private NetworkTableEntry ta = table.getEntry("ta");
     // /**Skew or rotation (-90 degrees to 0 degrees) */
     // private NetworkTableEntry ts = table.getEntry("ts");
@@ -45,7 +44,7 @@ public class Limelight extends SubsystemBase{
      1	force off
      2	force blink
      3	force on*/
-    private NetworkTableEntry ledMode = table.getEntry("ledMode");
+   // private NetworkTableEntry ledMode = table.getEntry("ledMode");
     /**camMode	Sets limelight’s operation mode
 0	Vision processor
 1	Driver Camera (Increases exposure, disables vision processing) */
@@ -54,9 +53,9 @@ public class Limelight extends SubsystemBase{
 // 0	Standard - Side-by-side streams if a webcam is attached to Limelight
 // 1	PiP Main - The secondary camera stream is placed in the lower-right corner of the primary camera stream
 // 2	PiP Secondary - The primary camera stream is placed in the lower-right corner of the secondary camera stream */
-// //     private NetworkTableEntry stream = table.getEntry("stream");
-// //  /**pipeline	Sets limelight’s current pipeline
-// // 0 .. 9	Select pipeline 0..9 */
+//     private NetworkTableEntry stream = table.getEntry("stream");
+ /**pipeline	Sets limelight’s current pipeline
+0 .. 9	Select pipeline 0..9 */
     private NetworkTableEntry pipeline = table.getEntry("pipeline");
 
     public static double distanceToTarget(){
@@ -73,22 +72,19 @@ public class Limelight extends SubsystemBase{
     public double getPipeLine(){
         return pipeline.getDouble(-1);
     }
-    public void setLedMode(LedMode mode)
+    public void setPipelineMode(LimelightMode mode)
     {
-    ledMode.setDouble(mode.getModeValue());     
+    pipeline.setDouble(mode.getModeValue());     
     }
-    public LedMode getLedMode() {
-        double getMode = ledMode.getDouble(LedMode.invalid.getModeValue());
-        LedMode ledMode = LedMode.invalid;
-       if(getMode == 1){
-           ledMode = LedMode.forceOff;
+    public LimelightMode getLimelightMode() {
+        double getMode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
+        LimelightMode pipeline = LimelightMode.invalid;
+       if(getMode == 0){
+           pipeline = LimelightMode.forceOff;
        }
-       else if(getMode == 2){
-           ledMode = LedMode.forceBlink;
+       else if(getMode ==1){
+           pipeline = LimelightMode.forceOn;
        }
-       else if(getMode ==3){
-           ledMode = LedMode.forceOn;
-       }
-        return ledMode;
+        return pipeline;
     }
     }

@@ -18,4 +18,5 @@ public class Constants {
     public static final double JAKE_WHEELS = 5.875;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
     public static final double SPEED_CONVERSION_FACTOR = 0.5;
+    public static final int DEATH_SPIN_BUTTON = 1;
 }

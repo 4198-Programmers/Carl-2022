@@ -26,7 +26,7 @@ public class Limelight extends SubsystemBase{
     /**Horizontal Offset From Crosshair To Target (LL1: -27 degrees to 27 degrees | LL2: -29.8 to 29.8 degrees)**/
     private NetworkTableEntry tx = table.getEntry("tx");
     /**Vertical Offset From Crosshair To Target (LL1: -20.5 degrees to 20.5 degrees | LL2: -24.85 to 24.85 degrees)*/
-    // private NetworkTableEntry ty = table.getEntry("ty");
+    private  NetworkTableEntry ty = table.getEntry("ty");
     // /**Whether the limelight has any valid targets (0 or 1) */
     private NetworkTableEntry tv = table.getEntry("tv");
     // /**Target Area (0% of image to 100% of image) */

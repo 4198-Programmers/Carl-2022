@@ -9,10 +9,10 @@ public class Drive extends CommandBase{
     Joystick turn;
     DriveTrain robotPosition;
 
-    public Drive(Joystick forward, Joystick turn, DriveTrain robotPositionArg){
+    public Drive(Joystick forward, Joystick turn, DriveTrain vroomVroom){
         this.forward = forward;
         this.turn = turn;
-        robotPosition = robotPositionArg;
+        robotPosition = vroomVroom;
         addRequirements(robotPosition);
     }
     // @Override

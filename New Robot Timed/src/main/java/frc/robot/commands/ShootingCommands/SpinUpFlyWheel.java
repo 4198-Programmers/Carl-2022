@@ -1,4 +1,4 @@
-// package frc.robot.commands.ShootingCommands;
+package frc.robot.commands.ShootingCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -7,18 +7,16 @@ import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 
 public class SpinUpFlyWheel extends CommandBase{
-    Shooter shooter;
-    Limelight limelight;
-    Maths maths;
+    private Shooter pewPew;
 
     
     public SpinUpFlyWheel(Shooter shooterArg){
-        shooter = shooterArg;
-        addRequirements(shooter);
+        pewPew = shooterArg;
+        addRequirements(pewPew);
     }
     @Override
     public void execute() {
-        shooter.flywheelspeed(Maths.wantedFlyWheelSpeed(Limelight.distanceToTarget()));
+        pewPew.flywheelspeed(Maths.wantedFlyWheelSpeed(Limelight.distanceToTarget()));
     }
     @Override
     public boolean isFinished(){

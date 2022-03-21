@@ -15,9 +15,9 @@ public final class Constants {
     public static final int VERT_LEFT_HOOK_MOTOR_ID = -0;
     public static final int ANGLED_RIGHT_HOOK_MOTOR_ID = -0;
     public static final int ANGLED_LEFT_HOOK_MOTOR_ID = -0;
-    // public static final int FEEDER_MOTOR_ID = -0;
-    // public static final int INTERNAL_MOTOR_ID = -0;
-    // public static final int FLY_WHEEL_MOTOR_ID = -0;
+    public static final int FEEDER_MOTOR_ID = -0;
+    public static final int INTERNAL_MOTOR_ID = -0;
+    public static final int FLY_WHEEL_MOTOR_ID = -0;
 //Factors
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
     public static final double WHEEL_DIAMETER = 5.875;

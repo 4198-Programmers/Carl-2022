@@ -32,17 +32,11 @@ public class Targeting extends CommandBase {
         } else if (visionT.xOffsetFromCenter() > Constants.WIDE_OFFSET_TOLERANCE) {
             vroomVroomT.greenLight(0.25, 0);
             System.out.println("targeting right");
-        } else if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.MID_OFFSET_TOLERANCE) {
+        } else if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.SLIM_OFFSET_TOLERANCE) {
             vroomVroomT.greenLight(-0.15, 0);
             System.out.println("targeting left");
-        } else if (visionT.xOffsetFromCenter() > Constants.MID_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(0.15, 0);
-            System.out.println("targeting right");
-        } else if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.SLIM_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(-0.075, 0);
-            System.out.println("targeting left");
         } else if (visionT.xOffsetFromCenter() > Constants.SLIM_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(0.075, 0);
+            vroomVroomT.greenLight(0.15, 0);
             System.out.println("targeting right");
         } else {
             vroomVroomT.greenLight(Constants.FREEZE, Constants.FREEZE);

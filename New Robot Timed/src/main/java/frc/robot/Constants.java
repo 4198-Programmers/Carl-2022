@@ -23,7 +23,6 @@ public class Constants {
     public static final byte MID_STICK_PORT = 1;
     public static final byte RIGHT_STICK_PORT = 2;
 
-    public static final double VERT_HOOK_SPEED = 0.5;
     public static final double ANGLE_HOOK_SPEED = 0.5;
     public static final double INTAKE_FORWARD_SPEED = -1;
     public static final double FLYWHEEL_SPEED = 1;
@@ -41,8 +40,7 @@ public class Constants {
 
     // other
     public static final double WIDE_OFFSET_TOLERANCE = 3.75;
-    public static final double MID_OFFSET_TOLERANCE = 2.75;
-    public static final double SLIM_OFFSET_TOLERANCE = 1;
+    public static final double SLIM_OFFSET_TOLERANCE = 3;
     public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
     public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
     public static final double WHEEL_DIAMTER = 5.875;
@@ -63,8 +61,7 @@ public class Constants {
 
     // middle stick buttons
     public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 1;
-    // public static final byte leftbuttonone = 1;
-    // public static final byte leftbuttontwo = 2;
+    public static final byte ANGLE_JOYSTICK_BUTTON = 2;
     // public static final byte leftbuttonthree = 3;
     // public static final byte leftbuttonfour = 4;
     // public static final byte leftbuttonfive = 5;
@@ -82,7 +79,7 @@ public class Constants {
     public static final byte INTERNAL_MOVER_BACKWARDS_BUTTON = 3;
     public static final byte FORCE_SPIT_BUTTON = 4;
     public static final byte INTERNAL_MOVER_FORWARDS_BUTTON = 5;
-    public static final byte ANGLE_JOYSTICK_BUTTON = 6;
+
     public static final byte INTAKE_IN_BUTTON = 7;
     public static final byte INTAKE_OUT_BUTTON = 8;
     public static final byte ANGLE_HOOK_UP_BUTTON = 11;

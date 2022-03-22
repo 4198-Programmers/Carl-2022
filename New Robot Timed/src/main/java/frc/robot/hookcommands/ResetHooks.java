@@ -2,14 +2,17 @@ package frc.robot.hookcommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.AngleHooks;
+import frc.robot.subsystems.VertHooks;
 
-public class ResetAngleHooks extends CommandBase{
+public class ResetHooks extends CommandBase{
     AngleHooks angleHooks;
+    VertHooks vertHooks;
     boolean done;
 
-    public ResetAngleHooks(AngleHooks angleHooksSub){
+    public ResetHooks(AngleHooks angleHooksSub, VertHooks vertHooksSub){
         angleHooks = angleHooksSub;
-        addRequirements(angleHooks);
+        vertHooks = vertHooksSub;
+        addRequirements(angleHooks, vertHooks);
     }
 
     @Override
@@ -20,6 +23,7 @@ public class ResetAngleHooks extends CommandBase{
     @Override
     public void execute() {
         angleHooks.resetAngleHooks();
+        vertHooks.resetVertHooks();
         done = true;
     }
 

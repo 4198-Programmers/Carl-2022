@@ -23,7 +23,7 @@ public final class Maths {
         double invTest = Distance;
         double a = 0.000188428;
         double b = -0.00228743;
-        double c = 0.710835;
+        double c = 0.710835 * 1.04;
 
         return (-((a * (invTest * invTest)) + (b * invTest) + c));
     }

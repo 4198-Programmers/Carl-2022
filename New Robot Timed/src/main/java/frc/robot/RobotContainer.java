@@ -15,9 +15,11 @@ import frc.robot.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.hookcommands.MoveCloserToZeroDegrees;
 import frc.robot.hookcommands.PullVertHooksIn;
 import frc.robot.hookcommands.ReachVertHooksUp;
+import frc.robot.hookcommands.ResetHooks;
 import frc.robot.simplecommands.BuildIsMean;
 import frc.robot.simplecommands.DoNotMove;
 import frc.robot.simplecommands.InSensorCheck;
+import frc.robot.simplecommands.IntakeFeeder;
 import frc.robot.simplecommands.IntakeStop;
 import frc.robot.simplecommands.PickLimelightMode;
 import frc.robot.simplecommands.ResetWheels;
@@ -65,9 +67,9 @@ public class RobotContainer {
   // ungrouped commands
   // RealizeBall realizeBall = new RealizeBall(ballFinder);
   DoNotMove doNotMove = new DoNotMove(vroomVroomSub, flyAndSensorsSub);
-  AngledHookJoystick angledHookJoystick = new AngledHookJoystick(angleHooksSub, rightStick);
-  ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(vertHooksSub);
-  PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(vertHooksSub);
+  AngledHookJoystick angledHookJoystick = new AngledHookJoystick(angleHooksSub, midStick, vroomVroomSub);
+  ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(vertHooksSub, rightStick);
+  PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(vertHooksSub, rightStick);
   MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(angleHooksSub);
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(angleHooksSub);
   Targeting targeting = new Targeting(vroomVroomSub, visionSub);
@@ -87,6 +89,8 @@ public class RobotContainer {
   TunnelStop tunnelStop = new TunnelStop(tunnelSub);
   HookStop hookStop = new HookStop(vertHooksSub);
   AngleStop angleStop = new AngleStop(angleHooksSub);
+  ResetHooks resetHooks = new ResetHooks(angleHooksSub, vertHooksSub);
+  IntakeFeeder intakeFeeder = new IntakeFeeder(intakeSub, tunnelSub, flyAndSensorsSub);
 
   // command groups
   Command limelightTargeting = (new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
@@ -96,32 +100,33 @@ public class RobotContainer {
       () -> vroomVroomSub.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroomSub);
 
   Command taxiAndShoot = (new ResetWheels(vroomVroomSub))
-      .andThen((new TaxiOffTarmac(vroomVroomSub, 50)
-          .alongWith(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, false, 0))))
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 50))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new SpinAuto(vroomVroomSub, 180))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, true, 250))
       .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub))
       .andThen(new DoNotMove(vroomVroomSub, flyAndSensorsSub));
-  // Command getOnFirstRung =
-  // reachVertHooksUpFRGROUP.andThen(taxiTarmacFRGROUP).andThen(pullVertHooksInFRGROUP);
-  // Command moveToNextRung =
-  // moveCloserToZeroDegreesTNRGROUP.andThen(moveCloserToNinetyDegreesTNRGROUP)
-  // .andThen(reachVertHooksUpTNRGROUP).andThen(pullVertHooksInTNRGROUP);
+
   Command shooting = (new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
       .andThen(new Targeting(vroomVroomSub, visionSub))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, false, 0))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, true, 150))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub));
 
-  Command taxi = (new ResetWheels(vroomVroomSub))
-      .andThen(new TaxiOffTarmac(vroomVroomSub, 40));
+  Command taxiSides = (new ResetWheels(vroomVroomSub))
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 50));
 
-  Command taxiTwoBallShoot = (new ResetWheels(vroomVroomSub))
+  Command taxiMid = new ResetWheels(vroomVroomSub)
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 60));
+
+  Command taxiTwoBallShootMidBall = (new ResetWheels(vroomVroomSub))
       .andThen((new SetIntakeSpeedIn(intakeSub))
           .alongWith(new TaxiOnTarmac(vroomVroomSub, 2)))
       .andThen(new ResetWheels(vroomVroomSub))
       .andThen(new TaxiOffTarmac(vroomVroomSub, 60))
       .andThen(new TimedInternalMoveIn(tunnelSub, 250))
       .andThen(new InSensorCheck(flyAndSensorsSub, true)
-          .raceWith(new WaitCommand(2000)))
+          .raceWith(new WaitCommand(2)))
       .andThen((new IntakeStop(intakeSub))
           .alongWith(new ResetWheels(vroomVroomSub)))
       .andThen((new SpinAuto(vroomVroomSub, 180))
@@ -132,22 +137,22 @@ public class RobotContainer {
       .andThen(new SetIntakeSpeedIn(intakeSub))
       .andThen(new TimedInternalMoveIn(tunnelSub, 700))
       .andThen(new IntakeStop(intakeSub))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, true, 600))
       .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, true, 600))
       .andThen(new SetIntakeSpeedIn(intakeSub))
       .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
+      .andThen(new WaitCommand(1))
       .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
       .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
-
-  Command spinOneEighty = new ResetWheels(vroomVroomSub)
-      .andThen(new SpinAuto(vroomVroomSub, 180));
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
   JoystickButton verticalHookUpBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_BUTTON);
   JoystickButton verticalHookDownBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_BUTTON);
-  //JoystickButton angledHookUpBTN = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
-  //JoystickButton angledHookDownBTN = new JoystickButton(rightStick, Constants.ANGLE_HOOK_DOWN_BUTTON);
+  // JoystickButton angledHookUpBTN = new JoystickButton(rightStick,
+  // Constants.ANGLE_HOOK_UP_BUTTON);
+  // JoystickButton angledHookDownBTN = new JoystickButton(rightStick,
+  // Constants.ANGLE_HOOK_DOWN_BUTTON);
   JoystickButton intakeInBTN = new JoystickButton(rightStick, Constants.INTAKE_IN_BUTTON);
   JoystickButton intakeOutBTN = new JoystickButton(rightStick, Constants.INTAKE_OUT_BUTTON);
   JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_BUTTON);
@@ -159,7 +164,7 @@ public class RobotContainer {
   JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_BUTTON);
   JoystickButton limelightOnThenTargetBTN = new JoystickButton(midStick, Constants.TARGETING_LIMELIGHT_SIMULTANEOUS);
   JoystickButton rudeBTN = new JoystickButton(leftStick, Constants.CRUEL_BUTTON);
-  JoystickButton angleJoystickButton = new JoystickButton(rightStick, Constants.ANGLE_JOYSTICK_BUTTON);
+  JoystickButton angleJoystickButton = new JoystickButton(midStick, Constants.ANGLE_JOYSTICK_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -171,6 +176,7 @@ public class RobotContainer {
     vertHooksSub.setDefaultCommand(stableHooks);
     angleHooksSub.setDefaultCommand(stableHooks);
     flyAndSensorsSub.setDefaultCommand(stableIntestines);
+    resetHooks.execute();
 
     CommandScheduler.getInstance().onCommandExecute((command) -> {
       if (!command.getName().equals("RunCommand") && !command.getName().equals("StableHooks")
@@ -187,21 +193,21 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    angleJoystickButton.whileHeld(angledHookJoystick);
+    angleJoystickButton.whenHeld(angledHookJoystick, false);
+    angleJoystickButton.whenInactive(driveSticks);
     verticalHookUpBTN.whileHeld(reachVertHooksUp);
     verticalHookDownBTN.whileHeld(pullVertHooksIn);
     // angledHookUpBTN.whileHeld(moveCloserToNinetyDegrees);
     // angledHookDownBTN.whileHeld(moveCloserToZeroDegrees);
     flywheelSpinUpBTN.whileHeld(setFlySpeed);
-    intakeInBTN.whileHeld(setIntakeSpeedIn);
+    intakeInBTN.whileHeld(intakeFeeder);
     intakeOutBTN.whileHeld(setIntakeSpeedOut);
     internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);
     internalFeederOutBTN.whileHeld(setInternalMoveSpeedOut);
     limelightOnThenTargetBTN.whileHeld(limelightTargeting);
     spitBTN.whenHeld(spitBalls);
 
-
-    angleJoystickButton.whenReleased(new AngleStop(angleHooksSub));
+    angleJoystickButton.whenReleased(angleStop);
     verticalHookUpBTN.whenReleased(hookStop);
     verticalHookDownBTN.whenReleased(hookStop);
     // angledHookUpBTN.whenReleased(angleStop);
@@ -222,10 +228,10 @@ public class RobotContainer {
 
   private void begin() {
     m_chooser.setDefaultOption("Default- Frozen", doNotMove);
-    m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", taxi);
-    m_chooser.addOption("Spin", spinOneEighty);
-    m_chooser.addOption("Two Ball Auto", taxiTwoBallShoot);
+    m_chooser.addOption("Only Taxi (R/L)", taxiSides);
+    m_chooser.addOption("Only Taxi (Mid)", taxiMid);
+    m_chooser.addOption("Taxi + Shoot One (R/M/L)", taxiAndShoot);
+    m_chooser.addOption("Two Ball Auto (R/M/L)", taxiTwoBallShootMidBall);
     SmartDashboard.putData("Auto choices", m_chooser);
 
   }

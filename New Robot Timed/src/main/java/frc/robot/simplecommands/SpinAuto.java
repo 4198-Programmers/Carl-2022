@@ -23,7 +23,7 @@ public class SpinAuto extends CommandBase {
 
     @Override
     public void execute() {
-        double rotationsToSpin = Maths.spinDistanceByDegree(degreesOfRotation);
+        double rotationsToSpin = Maths.spinDistanceByDegree((degreesOfRotation - 10));  //subtracting 10 cause it turns too far consistently
         double position = driver.findPosition();
 
         if (Math.abs(position) < Math.abs(rotationsToSpin)) // just reads the values, does not care about direction

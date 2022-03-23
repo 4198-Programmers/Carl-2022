@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.Subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
@@ -8,7 +8,7 @@ import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase{
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    public NetworkTableEntry tx = table.getEntry("tx"); //TODO math to convert to inches SOON
+    public NetworkTableEntry tx = table.getEntry("tx"); 
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv"); 
     NetworkTableEntry ta = table.getEntry("ta");
@@ -21,20 +21,18 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry stream = table.getEntry("stream");
     NetworkTableEntry pipeline = table.getEntry("pipeline");
 
-    public double xOffsetFromCenter()
-    {
-        /**Default is 1 to cause robot to spin to find target */
-        return tx.getDouble(1);                             
+    public double xOffset(){
+        return(tx.getDouble(0));
     }
-
-    public boolean hasTarget()
-    {
-        return tv.getDouble(0) == 1;
+    public double distancefromTarget(){
+        return(Maths.distanceFromTarget(ty.getDouble(0)));
     }
-
-    public double distanceToTarget()
-    {
-        double yAngle = ty.getDouble(0);
-        return Maths.distanceFromTarget(yAngle);
+    public double pipelineMode(double ledMode){
+        pipeline.setDefaultDouble(0);
+        pipeline.setDouble(ledMode);
+        return(ledMode);
+    }
+    public double hasTarget(){
+        return(tx.getDouble(0));
     }
 }

@@ -1,4 +1,4 @@
-package frc.Subsystems;
+package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -40,3 +40,4 @@ public class DriveTrain extends SubsystemBase{
     public void greenLight(double xAxis, double zRotation){
         allDrive.arcadeDrive(Constants.SPEED_MULTIPLIER *xAxis, Constants.SPEED_MULTIPLIER * zRotation);
     }
+}

@@ -15,7 +15,7 @@ public class Targeting extends CommandBase{
     }
     @Override
     public void initialize() {
-        limelight.pipelineMode(1);
+        limelight.setpipelineMode(1);
         driveTrain.resetPosition();
     }
     @Override

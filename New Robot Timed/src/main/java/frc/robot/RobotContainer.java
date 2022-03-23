@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.ShooterSystem;
 import frc.robot.Commands.AngledHooksMove;
+import frc.robot.Commands.ChooseLimelightMode;
 import frc.robot.Commands.DoNotDrive;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.Feeder;
@@ -40,6 +41,8 @@ public class RobotContainer {
   Targeting targeting = new Targeting(limelight, driveTrain);
   DoNotDrive doNotDrive = new DoNotDrive(driveTrain);
   OffTarmac offTarmac = new OffTarmac(driveTrain);
+  ChooseLimelightMode limelightModeOn = new ChooseLimelightMode(limelight, 1);
+  ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, 0);
   Command taxiAndShoot = (new OffTarmac(driveTrain))
     .alongWith(new Feeder(feederSub))
     .andThen(new Spin180(driveTrain))
@@ -49,6 +52,8 @@ public class RobotContainer {
   // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
+  JoystickButton limelightOnButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_ON_BUTTON);
+  JoystickButton limelightOffButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_OFF_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -64,6 +69,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
     shootingButton.whenHeld(new Shoot(shooterSystem));
+    limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, 1));
+    limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, 0));
+
   }
 
   private void begin() {

@@ -43,14 +43,24 @@ public class Constants {
     public static byte SPEED_MULTIPLIER = -0;
 /**Used to stop the angled hooks from going to opposite direction. */
     public static final double ANGLED_HOOK_LIMIT = 0;
-/**Left Joystick */
 
-/**Middle Joystick */
-    public static final int TARGETING_BUTTON = 0;
+    /**How far we want the bot to move in Auto */
 public static final double WANTED_AUTO_DISTANCE = 0;
+/**Motor ID */
 public static final int FEEDER_MOTOR_ID = 0;
+/**Motor ID */
 public static final int FLYWHEEL_MOTOR_ID = 0;
+/**Need the middle wheel Circumference to calculate Spin180 */
 public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = 0;
-/**Right Joystick */
+
+//LeftJoystick
+
+//Middle Joystick
+    public static final int TARGETING_BUTTON = 0;
+    public static final int LIMELIGHT_ON_BUTTON = 0;
+    public static final int LIMELIGHT_OFF_BUTTON = 0;
+
+//Righ Joystick
 public static final int SHOOTING_BUTTON = 0;
+
 }

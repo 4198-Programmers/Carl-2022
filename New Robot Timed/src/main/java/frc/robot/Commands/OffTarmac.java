@@ -1,35 +1,34 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Maths;
 import frc.robot.Subsystems.DriveTrain;
 
-public class Spin180 extends CommandBase{
+public class OffTarmac extends CommandBase{
     DriveTrain driveTrain;
-    double rotations;
-    boolean youdone;
-    public Spin180(DriveTrain driveTrain){
+    Maths maths;
+    double distance;
+    public OffTarmac(DriveTrain driveTrain){
         this.driveTrain = driveTrain;
         addRequirements(driveTrain);
     }
     @Override
     public void initialize() {
         driveTrain.resetPosition();
-        rotations = 40;
-        youdone = false;
+        distance = Constants.WANTED_AUTO_DISTANCE;
     }
     @Override
     public void execute() {
-        if(rotations < Maths.rotationConversion(rotations))
-        driveTrain.greenLight(-1, 0);
-        else if(rotations >= Maths.rotationConversion(rotations)){
-            driveTrain.greenLight(0, 0);
-            youdone = true;
+        if(Maths.rotationConversion(distance) < driveTrain.position()){
+            driveTrain.greenLight(0, 1);
         }
-
+        else if(Maths.rotationConversion(distance) >= driveTrain.position()){
+            driveTrain.greenLight(0, 0);
+        }
     }
     @Override
     public boolean isFinished() {
-        return (youdone == true);
+        return(Maths.rotationConversion(distance) >= driveTrain.position());
     }
 }

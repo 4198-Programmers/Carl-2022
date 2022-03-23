@@ -2,24 +2,23 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.Subsystems.Hooks;
+import frc.robot.Subsystems.VerticalHooks;
 
 public class VerticalHooksMove extends CommandBase{
-    Hooks hooks;
+    VerticalHooks verticalHooks;
     Joystick upStick;
-    public VerticalHooksMove(Hooks hooks, Joystick rightJoystick){
-        this.hooks = hooks;
+    public VerticalHooksMove(VerticalHooks verticalHooks, Joystick rightJoystick){
+        this.verticalHooks = verticalHooks;
         rightJoystick = upStick;
-        addRequirements(hooks);
+        addRequirements(verticalHooks);
     }
     @Override
     public void initialize() {
-        hooks.verticalHookResetPositon();
+        verticalHooks.verticalHookResetPositon();
     }
     @Override
     public void execute() {
-        hooks.angledHooksMove(upStick.getRawAxis(0));
-        hooks.verticalHookLimit(upStick.getRawAxis(0), upStick);
+        verticalHooks.verticalHookLimit(upStick.getRawAxis(0), upStick);
     }
     
 }

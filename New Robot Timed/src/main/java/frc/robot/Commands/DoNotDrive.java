@@ -1,7 +1,7 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.Subsystems.DriveTrain;
+import frc.robot.Subsystems.DriveTrain;
 
 public class DoNotDrive extends CommandBase{
     DriveTrain driveTrain;
@@ -16,6 +16,6 @@ public class DoNotDrive extends CommandBase{
     }
     @Override
     public boolean isFinished() {
-        return(driveTrain.position() == 0;);
+        return(driveTrain.position() == 0);
     }
 }

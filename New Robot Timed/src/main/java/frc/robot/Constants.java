@@ -51,6 +51,6 @@ public static final double WANTED_AUTO_DISTANCE = 0;
 public static final int FEEDER_MOTOR_ID = 0;
 public static final int FLYWHEEL_MOTOR_ID = 0;
 public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = 0;
-
 /**Right Joystick */
+public static final int SHOOTING_BUTTON = 0;
 }

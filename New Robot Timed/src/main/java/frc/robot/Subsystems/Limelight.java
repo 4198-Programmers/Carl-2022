@@ -27,8 +27,7 @@ public class Limelight extends SubsystemBase{
     public double distancefromTarget(){
         return(Maths.distanceFromTarget(ty.getDouble(0)));
     }
-    public double pipelineMode(double ledMode){
-        pipeline.setDefaultDouble(0);
+    public double setpipelineMode(double ledMode){
         pipeline.setDouble(ledMode);
         return(ledMode);
     }

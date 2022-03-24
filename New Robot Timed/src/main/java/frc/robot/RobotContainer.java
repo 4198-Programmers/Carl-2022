@@ -6,15 +6,19 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.ShooterSystem;
+import frc.robot.Subsystems.TunnelSub;
 import frc.robot.Commands.AngledHooksMove;
 import frc.robot.Commands.ChooseLimelightMode;
 import frc.robot.Commands.DoNotDrive;
 import frc.robot.Commands.Drive;
-import frc.robot.Commands.Feeder;
+import frc.robot.Commands.FeederIn;
+import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
 import frc.robot.Commands.Shoot;
 import frc.robot.Commands.Spin180;
 import frc.robot.Commands.Targeting;
+import frc.robot.Commands.TunnelIn;
+import frc.robot.Commands.TunnelOut;
 import frc.robot.Commands.VerticalHooksMove;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
@@ -34,6 +38,7 @@ public class RobotContainer {
   AngledHooks angledHooks;
   FeederSub feederSub;
   ShooterSystem shooterSystem;
+  TunnelSub tunnelSub;
   // commands
   Drive drive =  new Drive(driveTrain, leftJoystick , leftJoystick);
   VerticalHooksMove verticalHooksMove = new VerticalHooksMove(verticalHooks, rightJoystick);
@@ -44,7 +49,7 @@ public class RobotContainer {
   ChooseLimelightMode limelightModeOn = new ChooseLimelightMode(limelight, 1);
   ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, 0);
   Command taxiAndShoot = (new OffTarmac(driveTrain))
-    .alongWith(new Feeder(feederSub))
+    .alongWith(new FeederIn(feederSub))
     .andThen(new Spin180(driveTrain))
     .andThen(new Targeting(limelight, driveTrain))
     .andThen(new Shoot(shooterSystem));
@@ -54,6 +59,10 @@ public class RobotContainer {
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
   JoystickButton limelightOnButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_ON_BUTTON);
   JoystickButton limelightOffButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_OFF_BUTTON);
+  JoystickButton feederInButton = new JoystickButton(rightJoystick, Constants.FEEDER_IN_BUTTON);
+  JoystickButton feederOutButton = new JoystickButton(rightJoystick, Constants.FEEDER_OUT_BUTTON);
+  JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.TUNNEL_IN_BUTTON);
+  JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.TUNNEL_OUT_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -71,6 +80,10 @@ public class RobotContainer {
     shootingButton.whenHeld(new Shoot(shooterSystem));
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, 1));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, 0));
+    feederInButton.whenHeld(new FeederIn(feederSub));
+    feederOutButton.whenHeld(new FeederOut(feederSub));
+    tunnelInButton.whenHeld(new TunnelIn(tunnelSub));
+    tunnelOutButton.whenHeld(new TunnelOut(tunnelSub));
 
   }
 

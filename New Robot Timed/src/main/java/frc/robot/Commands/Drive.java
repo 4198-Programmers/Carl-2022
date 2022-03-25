@@ -4,16 +4,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.DriveTrain;
 
 public class Drive extends CommandBase{
-    public interface ForwardDriveSpeedRetriever {
-        double getDriveSpeed();
-    }
-    public interface TurningDriveSpeedRetriever {
+    public interface DriveSpeedRetriever {
         double getDriveSpeed();
     }
     DriveTrain driveTrain;
-    ForwardDriveSpeedRetriever forwardDriveSpeedRetriever;
-    TurningDriveSpeedRetriever turningDriveSpeedRetriever;
-    public Drive(DriveTrain driveTrain, ForwardDriveSpeedRetriever forwardDriveSpeedRetriever, TurningDriveSpeedRetriever turningDriveSpeedRetriever){
+    DriveSpeedRetriever forwardDriveSpeedRetriever;
+    DriveSpeedRetriever turningDriveSpeedRetriever;
+    public Drive(DriveTrain driveTrain, DriveSpeedRetriever forwardDriveSpeedRetriever, DriveSpeedRetriever turningDriveSpeedRetriever){
         this.forwardDriveSpeedRetriever = forwardDriveSpeedRetriever;
         this.turningDriveSpeedRetriever = turningDriveSpeedRetriever;
         this.driveTrain = driveTrain;

@@ -28,7 +28,7 @@ public class SetFlySpeed extends CommandBase {
     }
 
     protected double catchWantedFlySpeed() {
-        //return joystick.getRawAxis(3);
+        // return joystick.getRawAxis(3);
         return Maths.flyWheelSpeedByDistance(vision.distanceToTarget(), vision.hasTarget());
     }
 
@@ -49,16 +49,14 @@ public class SetFlySpeed extends CommandBase {
                 autoFinished = true;
                 System.out.println("auto finished");
             }
-        } 
-        else if(!vision.hasTarget()){
+        } else if (!vision.hasTarget()) {
             flyAndSensors.setFlySpeed(-0.36);
-        }
-        else {
-            //if (joystick.getRawButton(10)) {
-                //flyAndSensors.setFlySpeed(-1 * catchWantedFlySpeed());
-            //} else {
-                flyAndSensors.setFlySpeed(catchWantedFlySpeed());
-            //}
+        } else {
+            // if (joystick.getRawButton(10)) {
+            // flyAndSensors.setFlySpeed(-1 * catchWantedFlySpeed());
+            // } else {
+            flyAndSensors.setFlySpeed(catchWantedFlySpeed());
+            // }
             autoFinished = true;
             System.out.println("no auto");
         }

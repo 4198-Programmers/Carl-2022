@@ -9,27 +9,27 @@ import frc.robot.subsystems.Limelight;
 
 public class SetFlySpeed extends CommandBase {
     private FlyAndSensors flyAndSensors;
-    private Joystick throttle;
     Limelight vision;
     double speed;
     boolean auto;
     double spinUpTime;
     boolean autoFinished;
     double autoTime;
+    Joystick joystick;
 
-    public SetFlySpeed(FlyAndSensors flyAndSensorsArg, Joystick joystickArg, Limelight visionArg, boolean autoStatus,
-            double waitTime) {
+    public SetFlySpeed(FlyAndSensors flyAndSensorsArg, Limelight visionArg, boolean autoStatus, double waitTime,
+            Joystick joystickArg) {
         flyAndSensors = flyAndSensorsArg;
-        throttle = joystickArg;
         vision = visionArg;
         auto = autoStatus;
         spinUpTime = waitTime;
-        addRequirements(flyAndSensors);
+        joystick = joystickArg;
+        addRequirements(flyAndSensors, vision);
     }
 
     protected double catchWantedFlySpeed() {
-        // return -((throttle.getRawAxis(3) + 1) / 2);
-        return Maths.flyWheelSpeedByDistance(vision.distanceToTarget());
+        //return joystick.getRawAxis(3);
+        return Maths.flyWheelSpeedByDistance(vision.distanceToTarget(), vision.hasTarget());
     }
 
     @Override
@@ -49,8 +49,16 @@ public class SetFlySpeed extends CommandBase {
                 autoFinished = true;
                 System.out.println("auto finished");
             }
-        } else {
-            flyAndSensors.setFlySpeed(catchWantedFlySpeed());
+        } 
+        else if(!vision.hasTarget()){
+            flyAndSensors.setFlySpeed(-0.36);
+        }
+        else {
+            //if (joystick.getRawButton(10)) {
+                //flyAndSensors.setFlySpeed(-1 * catchWantedFlySpeed());
+            //} else {
+                flyAndSensors.setFlySpeed(catchWantedFlySpeed());
+            //}
             autoFinished = true;
             System.out.println("no auto");
         }

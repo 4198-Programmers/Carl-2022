@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class SpinAuto extends CommandBase {
+public class SpinRightAuto extends CommandBase {
     DriveTrain driver;
     double calculatedDistance;
     double degreesOfRotation;
     boolean youDone;
 
-    public SpinAuto(DriveTrain driveArg, double degrees) {
+    public SpinRightAuto(DriveTrain driveArg, double degrees) {
         driver = driveArg;
         degreesOfRotation = degrees;
         addRequirements(driveArg);

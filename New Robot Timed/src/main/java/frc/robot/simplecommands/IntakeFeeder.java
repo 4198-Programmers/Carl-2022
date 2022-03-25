@@ -24,7 +24,7 @@ public class IntakeFeeder extends CommandBase{
         if(sensor.ballIn() && !sensor.ballOut()){
             tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
         }
-        else if(sensor.ballOut()){
+        else {
             tunnel.setMoverSpeed(Constants.FREEZE);
         }
     }

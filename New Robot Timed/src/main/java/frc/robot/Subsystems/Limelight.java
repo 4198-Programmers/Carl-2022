@@ -8,7 +8,7 @@ import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase{
     public enum PipelineMode{
-
+        
     }
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     public NetworkTableEntry tx = table.getEntry("tx"); 

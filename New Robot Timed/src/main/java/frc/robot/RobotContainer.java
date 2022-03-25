@@ -9,6 +9,8 @@ import frc.robot.Subsystems.ShooterSystem;
 import frc.robot.Subsystems.TunnelSub;
 import frc.robot.Commands.AngledHooksMove;
 import frc.robot.Commands.ChooseLimelightMode;
+import frc.robot.Commands.DanceAngledHooks;
+import frc.robot.Commands.DanceVerticalHooks;
 import frc.robot.Commands.DoNotDrive;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.FeederIn;
@@ -53,7 +55,13 @@ public class RobotContainer {
     .andThen(new Spin180(driveTrain))
     .andThen(new Targeting(limelight, driveTrain))
     .andThen(new Shoot(shooterSystem));
-    Command shootWithTargeting = (new Targeting(limelight, driveTrain)).andThen(new Shoot(shooterSystem));
+    Command shootWithTargeting = (new Targeting(limelight, driveTrain))
+      .andThen(new Shoot(shooterSystem));
+    Command dance = (new OffTarmac(driveTrain))
+      .andThen(new Spin180(driveTrain))
+      .alongWith(new DanceVerticalHooks(verticalHooks, 10))
+      .alongWith(new DanceAngledHooks(angledHooks, 10))
+      .andThen(new Targeting(limelight, driveTrain));
   // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
@@ -63,6 +71,7 @@ public class RobotContainer {
   JoystickButton feederOutButton = new JoystickButton(rightJoystick, Constants.FEEDER_OUT_BUTTON);
   JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.TUNNEL_IN_BUTTON);
   JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.TUNNEL_OUT_BUTTON);
+  JoystickButton danceButton = new JoystickButton(middleJoystick, Constants.DANCE_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -84,7 +93,7 @@ public class RobotContainer {
     feederOutButton.whenHeld(new FeederOut(feederSub));
     tunnelInButton.whenHeld(new TunnelIn(tunnelSub));
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub));
-
+    danceButton.whenPressed(dance);
   }
 
   private void begin() {

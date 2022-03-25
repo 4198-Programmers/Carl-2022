@@ -18,6 +18,9 @@ public class AngledHooks extends SubsystemBase{
         angledHooks.set(speed);
         
     }
+    public double angeldHooksPosition(){
+        return(angledHookEncoder.getPosition());
+    }
     public void angledHookLimit(double speed, Joystick rightJoystick){
         if(angledHookEncoder.getPosition() <= Constants.ANGLED_HOOK_LIMIT && rightJoystick.getRawAxis(1) >= 0){
             angledHooks.set(speed);

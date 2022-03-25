@@ -21,6 +21,11 @@ public class VerticalHooks extends SubsystemBase{
         verticalLeftHook.set(speed);
         verticalRightHook.set(speed);
     }
+    public double verticalHooksPostion(){
+        double a = verticalRightHookEncoder.getPosition();
+        double b = verticalLeftHookEncoder.getPosition();
+        return( (a+b) / 2);
+    }
     public void verticalHookLimit(double speed, Joystick verticalStick){
         if(verticalRightHookEncoder.getPosition() <= Constants.VERTICAL_HOOK_TOP_LIMIT  
             && verticalLeftHookEncoder.getPosition() <= Constants.VERTICAL_HOOK_TOP_LIMIT

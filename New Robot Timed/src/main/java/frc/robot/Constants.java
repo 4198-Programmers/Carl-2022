@@ -62,5 +62,6 @@ public class Constants {
     public static final int FEEDER_OUT_BUTTON = 0;
     public static final int TUNNEL_IN_BUTTON = 0;
     public static final int TUNNEL_OUT_BUTTON = 0;
+    public static final int DANCE_BUTTON = 0;
 
 }

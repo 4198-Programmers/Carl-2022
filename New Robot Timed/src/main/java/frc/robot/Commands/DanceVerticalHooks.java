@@ -17,15 +17,15 @@ public class DanceVerticalHooks extends CommandBase{
     }
     @Override
     public void execute() {
-        if(verticalHooks.getPostion() <= distance){
-            verticalHooks.move(0.15);
+        if(verticalHooks.getPosition() <= distance){
+            verticalHooks.moveHooks(0.15);
         }
-        else if(verticalHooks.getPostion() >= distance){
+        else if(verticalHooks.getPosition() >= distance){
               verticalHooks.stop();  
         }
     }
     @Override
     public boolean isFinished() {
-        return(verticalHooks.getPostion() >= distance);
+        return(verticalHooks.getPosition() >= distance);
     }
 }

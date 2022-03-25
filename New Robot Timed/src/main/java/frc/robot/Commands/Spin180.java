@@ -6,7 +6,7 @@ import frc.robot.Subsystems.DriveTrain;
 
 public class Spin180 extends CommandBase{
     DriveTrain driveTrain;
-    double distance;
+    double degrees;
     boolean youdone;
     public Spin180(DriveTrain driveTrain){
         this.driveTrain = driveTrain;
@@ -15,14 +15,14 @@ public class Spin180 extends CommandBase{
     @Override
     public void initialize() {
         driveTrain.resetPosition();
-        distance = 40;
+        degrees = 180;
         youdone = false;
     }
     @Override
     public void execute() {
-        if(distance < Maths.spinDistanceByDegree(distance))
+        if(degrees < Maths.spinDistanceByDegree(degrees))
         driveTrain.greenLight(-1, 0);
-        else if(distance >= Maths.spinDistanceByDegree(distance)){
+        else if(degrees >= Maths.spinDistanceByDegree(degrees)){
             driveTrain.greenLight(0, 0);
             youdone = true;
         }

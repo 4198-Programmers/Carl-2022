@@ -4,7 +4,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -14,21 +13,32 @@ public class AngledHooks extends SubsystemBase{
     public void resetPostition(){
         angledHookEncoder.setPosition(0);
     }
-    public void moveHooks(double speed){
-        angledHooks.set(speed);
-    }
+
     public void stopHooks(){
         angledHooks.set(0);
     }
     public double getPosition(){
         return(angledHookEncoder.getPosition());
     }
-    public void heightLimit(double speed, Joystick rightJoystick){
-        if(angledHookEncoder.getPosition() <= Constants.ANGLED_HOOK_LIMIT && rightJoystick.getRawAxis(1) >= 0){
-            angledHooks.set(speed);
+    private boolean canAngledHooksMoveUp(){
+        return(getPosition() <= Constants.ANGLED_HOOK_UPPER_LIMIT);
+    }
+    private boolean canAngledHooksMoveDown(){
+        return(getPosition() >= Constants.ANGLED_HOOK_LOWER_LIMIT);
+    }
+    public void moveHooks(double speed){
+        double effectiveSpeed = speed;
+        if(speed > 0){
+            if(!canAngledHooksMoveUp()){
+                effectiveSpeed = 0;
+            }
         }
-        else if(angledHookEncoder.getPosition() >= Constants.ANGLED_HOOK_LIMIT && rightJoystick.getRawAxis(1) < 0){
-            angledHooks.set(0);
+        else if(speed < 0){
+            if(!canAngledHooksMoveDown()){
+                effectiveSpeed = 0;
+            }
         }
+        angledHooks.set(effectiveSpeed);
+
     }
 }

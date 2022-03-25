@@ -3,9 +3,9 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.ShooterSystem;
 
-public class ShootStop extends CommandBase{
+public class StopFlyWheelSpeed extends CommandBase{
     ShooterSystem shooterSystem;
-    public ShootStop(ShooterSystem shooterSystem){
+    public StopFlyWheelSpeed(ShooterSystem shooterSystem){
         this.shooterSystem = shooterSystem;
         addRequirements(shooterSystem);
     }

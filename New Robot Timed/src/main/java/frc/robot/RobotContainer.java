@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.ShooterSystem;
 import frc.robot.Subsystems.TunnelSub;
-import frc.robot.Commands.AngledHookJoystick;
+import frc.robot.Commands.MoveAngledHooks;
 import frc.robot.Commands.ChooseLimelightMode;
 import frc.robot.Commands.DanceAngledHooks;
 import frc.robot.Commands.DanceVerticalHooks;
@@ -17,13 +17,13 @@ import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
 import frc.robot.Commands.SetFlyWheelSpeed;
-import frc.robot.Commands.ShootStop;
+import frc.robot.Commands.StopFlyWheelSpeed;
 import frc.robot.Commands.Spin180;
 import frc.robot.Commands.Targeting;
 import frc.robot.Commands.TunnelIn;
 import frc.robot.Commands.TunnelOut;
 import frc.robot.Commands.TunnelStop;
-import frc.robot.Commands.VerticalHookJoystick;
+import frc.robot.Commands.MoveVerticalHooks;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
 import frc.robot.Subsystems.FeederSub;
@@ -44,7 +44,7 @@ public class RobotContainer {
   FeederSub feederSub;
   TunnelSub tunnelSub;
   // commands
-  Drive drive =  new Drive(driveTrain, leftJoystick , leftJoystick);
+  Drive drive =  new Drive(driveTrain, () -> leftJoystick.getRawAxis(0), ()-> middleJoystick.getRawAxis(1));
   Targeting targeting = new Targeting(limelight, driveTrain);
   DoNotDrive doNotDrive = new DoNotDrive(driveTrain);
   OffTarmac offTarmac = new OffTarmac(driveTrain);
@@ -65,7 +65,7 @@ public class RobotContainer {
     Command autoShoot = (new Targeting(limelight, driveTrain))
       .andThen(new SetFlyWheelSpeed(shooterSystem))
       .alongWith(new TunnelIn(tunnelSub))
-      .andThen(new ShootStop(shooterSystem))
+      .andThen(new StopFlyWheelSpeed(shooterSystem))
       .alongWith(new TunnelStop(tunnelSub));
     // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
@@ -86,9 +86,8 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     begin();
-    driveTrain.setDefaultCommand(new Drive(driveTrain, leftJoystick, leftJoystick));
-    verticalHooks.setDefaultCommand(new VerticalHookJoystick(verticalHooks, rightJoystick));
-    angledHooks.setDefaultCommand(new AngledHookJoystick(angledHooks, middleJoystick));
+    driveTrain.setDefaultCommand(new Drive(driveTrain, () -> leftJoystick.getRawAxis(0), () -> middleJoystick.getRawAxis(1)));
+
   }
 
   private void configureButtonBindings() {
@@ -101,8 +100,8 @@ public class RobotContainer {
     tunnelInButton.whenHeld(new TunnelIn(tunnelSub), false);
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
     danceButton.whenPressed(dance);
-    angledOverRideButton.whenHeld(new AngledHookJoystick(angledHooks, middleJoystick), false);
-    verticalOverRideButton.whenHeld(new VerticalHookJoystick(verticalHooks, rightJoystick), false);
+    angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(1)), false);
+    verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks, () -> middleJoystick.getRawAxis(0)), false);
     
   }
 

@@ -8,7 +8,7 @@ import frc.robot.Constants;
 
 public class ShooterSystem extends SubsystemBase{
     private CANSparkMax flyWheel = new CANSparkMax(Constants.FLYWHEEL_MOTOR_PORT, MotorType.kBrushless);
-    public void shoot(double speed){
+    public void setFlyWheelSpeed(double speed){
         flyWheel.set(speed);
     }
     public void stop(){

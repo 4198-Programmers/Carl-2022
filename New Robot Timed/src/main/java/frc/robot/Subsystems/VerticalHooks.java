@@ -4,7 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -13,35 +13,38 @@ public class VerticalHooks extends SubsystemBase{
     private CANSparkMax verticalLeftHook = new CANSparkMax(Constants.VERTICAL_LEFT_HOOK_MOTOR_PORT, MotorType.kBrushless);
     private RelativeEncoder verticalRightHookEncoder = verticalRightHook.getEncoder();
     private RelativeEncoder verticalLeftHookEncoder = verticalLeftHook.getEncoder();
+    private MotorControllerGroup verticalHooks = new MotorControllerGroup(verticalRightHook, verticalLeftHook);
     public void resetPosition(){
         verticalRightHookEncoder.setPosition(0);
         verticalLeftHookEncoder.setPosition(0);
     }
-    public void move(double speed){
-        verticalLeftHook.set(speed);
-        verticalRightHook.set(speed);
-    }
     public void stop(){
-        verticalLeftHook.set(0);
-        verticalRightHook.set(0);
+        verticalHooks.set(0);
     }
-    public double getPostion(){
+    public double getPosition(){
         double a = verticalRightHookEncoder.getPosition();
         double b = verticalLeftHookEncoder.getPosition();
         return( (a+b) / 2);
     }
-    public void heightLimit(double speed, Joystick verticalStick){
-        if(verticalRightHookEncoder.getPosition() <= Constants.VERTICAL_HOOK_TOP_LIMIT  
-            && verticalLeftHookEncoder.getPosition() <= Constants.VERTICAL_HOOK_TOP_LIMIT
-            && verticalStick.getRawAxis(0) > 0){
-            verticalLeftHook.set(speed);
-            verticalRightHook.set(speed);
+    private boolean canHooksMoveUp(){
+        return(getPosition() <= Constants.VERTICAL_HOOK_TOP_LIMIT);
+    }
+    private boolean canHooksMoveDown(){
+        return(getPosition() >= Constants.VERTICAL_HOOK_LOWER_LIMIT);
+    }
+    public void moveHooks(double speed){
+        double effectiveSpeed = speed;
+        if(speed > 0) {
+            // have it go up until it starts rewind itself
+            if(!canHooksMoveUp()){
+                effectiveSpeed = 0;
+            }
         }
-        else if(verticalRightHookEncoder.getPosition() >= Constants.VERTICAL_HOOK_TOP_LIMIT 
-        && verticalLeftHookEncoder.getPosition() >= Constants.VERTICAL_HOOK_TOP_LIMIT
-        && verticalStick.getRawAxis(0) < 0){
-            verticalLeftHook.set(0);
-            verticalRightHook.set(0);
+        else if(speed < 0){
+            if(!canHooksMoveDown())
+                effectiveSpeed = 0;
         }
+
+        verticalHooks.set(effectiveSpeed);
     }
 }

@@ -30,7 +30,7 @@ public class Constants {
     /** Used to find the distance as well as the speed */
         public static byte SPEED_MULTIPLIER = -0;
     /**Used to stop the angled hooks from going to opposite direction. */
-        public static final double ANGLED_HOOK_LIMIT = 0;
+        public static final double ANGLED_HOOK_UPPER_LIMIT = 0;
     /**How far we want the bot to move in Auto */
         public static final double WANTED_AUTO_DISTANCE = 0;
     /**Need the middle wheel Circumference to calculate Spin180 */
@@ -69,4 +69,6 @@ public class Constants {
     public static final int TUNNEL_IN_BUTTON = 0;
     public static final int TUNNEL_OUT_BUTTON = 0;
     public static final int VERTICAL_OVERRIDE_BUTTON = 2;
+    public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
+    public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
 }

@@ -11,11 +11,11 @@ public class StableIntestines extends CommandBase {
     private Tunnel tunnel;
     private Intake intake;
 
-    public StableIntestines(FlyAndSensors flyAndSensorsArg, Tunnel tunnelArg, Intake intakeArg) {
-        flyAndSensors = flyAndSensorsArg;
-        tunnel = tunnelArg;
-        intake = intakeArg;
-        addRequirements(flyAndSensorsArg, tunnel, intake);
+    public StableIntestines(FlyAndSensors flyAndSensorsSub, Tunnel tunnelSub, Intake intakeSub) {
+        flyAndSensors = flyAndSensorsSub;
+        tunnel = tunnelSub;
+        intake = intakeSub;
+        addRequirements(flyAndSensors, tunnel, intake);
     }
 
     @Override

@@ -13,9 +13,9 @@ public class AngleStop extends CommandBase {
         done = false;
     }
 
-    public AngleStop(AngleHooks intakeSub) {
-        intake = intakeSub;
-        addRequirements(intakeSub);
+    public AngleStop(AngleHooks angleHooksSub) {
+        intake = angleHooksSub;
+        addRequirements(angleHooksSub);
     }
 
     @Override

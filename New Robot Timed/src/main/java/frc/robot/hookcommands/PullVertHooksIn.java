@@ -9,8 +9,8 @@ public class PullVertHooksIn extends CommandBase {
     Joystick throttle;
     // private double distanceDown;
 
-    public PullVertHooksIn(VertHooks vertHooksArg, Joystick joystickArg) {
-        grab = vertHooksArg;
+    public PullVertHooksIn(VertHooks vertHooksSub, Joystick joystickArg) {
+        grab = vertHooksSub;
         throttle = joystickArg;
         addRequirements(grab);
 
@@ -18,8 +18,8 @@ public class PullVertHooksIn extends CommandBase {
 
     @Override
     public void execute() {
-        grab.moveVertHooks((1-((throttle.getRawAxis(3) +1)/2)));
-        System.out.println("vert hooks " + grab.vertHooksPos() );
+        grab.moveVertHooks((1 - ((throttle.getRawAxis(3) + 1) / 2)));
+        System.out.println("vert hooks " + grab.vertHooksPos());
     }
 
     // @Override

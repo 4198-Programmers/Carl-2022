@@ -17,10 +17,11 @@ public class SetFlySpeed extends CommandBase {
     double autoTime;
     Joystick joystick;
 
-    public SetFlySpeed(FlyAndSensors flyAndSensorsArg, Limelight visionArg, boolean autoStatus, double waitTime,
+    /** waitTime in Milliseconds */
+    public SetFlySpeed(FlyAndSensors flyAndSensorsSub, Limelight visionSub, boolean autoStatus, double waitTime,
             Joystick joystickArg) {
-        flyAndSensors = flyAndSensorsArg;
-        vision = visionArg;
+        flyAndSensors = flyAndSensorsSub;
+        vision = visionSub;
         auto = autoStatus;
         spinUpTime = waitTime;
         joystick = joystickArg;

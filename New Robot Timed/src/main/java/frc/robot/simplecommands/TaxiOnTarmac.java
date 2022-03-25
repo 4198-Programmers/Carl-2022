@@ -4,14 +4,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class TaxiOnTarmac extends CommandBase{
+public class TaxiOnTarmac extends CommandBase {
     private DriveTrain vroomVroomOT;
     boolean youDone;
     double distanceOff;
 
     /** Pulls in the current DriveTrain instance to use in the specific class */
-    public TaxiOnTarmac(DriveTrain driveTrainArg, double travelDistance) {
-        vroomVroomOT = driveTrainArg;
+    public TaxiOnTarmac(DriveTrain vroomVroomSub, double travelDistance) {
+        vroomVroomOT = vroomVroomSub;
         distanceOff = travelDistance;
         addRequirements(vroomVroomOT);
     }
@@ -41,5 +41,5 @@ public class TaxiOnTarmac extends CommandBase{
     public boolean isFinished() {
         return youDone;
     }
-    
+
 }

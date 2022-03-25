@@ -8,10 +8,10 @@ public class StableHooks extends CommandBase {
     VertHooks grabbersSH;
     AngleHooks angleHooks;
 
-    public StableHooks(VertHooks hookArg, AngleHooks angleHookArg) {
-        grabbersSH = hookArg;
-        angleHooks = angleHookArg;
-        addRequirements(grabbersSH, angleHookArg);
+    public StableHooks(VertHooks vertHooksSub, AngleHooks angleHooksSub) {
+        grabbersSH = vertHooksSub;
+        angleHooks = angleHooksSub;
+        addRequirements(grabbersSH, angleHooksSub);
     }
 
     @Override

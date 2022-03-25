@@ -13,9 +13,9 @@ public class Targeting extends CommandBase {
     private Joystick joystick;
     double autoTime;
 
-    public Targeting(DriveTrain driveTrainArg, Limelight limelightArg, Joystick joystickArg) {
-        vroomVroomT = driveTrainArg;
-        visionT = limelightArg;
+    public Targeting(DriveTrain vroomVroomSub, Limelight visionSub, Joystick joystickArg) {
+        vroomVroomT = vroomVroomSub;
+        visionT = visionSub;
         joystick = joystickArg;
         addRequirements(vroomVroomT, visionT);
     }

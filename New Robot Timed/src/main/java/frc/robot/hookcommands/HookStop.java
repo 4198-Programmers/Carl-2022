@@ -8,9 +8,9 @@ public class HookStop extends CommandBase {
     private VertHooks vertHooks;
     boolean done;
 
-    public HookStop(VertHooks vertHooksArg) {
-        vertHooks = vertHooksArg;
-        addRequirements(vertHooks);
+    public HookStop(VertHooks vertHooksSub) {
+        vertHooks = vertHooksSub;
+        addRequirements(vertHooksSub);
     }
 
     @Override

@@ -8,8 +8,8 @@ public class StopFly extends CommandBase {
     boolean done;
     private FlyAndSensors fly;
 
-    public StopFly(FlyAndSensors flyAndSensorsArg) {
-        fly = flyAndSensorsArg;
+    public StopFly(FlyAndSensors flyAndSensorsSub) {
+        fly = flyAndSensorsSub;
         addRequirements(fly);
     }
 

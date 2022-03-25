@@ -9,9 +9,9 @@ public class SpitBalls extends CommandBase {
     private Intake intake;
     private Tunnel tunnel;
 
-    public SpitBalls(Intake intakeArg, Tunnel tunnelArg) {
-        intake = intakeArg;
-        tunnel = tunnelArg;
+    public SpitBalls(Intake intakeSub, Tunnel tunnelSub) {
+        intake = intakeSub;
+        tunnel = tunnelSub;
         addRequirements(intake, tunnel);
     }
 

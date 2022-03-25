@@ -7,8 +7,8 @@ public class PickLimelightMode extends CommandBase {
     private Limelight visionSLM;
     double mode;
 
-    public PickLimelightMode(Limelight limelightArg, double modeArg) {
-        visionSLM = limelightArg;
+    public PickLimelightMode(Limelight visionSub, double modeArg) {
+        visionSLM = visionSub;
         mode = modeArg;
         addRequirements(visionSLM);
     }

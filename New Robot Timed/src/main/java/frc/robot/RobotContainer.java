@@ -1,5 +1,9 @@
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,6 +34,7 @@ import frc.robot.simplecommands.SetIntakeSpeedIn;
 import frc.robot.simplecommands.SetIntakeSpeedOut;
 import frc.robot.simplecommands.SetInternalMoveSpeedIn;
 import frc.robot.simplecommands.SetInternalMoveSpeedOut;
+import frc.robot.simplecommands.SpinLeftAuto;
 import frc.robot.simplecommands.SpinRightAuto;
 import frc.robot.simplecommands.SpitBalls;
 import frc.robot.simplecommands.StableHooks;
@@ -62,7 +67,10 @@ public class RobotContainer {
   Limelight visionSub = new Limelight();
   Tunnel tunnelSub = new Tunnel();
   Intake intakeSub = new Intake();
-  // UsbCamera ballFinder = CameraServer.startAutomaticCapture();
+
+  UsbCamera ballFinder = CameraServer.startAutomaticCapture();
+  CvSink cvSink = CameraServer.getVideo();
+  CvSource stream = CameraServer.putVideo("Intake View", 1280, 720);
 
   // ungrouped commands
   // RealizeBall realizeBall = new RealizeBall(ballFinder);
@@ -145,6 +153,44 @@ public class RobotContainer {
       .andThen(new WaitCommand(1))
       .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
       .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
+
+  Command taxiFourBall = (new ResetWheels(vroomVroomSub))
+      .andThen((new SetIntakeSpeedIn(intakeSub))
+          .alongWith(new TaxiOnTarmac(vroomVroomSub, 2)))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen((new TaxiOffTarmac(vroomVroomSub, 60))
+          .alongWith(new TimedInternalMoveIn(tunnelSub, 250)))
+      .andThen(new InSensorCheck(flyAndSensorsSub, true)
+          .raceWith(new WaitCommand(2)))
+      .andThen((new IntakeStop(intakeSub))
+          .alongWith(new ResetWheels(vroomVroomSub)))
+      .andThen((new SpinRightAuto(vroomVroomSub, 180))
+          .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
+      .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
+      .andThen(new SetIntakeSpeedIn(intakeSub))
+      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+      .andThen(new IntakeStop(intakeSub))
+      .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 600, midStick))
+      .andThen(new SetIntakeSpeedIn(intakeSub))
+      .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
+      .andThen(new WaitCommand(1))
+      .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
+      .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new SpinLeftAuto(vroomVroomSub, 155))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 163))
+      .andThen(new IntakeFeeder(intakeSub, tunnelSub, flyAndSensorsSub))
+      .andThen(new WaitCommand(2))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new TaxiOnTarmac(vroomVroomSub, 5))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new SpinRightAuto(vroomVroomSub, 180))
+      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 500, midStick));
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_LBUTTON);

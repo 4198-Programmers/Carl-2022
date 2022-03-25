@@ -10,20 +10,17 @@ public class ReachVertHooksUp extends CommandBase {
     Joystick throttle;
     double distanceUp;
 
-    public ReachVertHooksUp(VertHooks vertHooksArg, Joystick joystickArg) {
-        grabbers = vertHooksArg;
+    public ReachVertHooksUp(VertHooks vertHooksSub, Joystick joystickArg) {
+        grabbers = vertHooksSub;
         throttle = joystickArg;
         addRequirements(grabbers);
     }
 
-
-
     @Override
     public void execute() {
-        if(grabbers.vertHooksPos() >= -187){
-        grabbers.moveVertHooks(-(1-((throttle.getRawAxis(3) +1)/2)));
-        }
-        else{
+        if (grabbers.vertHooksPos() >= -187) {
+            grabbers.moveVertHooks(-(1 - ((throttle.getRawAxis(3) + 1) / 2)));
+        } else {
             grabbers.moveVertHooks(Constants.FREEZE);
         }
         System.out.println("hooks vert " + grabbers.vertHooksPos());

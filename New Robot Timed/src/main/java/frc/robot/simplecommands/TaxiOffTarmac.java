@@ -11,8 +11,8 @@ public class TaxiOffTarmac extends CommandBase {
     double distanceOff;
 
     /** Pulls in the current DriveTrain instance to use in the specific class */
-    public TaxiOffTarmac(DriveTrain driveTrainArg, double travelDistance) {
-        vroomVroomOT = driveTrainArg;
+    public TaxiOffTarmac(DriveTrain vroomVroomSub, double travelDistance) {
+        vroomVroomOT = vroomVroomSub;
         distanceOff = travelDistance;
         addRequirements(vroomVroomOT);
     }

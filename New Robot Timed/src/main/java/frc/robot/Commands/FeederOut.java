@@ -12,7 +12,7 @@ public class FeederOut extends CommandBase{
     }
     @Override
     public void execute() {
-        feederSub.takeIn(-(Constants.FEEDER_INTAKE_SPEED));
+        feederSub.intake(-(Constants.FEEDER_INTAKE_SPEED));
     }
     
 }

@@ -4,11 +4,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.AngledHooks;
 
-public class AngledHooksMove extends CommandBase{
+public class AngledHookJoystick extends CommandBase{
     AngledHooks angledHooks;
     Joystick angledJoystick;
-    public AngledHooksMove(AngledHooks angledHooks, Joystick rightJoystick){
+    public AngledHookJoystick(AngledHooks angledHooks, Joystick middleJoystick){
         this.angledHooks = angledHooks;
+        middleJoystick = angledJoystick;
         addRequirements(angledHooks);
     }
     @Override
@@ -17,6 +18,7 @@ public class AngledHooksMove extends CommandBase{
     }
     @Override
     public void execute() {
-        angledHooks.HeightLimit(angledJoystick.getRawAxis(1), angledJoystick);
+        angledHooks.MoveHooks(angledJoystick.getRawAxis(0));
+
     }
 }

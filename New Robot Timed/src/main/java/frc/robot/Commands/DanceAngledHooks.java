@@ -13,21 +13,21 @@ public class DanceAngledHooks extends CommandBase{
     }
     @Override
     public void initialize() {
-        angledHooks.angledHookResetPosition();
+        angledHooks.resetPostition();
     }
     @Override
     public void execute() {
-        if(angledHooks.angeldHooksPosition() <= distance){
-            angledHooks.angledHooksMove(0.15);
+        if(angledHooks.getPosition() <= distance){
+            angledHooks.MoveHooks(0.15);
         }
     
-        else if(angledHooks.angeldHooksPosition() >= distance){
-            angledHooks.angledHooksMove(0);
+        else if(angledHooks.getPosition() >= distance){
+            angledHooks.MoveHooks(0);
         }
     }
     @Override
     public boolean isFinished() {
-        return(angledHooks.angeldHooksPosition() >= distance);
+        return(angledHooks.getPosition() >= distance);
     }
 
 }

@@ -8,7 +8,7 @@ import frc.robot.Constants;
 
 public class TunnelSub extends SubsystemBase{
     CANSparkMax tunnelMotor = new CANSparkMax(Constants.TUNNEL_MOTOR_ID, MotorType.kBrushless);
-    public void tunnelSpeed(double speed){
+    public void setSpeed(double speed){
         tunnelMotor.set(speed);
     }
 }

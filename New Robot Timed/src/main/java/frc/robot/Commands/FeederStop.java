@@ -16,7 +16,7 @@ public class FeederStop extends CommandBase{
     }
     @Override
     public void execute() {
-        feederSub.takeIn(0);
+        feederSub.intake(0);
         youdone = true;
     }
     @Override

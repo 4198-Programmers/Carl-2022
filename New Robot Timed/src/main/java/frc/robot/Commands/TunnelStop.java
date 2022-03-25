@@ -16,7 +16,7 @@ public class TunnelStop extends CommandBase{
     }
     @Override
     public void execute() {
-        tunnelSub.tunnelSpeed(0);
+        tunnelSub.setSpeed(0);
         youdone = true;
     }
     @Override

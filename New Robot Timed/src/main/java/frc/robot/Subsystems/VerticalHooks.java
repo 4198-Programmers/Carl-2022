@@ -13,20 +13,20 @@ public class VerticalHooks extends SubsystemBase{
     private CANSparkMax verticalLeftHook = new CANSparkMax(Constants.VERTICAL_LEFT_HOOK_MOTOR_PORT, MotorType.kBrushless);
     RelativeEncoder verticalRightHookEncoder = verticalRightHook.getEncoder();
     RelativeEncoder verticalLeftHookEncoder = verticalLeftHook.getEncoder();
-    public void verticalHookResetPositon(){
+    public void resetPosition(){
         verticalRightHookEncoder.setPosition(0);
         verticalLeftHookEncoder.setPosition(0);
     }
-    public void verticalHooksMove(double speed){
+    public void move(double speed){
         verticalLeftHook.set(speed);
         verticalRightHook.set(speed);
     }
-    public double verticalHooksPostion(){
+    public double getPostion(){
         double a = verticalRightHookEncoder.getPosition();
         double b = verticalLeftHookEncoder.getPosition();
         return( (a+b) / 2);
     }
-    public void verticalHookLimit(double speed, Joystick verticalStick){
+    public void heightLimit(double speed, Joystick verticalStick){
         if(verticalRightHookEncoder.getPosition() <= Constants.VERTICAL_HOOK_TOP_LIMIT  
             && verticalLeftHookEncoder.getPosition() <= Constants.VERTICAL_HOOK_TOP_LIMIT
             && verticalStick.getRawAxis(0) > 0){

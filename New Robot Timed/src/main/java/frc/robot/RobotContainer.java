@@ -104,8 +104,8 @@ public class RobotContainer {
   }
 
   private void begin() {
-m_chooser.setDefaultOption("Auto-Do not Move", doNotDrive);  
-m_chooser.addOption("Taxi and Shoot Two Balls", taxiAndShoot);
+m_chooser.addOption("Auto-Do not Move", doNotDrive);  
+m_chooser.setDefaultOption("Taxi and Shoot Two Balls", taxiAndShoot);
 m_chooser.addOption("Taxi", offTarmac);
 }
 

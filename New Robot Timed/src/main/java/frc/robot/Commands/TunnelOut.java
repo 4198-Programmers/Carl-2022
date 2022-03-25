@@ -12,6 +12,6 @@ public class TunnelOut extends CommandBase{
     }
     @Override
     public void execute() {
-        tunnelSub.tunnelSpeed(-(Constants.TUNNEL_SPEED));
+        tunnelSub.setSpeed(-(Constants.TUNNEL_SPEED));
     }
 }

@@ -11,17 +11,17 @@ import frc.robot.Constants;
 public class AngledHooks extends SubsystemBase{
     private CANSparkMax angledHooks = new CANSparkMax(Constants.ANGLED_HOOK_MOTOR_PORT, MotorType.kBrushless);
     RelativeEncoder angledHookEncoder = angledHooks.getEncoder();
-    public void angledHookResetPosition(){
+    public void resetPostition(){
         angledHookEncoder.setPosition(0);
     }
-    public void angledHooksMove(double speed){
+    public void MoveHooks(double speed){
         angledHooks.set(speed);
         
     }
-    public double angeldHooksPosition(){
+    public double getPosition(){
         return(angledHookEncoder.getPosition());
     }
-    public void angledHookLimit(double speed, Joystick rightJoystick){
+    public void HeightLimit(double speed, Joystick rightJoystick){
         if(angledHookEncoder.getPosition() <= Constants.ANGLED_HOOK_LIMIT && rightJoystick.getRawAxis(1) >= 0){
             angledHooks.set(speed);
         }

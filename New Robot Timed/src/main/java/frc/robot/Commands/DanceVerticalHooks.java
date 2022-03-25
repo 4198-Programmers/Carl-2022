@@ -13,19 +13,19 @@ public class DanceVerticalHooks extends CommandBase{
     }
     @Override
     public void initialize() {
-        verticalHooks.verticalHookResetPositon();
+        verticalHooks.resetPosition();
     }
     @Override
     public void execute() {
-        if(verticalHooks.verticalHooksPostion() <= distance){
-            verticalHooks.verticalHooksMove(0.15);
+        if(verticalHooks.getPostion() <= distance){
+            verticalHooks.move(0.15);
         }
-        else if(verticalHooks.verticalHooksPostion() >= distance){
-            verticalHooks.verticalHooksMove(0);
+        else if(verticalHooks.getPostion() >= distance){
+            verticalHooks.move(0);
         }
     }
     @Override
     public boolean isFinished() {
-        return(verticalHooks.verticalHooksPostion() >= distance);
+        return(verticalHooks.getPostion() >= distance);
     }
 }

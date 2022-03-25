@@ -14,11 +14,11 @@ public class VerticalHooksMove extends CommandBase{
     }
     @Override
     public void initialize() {
-        verticalHooks.verticalHookResetPositon();
+        verticalHooks.resetPosition();
     }
     @Override
     public void execute() {
-        verticalHooks.verticalHookLimit(upStick.getRawAxis(0), upStick);
+        verticalHooks.heightLimit(upStick.getRawAxis(0), upStick);
     }
     
 }

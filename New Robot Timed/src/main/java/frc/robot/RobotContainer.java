@@ -17,10 +17,12 @@ import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
 import frc.robot.Commands.Shoot;
+import frc.robot.Commands.ShootStop;
 import frc.robot.Commands.Spin180;
 import frc.robot.Commands.Targeting;
 import frc.robot.Commands.TunnelIn;
 import frc.robot.Commands.TunnelOut;
+import frc.robot.Commands.TunnelStop;
 import frc.robot.Commands.VerticalHooksMove;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
@@ -62,7 +64,12 @@ public class RobotContainer {
       .alongWith(new DanceVerticalHooks(verticalHooks, 10))
       .alongWith(new DanceAngledHooks(angledHooks, 10))
       .andThen(new Targeting(limelight, driveTrain));
-  // buttons
+    Command autoShoot = (new Targeting(limelight, driveTrain))
+      .andThen(new Shoot(shooterSystem))
+      .alongWith(new TunnelIn(tunnelSub))
+      .andThen(new ShootStop(shooterSystem))
+      .alongWith(new TunnelStop(tunnelSub));
+    // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
   JoystickButton limelightOnButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_ON_BUTTON);

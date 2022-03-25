@@ -35,6 +35,10 @@ public class Constants {
         public static final double WANTED_AUTO_DISTANCE = 0;
     /**Need the middle wheel Circumference to calculate Spin180 */
         public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = 0;
+    //Constant Speeds
+        public static final double FEEDER_INTAKE_SPEED = 0;
+        public static final double TUNNEL_SPEED = 0;
+
 
 //Targeting Offsets
     public static final double X_OFFSET_TARGETING_TO_THE_RIGHT = 0;
@@ -49,20 +53,20 @@ public class Constants {
 //LeftJoystick
 
 //Middle Joystick
-    public static final int TARGETING_BUTTON = 0;
-    public static final int LIMELIGHT_ON_BUTTON = 0;
-    public static final int LIMELIGHT_OFF_BUTTON = 0;
-    public static final int ANGLED_OVERRIDE_BUTTON = 0;
-    public static final int DANCE_BUTTON = 0;
+    public static final int TARGETING_BUTTON = 1;
+    public static final int ANGLED_OVERRIDE_BUTTON = 2; 
+    public static final int DANCE_BUTTON = 9;   
+    public static final int LIMELIGHT_ON_BUTTON = 11;
+    public static final int LIMELIGHT_OFF_BUTTON = 12;
+    
+
 
 //Righ Joystick
-    public static final int SHOOTING_BUTTON = 0;
-    public static final double FEEDER_INTAKE_SPEED = 0;
+    public static final int SHOOTING_BUTTON = 1;
     public static final int TUNNEL_MOTOR_ID = 0;
-    public static final double TUNNEL_SPEED = 0;
     public static final int FEEDER_IN_BUTTON = 0;
     public static final int FEEDER_OUT_BUTTON = 0;
     public static final int TUNNEL_IN_BUTTON = 0;
     public static final int TUNNEL_OUT_BUTTON = 0;
-    public static final int VERTICAL_OVERRIDE_BUTTON = 0;
+    public static final int VERTICAL_OVERRIDE_BUTTON = 2;
 }

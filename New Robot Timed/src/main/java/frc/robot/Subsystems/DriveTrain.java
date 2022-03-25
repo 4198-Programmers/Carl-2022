@@ -15,10 +15,12 @@ public class DriveTrain extends SubsystemBase{
     private CANSparkMax backRightMotor = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_PORT, MotorType.kBrushless);
     private CANSparkMax backLeftMotor = new CANSparkMax(Constants.BACK_LEFT_MOTOR_PORT, MotorType.kBrushless);
     
-    RelativeEncoder frontRightMotorEncoder = frontRightMotor.getEncoder();
-    RelativeEncoder frontLeftMotorEncoder = frontLeftMotor.getEncoder();
-    RelativeEncoder backRightMotorEncoder = backRightMotor.getEncoder();
-    RelativeEncoder backLeftMotorEncoder = backLeftMotor.getEncoder();
+    private RelativeEncoder frontRightMotorEncoder = frontRightMotor.getEncoder();
+    private RelativeEncoder frontLeftMotorEncoder = frontLeftMotor.getEncoder();
+    private RelativeEncoder backRightMotorEncoder = backRightMotor.getEncoder();
+    private RelativeEncoder backLeftMotorEncoder = backLeftMotor.getEncoder();
+
+    private DifferentialDrive allDrive = new DifferentialDrive( new MotorControllerGroup(frontLeftMotor, backLeftMotor), new MotorControllerGroup(frontRightMotor, backRightMotor));
 
 
     public void resetPosition(){
@@ -34,9 +36,7 @@ public class DriveTrain extends SubsystemBase{
             + backRightMotorEncoder.getPosition() 
             + backLeftMotorEncoder.getPosition()) / 4d;
     }
-    MotorControllerGroup rightDrive = new MotorControllerGroup(frontRightMotor, backRightMotor);
-    MotorControllerGroup leftDrive = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
-    DifferentialDrive allDrive = new DifferentialDrive(leftDrive, rightDrive);
+
     public void greenLight(double xAxis, double zRotation){
         allDrive.arcadeDrive(Constants.SPEED_MULTIPLIER *xAxis, Constants.SPEED_MULTIPLIER * zRotation);
     }

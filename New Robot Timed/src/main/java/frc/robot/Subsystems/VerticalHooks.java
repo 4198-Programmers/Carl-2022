@@ -11,8 +11,8 @@ import frc.robot.Constants;
 public class VerticalHooks extends SubsystemBase{
     private CANSparkMax verticalRightHook = new CANSparkMax(Constants.VERTICAL_RIGHT_HOOK_MOTOR_PORT, MotorType.kBrushless);
     private CANSparkMax verticalLeftHook = new CANSparkMax(Constants.VERTICAL_LEFT_HOOK_MOTOR_PORT, MotorType.kBrushless);
-    RelativeEncoder verticalRightHookEncoder = verticalRightHook.getEncoder();
-    RelativeEncoder verticalLeftHookEncoder = verticalLeftHook.getEncoder();
+    private RelativeEncoder verticalRightHookEncoder = verticalRightHook.getEncoder();
+    private RelativeEncoder verticalLeftHookEncoder = verticalLeftHook.getEncoder();
     public void resetPosition(){
         verticalRightHookEncoder.setPosition(0);
         verticalLeftHookEncoder.setPosition(0);
@@ -20,6 +20,10 @@ public class VerticalHooks extends SubsystemBase{
     public void move(double speed){
         verticalLeftHook.set(speed);
         verticalRightHook.set(speed);
+    }
+    public void stop(){
+        verticalLeftHook.set(0);
+        verticalRightHook.set(0);
     }
     public double getPostion(){
         double a = verticalRightHookEncoder.getPosition();

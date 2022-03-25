@@ -18,14 +18,21 @@ public class Maths {
     
             return distance;
         }
-        public static double flyWheelSpeedByDistance(double Distance) {
-            double invTest = Distance;
-            double a = 0.000188428;
-            double b = -0.00228743;
-            double c = 0.710835 * 1.04;
-    
-            return (-((a * (invTest * invTest)) + (b * invTest) + c));
+            public static double flyWheelSpeedByDistance(double Distance, boolean target) {
+                // double invTest = Distance;
+                // double a = 0.000188428;
+                // double b = -0.00228743;
+                // double c = 0.710835 * 1.04;
+        
+                // return (-((a * (invTest * invTest)) + (b * invTest) + c));
+                // if(target){
+                double x = Distance;
+                double a = 0.579371831414;
+                double pow = 0.00961944776679;
+        
+                return (-1* a * (Math.exp(pow*x)));
         }
+    
     
         public static double spinDistanceByDegree(double Degrees) {
             double circleDistance = (Degrees / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;

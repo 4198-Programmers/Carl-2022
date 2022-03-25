@@ -16,7 +16,7 @@ import frc.robot.Commands.Drive;
 import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
-import frc.robot.Commands.Shoot;
+import frc.robot.Commands.SetFlyWheelSpeed;
 import frc.robot.Commands.ShootStop;
 import frc.robot.Commands.Spin180;
 import frc.robot.Commands.Targeting;
@@ -37,11 +37,11 @@ public class RobotContainer {
 
   // subsystems
   DriveTrain driveTrain;
+  ShooterSystem shooterSystem;
   VerticalHooks verticalHooks;
   Limelight limelight;
   AngledHooks angledHooks;
   FeederSub feederSub;
-  ShooterSystem shooterSystem;
   TunnelSub tunnelSub;
   // commands
   Drive drive =  new Drive(driveTrain, leftJoystick , leftJoystick);
@@ -54,16 +54,16 @@ public class RobotContainer {
     .alongWith(new FeederIn(feederSub))
     .andThen(new Spin180(driveTrain))
     .andThen(new Targeting(limelight, driveTrain))
-    .andThen(new Shoot(shooterSystem));
+    .andThen(new SetFlyWheelSpeed(shooterSystem));
     Command shootWithTargeting = (new Targeting(limelight, driveTrain))
-      .andThen(new Shoot(shooterSystem));
+      .andThen(new SetFlyWheelSpeed(shooterSystem));
     Command dance = (new OffTarmac(driveTrain))
       .andThen(new Spin180(driveTrain))
       .alongWith(new DanceVerticalHooks(verticalHooks, 10))
       .alongWith(new DanceAngledHooks(angledHooks, 10))
       .andThen(new Targeting(limelight, driveTrain));
     Command autoShoot = (new Targeting(limelight, driveTrain))
-      .andThen(new Shoot(shooterSystem))
+      .andThen(new SetFlyWheelSpeed(shooterSystem))
       .alongWith(new TunnelIn(tunnelSub))
       .andThen(new ShootStop(shooterSystem))
       .alongWith(new TunnelStop(tunnelSub));
@@ -93,7 +93,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
-    shootingButton.whenHeld(new Shoot(shooterSystem), false);
+    shootingButton.whenHeld(new SetFlyWheelSpeed(shooterSystem), false);
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, 1));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, 0));
     feederInButton.whenHeld(new FeederIn(feederSub), false);

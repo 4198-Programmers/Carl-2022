@@ -6,16 +6,20 @@ import frc.robot.Maths;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.ShooterSystem;
 
-public class Shoot extends CommandBase{
+public class SetFlyWheelSpeed extends CommandBase{
     ShooterSystem shooterSystem;
     Limelight limelight;
-    public Shoot(ShooterSystem shooterSystem){
+    public SetFlyWheelSpeed(ShooterSystem shooterSystem){
         this.shooterSystem = shooterSystem;
         addRequirements(shooterSystem);
     }
     @Override
     public void execute() {
-        shooterSystem.shoot(Maths.flyWheelSpeedByDistance((limelight.distancefromTarget())));
+        shooterSystem.shoot(Maths.flyWheelSpeedByDistance((limelight.distancefromTarget()), limelight.hasTarget() == 1));
+    }
+    @Override
+    public void end(boolean interrupted) {
+        shooterSystem.stop();
     }
     }
 

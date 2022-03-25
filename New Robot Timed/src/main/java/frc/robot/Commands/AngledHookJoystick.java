@@ -19,6 +19,5 @@ public class AngledHookJoystick extends CommandBase{
     @Override
     public void execute() {
         angledHooks.moveHooks(angledJoystick.getRawAxis(1));
-
     }
 }

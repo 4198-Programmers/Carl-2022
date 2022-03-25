@@ -52,6 +52,8 @@ public class Constants {
     public static final int TARGETING_BUTTON = 0;
     public static final int LIMELIGHT_ON_BUTTON = 0;
     public static final int LIMELIGHT_OFF_BUTTON = 0;
+    public static final int ANGLED_OVERRIDE_BUTTON = 0;
+    public static final int DANCE_BUTTON = 0;
 
 //Righ Joystick
     public static final int SHOOTING_BUTTON = 0;
@@ -62,6 +64,5 @@ public class Constants {
     public static final int FEEDER_OUT_BUTTON = 0;
     public static final int TUNNEL_IN_BUTTON = 0;
     public static final int TUNNEL_OUT_BUTTON = 0;
-    public static final int DANCE_BUTTON = 0;
-
+    public static final int VERTICAL_OVERRIDE_BUTTON = 0;
 }

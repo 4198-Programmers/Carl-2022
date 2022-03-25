@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.ShooterSystem;
 import frc.robot.Subsystems.TunnelSub;
-import frc.robot.Commands.AngledHooksMove;
+import frc.robot.Commands.AngledHookJoystick;
 import frc.robot.Commands.ChooseLimelightMode;
 import frc.robot.Commands.DanceAngledHooks;
 import frc.robot.Commands.DanceVerticalHooks;
@@ -23,7 +23,7 @@ import frc.robot.Commands.Targeting;
 import frc.robot.Commands.TunnelIn;
 import frc.robot.Commands.TunnelOut;
 import frc.robot.Commands.TunnelStop;
-import frc.robot.Commands.VerticalHooksMove;
+import frc.robot.Commands.VerticalHookJoystick;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
 import frc.robot.Subsystems.FeederSub;
@@ -45,8 +45,6 @@ public class RobotContainer {
   TunnelSub tunnelSub;
   // commands
   Drive drive =  new Drive(driveTrain, leftJoystick , leftJoystick);
-  VerticalHooksMove verticalHooksMove = new VerticalHooksMove(verticalHooks, rightJoystick);
-  AngledHooksMove angledHooksMove = new AngledHooksMove(angledHooks, rightJoystick);
   Targeting targeting = new Targeting(limelight, driveTrain);
   DoNotDrive doNotDrive = new DoNotDrive(driveTrain);
   OffTarmac offTarmac = new OffTarmac(driveTrain);
@@ -79,6 +77,8 @@ public class RobotContainer {
   JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.TUNNEL_IN_BUTTON);
   JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.TUNNEL_OUT_BUTTON);
   JoystickButton danceButton = new JoystickButton(middleJoystick, Constants.DANCE_BUTTON);
+  JoystickButton angledOverRideButton = new JoystickButton(middleJoystick, Constants.ANGLED_OVERRIDE_BUTTON);
+  JoystickButton verticalOverRideButton = new JoystickButton(middleJoystick, Constants.VERTICAL_OVERRIDE_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -87,20 +87,23 @@ public class RobotContainer {
     configureButtonBindings();
     begin();
     driveTrain.setDefaultCommand(new Drive(driveTrain, leftJoystick, leftJoystick));
-    verticalHooks.setDefaultCommand(new VerticalHooksMove(verticalHooks, rightJoystick));
-    angledHooks.setDefaultCommand(new AngledHooksMove(angledHooks, rightJoystick));
+    verticalHooks.setDefaultCommand(new VerticalHookJoystick(verticalHooks, rightJoystick));
+    angledHooks.setDefaultCommand(new AngledHookJoystick(angledHooks, middleJoystick));
   }
 
   private void configureButtonBindings() {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
-    shootingButton.whenHeld(new Shoot(shooterSystem));
+    shootingButton.whenHeld(new Shoot(shooterSystem), false);
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, 1));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, 0));
-    feederInButton.whenHeld(new FeederIn(feederSub));
-    feederOutButton.whenHeld(new FeederOut(feederSub));
-    tunnelInButton.whenHeld(new TunnelIn(tunnelSub));
-    tunnelOutButton.whenHeld(new TunnelOut(tunnelSub));
+    feederInButton.whenHeld(new FeederIn(feederSub), false);
+    feederOutButton.whenHeld(new FeederOut(feederSub), false);
+    tunnelInButton.whenHeld(new TunnelIn(tunnelSub), false);
+    tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
     danceButton.whenPressed(dance);
+    angledOverRideButton.whenHeld(new AngledHookJoystick(angledHooks, middleJoystick), false);
+    verticalOverRideButton.whenHeld(new VerticalHookJoystick(verticalHooks, rightJoystick), false);
+    
   }
 
   private void begin() {

@@ -7,8 +7,18 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase{
-    public enum PipelineMode{
-        
+    public enum LimelightMode{
+        forceOff(0),
+        forceOn(1),
+        invalid(-1);
+        private double mode;
+
+        private LimelightMode(double mode){
+            this.mode = mode;
+        }
+        protected double getModeValue(){
+            return mode;
+        }
     }
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     public NetworkTableEntry tx = table.getEntry("tx"); 
@@ -30,11 +40,16 @@ public class Limelight extends SubsystemBase{
     public double distancefromTarget(){
         return(Maths.distanceFromTarget(ty.getDouble(0)));
     }
-    public double setpipelineMode(double pipelineMode){
-        pipeline.setDouble(pipelineMode);
-        return(pipelineMode);
+    public void setpipelineMode(LimelightMode limelightMode){
+        pipeline.setDouble(limelightMode.getModeValue());
+    }
+    public LimelightMode getpipelineMode(){
+        double mode = pipeline.getDouble(-1);
+        if(mode == LimelightMode.invalid.getModeValue()){
+            
+        }
     }
     public double hasTarget(){
         return(tx.getDouble(0));
     }
-}
+    }

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Subsystems.DriveTrain;
 import frc.robot.Subsystems.Limelight;
+import frc.robot.Subsystems.Limelight.LimelightMode;
 
 public class Targeting extends CommandBase{
     Limelight limelight;
@@ -15,7 +16,7 @@ public class Targeting extends CommandBase{
     }
     @Override
     public void initialize() {
-        limelight.setpipelineMode(1);
+        limelight.setpipelineMode(LimelightMode.forceOn);
         driveTrain.resetPosition();
     }
     @Override
@@ -35,5 +36,9 @@ public class Targeting extends CommandBase{
         else if(limelight.hasTarget() == 1 && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT_SLIM && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT_SLIM){
             driveTrain.greenLight(0, 0);
         }
+    }
+    @Override
+    public boolean isFinished() {
+        return(limelight.hasTarget() == 1 && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT_SLIM && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT_SLIM);
     }
 }

@@ -28,6 +28,7 @@ import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
 import frc.robot.Subsystems.FeederSub;
 import frc.robot.Subsystems.VerticalHooks;
+import frc.robot.Subsystems.Limelight.LimelightMode;
 
 
 public class RobotContainer {
@@ -92,6 +93,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
+    targetingButton.whenReleased(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
     shootingButton.whenHeld(new SetFlyWheelSpeed(shooterSystem), false);
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, 1));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, 0));

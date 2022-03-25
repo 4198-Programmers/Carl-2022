@@ -15,9 +15,9 @@ public class DoNotMove extends CommandBase {
      * Pulls in the current DriveTrain and Shooter instances to use in the specific
      * class
      */
-    public DoNotMove(DriveTrain driveTrainArg, FlyAndSensors flyAndSensorsArg) {
-        vroomVroom = driveTrainArg;
-        flyAndSensors = flyAndSensorsArg;
+    public DoNotMove(DriveTrain vroomVroomSub, FlyAndSensors flyAndSensorsSub) {
+        vroomVroom = vroomVroomSub;
+        flyAndSensors = flyAndSensorsSub;
         addRequirements(vroomVroom, flyAndSensors);
     }
 

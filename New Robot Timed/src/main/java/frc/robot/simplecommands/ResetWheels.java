@@ -6,9 +6,9 @@ import frc.robot.subsystems.DriveTrain;
 public class ResetWheels extends CommandBase {
     private DriveTrain driver;
 
-    public ResetWheels(DriveTrain driverArg) {
-        driver = driverArg;
-        addRequirements(driverArg);
+    public ResetWheels(DriveTrain vroomVroomSub) {
+        driver = vroomVroomSub;
+        addRequirements(vroomVroomSub);
     }
 
     @Override

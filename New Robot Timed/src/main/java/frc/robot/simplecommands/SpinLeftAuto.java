@@ -4,13 +4,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class SpinRightAuto extends CommandBase {
+public class SpinLeftAuto extends CommandBase {
     DriveTrain driver;
     double calculatedDistance;
     double degreesOfRotation;
     boolean youDone;
 
-    public SpinRightAuto(DriveTrain vroomVroomSub, double degrees) {
+    public SpinLeftAuto(DriveTrain vroomVroomSub, double degrees) {
         driver = vroomVroomSub;
         degreesOfRotation = degrees;
         addRequirements(vroomVroomSub);
@@ -29,7 +29,7 @@ public class SpinRightAuto extends CommandBase {
 
         if (Math.abs(position) < Math.abs(rotationsToSpin)) // just reads the values, does not care about direction
         {
-            driver.greenLight(0.5, 0);
+            driver.greenLight(-0.5, 0);
         } else {
             driver.greenLight(0, 0);
             youDone = true;

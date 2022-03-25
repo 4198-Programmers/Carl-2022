@@ -17,26 +17,23 @@ public class AngledHookJoystick extends CommandBase {
      * Allows driver to manually controll specifics
      * (angled hooks angle)
      */
-    public AngledHookJoystick(AngleHooks hooksArg, Joystick controllingJoystick, DriveTrain vroomVroomSub) {
-        climberHC = hooksArg;
+    public AngledHookJoystick(AngleHooks angleHooksSub, Joystick controllingJoystick, DriveTrain vroomVroomSub) {
+        climberHC = angleHooksSub;
         hookAxisStick = controllingJoystick;
         vroomVroom = vroomVroomSub;
         addRequirements(climberHC);
     }
-
 
     @Override
     public void execute() {
         axis = -hookAxisStick.getRawAxis(0);
         vroomVroom.greenLight(0, 0);
 
-        if(climberHC.anglePosition() >= -97 && (axis < 0)){ //makes sure you do not over run
-        climberHC.moveAngledHooks(axis);
-    }
-        else if( axis >= 0){
+        if (climberHC.anglePosition() >= -97 && (axis < 0)) { // makes sure you do not over run
             climberHC.moveAngledHooks(axis);
-        }
-        else{
+        } else if (axis >= 0) {
+            climberHC.moveAngledHooks(axis);
+        } else {
             climberHC.moveAngledHooks(Constants.FREEZE);
         }
         done = true;

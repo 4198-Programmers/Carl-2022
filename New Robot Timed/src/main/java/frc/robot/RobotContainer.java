@@ -4,28 +4,51 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.command.DoNotMove;
-import frc.robot.command.SetFlySpeed;
-import frc.robot.command.SetFlySpeedUsingCalculation;
-import frc.robot.command.SetIntakeSpeed;
-import frc.robot.command.SetInternalMoveSpeed;
-import frc.robot.command.SpitBalls;
-import frc.robot.command.Targeting;
-import frc.robot.command.TaxiAndShoot;
-import frc.robot.command.TaxiTarmac;
-import frc.robot.command.hookcommands.AngledHookJoystick;
-import frc.robot.command.hookcommands.MoveCloserToNinetyDegrees;
-import frc.robot.command.hookcommands.MoveCloserToZeroDegrees;
-import frc.robot.command.hookcommands.PullVertHooksIn;
-import frc.robot.command.hookcommands.ReachVertHooksUp;
+import frc.robot.hookcommands.AngleStop;
+import frc.robot.hookcommands.AngledHookJoystick;
+import frc.robot.hookcommands.HookStop;
+import frc.robot.hookcommands.MoveCloserToNinetyDegrees;
+import frc.robot.hookcommands.MoveCloserToZeroDegrees;
+import frc.robot.hookcommands.PullVertHooksIn;
+import frc.robot.hookcommands.ReachVertHooksUp;
+import frc.robot.hookcommands.ResetHooks;
+import frc.robot.simplecommands.BuildIsMean;
+import frc.robot.simplecommands.DoNotMove;
+import frc.robot.simplecommands.InSensorCheck;
+import frc.robot.simplecommands.IntakeFeeder;
+import frc.robot.simplecommands.IntakeStop;
+import frc.robot.simplecommands.LowLoft;
+import frc.robot.simplecommands.PickLimelightMode;
+import frc.robot.simplecommands.ResetWheels;
+import frc.robot.simplecommands.SensorTummyStopAll;
+//import frc.robot.simplecommands.RedFollower;
+import frc.robot.simplecommands.SetFlySpeed;
+import frc.robot.simplecommands.SetIntakeSpeedIn;
+import frc.robot.simplecommands.SetIntakeSpeedOut;
+import frc.robot.simplecommands.SetInternalMoveSpeedIn;
+import frc.robot.simplecommands.SetInternalMoveSpeedOut;
+import frc.robot.simplecommands.SpinRightAuto;
+import frc.robot.simplecommands.SpitBalls;
+import frc.robot.simplecommands.StableHooks;
+import frc.robot.simplecommands.StableIntestines;
+import frc.robot.simplecommands.StopFly;
+import frc.robot.simplecommands.Targeting;
+import frc.robot.simplecommands.TaxiOffTarmac;
+import frc.robot.simplecommands.TaxiOnTarmac;
+import frc.robot.simplecommands.TimedInternalMoveIn;
+import frc.robot.simplecommands.TimedInternalMoveOut;
+import frc.robot.simplecommands.TunnelStop;
+import frc.robot.subsystems.AngleHooks;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Hooks;
+import frc.robot.subsystems.VertHooks;
 import frc.robot.subsystems.Limelight;
-import frc.robot.subsystems.ShooterPathMovement;
+import frc.robot.subsystems.Tunnel;
+import frc.robot.subsystems.FlyAndSensors;
+import frc.robot.subsystems.Intake;
 
 public class RobotContainer {
   Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
@@ -33,73 +56,227 @@ public class RobotContainer {
   Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
 
   // subsystems
-  DriveTrain vroomVroom = new DriveTrain();
-  ShooterPathMovement pewPew = new ShooterPathMovement();
-  Hooks climber = new Hooks();
-  Limelight vision = new Limelight();
+  DriveTrain vroomVroomSub = new DriveTrain();
+  FlyAndSensors flyAndSensorsSub = new FlyAndSensors();
+  VertHooks vertHooksSub = new VertHooks();
+  AngleHooks angleHooksSub = new AngleHooks();
+  Limelight visionSub = new Limelight();
+  Tunnel tunnelSub = new Tunnel();
+  Intake intakeSub = new Intake();
+  // UsbCamera ballFinder = CameraServer.startAutomaticCapture();
 
-  // commands
-  DoNotMove doNotMove = new DoNotMove(vroomVroom, pewPew);
-  TaxiAndShoot taxiAndShoot = new TaxiAndShoot(vroomVroom, pewPew);
-  TaxiTarmac taxiTarmac = new TaxiTarmac(vroomVroom);
-  AngledHookJoystick angledHookJoystick = new AngledHookJoystick(climber, rightStick);
-  ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(climber);
-  PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(climber);
-  MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(climber);
-  MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(climber);
-  Targeting targeting = new Targeting(vroomVroom, vision);
-  SetFlySpeed setFlySpeed = new SetFlySpeed(pewPew);
-  SetIntakeSpeed setIntakeSpeed = new SetIntakeSpeed(pewPew);
-  SetInternalMoveSpeed setInternalMoveSpeed = new SetInternalMoveSpeed(pewPew);
-  SpitBalls spitBalls = new SpitBalls(pewPew);
-  SetFlySpeedUsingCalculation setFlySpeedUsingCalculation = new SetFlySpeedUsingCalculation(vision, pewPew);
+  // ungrouped commands
+  // RealizeBall realizeBall = new RealizeBall(ballFinder);
+  DoNotMove doNotMove = new DoNotMove(vroomVroomSub, flyAndSensorsSub);
+  AngledHookJoystick angledHookJoystick = new AngledHookJoystick(angleHooksSub, midStick, vroomVroomSub);
+  ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(vertHooksSub, rightStick);
+  PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(vertHooksSub, rightStick);
+  MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(angleHooksSub);
+  MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(angleHooksSub);
+  Targeting targeting = new Targeting(vroomVroomSub, visionSub, leftStick);
+  SetFlySpeed setFlySpeed = new SetFlySpeed(flyAndSensorsSub, visionSub, false, 0, midStick);
+  SetIntakeSpeedIn setIntakeSpeedIn = new SetIntakeSpeedIn(intakeSub);
+  SetIntakeSpeedOut setIntakeSpeedOut = new SetIntakeSpeedOut(intakeSub);
+  SetInternalMoveSpeedIn setInternalMoveSpeedIn = new SetInternalMoveSpeedIn(tunnelSub);
+  SetInternalMoveSpeedOut setInternalMoveSpeedOut = new SetInternalMoveSpeedOut(tunnelSub);
+  SpitBalls spitBalls = new SpitBalls(intakeSub, tunnelSub);
+  PickLimelightMode setLimelightModeOff = new PickLimelightMode(visionSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
+  PickLimelightMode setLimelightModeOn = new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
+  StableHooks stableHooks = new StableHooks(vertHooksSub, angleHooksSub);
+  StableIntestines stableIntestines = new StableIntestines(flyAndSensorsSub, tunnelSub, intakeSub);
+  BuildIsMean meanie = new BuildIsMean(vroomVroomSub);
+  StopFly stopFly = new StopFly(flyAndSensorsSub);
+  IntakeStop intakeStop = new IntakeStop(intakeSub);
+  TunnelStop tunnelStop = new TunnelStop(tunnelSub);
+  HookStop hookStop = new HookStop(vertHooksSub);
+  AngleStop angleStop = new AngleStop(angleHooksSub);
+  ResetHooks resetHooks = new ResetHooks(angleHooksSub, vertHooksSub);
+  IntakeFeeder intakeFeeder = new IntakeFeeder(intakeSub, tunnelSub, flyAndSensorsSub);
+  LowLoft lowLoft = new LowLoft(flyAndSensorsSub);
 
-  ParallelCommandGroup  parallelGroupShootPrep = new ParallelCommandGroup(targeting,setFlySpeed);
-  SequentialCommandGroup shootingGroup = new SequentialCommandGroup(parallelGroupShootPrep, setInternalMoveSpeed);
+  // command groups
+  Command limelightTargeting = (new Targeting(vroomVroomSub, visionSub, leftStick))
+  .andThen(new WaitCommand(1))
+  .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE));
+
+  RunCommand driveSticks = new RunCommand(
+      () -> vroomVroomSub.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroomSub);
+
+  Command taxiAndShoot = (new ResetWheels(vroomVroomSub))
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 50))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new SpinRightAuto(vroomVroomSub, 180))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 250, midStick))
+      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new SetInternalMoveSpeedOut(tunnelSub))
+      .andThen(new DoNotMove(vroomVroomSub, flyAndSensorsSub));
+
+  Command shooting = (new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 150, midStick))
+      .andThen(new SetInternalMoveSpeedOut(tunnelSub));
+
+  Command taxiSides = (new ResetWheels(vroomVroomSub))
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 50));
+
+  Command taxiMid = new ResetWheels(vroomVroomSub)
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 60));
+
+  Command taxiTwoBallShootMidBall = (new ResetWheels(vroomVroomSub))
+      .andThen((new SetIntakeSpeedIn(intakeSub))
+          .alongWith(new TaxiOnTarmac(vroomVroomSub, 2)))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new TaxiOffTarmac(vroomVroomSub, 60))
+      .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+      .andThen(new InSensorCheck(flyAndSensorsSub, true)
+          .raceWith(new WaitCommand(2)))
+      .andThen((new IntakeStop(intakeSub))
+          .alongWith(new ResetWheels(vroomVroomSub)))
+      .andThen((new SpinRightAuto(vroomVroomSub, 180))
+          .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
+      .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
+      .andThen(new SetIntakeSpeedIn(intakeSub))
+      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+      .andThen(new IntakeStop(intakeSub))
+      .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 600, midStick))
+      .andThen(new SetIntakeSpeedIn(intakeSub))
+      .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
+      .andThen(new WaitCommand(1))
+      .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
+      .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
+
+  // Command taxiTwoBallHumanBallHangarL = (new ResetWheels(vroomVroomSub))
+  // .andThen((new SetIntakeSpeedIn(intakeSub))
+  // .alongWith(new TaxiOnTarmac(vroomVroomSub, 2)))
+  // .andThen(new ResetWheels(vroomVroomSub))
+  // .andThen(new TaxiOffTarmac(vroomVroomSub, 60))
+  // .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+  // .andThen(new InSensorCheck(flyAndSensorsSub, true)
+  // .raceWith(new WaitCommand(2)))
+  // .andThen((new IntakeStop(intakeSub))
+  // .alongWith(new ResetWheels(vroomVroomSub)))
+  // .andThen((new SpinRightAuto(vroomVroomSub, 180))
+  // .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
+  // .andThen(new PickLimelightMode(visionSub,
+  // Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+  // .andThen(new Targeting(vroomVroomSub, visionSub))
+  // .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, true, 750))
+  // .andThen(new SetIntakeSpeedIn(intakeSub))
+  // .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+  // .andThen(new IntakeStop(intakeSub))
+  // .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+  // .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, true, 600))
+  // .andThen(new SetIntakeSpeedIn(intakeSub))
+  // .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
+  // .andThen(new WaitCommand(1))
+  // .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
+  // .andThen(new PickLimelightMode(visionSub,
+  // Constants.LIMELIGHT_OFF_PIPELINE_MODE))
+  // .andThen(new ResetWheels(vroomVroomSub))
+  // .andThen(new SpinRightAuto(vroomVroomSub, 74))
+  // .andThen(new ResetWheels(vroomVroomSub))
+  // .andThen((new TaxiOffTarmac(vroomVroomSub, 156.25))
+  // .alongWith(new SetIntakeSpeedIn(intakeSub)))
+  // .andThen(new PickLimelightMode(visionSub,
+  // Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+  // .andThen(new Targeting(vroomVroomSub, visionSub))
+  // .andThen(new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, true, 750))
+  // .andThen(new WaitCommand(1))
+  // .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
+  // .andThen(new PickLimelightMode(visionSub,
+  // Constants.LIMELIGHT_OFF_PIPELINE_MODE));
 
   // buttons
-  JoystickButton overrideButton = new JoystickButton(rightStick, Constants.HUMAN_OVERRIDE_BUTTON);
+  JoystickButton overrideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
   JoystickButton verticalHookUpBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_BUTTON);
   JoystickButton verticalHookDownBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_BUTTON);
-  JoystickButton angledHookUpBTN = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
-  JoystickButton angledHookDownBTN = new JoystickButton(rightStick, Constants.ANGLE_HOOK_UP_BUTTON);
-  JoystickButton manualIntakeForwardsBTN = new JoystickButton(rightStick, Constants.INTAKEIN_BUTTON);
+  JoystickButton angledHookUpBTN = new JoystickButton(rightStick,
+      Constants.ANGLE_HOOK_UP_BUTTON);
+  // JoystickButton angledHookDownBTN = new JoystickButton(rightStick,
+  // Constants.ANGLE_HOOK_DOWN_BUTTON);
+  JoystickButton intakeInBTN = new JoystickButton(rightStick, Constants.INTAKE_IN_BUTTON);
+  JoystickButton intakeOutBTN = new JoystickButton(rightStick, Constants.INTAKE_OUT_BUTTON);
   JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_BUTTON);
   JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
-  JoystickButton spitBTN = new JoystickButton(rightStick, Constants.YEET_THE_BALLS_OUT_THE_BACK_BUTTON);
-  JoystickButton fullFIREEEEBTN = new JoystickButton(rightStick, Constants.RIGHT_STICK_TRIGGER);
+  JoystickButton internalFeederOutBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_BACKWARDS_BUTTON);
+  JoystickButton spitBTN = new JoystickButton(rightStick, Constants.FORCE_SPIT_BUTTON);
+  JoystickButton shootingBTN = new JoystickButton(rightStick, Constants.QUOTE_AUTO_UNQUOTE_SHOOTING_BUTTON);
+  JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_BUTTON);
+  JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_BUTTON);
+  JoystickButton limelightOnThenTargetBTN = new JoystickButton(midStick, Constants.TARGETING_LIMELIGHT_SIMULTANEOUS);
+  JoystickButton rudeBTN = new JoystickButton(leftStick, Constants.CRUEL_BUTTON);
+  JoystickButton angleJoystickButton = new JoystickButton(midStick, Constants.ANGLE_JOYSTICK_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-  public RobotContainer() {
+  public void initialize() {
     configureButtonBindings();
     begin();
-    vroomVroom.setDefaultCommand(new RunCommand( () -> 
-    vroomVroom.greenLight(midStick.getRawAxis(1), leftStick.getRawAxis(0)), vroomVroom));
+    vroomVroomSub.setDefaultCommand(driveSticks);
+    vertHooksSub.setDefaultCommand(stableHooks);
+    angleHooksSub.setDefaultCommand(stableHooks);
+    flyAndSensorsSub.setDefaultCommand(stableIntestines);
+    resetHooks.execute();
+
+    CommandScheduler.getInstance().onCommandExecute((command) -> {
+      if (!command.getName().equals("RunCommand") && !command.getName().equals("StableHooks")
+          && !command.getName().equals("StableIntestines")) {
+        System.out.println("running command " + command.getName());
+      }
+    });
+    CommandScheduler.getInstance().onCommandFinish((command) -> {
+      System.out.println("finished command " + command.getName());
+    });
+    CommandScheduler.getInstance().onCommandInterrupt((command) -> {
+      System.out.println("interrupted command " + command.getName());
+    });
   }
 
   private void configureButtonBindings() {
-    overrideButton.whileHeld(angledHookJoystick);
-    overrideButton.and(verticalHookUpBTN).whileActiveContinuous(reachVertHooksUp);
-    overrideButton.and(verticalHookDownBTN).whileActiveContinuous(pullVertHooksIn);
-    overrideButton.and(angledHookUpBTN).whileActiveContinuous(moveCloserToNinetyDegrees);
-    overrideButton.and(angledHookDownBTN).whileActiveContinuous(moveCloserToZeroDegrees);
-    overrideButton.and(flywheelSpinUpBTN).whileActiveContinuous(setFlySpeed);
-    overrideButton.and(manualIntakeForwardsBTN).whileActiveContinuous(setIntakeSpeed);
-    overrideButton.and(internalFeederInBTN).whileActiveContinuous(setInternalMoveSpeed);
-    overrideButton.and(spitBTN).whileActiveContinuous(spitBalls);
-    fullFIREEEEBTN.whenHeld(shootingGroup);
+    angleJoystickButton.whenHeld(angledHookJoystick, false);
+    angleJoystickButton.whenInactive(driveSticks);
+    verticalHookUpBTN.whileHeld(reachVertHooksUp);
+    verticalHookDownBTN.whileHeld(pullVertHooksIn);
+    // angledHookDownBTN.whileHeld(moveCloserToZeroDegrees);
+    flywheelSpinUpBTN.whileHeld(setFlySpeed);
+    intakeInBTN.whileHeld(intakeFeeder);
+    intakeOutBTN.whileHeld(setIntakeSpeedOut);
+    internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);
+    internalFeederOutBTN.whileHeld(setInternalMoveSpeedOut);
+    limelightOnThenTargetBTN.whenHeld(limelightTargeting);
+    spitBTN.whenHeld(spitBalls);
 
-  
-  
+    angleJoystickButton.whenReleased(angleStop);
+    verticalHookUpBTN.whenReleased(hookStop);
+    verticalHookDownBTN.whenReleased(hookStop);
+    // angledHookUpBTN.whenReleased(angleStop);
+    // angledHookDownBTN.whenReleased(angleStop);
+    flywheelSpinUpBTN.whenReleased(stopFly);
+    intakeInBTN.whenReleased(intakeStop);
+    intakeOutBTN.whenReleased(intakeStop);
+    internalFeederInBTN.whenReleased(tunnelStop);
+    internalFeederOutBTN.whenReleased(tunnelStop);
+    limelightOnThenTargetBTN.whenReleased(setLimelightModeOff);
+
+    limelightOffBTN.whenPressed(setLimelightModeOff);
+    limelightOnBTN.whenPressed(setLimelightModeOn);
+    overrideButton.and(rudeBTN).whileActiveOnce(meanie);
+    shootingBTN.whileHeld(lowLoft);
+
   }
 
   private void begin() {
-    m_chooser.setDefaultOption("Default Auto", doNotMove);
-    m_chooser.addOption("Taxi + Shoot One", taxiAndShoot);
-    m_chooser.addOption("Taxi", taxiTarmac);
+    // m_chooser.setDefaultOption("Default- Frozen", doNotMove);
+    m_chooser.addOption("Only Taxi (R/L)", taxiSides);
+    m_chooser.addOption("Only Taxi (Mid)", taxiMid);
+    m_chooser.addOption("Taxi + Shoot One (R/M/L)", taxiAndShoot);
+    m_chooser.setDefaultOption("Two Ball Auto (R/M/L)", taxiTwoBallShootMidBall);
     SmartDashboard.putData("Auto choices", m_chooser);
+
   }
 
   public Command getAutonomousCommand() {

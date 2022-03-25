@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class DriveTrain extends SubsystemBase{
+public class DriveTrain extends SubsystemBase {
     private CANSparkMax frontR = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax frontL = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_DEVICE_ID, MotorType.kBrushless);
     private CANSparkMax backR = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
@@ -19,48 +19,47 @@ public class DriveTrain extends SubsystemBase{
     private RelativeEncoder backREnc = backR.getEncoder();
     private RelativeEncoder backLEnc = backL.getEncoder();
 
-    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontR, backR);
-    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontL, backL);
-  
+    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontR, backR);
+    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontL, backL);
+
     private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
 
-    private double conversionFactor = 12.75;
-
-    public DriveTrain(){
-        frontLEnc.setPositionConversionFactor(conversionFactor);
-        frontREnc.setPositionConversionFactor(conversionFactor);
-        backLEnc.setPositionConversionFactor(conversionFactor);
-        backREnc.setPositionConversionFactor(conversionFactor);
+    public DriveTrain() {
+        frontLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        frontREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        backLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        backREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
     }
 
-    /**Sets encoder positions to 0 */
-    public void resetPosition(){
-        frontLEnc.setPosition(0);
-        frontREnc.setPosition(0);
-        backLEnc.setPosition(0);
-        backREnc.setPosition(0);
+    /** Sets encoder positions to 0 */
+    public void resetPosition() {
+        frontLEnc.setPosition(0d);
+        frontREnc.setPosition(0d);
+        backLEnc.setPosition(0d);
+        backREnc.setPosition(0d);
     }
 
-    public double findPosition(){
-        double encCurrentPosition = frontLEnc.getPosition();
-        encCurrentPosition += frontREnc.getPosition();
-        encCurrentPosition += backREnc.getPosition();
-        encCurrentPosition += backLEnc.getPosition();
-        return encCurrentPosition/4d ;
+    public double findPosition() {
+        double encCurrentPosition = Math.abs(frontLEnc.getPosition());
+        encCurrentPosition += Math.abs(frontREnc.getPosition());
+        encCurrentPosition += Math.abs(backREnc.getPosition());
+        encCurrentPosition += Math.abs(backLEnc.getPosition());
+        return encCurrentPosition / 4d;
     }
-
 
     /**
-     * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot. Negative values of xAxis
-     * will move backwards, negative values of the zRotation will rotate counter-clockwise.
+     * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot.
+     * Negative values of xAxis
+     * will move backwards, negative values of the zRotation will rotate
+     * counter-clockwise.
      * Joysticks allow these to be control by controller axes
+     * 
      * @param xAxis
      * @param zRotate
      */
-    public void greenLight(double xAxis, double zRotate){
-        
-        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER*xAxis, Constants.DRIVE_SPEED_MULTIPLIER*zRotate);
+    public void greenLight(double zRotate, double xAxis) {
+
+        allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * zRotate, Constants.DRIVE_SPEED_MULTIPLIER * xAxis);
     }
 
-  
 }

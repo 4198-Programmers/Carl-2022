@@ -44,11 +44,15 @@ public class Limelight extends SubsystemBase{
         pipeline.setDouble(limelightMode.getModeValue());
     }
     public LimelightMode getpipelineMode(){
-        double mode = pipeline.getDouble(-1);
-        if(mode == LimelightMode.invalid.getModeValue()){
-            return(LimelightMode.values());
+        double mode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
+        LimelightMode pipeline = LimelightMode.invalid;
+        if(pipeline == 0){
+            pipeline = LimelightMode.forceOff;
         }
-    }
+        else if( pipeline == 1){
+            pipeline = LimelightMode.forceOn;
+        }
+        }
     public double hasTarget(){
         return(tx.getDouble(0));
     }

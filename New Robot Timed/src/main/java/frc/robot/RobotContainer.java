@@ -97,11 +97,11 @@ public class RobotContainer {
   PickLimelightMode setLimelightModeOn = new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
   ResetHooks resetHooks = new ResetHooks(angleHooksSub, vertHooksSub);
   LowLoft lowLoft = new LowLoft(flyAndSensorsSub);
-  Targeting targeting = new Targeting(vroomVroomSub, visionSub, leftStick);
+  Targeting targeting = new Targeting(vroomVroomSub, visionSub);
   SpitBalls spitBalls = new SpitBalls(intakeSub, tunnelSub);
 
   // command groups
-  Command limelightTargeting = (new Targeting(vroomVroomSub, visionSub, leftStick))
+  Command limelightTargeting = (new Targeting(vroomVroomSub, visionSub))
       .andThen(new WaitCommand(1))
       .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE));
 
@@ -113,12 +113,12 @@ public class RobotContainer {
       .andThen(new ResetWheels(vroomVroomSub))
       .andThen(new SpinRightAuto(vroomVroomSub, 180))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 250, midStick))
-      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub))
       .andThen(new DoNotMove(vroomVroomSub, flyAndSensorsSub));
 
   Command shooting = (new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
-      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 150, midStick))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub));
 
@@ -141,7 +141,7 @@ public class RobotContainer {
       .andThen((new SpinRightAuto(vroomVroomSub, 180))
           .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
       .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
-      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
       .andThen(new SetIntakeSpeedIn(intakeSub))
       .andThen(new TimedInternalMoveIn(tunnelSub, 700))
@@ -167,7 +167,7 @@ public class RobotContainer {
       .andThen((new SpinRightAuto(vroomVroomSub, 180))
           .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
       .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
-      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
       .andThen(new SetIntakeSpeedIn(intakeSub))
       .andThen(new TimedInternalMoveIn(tunnelSub, 700))
@@ -189,7 +189,7 @@ public class RobotContainer {
       .andThen(new TaxiOnTarmac(vroomVroomSub, 5))
       .andThen(new ResetWheels(vroomVroomSub))
       .andThen(new SpinRightAuto(vroomVroomSub, 180))
-      .andThen(new Targeting(vroomVroomSub, visionSub, leftStick))
+      .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 500, midStick));
 
   // buttons

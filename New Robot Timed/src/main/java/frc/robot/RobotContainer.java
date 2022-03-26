@@ -118,10 +118,8 @@ public class RobotContainer {
       .andThen(new SetInternalMoveSpeedOut(tunnelSub))
       .andThen(new DoNotMove(vroomVroomSub, flyAndSensorsSub));
 
-  Command shooting = (new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
-      .andThen(new Targeting(vroomVroomSub, visionSub))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 150, midStick))
-      .andThen(new SetInternalMoveSpeedOut(tunnelSub));
+  // Command shooting = (new SetFlySpeed(flyAndSensorsSub, visionSub, true, 150, midStick))
+  //     .andThen(new SetInternalMoveSpeedOut(tunnelSub));
 
   Command taxiSides = (new ResetWheels(vroomVroomSub))
       .andThen(new TaxiOffTarmac(vroomVroomSub, 50));

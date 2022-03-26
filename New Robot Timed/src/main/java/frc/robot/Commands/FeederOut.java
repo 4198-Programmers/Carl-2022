@@ -13,15 +13,18 @@ public class FeederOut extends CommandBase{
         this.sensors = sensors;
         addRequirements(feederSub, sensors);
     }
+
     @Override
     public void execute() {
-        if(sensors.getBallIn() == true){
+        if(sensors.isBallInFeed()){
             feederSub.intake(-(Constants.FEEDER_INTAKE_SPEED));
         }
-        if(sensors.getBallIn() == false){
+        else{
             feederSub.intake(0);
         }
-
     }
-    
+    @Override
+    public boolean isFinished() {
+        return !sensors.isBallInFeed();
+    }
 }

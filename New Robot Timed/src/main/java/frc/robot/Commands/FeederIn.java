@@ -15,12 +15,16 @@ public class FeederIn extends CommandBase{
     }
     @Override
     public void execute() {
-        if(sensors.getBallIn() == false){
+        if(!sensors.isBallInFeed()){
         feederSub.intake(Constants.FEEDER_INTAKE_SPEED);
         }
-        else if(sensors.getBallIn() == true){
+        else{
             feederSub.intake(0);
         }
+    }
+    @Override
+    public boolean isFinished() {
+        return(sensors.isBallInFeed());
     }
     
 }

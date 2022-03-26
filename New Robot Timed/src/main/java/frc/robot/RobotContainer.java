@@ -17,12 +17,12 @@ import frc.robot.Commands.Drive;
 import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
-import frc.robot.Commands.Shoot;
+import frc.robot.Commands.SetFlySpeed;
+import frc.robot.Commands.AutoShoot;
 import frc.robot.Commands.Spin;
 import frc.robot.Commands.Targeting;
-import frc.robot.Commands.TunnelIn;
+import frc.robot.Commands.MoveBalltoShooter;
 import frc.robot.Commands.TunnelOut;
-import frc.robot.Commands.TunnelStop;
 import frc.robot.Commands.MoveVerticalHooks;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
@@ -56,18 +56,17 @@ public class RobotContainer {
     .alongWith(new FeederIn(feederSub, sensors))
     .andThen(new Spin(driveTrain, Constants.TAXI_AND_SHOOT_SPIN_DEGREES))
     .andThen(new Targeting(limelight, driveTrain))
-    .andThen(new Shoot(shooterSystem, sensors));
+    .andThen(new AutoShoot(shooterSystem, sensors));
     Command shootWithTargeting = (new Targeting(limelight, driveTrain))
-      .andThen(new Shoot(shooterSystem, sensors));
+      .andThen(new AutoShoot(shooterSystem, sensors));
     Command dance = (new OffTarmac(driveTrain))
       .andThen(new Spin(driveTrain, Constants.DANCE_SPIN))
       .alongWith(new DanceVerticalHooks(verticalHooks, Constants.DANCE_VERTICAL_HOOK_DISTANCE))
       .alongWith(new DanceAngledHooks(angledHooks, Constants.DANCE_ANGLED_HOOK_DISTANCE))
       .andThen(new Targeting(limelight, driveTrain));
     Command autoShoot = (new Targeting(limelight, driveTrain))
-      .andThen(new Shoot(shooterSystem, sensors))
-      .andThen(new TunnelIn(tunnelSub))
-      .alongWith(new TunnelStop(tunnelSub));
+      .andThen(new AutoShoot(shooterSystem, sensors))
+      .andThen(new MoveBalltoShooter(tunnelSub));
     // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
@@ -96,20 +95,19 @@ public class RobotContainer {
   private void configureButtonBindings() {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
     targetingButton.whenReleased(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
-    shootingButton.whenHeld(new Shoot(shooterSystem, sensors), false);
-    shootingButton.and(humanOverRideButton).whileActiveContinuous(autoShoot);
+    shootingButton.whenHeld(new SetFlySpeed(shooterSystem), false);
+    shootingButton.and(humanOverRideButton).whileActiveContinuous(new SetFlySpeed(shooterSystem));
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
     feederInButton.whenHeld(new FeederIn(feederSub, sensors), false);
     feederOutButton.whenHeld(new FeederOut(feederSub, sensors), false);
-    tunnelInButton.whenHeld(new TunnelIn(tunnelSub), false);
+    tunnelInButton.whenHeld(new MoveBalltoShooter(tunnelSub), false);
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
     danceButton.and(humanOverRideButton).whileActiveContinuous(dance);
     angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)), false);
     angledOverRideButton.whenInactive(new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
     verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks, () -> middleJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
     deathSpinButton.and(humanOverRideButton).whileActiveContinuous(new Spin(driveTrain, Constants.SPIN_BUTTON_DEGREES));
-    
   }
 
   private void begin() {

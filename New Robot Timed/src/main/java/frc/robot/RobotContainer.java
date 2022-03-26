@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Subsystems.Limelight;
+import frc.robot.Subsystems.Sensors;
 import frc.robot.Subsystems.ShooterSystem;
 import frc.robot.Subsystems.TunnelSub;
 import frc.robot.Commands.MoveAngledHooks;
@@ -16,8 +17,7 @@ import frc.robot.Commands.Drive;
 import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
-import frc.robot.Commands.SetFlyWheelSpeed;
-import frc.robot.Commands.StopFlyWheelSpeed;
+import frc.robot.Commands.Shoot;
 import frc.robot.Commands.Spin;
 import frc.robot.Commands.Targeting;
 import frc.robot.Commands.TunnelIn;
@@ -44,29 +44,29 @@ public class RobotContainer {
   Limelight limelight;
   FeederSub feederSub;
   TunnelSub tunnelSub;
+  Sensors sensors;
   // commands
-  Drive drive =  new Drive(driveTrain, () -> leftJoystick.getRawAxis(0), ()-> middleJoystick.getRawAxis(1));
+  Drive drive =  new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), ()-> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS));
   Targeting targeting = new Targeting(limelight, driveTrain);
   DoNotDrive doNotDrive = new DoNotDrive(driveTrain);
   OffTarmac offTarmac = new OffTarmac(driveTrain);
   ChooseLimelightMode limelightModeOn = new ChooseLimelightMode(limelight, LimelightMode.forceOn);
   ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, LimelightMode.forceOff);
   Command taxiAndShoot = (new OffTarmac(driveTrain))
-    .alongWith(new FeederIn(feederSub))
-    .andThen(new Spin(driveTrain, 180))
+    .alongWith(new FeederIn(feederSub, sensors))
+    .andThen(new Spin(driveTrain, Constants.TAXI_AND_SHOOT_SPIN_DEGREES))
     .andThen(new Targeting(limelight, driveTrain))
-    .andThen(new SetFlyWheelSpeed(shooterSystem));
+    .andThen(new Shoot(shooterSystem, sensors));
     Command shootWithTargeting = (new Targeting(limelight, driveTrain))
-      .andThen(new SetFlyWheelSpeed(shooterSystem));
+      .andThen(new Shoot(shooterSystem, sensors));
     Command dance = (new OffTarmac(driveTrain))
-      .andThen(new Spin(driveTrain, 180))
-      .alongWith(new DanceVerticalHooks(verticalHooks, 10))
-      .alongWith(new DanceAngledHooks(angledHooks, 10))
+      .andThen(new Spin(driveTrain, Constants.DANCE_SPIN))
+      .alongWith(new DanceVerticalHooks(verticalHooks, Constants.DANCE_VERTICAL_HOOK_DISTANCE))
+      .alongWith(new DanceAngledHooks(angledHooks, Constants.DANCE_ANGLED_HOOK_DISTANCE))
       .andThen(new Targeting(limelight, driveTrain));
     Command autoShoot = (new Targeting(limelight, driveTrain))
-      .andThen(new SetFlyWheelSpeed(shooterSystem))
+      .andThen(new Shoot(shooterSystem, sensors))
       .andThen(new TunnelIn(tunnelSub))
-      .andThen(new StopFlyWheelSpeed(shooterSystem))
       .alongWith(new TunnelStop(tunnelSub));
     // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
@@ -89,26 +89,26 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     begin();
-    driveTrain.setDefaultCommand(new Drive(driveTrain, () -> leftJoystick.getRawAxis(0), () -> middleJoystick.getRawAxis(1)));
+    driveTrain.setDefaultCommand(new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
 
   }
 
   private void configureButtonBindings() {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
     targetingButton.whenReleased(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
-    shootingButton.whenHeld(new SetFlyWheelSpeed(shooterSystem), false);
+    shootingButton.whenHeld(new Shoot(shooterSystem, sensors), false);
     shootingButton.and(humanOverRideButton).whileActiveContinuous(autoShoot);
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
-    feederInButton.whenHeld(new FeederIn(feederSub), false);
-    feederOutButton.whenHeld(new FeederOut(feederSub), false);
+    feederInButton.whenHeld(new FeederIn(feederSub, sensors), false);
+    feederOutButton.whenHeld(new FeederOut(feederSub, sensors), false);
     tunnelInButton.whenHeld(new TunnelIn(tunnelSub), false);
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
     danceButton.and(humanOverRideButton).whileActiveContinuous(dance);
-    angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(1)), false);
-    angledOverRideButton.whenInactive(new Drive(driveTrain, () -> leftJoystick.getRawAxis(0), () -> middleJoystick.getRawAxis(1)));
-    verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks, () -> middleJoystick.getRawAxis(0)), false);
-    deathSpinButton.and(humanOverRideButton).whileActiveContinuous(new Spin(driveTrain, 360));
+    angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)), false);
+    angledOverRideButton.whenInactive(new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
+    verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks, () -> middleJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
+    deathSpinButton.and(humanOverRideButton).whileActiveContinuous(new Spin(driveTrain, Constants.SPIN_BUTTON_DEGREES));
     
   }
 

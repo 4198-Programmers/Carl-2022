@@ -1,7 +1,10 @@
 package frc.robot;
 
 public class Constants {
-//Motor Ports
+//Axis
+public static final int UP_AND_DOWN_AXIS = 0;
+public static final double SPIN_BUTTON_DEGREES = 1;
+//Ports
     public static byte FRONT_RIGHT_MOTOR_PORT = 10;
     public static byte FRONT_LEFT_MOTOR_PORT = 1;
     public static byte BACK_RIGHT_MOTOR_PORT = 9;
@@ -15,9 +18,9 @@ public class Constants {
     public static final byte BALL_IN_SENSOR_PORT = 1;
     public static final byte BALL_OUT_SENSOR_PORT = 0;
 //Joysticks
-    public static final int RIGHT_JOYSTICK_PORT = 2;
-    public static final int MIDDLE_JOYSTICK_PORT = 1;
     public static final int LEFT_JOYSTICK_PORT = 0;
+    public static final int MIDDLE_JOYSTICK_PORT = 1;
+    public static final int RIGHT_JOYSTICK_PORT = 2;
 
     //Used in Equations
     /**Used to find distance traveled */
@@ -76,4 +79,9 @@ public static final int DEATH_SPIN_BUTTON = 11;
     public static final int TUNNEL_IN_BUTTON = 6;
     public static final int TUNNEL_OUT_BUTTON = 4;
     public static final int VERTICAL_OVERRIDE_BUTTON = 2;
+    public static final double DANCE_SPIN = 0;
+    public static final double DANCE_VERTICAL_HOOK_DISTANCE = 0;
+    public static final double DANCE_ANGLED_HOOK_DISTANCE = 0;
+    public static final double TAXI_AND_SHOOT_SPIN_DEGREES = 0;
+    public static final int LEFT_AND_RIGHT_AXIS = 0;
 }

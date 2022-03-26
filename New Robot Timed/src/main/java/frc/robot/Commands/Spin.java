@@ -4,18 +4,18 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.Subsystems.DriveTrain;
 
-public class Spin180 extends CommandBase{
+public class Spin extends CommandBase{
     DriveTrain driveTrain;
     double degrees;
     boolean youdone;
-    public Spin180(DriveTrain driveTrain){
+    public Spin(DriveTrain driveTrain, double degrees){
         this.driveTrain = driveTrain;
+        this.degrees = degrees;
         addRequirements(driveTrain);
     }
     @Override
     public void initialize() {
         driveTrain.resetPosition();
-        degrees = 180;
         youdone = false;
     }
     @Override

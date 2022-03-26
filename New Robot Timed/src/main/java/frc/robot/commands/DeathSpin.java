@@ -6,7 +6,6 @@ import frc.robot.subsystems.DriveTrain;
 public class DeathSpin extends CommandBase {
 
     private DriveTrain deathParade;
-    boolean spinCondition;
 
     public DeathSpin(DriveTrain deathParade) {
         this.deathParade = deathParade;
@@ -15,7 +14,6 @@ public class DeathSpin extends CommandBase {
 
     @Override
     public void initialize() {
-        spinCondition = true;
         deathParade.resetPosition();
     }
 

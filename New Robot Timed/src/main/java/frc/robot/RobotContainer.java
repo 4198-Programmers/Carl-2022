@@ -39,7 +39,7 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
 
-    deathSpinBTN.
+    deathSpinBTN.whileActiveContinuous(deathSpin);
   }
 
   public Command getAutonomousCommand() {

@@ -10,6 +10,8 @@ public class Constants {
     public static final int FL_MOTOR_ID = 4;
     public static final int BR_MOTOR_ID = 1;
     public static final int BL_MOTOR_ID = 2;
+    public static final int RHOOK_MOTOR_ID = -0;
+    public static final int LHOOK_MOTOR_ID = -0;
 
     public static final byte LEFT_SHAFT_PORT = 0;
     public static final byte MIDDLE_SHAFT_PORT = 1;
@@ -17,6 +19,6 @@ public class Constants {
 
     public static final double JAKE_WHEELS = 5.875;
     public static final double WHEEL_CONVERSION_FACTOR = 12.75;
-    public static final double SPEED_CONVERSION_FACTOR = 0.5;
+    public static final double SPEED_CONVERSION_FACTOR = 1;
     public static final int DEATH_SPIN_BUTTON = 1;
 }

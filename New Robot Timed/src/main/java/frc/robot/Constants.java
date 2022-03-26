@@ -27,7 +27,7 @@ public class Constants {
     /**The angle of the limelight compared to the ground */
         public static final double LIMELIGHT_ANGLE_FROM_GROUND = 65;
     /**The limit that the vertical hooks can't go past */
-        public static final double VERTICAL_HOOK_TOP_LIMIT = -0;
+        public static final double VERTICAL_HOOK_TOP_LIMIT = -187;
         public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
     /** Used to find the distance as well as the speed */
         public static byte SPEED_MULTIPLIER = 1;

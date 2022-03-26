@@ -12,6 +12,8 @@ public class Constants {
     public static final int FEEDER_MOTOR_PORT = 4;
     public static final int FLYWHEEL_MOTOR_PORT = 3;
     public static final int TUNNEL_MOTOR_ID = 7;
+    public static final byte BALL_IN_SENSOR_PORT = 1;
+    public static final byte BALL_OUT_SENSOR_PORT = 0;
 //Joysticks
     public static final int RIGHT_JOYSTICK_PORT = 2;
     public static final int MIDDLE_JOYSTICK_PORT = 1;

@@ -8,10 +8,9 @@ import frc.robot.Subsystems.TunnelSub;
 public class MoveBallFromFeed extends CommandBase{
     TunnelSub tunnelSub;
     Sensors sensors;
-    public MoveBallFromFeed(TunnelSub tunnelSub, Sensors sensors){
+    public MoveBallFromFeed(TunnelSub tunnelSub){
         this.tunnelSub = tunnelSub;
-        this.sensors = sensors;
-        addRequirements(tunnelSub, sensors);
+        addRequirements(tunnelSub);
     }
     @Override
     public void execute() {

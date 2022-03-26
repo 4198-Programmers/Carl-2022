@@ -8,10 +8,9 @@ import frc.robot.Subsystems.Sensors;
 public class FeederOut extends CommandBase{
     FeederSub feederSub;
     Sensors sensors;
-    public FeederOut(FeederSub feederSub, Sensors sensors){
+    public FeederOut(FeederSub feederSub){
         this.feederSub = feederSub;
-        this.sensors = sensors;
-        addRequirements(feederSub, sensors);
+        addRequirements(feederSub);
     }
 
     @Override

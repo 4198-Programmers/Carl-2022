@@ -18,7 +18,7 @@ public class Maths {
         return distance;
     }
 
-    public static double flyWheelSpeedByDistance(double Distance, boolean target) {
+    public static double flyWheelSpeedByDistance(double Distance) {
         // double invTest = Distance;
         // double a = 0.000188428;
         // double b = -0.00228743;

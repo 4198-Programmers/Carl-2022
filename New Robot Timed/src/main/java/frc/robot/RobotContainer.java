@@ -9,6 +9,7 @@ import frc.robot.Subsystems.Sensors;
 import frc.robot.Subsystems.ShooterSystem;
 import frc.robot.Subsystems.TunnelSub;
 import frc.robot.Commands.MoveAngledHooks;
+import frc.robot.Commands.MoveBallFromFeed;
 import frc.robot.Commands.ChooseLimelightMode;
 import frc.robot.Commands.DanceAngledHooks;
 import frc.robot.Commands.DanceVerticalHooks;
@@ -18,11 +19,14 @@ import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
 import frc.robot.Commands.SetFlySpeed;
-import frc.robot.Commands.AutoShoot;
+import frc.robot.Commands.WaitForBallToLeaveBot;
+import frc.robot.Commands.WaitForFlyWheelSpeed;
 import frc.robot.Commands.Spin;
+import frc.robot.Commands.StopFlyWheel;
 import frc.robot.Commands.Targeting;
 import frc.robot.Commands.MoveBalltoShooter;
 import frc.robot.Commands.TunnelOut;
+import frc.robot.Commands.TunnelStop;
 import frc.robot.Commands.MoveVerticalHooks;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
@@ -53,20 +57,31 @@ public class RobotContainer {
   ChooseLimelightMode limelightModeOn = new ChooseLimelightMode(limelight, LimelightMode.forceOn);
   ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, LimelightMode.forceOff);
   Command taxiAndShoot = (new OffTarmac(driveTrain))
-    .alongWith(new FeederIn(feederSub, sensors))
-    .andThen(new Spin(driveTrain, Constants.TAXI_AND_SHOOT_SPIN_DEGREES))
-    .andThen(new Targeting(limelight, driveTrain))
-    .andThen(new AutoShoot(shooterSystem, sensors));
+    .alongWith(new MoveBallFromFeed(tunnelSub))
+    .alongWith(new FeederIn(feederSub))
+    .andThen(new SetFlySpeed(shooterSystem))
+    .andThen(new WaitForFlyWheelSpeed(shooterSystem, limelight))
+    .andThen(new MoveBalltoShooter(tunnelSub))
+    .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
+    .alongWith(new WaitForBallToLeaveBot())
+    .andThen(new WaitForFlyWheelSpeed(shooterSystem, limelight))
+    .andThen(new MoveBalltoShooter(tunnelSub))
+    .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
+    .alongWith(new WaitForBallToLeaveBot())
+    .andThen(new TunnelStop(tunnelSub))
+    .alongWith(new StopFlyWheel(shooterSystem));
     Command shootWithTargeting = (new Targeting(limelight, driveTrain))
-      .andThen(new AutoShoot(shooterSystem, sensors));
+      .andThen(new WaitForBallToLeaveBot());
     Command dance = (new OffTarmac(driveTrain))
       .andThen(new Spin(driveTrain, Constants.DANCE_SPIN))
-      .alongWith(new DanceVerticalHooks(verticalHooks, Constants.DANCE_VERTICAL_HOOK_DISTANCE))
-      .alongWith(new DanceAngledHooks(angledHooks, Constants.DANCE_ANGLED_HOOK_DISTANCE))
+      .alongWith(new DanceVerticalHooks(verticalHooks, Constants.DANCE_VERTICAL_HOOK_DISTANCE),
+        (new DanceAngledHooks(angledHooks, Constants.DANCE_ANGLED_HOOK_DISTANCE)))
       .andThen(new Targeting(limelight, driveTrain));
     Command autoShoot = (new Targeting(limelight, driveTrain))
-      .andThen(new AutoShoot(shooterSystem, sensors))
-      .andThen(new MoveBalltoShooter(tunnelSub));
+      .andThen(new SetFlySpeed(shooterSystem))
+      .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
+      .alongWith(new WaitForBallToLeaveBot())
+      .alongWith(new MoveBallFromFeed(tunnelSub));
     // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
@@ -99,8 +114,8 @@ public class RobotContainer {
     shootingButton.and(humanOverRideButton).whileActiveContinuous(new SetFlySpeed(shooterSystem));
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
-    feederInButton.whenHeld(new FeederIn(feederSub, sensors), false);
-    feederOutButton.whenHeld(new FeederOut(feederSub, sensors), false);
+    feederInButton.whenHeld(new FeederIn(feederSub), false);
+    feederOutButton.whenHeld(new FeederOut(feederSub), false);
     tunnelInButton.whenHeld(new MoveBalltoShooter(tunnelSub), false);
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
     danceButton.and(humanOverRideButton).whileActiveContinuous(dance);

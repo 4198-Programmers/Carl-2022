@@ -14,4 +14,7 @@ public class ShooterSystem extends SubsystemBase{
     public void stop(){
         flyWheel.set(0);
     }
+    public double getSpeed() {
+        return flyWheel.get();
+    }
 }

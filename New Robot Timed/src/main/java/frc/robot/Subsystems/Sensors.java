@@ -32,4 +32,8 @@ public class Sensors extends SubsystemBase{
         shotBall = true;
        }
     }
+    public void forget() {
+        shotBall = false;
+        hasBallOutSensorSeenBall = false;
+    }
 }

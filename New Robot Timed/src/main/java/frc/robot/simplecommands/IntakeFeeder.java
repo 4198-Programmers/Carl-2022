@@ -10,12 +10,18 @@ public class IntakeFeeder extends CommandBase {
     Intake intake;
     Tunnel tunnel;
     FlyAndSensors sensor;
+    boolean done;
 
     public IntakeFeeder(Intake intakeSub, Tunnel tunnelSub, FlyAndSensors flyAndSensorsSub) {
         intake = intakeSub;
         tunnel = tunnelSub;
         sensor = flyAndSensorsSub;
         addRequirements(intake, tunnel);
+    }
+
+    @Override
+    public void initialize() {
+        done = false;
     }
 
     @Override
@@ -26,6 +32,12 @@ public class IntakeFeeder extends CommandBase {
         } else {
             tunnel.setMoverSpeed(Constants.FREEZE);
         }
+        done = true;
+    }
+
+    @Override
+    public boolean isFinished() {
+        return done;
     }
 
 }

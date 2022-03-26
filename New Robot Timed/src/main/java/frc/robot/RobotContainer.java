@@ -42,6 +42,7 @@ import frc.robot.simplecommands.StableIntestines;
 import frc.robot.simplecommands.StopFly;
 import frc.robot.simplecommands.Targeting;
 import frc.robot.simplecommands.TaxiOffTarmac;
+import frc.robot.simplecommands.TaxiOffTarmacFast;
 import frc.robot.simplecommands.TaxiOnTarmac;
 import frc.robot.simplecommands.TimedInternalMoveIn;
 import frc.robot.simplecommands.TimedInternalMoveOut;
@@ -182,15 +183,13 @@ public class RobotContainer {
       .andThen(new ResetWheels(vroomVroomSub))
       .andThen(new SpinLeftAuto(vroomVroomSub, 155))
       .andThen(new ResetWheels(vroomVroomSub))
-      .andThen(new TaxiOffTarmac(vroomVroomSub, 163))
-      .andThen(new IntakeFeeder(intakeSub, tunnelSub, flyAndSensorsSub))
-      .andThen(new WaitCommand(2))
-      .andThen(new ResetWheels(vroomVroomSub))
-      .andThen(new TaxiOnTarmac(vroomVroomSub, 5))
-      .andThen(new ResetWheels(vroomVroomSub))
-      .andThen(new SpinRightAuto(vroomVroomSub, 180))
-      .andThen(new Targeting(vroomVroomSub, visionSub))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 500, midStick));
+      .andThen((new TaxiOffTarmacFast(vroomVroomSub, 140))
+          .alongWith((new SetIntakeSpeedIn(intakeSub))
+              .andThen(new InSensorCheck(flyAndSensorsSub, true))
+              .andThen(new SetInternalMoveSpeedIn(tunnelSub))
+              .andThen(new InSensorCheck(flyAndSensorsSub, false))
+              .andThen(new TunnelStop(tunnelSub))))
+      .andThen((new WaitCommand(10)));
 
   // buttons
   JoystickButton overrideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_LBUTTON);
@@ -269,6 +268,7 @@ public class RobotContainer {
     m_chooser.addOption("Only Taxi (Mid)", taxiMid);
     m_chooser.addOption("Taxi + Shoot One (R/M/L)", taxiAndShoot);
     m_chooser.setDefaultOption("Two Ball Auto (R/M/L)", taxiTwoBallShootMidBall);
+    m_chooser.addOption("four", taxiFourBall);
     SmartDashboard.putData("Auto choices", m_chooser);
 
   }

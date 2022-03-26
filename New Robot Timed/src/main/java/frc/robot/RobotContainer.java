@@ -49,8 +49,8 @@ public class RobotContainer {
   Targeting targeting = new Targeting(limelight, driveTrain);
   DoNotDrive doNotDrive = new DoNotDrive(driveTrain);
   OffTarmac offTarmac = new OffTarmac(driveTrain);
-  ChooseLimelightMode limelightModeOn = new ChooseLimelightMode(limelight, 1);
-  ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, 0);
+  ChooseLimelightMode limelightModeOn = new ChooseLimelightMode(limelight, LimelightMode.forceOn);
+  ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, LimelightMode.forceOff);
   Command taxiAndShoot = (new OffTarmac(driveTrain))
     .alongWith(new FeederIn(feederSub))
     .andThen(new Spin180(driveTrain))
@@ -95,8 +95,8 @@ public class RobotContainer {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
     targetingButton.whenReleased(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
     shootingButton.whenHeld(new SetFlyWheelSpeed(shooterSystem), false);
-    limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, 1));
-    limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, 0));
+    limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
+    limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
     feederInButton.whenHeld(new FeederIn(feederSub), false);
     feederOutButton.whenHeld(new FeederOut(feederSub), false);
     tunnelInButton.whenHeld(new TunnelIn(tunnelSub), false);

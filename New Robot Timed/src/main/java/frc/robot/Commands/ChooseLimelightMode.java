@@ -18,6 +18,6 @@ public class ChooseLimelightMode extends CommandBase{
     }
     @Override
     public boolean isFinished(){
-        return(limelight.getpipelineMode(mode) == mode);
+        return(limelight.getpipelineMode() == mode);
     }
 }

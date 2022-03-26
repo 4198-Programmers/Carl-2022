@@ -55,6 +55,8 @@ public class Constants {
 
 
 //LeftJoystick
+public static final int HUMAN_OVERRIDE_BUTTON = 2;
+public static final int DEATH_SPIN_BUTTON = 11;
 
 //Middle Joystick
     public static final int TARGETING_BUTTON = 1;

@@ -18,7 +18,7 @@ import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.OffTarmac;
 import frc.robot.Commands.SetFlyWheelSpeed;
 import frc.robot.Commands.StopFlyWheelSpeed;
-import frc.robot.Commands.Spin180;
+import frc.robot.Commands.Spin;
 import frc.robot.Commands.Targeting;
 import frc.robot.Commands.TunnelIn;
 import frc.robot.Commands.TunnelOut;
@@ -53,19 +53,19 @@ public class RobotContainer {
   ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, LimelightMode.forceOff);
   Command taxiAndShoot = (new OffTarmac(driveTrain))
     .alongWith(new FeederIn(feederSub))
-    .andThen(new Spin180(driveTrain))
+    .andThen(new Spin(driveTrain, 180))
     .andThen(new Targeting(limelight, driveTrain))
     .andThen(new SetFlyWheelSpeed(shooterSystem));
     Command shootWithTargeting = (new Targeting(limelight, driveTrain))
       .andThen(new SetFlyWheelSpeed(shooterSystem));
     Command dance = (new OffTarmac(driveTrain))
-      .andThen(new Spin180(driveTrain))
+      .andThen(new Spin(driveTrain, 180))
       .alongWith(new DanceVerticalHooks(verticalHooks, 10))
       .alongWith(new DanceAngledHooks(angledHooks, 10))
       .andThen(new Targeting(limelight, driveTrain));
     Command autoShoot = (new Targeting(limelight, driveTrain))
       .andThen(new SetFlyWheelSpeed(shooterSystem))
-      .alongWith(new TunnelIn(tunnelSub))
+      .andThen(new TunnelIn(tunnelSub))
       .andThen(new StopFlyWheelSpeed(shooterSystem))
       .alongWith(new TunnelStop(tunnelSub));
     // buttons
@@ -80,6 +80,8 @@ public class RobotContainer {
   JoystickButton danceButton = new JoystickButton(middleJoystick, Constants.DANCE_BUTTON);
   JoystickButton angledOverRideButton = new JoystickButton(middleJoystick, Constants.ANGLED_OVERRIDE_BUTTON);
   JoystickButton verticalOverRideButton = new JoystickButton(middleJoystick, Constants.VERTICAL_OVERRIDE_BUTTON);
+  JoystickButton deathSpinButton = new JoystickButton(leftJoystick, Constants.DEATH_SPIN_BUTTON);
+  JoystickButton humanOverRideButton = new JoystickButton(leftJoystick, Constants.HUMAN_OVERRIDE_BUTTON);
 
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -95,16 +97,18 @@ public class RobotContainer {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
     targetingButton.whenReleased(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
     shootingButton.whenHeld(new SetFlyWheelSpeed(shooterSystem), false);
+    shootingButton.and(humanOverRideButton).whileActiveContinuous(autoShoot);
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
     feederInButton.whenHeld(new FeederIn(feederSub), false);
     feederOutButton.whenHeld(new FeederOut(feederSub), false);
     tunnelInButton.whenHeld(new TunnelIn(tunnelSub), false);
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
-    danceButton.whenPressed(dance);
+    danceButton.and(humanOverRideButton).whileActiveContinuous(dance);
     angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(1)), false);
     angledOverRideButton.whenInactive(new Drive(driveTrain, () -> leftJoystick.getRawAxis(0), () -> middleJoystick.getRawAxis(1)));
     verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks, () -> middleJoystick.getRawAxis(0)), false);
+    deathSpinButton.and(humanOverRideButton).whileActiveContinuous(new Spin(driveTrain, 360));
     
   }
 

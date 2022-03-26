@@ -33,9 +33,9 @@ public class Constants {
         public static byte SPEED_MULTIPLIER = 1;
     /**Used to stop the angled hooks from going to opposite direction. */
         public static final double ANGLED_HOOK_UPPER_LIMIT = -97;
-        public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
+        public static final double ANGLED_HOOK_LOWER_LIMIT = 20;
     /**How far we want the bot to move in Auto */
-        public static final double WANTED_AUTO_DISTANCE = 0;
+        public static final double WANTED_AUTO_DISTANCE = 24;
     /**Need the middle wheel Circumference to calculate Spin180 */
         public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5;
     //Constant Speeds
@@ -67,9 +67,9 @@ public class Constants {
 
 //Righ Joystick
     public static final int SHOOTING_BUTTON = 1;
-    public static final int FEEDER_IN_BUTTON = 0;
-    public static final int FEEDER_OUT_BUTTON = 0;
-    public static final int TUNNEL_IN_BUTTON = 0;
-    public static final int TUNNEL_OUT_BUTTON = 0;
+    public static final int FEEDER_IN_BUTTON = 5;
+    public static final int FEEDER_OUT_BUTTON = 3;
+    public static final int TUNNEL_IN_BUTTON = 6;
+    public static final int TUNNEL_OUT_BUTTON = 4;
     public static final int VERTICAL_OVERRIDE_BUTTON = 2;
 }

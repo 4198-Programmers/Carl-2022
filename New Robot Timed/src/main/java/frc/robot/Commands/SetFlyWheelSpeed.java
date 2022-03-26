@@ -15,7 +15,7 @@ public class SetFlyWheelSpeed extends CommandBase{
     }
     @Override
     public void execute() {
-        shooterSystem.setFlyWheelSpeed(Maths.flyWheelSpeedByDistance((limelight.distancefromTarget()), limelight.hasTarget() == 1));
+        shooterSystem.setFlyWheelSpeed(Maths.flyWheelSpeedByDistance((limelight.distancefromTarget()), limelight.hasTarget() == true));
     }
 
 }

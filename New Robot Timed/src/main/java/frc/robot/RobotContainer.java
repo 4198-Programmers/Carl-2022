@@ -103,6 +103,7 @@ public class RobotContainer {
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
     danceButton.whenPressed(dance);
     angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(1)), false);
+    angledOverRideButton.whenInactive(new Drive(driveTrain, () -> leftJoystick.getRawAxis(0), () -> middleJoystick.getRawAxis(1)));
     verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks, () -> middleJoystick.getRawAxis(0)), false);
     
   }

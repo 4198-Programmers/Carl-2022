@@ -54,7 +54,7 @@ public class Limelight extends SubsystemBase{
         }
         return(pipeline);
         }
-    public double hasTarget(){
-        return(tx.getDouble(0));
+    public boolean hasTarget(){
+        return(tv.getDouble(0) == 1);
     }
     }

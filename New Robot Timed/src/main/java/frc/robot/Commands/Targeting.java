@@ -21,24 +21,24 @@ public class Targeting extends CommandBase{
     }
     @Override
     public void execute() {
-        if(limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT  && limelight.hasTarget() != 1){
+        if(limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT  && limelight.hasTarget() != true){
             driveTrain.greenLight(-1, 0);
         }
-        else if(limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_LEFT && limelight.hasTarget() != 1){
+        else if(limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_LEFT && limelight.hasTarget() != true){
             driveTrain.greenLight(1, 0);
         }
-        else if(limelight.hasTarget() ==1 && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT){
+        else if(limelight.hasTarget() == true && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT){
             driveTrain.greenLight(-0.5, 0);
         }
-        else if(limelight.hasTarget() == 1 && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT){
+        else if(limelight.hasTarget() == true && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT){
             driveTrain.greenLight(0.5, 0);
         }
-        else if(limelight.hasTarget() == 1 && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT_SLIM && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT_SLIM){
+        else if(limelight.hasTarget() == true && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT_SLIM && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT_SLIM){
             driveTrain.greenLight(0, 0);
         }
     }
     @Override
     public boolean isFinished() {
-        return(limelight.hasTarget() == 1 && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT_SLIM && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT_SLIM);
+        return(limelight.hasTarget() == true && limelight.xOffset() <= Constants.X_OFFSET_TARGETING_TO_THE_RIGHT_SLIM && limelight.xOffset() >= Constants.X_OFFSET_TARGETING_TO_THE_LEFT_SLIM);
     }
 }

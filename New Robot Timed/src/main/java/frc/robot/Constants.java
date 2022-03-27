@@ -44,10 +44,12 @@ public static final double SPIN_BUTTON_DEGREES = 1;
         public static final double WANTED_AUTO_DISTANCE = 24;
     /**Need the middle wheel Circumference to calculate Spin180 */
         public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5;
-    //Constant Speeds
+    //Constants
         public static final double FEEDER_INTAKE_SPEED = -1;
         public static final double TUNNEL_SPEED = 0.75;
-
+        public static final double FOUR_BALL_AUTO_DEGREES = 0;
+        public static final double DANCE_DRIVE_DISTANCE = 0;
+        public static final double WANTED_DISTANCE_FOR_FOUR_BALL_AUTO = 0;
 
 
 //Targeting Offsets

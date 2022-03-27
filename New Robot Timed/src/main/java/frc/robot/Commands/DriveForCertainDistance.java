@@ -1,22 +1,21 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Maths;
 import frc.robot.Subsystems.DriveTrain;
 
-public class OffTarmac extends CommandBase{
+public class DriveForCertainDistance extends CommandBase{
     DriveTrain driveTrain;
     Maths maths;
     double distance;
-    public OffTarmac(DriveTrain driveTrain){
+    public DriveForCertainDistance(DriveTrain driveTrain, double distance){
         this.driveTrain = driveTrain;
+        this.distance = distance;
         addRequirements(driveTrain);
     }
     @Override
     public void initialize() {
         driveTrain.resetPosition();
-        distance = Constants.WANTED_AUTO_DISTANCE;
     }
     @Override
     public void execute() {

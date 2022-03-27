@@ -75,11 +75,11 @@ public static final int DEATH_SPIN_BUTTON = 11;
 
 //Righ Joystick
     public static final int SHOOTING_BUTTON = 1;
+    public static final int VERTICAL_OVERRIDE_BUTTON = 2;
     public static final int FEEDER_IN_BUTTON = 5;
     public static final int FEEDER_OUT_BUTTON = 3;
     public static final int TUNNEL_IN_BUTTON = 6;
     public static final int TUNNEL_OUT_BUTTON = 4;
-    public static final int VERTICAL_OVERRIDE_BUTTON = 2;
     public static final double DANCE_SPIN = 0;
     public static final double DANCE_VERTICAL_HOOK_DISTANCE = 0;
     public static final double DANCE_ANGLED_HOOK_DISTANCE = 0;

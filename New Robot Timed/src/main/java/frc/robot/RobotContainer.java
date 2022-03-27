@@ -92,8 +92,10 @@ public class RobotContainer {
   JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.TUNNEL_IN_BUTTON);
   JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.TUNNEL_OUT_BUTTON);
   JoystickButton danceButton = new JoystickButton(middleJoystick, Constants.DANCE_BUTTON);
+
   JoystickButton angledOverRideButton = new JoystickButton(middleJoystick, Constants.ANGLED_OVERRIDE_BUTTON);
   JoystickButton verticalOverRideButton = new JoystickButton(middleJoystick, Constants.VERTICAL_OVERRIDE_BUTTON);
+
   JoystickButton deathSpinButton = new JoystickButton(leftJoystick, Constants.DEATH_SPIN_BUTTON);
   JoystickButton humanOverRideButton = new JoystickButton(leftJoystick, Constants.HUMAN_OVERRIDE_BUTTON);
 
@@ -103,7 +105,7 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     begin();
-    driveTrain.setDefaultCommand(new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
+    // driveTrain.setDefaultCommand(new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
 
   }
 
@@ -119,7 +121,7 @@ public class RobotContainer {
     tunnelInButton.whenHeld(new MoveBalltoShooter(tunnelSub), false);
     tunnelOutButton.whenHeld(new TunnelOut(tunnelSub), false);
     danceButton.and(humanOverRideButton).whileActiveContinuous(dance);
-    angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)), false);
+    angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks, () -> rightJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
     angledOverRideButton.whenInactive(new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
     verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks, () -> middleJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
     deathSpinButton.and(humanOverRideButton).whileActiveContinuous(new Spin(driveTrain, Constants.SPIN_BUTTON_DEGREES));

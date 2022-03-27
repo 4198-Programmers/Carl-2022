@@ -14,14 +14,10 @@ public class Robot extends TimedRobot {
 
   }
 
-
-
   @Override
   public void robotPeriodic() {
-    CommandScheduler.getInstance().run(); 
+    CommandScheduler.getInstance().run();
   }
-
- 
 
   @Override
   public void autonomousInit() {
@@ -33,12 +29,9 @@ public class Robot extends TimedRobot {
 
   }
 
-
-
   @Override
-  public void autonomousPeriodic() {}
-
-
+  public void autonomousPeriodic() {
+  }
 
   @Override
   public void teleopInit() {
@@ -55,21 +48,25 @@ public class Robot extends TimedRobot {
 
   /** This function is called once when the robot is disabled. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+  }
 
   /** This function is called periodically when disabled. */
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+  }
 
   /** This function is called once when test mode is enabled. */
   @Override
-  public void testInit() {}
+  public void testInit() {
+  }
 
   /** This function is called periodically during test mode. */
   @Override
-  public void testPeriodic() {}
+  public void testPeriodic() {
+  }
 
-  // @Override 
+  // @Override
   // public void simulationInit() {}
-  
+
 }

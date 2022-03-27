@@ -30,7 +30,7 @@ public class Maths {
         double a = 0.579371831414;
         double pow = 0.00961944776679;
 
-        return (-1* a * (Math.exp(pow*x)));
+        return (-1 * a * (Math.exp(pow * x)));
         // }
         // else{
         // return 0.25;
@@ -43,4 +43,4 @@ public class Maths {
         double totalRotations = ((circleDistance / wheelCircumference));
         return totalRotations;
     }
-    }
+}

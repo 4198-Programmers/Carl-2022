@@ -49,7 +49,8 @@ public class RobotContainer {
   TunnelSub tunnelSub;
   Sensors sensors;
   // commands
-  Drive drive = new Drive(driveTrain, () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS),
+  Drive drive = new Drive(driveTrain,
+      () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS),
       () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS));
   Targeting targeting = new Targeting(limelight, driveTrain);
   DoNotDrive doNotDrive = new DoNotDrive(driveTrain);

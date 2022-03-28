@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase{
-    public enum chooseLimelightMode{
+    public enum LimelightMode{
         forceOff(0),
         forceOn(1),
         invalid(-1);
         private double mode;
-        private chooseLimelightMode(double mode) {
+        private LimelightMode(double mode) {
             this.mode = mode;
         }
         public double getMode() {
@@ -35,7 +35,7 @@ public class Limelight extends SubsystemBase{
     private NetworkTableEntry pipeline = table.getEntry("pipeline");
 
     public static double distanceToTarget(){
-        double yAngle = ty.getDouble(0);
+        double yAngle = ty.getDouble();
         double distance = Maths.distanceFromTarget(yAngle);
         return distance;
     }
@@ -50,10 +50,10 @@ public class Limelight extends SubsystemBase{
     }
     public void setPipelineMode(LimelightMode mode)
     {
-    pipeline.setDouble(mode.getModeValue());     
+    pipeline.setDouble(mode.getMode());     
     }
     public LimelightMode getLimelightMode() {
-        double getMode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
+        double getMode = pipeline.getDouble(LimelightMode.invalid.getMode());
         LimelightMode pipeline = LimelightMode.invalid;
        if(getMode == 0){
            pipeline = LimelightMode.forceOff;
@@ -64,4 +64,3 @@ public class Limelight extends SubsystemBase{
         return pipeline;
     }
     }
-}

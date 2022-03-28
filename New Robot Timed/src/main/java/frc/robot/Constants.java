@@ -15,8 +15,8 @@ public class Constants {
     public static final int TUNNEL_MOTOR_PORT = 0;
     public static final int INTAKE_MOTOR_PORT = 0;
     
-    public static final int SHOOT_SENSOR_CHANNEL = 0;
-    public static final int INTAKE_SENSOR_CHANNEL = 0;
+    public static final int BALL_IN_SENSOR_PORT = 0;
+    public static final int BALL_OUT_SENSOR_PORT = 0;
 
 }
    

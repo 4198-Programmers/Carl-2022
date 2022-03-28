@@ -35,9 +35,7 @@ public class Limelight extends SubsystemBase{
     private NetworkTableEntry pipeline = table.getEntry("pipeline");
 
     public static double distanceToTarget(){
-        double yAngle = ty.getDouble();
-        double distance = Maths.distanceFromTarget(yAngle);
-        return distance;
+        return (Maths.distanceFromTarget(ty.getDouble(0)));
     }
     public double xOffsetTarget(){
         return tx.getDouble(1);

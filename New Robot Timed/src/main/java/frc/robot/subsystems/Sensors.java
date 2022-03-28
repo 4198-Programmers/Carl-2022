@@ -13,13 +13,19 @@ public class Sensors extends SubsystemBase{
         return(intakeSensor.get());
     }
     public boolean isBallAtShootSensor(){
-        ballIsAtSensor = shootSensor.get();
-        return(ballIsAtSensor);
+        return(shootSensor.get());
+    }
+    public boolean hasBallBeenSeen(){
+        return(hasShootSensorSeenBall);
     }
     @Override
     public void periodic() {
         if(isBallAtShootSensor()){
             hasShootSensorSeenBall = true;
+            ballIsAtSensor = true;
+        }
+        if(hasBallBeenSeen()){
+            
         }
 
     }

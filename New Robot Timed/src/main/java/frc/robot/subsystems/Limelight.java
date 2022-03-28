@@ -4,6 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase{
     public enum chooseLimelightMode{
@@ -31,8 +32,26 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry ledMode = table.getEntry("ledMode");
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
-    public NetworkTableEntry pipeline = table.getEntry("pipeline");
-    public 
+    private NetworkTableEntry pipeline = table.getEntry("pipeline");
+
+    public static double distanceToTarget(){
+        double yAngle = ty.getDouble(0);
+        double distance = Maths.distanceFromTarget(yAngle);
+        return distance;
+    }
+    public double xOffsetTarget(){
+        return tx.getDouble(1);
+    }
+    public boolean hasTarget(){
+        return tv.getDouble(0) == 1;
+    }
+    public double getPipeLine(){
+        return pipeline.getDouble(-1);
+    }
+    public void setPipelineMode(LimelightMode mode)
+    {
+    pipeline.setDouble(mode.getModeValue());     
+    }
     public LimelightMode getLimelightMode() {
         double getMode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
         LimelightMode pipeline = LimelightMode.invalid;
@@ -43,5 +62,6 @@ public class Limelight extends SubsystemBase{
            pipeline = LimelightMode.forceOn;
        }
         return pipeline;
-
+    }
+    }
 }

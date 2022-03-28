@@ -11,7 +11,7 @@ public class Limelight extends SubsystemBase{
         forceOn(1),
         invalid(-1);
         private double mode;
-        public void setMode(double mode) {
+        private chooseLimelightMode(double mode) {
             this.mode = mode;
         }
         public double getMode() {
@@ -32,6 +32,6 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
     public NetworkTableEntry pipeline = table.getEntry("pipeline");
-
+    
 
 }

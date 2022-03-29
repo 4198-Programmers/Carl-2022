@@ -16,7 +16,7 @@ public class VerticalHooksMove extends CommandBase{
     }
     @Override
     public void execute() {
-        if()
+        verticalHooks.moveHooks(hooksReciever.getHookSpeed());
     }
 
 }

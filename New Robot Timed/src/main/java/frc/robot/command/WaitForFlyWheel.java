@@ -5,10 +5,10 @@ import frc.robot.Maths;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.ShooterSystem;
 
-public class FlyWheelUpToSpeed extends CommandBase{
+public class WaitForFlyWheel extends CommandBase{
     ShooterSystem shooterSystem;
     Limelight limelight;
-    public FlyWheelUpToSpeed(ShooterSystem shooterSystem, Limelight limelight){
+    public WaitForFlyWheel(ShooterSystem shooterSystem, Limelight limelight){
         this.shooterSystem = shooterSystem;
         this.limelight = limelight;
     }

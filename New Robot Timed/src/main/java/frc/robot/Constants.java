@@ -31,6 +31,9 @@ public class Constants {
     public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
     public static final double WIDE_X_OFFSET = 0;
     public static final double SLIM_X_OFFSET = 0;
+    public static final int UP_DOWN_AXIS = 0;
+    public static final int LEFT_RIGHT_AXIS = 0;
+    public static final double TUNNEL_SPEED = 0;
 
 }
    

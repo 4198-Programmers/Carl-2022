@@ -3,7 +3,8 @@ package frc.robot;
 public class Constants {
     // Axis
     public static final int UP_AND_DOWN_AXIS = 0;
-    public static final double SPIN_BUTTON_DEGREES = 1;
+    public static final int LEFT_AND_RIGHT_AXIS = 0;
+    public static final int THROTTLE_AXIS = 0;
     // Ports
     public static byte FRONT_RIGHT_MOTOR_PORT = 10;
     public static byte FRONT_LEFT_MOTOR_PORT = 1;
@@ -50,6 +51,7 @@ public class Constants {
     public static final double FOUR_BALL_AUTO_DEGREES = 0;
     public static final double DANCE_DRIVE_DISTANCE = 0;
     public static final double WANTED_DISTANCE_FOR_FOUR_BALL_AUTO = 0;
+    public static final double SPIN_BUTTON_DEGREES = 1;
 
     // Targeting Offsets
     public static final double X_OFFSET_TARGETING_TO_THE_RIGHT = 3.75;
@@ -59,7 +61,10 @@ public class Constants {
 
     // LeftJoystick
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
+    public static final int THROTTLE_OVERRIDE_BUTTON = 3;
     public static final int DEATH_SPIN_BUTTON = 11;
+
+
 
     // Middle Joystick
     public static final int TARGETING_BUTTON = 1;
@@ -79,5 +84,7 @@ public class Constants {
     public static final double DANCE_VERTICAL_HOOK_DISTANCE = 0;
     public static final double DANCE_ANGLED_HOOK_DISTANCE = 0;
     public static final double TAXI_AND_SHOOT_SPIN_DEGREES = 0;
-    public static final int LEFT_AND_RIGHT_AXIS = 0;
+
+
+
 }

@@ -1,19 +1,19 @@
 package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Subsystems.TunnelSub;
 
-public class TunnelOut extends CommandBase {
+public class SetTunnelSpeed extends CommandBase {
     TunnelSub tunnelSub;
-
-    public TunnelOut(TunnelSub tunnelSub) {
+    double speed;
+    public SetTunnelSpeed(TunnelSub tunnelSub, double speed) {
         this.tunnelSub = tunnelSub;
+        this.speed = speed;
         addRequirements(tunnelSub);
     }
 
     @Override
     public void execute() {
-        tunnelSub.setSpeed(-(Constants.TUNNEL_SPEED));
+        tunnelSub.setSpeed(speed);
     }
 }

@@ -29,8 +29,11 @@ public class VerticalHooks extends SubsystemBase{
         return(getHookPostion() >= Constants.VERTICAL_HOOK_LOWER_LIMIT);
     }
     public void moveHooks(double speed){
-        if(canHooksMoveUp()){
-
+        double effectiveSpeed = speed;
+        if(speed > 0){
+            if(!canHooksMoveUp()){
+                effectiveSpeed = 0;
+            }
         }
     }
 }

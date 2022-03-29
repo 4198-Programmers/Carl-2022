@@ -25,6 +25,8 @@ public class Constants {
     public static final int RIGHT_VERTICAL_HOOK_PORT = 0;
     public static final int LEFT_VERTICAL_HOOK_PORT = 0;
     public static final int ANGLED_HOOKS_PORT = 0;
+    public static final double VERTICAL_HOOK_UPPER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
 
 }
    

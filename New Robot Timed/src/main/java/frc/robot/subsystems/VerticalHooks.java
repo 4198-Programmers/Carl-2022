@@ -22,8 +22,15 @@ public class VerticalHooks extends SubsystemBase{
         double leftPostion = leftVerticalEncoder.getPosition();
         return((rightPostion + leftPostion) / 2);
     }
-    public void setHookSpeed(double speed){
-        rightVerticalHookMotor.set(speed);
-        leftVerticalHookMotor.set(speed);
+    public boolean canHooksMoveUp(){
+        return(getHookPostion() <= Constants.VERTICAL_HOOK_UPPER_LIMIT);
+    }
+    public boolean canHooksMoveDown(){
+        return(getHookPostion() >= Constants.VERTICAL_HOOK_LOWER_LIMIT);
+    }
+    public void moveHooks(double speed){
+        if(canHooksMoveUp()){
+
+        }
     }
 }

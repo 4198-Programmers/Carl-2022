@@ -14,6 +14,6 @@ public class FlyWheelUpToSpeed extends CommandBase{
     }
     @Override
     public boolean isFinished() {
-        return(shooterSystem.setFlyWheelSpeed(Maths.flyWheelSpeedByDistance(limelight.distancefromTarget())) == Maths.flyWheelSpeedByDistance(limelight.distancefromTarget()));
+        double speed = shooterSystem.getSpeed();
     }
 }

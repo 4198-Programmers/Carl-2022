@@ -19,4 +19,7 @@ public class ShooterSystem extends SubsystemBase{
     public void setIntakeMotorSpeed(double speed){
         intakeMotor.set(speed);
     }
+    public double getSpeed() {
+        return (f);
+    }
 }

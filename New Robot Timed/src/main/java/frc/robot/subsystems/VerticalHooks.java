@@ -37,9 +37,9 @@ public class VerticalHooks extends SubsystemBase{
         }
         else if(speed < 0){
             if(!canHooksMoveDown()){
-                effectiveSpeed - 0;
+                effectiveSpeed = 0;
             }
         }
-        effectiveSpeed = 
+        verticalHooks.set(effectiveSpeed);   
     }
 }

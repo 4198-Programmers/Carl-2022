@@ -13,36 +13,45 @@ public static final int THROTTLE_AXIS = 3;
     public static final int RIGHT_JOYSTICK_PORT = 2;
 
 
-    public static final int FRONT_RIGHT_MOTOR_PORT = 0;
-    public static final int FRONT_LEFT_MOTOR_PORT = 0;
-    public static final int BACK_RIGHT_MOTOR_PORT = 0;
-    public static final int BACK_LEFT_MOTOR_PORT = 0;
-    public static final double SPEED_MULTIPLIER = 0;
-    public static final int FLY_WHEEL_MOTOR_PORT = 0;
-    public static final int TUNNEL_MOTOR_PORT = 0;
-    public static final int INTAKE_MOTOR_PORT = 0;
-    public static final int RIGHT_VERTICAL_HOOK_PORT = 0;
-    public static final int LEFT_VERTICAL_HOOK_PORT = 0;
-    public static final int ANGLED_HOOKS_PORT = 0;
+    public static final int FRONT_RIGHT_MOTOR_PORT = 10;
+    public static final int FRONT_LEFT_MOTOR_PORT = 1;
+    
+    public static final int BACK_RIGHT_MOTOR_PORT = 9;
+    public static final int BACK_LEFT_MOTOR_PORT = 2;
 
-    public static final int BALL_IN_SENSOR_PORT = 0;
+    public static final int FLY_WHEEL_MOTOR_PORT = 3;
+
+    public static final int TUNNEL_MOTOR_PORT = 7;
+
+    public static final int INTAKE_MOTOR_PORT = 4;
+
+    public static final int RIGHT_VERTICAL_HOOK_PORT = 8;
+    public static final int LEFT_VERTICAL_HOOK_PORT = 6;
+
+    public static final int ANGLED_HOOKS_PORT = 5;
+
+    public static final int BALL_IN_SENSOR_PORT = 1;
     public static final int BALL_OUT_SENSOR_PORT = 0;
 // Constants
-    public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = 0;
-    public static final double WHEEL_DIAMTER = 0;
-    public static final double TARGET_HEIGHT_TOP_TO_GROUND = 0;
-    public static final double LIMELIGHT_HEIGHT_TO_GROUND = 0;
-    public static final double LIMELIGHT_ANGLE_FROM_GROUND = 0;
+    public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5;
+    public static final double WHEEL_DIAMTER = 5.875;
+
+    public static final double TARGET_HEIGHT_TOP_TO_GROUND = 104;
+    public static final double LIMELIGHT_HEIGHT_TO_GROUND = 25;
+    public static final double LIMELIGHT_ANGLE_FROM_GROUND = 65;
 
     public static final double VERTICAL_HOOK_UPPER_LIMIT = 0;
     public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
+
     public static final double ANGLED_HOOK_UPPER_LIMIT = 0;
     public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
-    public static final double WIDE_X_OFFSET = 0;
-    public static final double SLIM_X_OFFSET = 0;
 
-    public static final double TUNNEL_SPEED = 0;
-    public static final double INTAKE_SPEED = 0;
+    public static final double WIDE_X_OFFSET = 3.75;
+    public static final double SLIM_X_OFFSET = 3;
+    public static final double SPEED_MULTIPLIER = 1;
+
+    public static final double TUNNEL_SPEED = 0.75;
+    public static final double INTAKE_SPEED = -1;
 
 //Left Joystick
     public static final int HUMAN_OVERRIDE_BUTTON = 2;

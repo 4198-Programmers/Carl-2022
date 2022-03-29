@@ -8,13 +8,17 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.command.AngledHookMove;
 import frc.robot.command.ChooseLimelightMode;
 import frc.robot.command.Drive;
+import frc.robot.command.DriveForDeterminedDistance;
 import frc.robot.command.MoveBallFromIntake;
 import frc.robot.command.SetFlyWheelSpeed;
 import frc.robot.command.SetFlyWheelSpeedWithThrottle;
 import frc.robot.command.SetIntakeSpeed;
 import frc.robot.command.SetTunnelSpeed;
+import frc.robot.command.Spin;
+import frc.robot.command.StopFlyWheel;
 import frc.robot.command.Target;
 import frc.robot.command.VerticalHooksMove;
+import frc.robot.command.WaitForBallToBeSeenByIntakeSensor;
 import frc.robot.command.WaitForBallToShoot;
 import frc.robot.command.WaitForFlyWheel;
 import frc.robot.subsystems.AngledHooks;
@@ -48,11 +52,48 @@ public class RobotContainer {
   SetFlyWheelSpeedWithThrottle setFlyWheelSpeedWithThrottle = new SetFlyWheelSpeedWithThrottle(shooterSystem,
       () -> middleJoystick.getRawAxis(Constants.THROTTLE_AXIS));
   SetTunnelSpeed setTunnelSpeed = new SetTunnelSpeed(shooterSystem, Constants.TUNNEL_SPEED);
+  Spin spin = new Spin(driveTrain, Constants.AUTO_ROTATION);
   Target target = new Target(limelight, driveTrain);
   VerticalHooksMove verticalHooksMove = new VerticalHooksMove(verticalHooks,
       () -> rightJoystick.getRawAxis(Constants.UP_DOWN_AXIS));
   WaitForBallToShoot waitForBallToShoot = new WaitForBallToShoot(sensors);
   WaitForFlyWheel waitForFlyWheel = new WaitForFlyWheel(shooterSystem, limelight);
+
+ Command autonomousPeriodTwoBall = (new DriveForDeterminedDistance(driveTrain, Constants.AUTO_DRIVE_DISTANCE))
+  .alongWith(new SetIntakeSpeed(shooterSystem, Constants.INTAKE_SPEED))
+  .alongWith(new WaitForBallToBeSeenByIntakeSensor(shooterSystem, sensors))
+  .andThen(new MoveBallFromIntake(shooterSystem, sensors, Constants.TUNNEL_SPEED))
+  .alongWith(new Spin(driveTrain, Constants.ONE_EIGHTY_DEGREES))
+  .andThen(new SetFlyWheelSpeed(shooterSystem, limelight))
+  .alongWith(new WaitForFlyWheel(shooterSystem, limelight))
+  .andThen(new SetTunnelSpeed(shooterSystem, Constants.TUNNEL_SPEED))
+  .alongWith(new WaitForBallToShoot(sensors))
+  .andThen(new StopFlyWheel(shooterSystem))
+  .alongWith(new SetTunnelSpeed(shooterSystem, 0));
+
+  Command autonomousPeriodFourBall = (new DriveForDeterminedDistance(driveTrain, Constants.AUTO_DRIVE_DISTANCE))
+  .alongWith(new SetIntakeSpeed(shooterSystem, Constants.INTAKE_SPEED))
+  .alongWith(new WaitForBallToBeSeenByIntakeSensor(shooterSystem, sensors))
+  .andThen(new MoveBallFromIntake(shooterSystem, sensors, Constants.TUNNEL_SPEED))
+  .andThen(new SetIntakeSpeed(shooterSystem, 0))
+  .andThen(new Spin(driveTrain, Constants.ONE_EIGHTY_DEGREES))
+  .andThen(new SetFlyWheelSpeed(shooterSystem, limelight))
+  .alongWith(new WaitForFlyWheel(shooterSystem, limelight))
+  .andThen(new SetTunnelSpeed(shooterSystem, Constants.TUNNEL_SPEED))
+  .alongWith(new WaitForBallToShoot(sensors))
+  .andThen(new StopFlyWheel(shooterSystem))
+  .alongWith(new SetTunnelSpeed(shooterSystem, 0))
+  .andThen(new Spin(driveTrain, Constants.AUTO_ROTATION_AFTER_SHOT))
+  .andThen(new DriveForDeterminedDistance(driveTrain, Constants.AUTO_DRIVE_DISTANCE_AFTER_SHOT))
+  .alongWith(new SetIntakeSpeed(shooterSystem, Constants.INTAKE_SPEED))
+  .alongWith(new WaitForBallToBeSeenByIntakeSensor(shooterSystem, sensors))
+  .andThen(new MoveBallFromIntake(shooterSystem, sensors, Constants.TUNNEL_SPEED))
+  .andThen(new SetFlyWheelSpeed(shooterSystem, limelight))
+  .alongWith(new WaitForFlyWheel(shooterSystem, limelight))
+  .andThen(new SetTunnelSpeed(shooterSystem, Constants.TUNNEL_SPEED))
+  .andThen(new WaitForBallToShoot(sensors))
+  .andThen(new StopFlyWheel(shooterSystem))
+  .alongWith(new SetTunnelSpeed(shooterSystem, 0));
   // buttons
   JoystickButton humanOverRide = new JoystickButton(leftJoystick, Constants.HUMAN_OVERRIDE_BUTTON);
   JoystickButton limelightOnButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_ON_BUTTON);
@@ -85,12 +126,17 @@ public class RobotContainer {
     intakeInButton.whenHeld(new SetIntakeSpeed(shooterSystem, Constants.INTAKE_SPEED));
     intakeOutButton.whenHeld(new SetIntakeSpeed(shooterSystem, -Constants.INTAKE_SPEED));
     angledOverRideButton.whenHeld(new AngledHookMove(angledHooks, () -> middleJoystick.getRawAxis(Constants.UP_DOWN_AXIS)));
+    angledOverRideButton.whenInactive(new Drive(driveTrain, 
+      ()-> leftJoystick.getRawAxis(Constants.UP_DOWN_AXIS), 
+      () -> middleJoystick.getRawAxis(Constants.LEFT_RIGHT_AXIS)));
     verticalOverRideButton.whenHeld(new VerticalHooksMove(verticalHooks, () -> rightJoystick.getRawAxis(Constants.UP_DOWN_AXIS)));
     
   }
 
   private void begin() {
     SmartDashboard.putData("Auto choices", m_chooser);
+    m_chooser.addOption("Two Ball Auto", autonomousPeriodTwoBall);
+    m_chooser.addOption("Four Ball Auto", autonomousPeriodFourBall);
   }
 
   public Command getAutonomousCommand() {

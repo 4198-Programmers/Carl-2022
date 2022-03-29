@@ -40,11 +40,11 @@ public static final int THROTTLE_AXIS = 3;
     public static final double LIMELIGHT_HEIGHT_TO_GROUND = 25;
     public static final double LIMELIGHT_ANGLE_FROM_GROUND = 65;
 
-    public static final double VERTICAL_HOOK_UPPER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_UPPER_LIMIT = -187;
     public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
 
-    public static final double ANGLED_HOOK_UPPER_LIMIT = 0;
-    public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
+    public static final double ANGLED_HOOK_UPPER_LIMIT = -97;
+    public static final double ANGLED_HOOK_LOWER_LIMIT = 20; //TODO update ANGLED_HOOK_LOWER_LIMIT
 
     public static final double WIDE_X_OFFSET = 3.75;
     public static final double SLIM_X_OFFSET = 3;
@@ -52,6 +52,13 @@ public static final int THROTTLE_AXIS = 3;
 
     public static final double TUNNEL_SPEED = 0.75;
     public static final double INTAKE_SPEED = -1;
+
+    public static final double AUTO_ROTATION = 0;
+    public static final double AUTO_DRIVE_DISTANCE = 0;
+
+    public static final double ONE_EIGHTY_DEGREES = 180;
+    public static final double AUTO_ROTATION_AFTER_SHOT = 0;
+
 
 //Left Joystick
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
@@ -67,10 +74,6 @@ public static final int THROTTLE_AXIS = 3;
     public static final int TUNNEL_OUT_BUTTON = 4;  
     public static final int INTAKE_IN_BUTTON = 5;        
     public static final int TUNNEL_IN_BUTTON = 6;
-
-
-
-
-
+    public static final double AUTO_DRIVE_DISTANCE_AFTER_SHOT = 0;
 }
    

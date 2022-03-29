@@ -1,14 +1,15 @@
 package frc.robot.command;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveForDeterminedDistance extends CommandBase{
+public class Spin extends CommandBase{
     DriveTrain driveTrain;
-    double distance;
-    public DriveForDeterminedDistance(DriveTrain driveTrain, double distance){
+    double rotations;
+    public Spin(DriveTrain driveTrain, double rotations){
         this.driveTrain = driveTrain;
-        this.distance = distance;
+        this.rotations = rotations;
         addRequirements(driveTrain);
     }
     @Override
@@ -17,15 +18,15 @@ public class DriveForDeterminedDistance extends CommandBase{
     }
     @Override
     public void execute() {
-        if(driveTrain.getPostion() < distance){
-            driveTrain.drive(1, 0);
+        if(driveTrain.getPostion() < Maths.rotationConversion(rotations)){
+            driveTrain.drive(0, 1);
         }
-        else if(driveTrain.getPostion() >= distance){
+        else if(driveTrain.getPostion() >= Maths.rotationConversion(rotations)){
             driveTrain.drive(0, 0);
         }
     }
     @Override
     public boolean isFinished() {
-        return(driveTrain.getPostion() >= distance);
+        return(driveTrain.getPostion() >= Maths.rotationConversion(rotations));
     }
 }

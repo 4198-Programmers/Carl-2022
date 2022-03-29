@@ -39,6 +39,12 @@ public class Constants {
     public static final int LIMELIGHT_OFF_BUTTON = 0;
     public static final int TUNNEL_IN_BUTTON = 0;
     public static final int TUNNEL_OUT_BUTTON = 0;
+    public static final int INTAKE_IN_BUTTON = 0;
+    public static final int INTAKE_OUT_BUTTON = 0;
+    public static final double INTAKE_SPEED = 0;
+    public static final int HUMAN_OVERRIDE_BUTTON = 0;
+    public static final int ANGLED_OVERRIDE_BUTTON = 0;
+    public static final int VERTICAL_OVERRIDE_BUTTON = 0;
 
 }
    

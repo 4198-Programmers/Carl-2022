@@ -11,6 +11,7 @@ import frc.robot.command.Drive;
 import frc.robot.command.MoveBallFromIntake;
 import frc.robot.command.SetFlyWheelSpeed;
 import frc.robot.command.SetFlyWheelSpeedWithThrottle;
+import frc.robot.command.SetIntakeSpeed;
 import frc.robot.command.SetTunnelSpeed;
 import frc.robot.command.Target;
 import frc.robot.command.VerticalHooksMove;
@@ -53,12 +54,15 @@ public class RobotContainer {
   WaitForBallToShoot waitForBallToShoot = new WaitForBallToShoot(sensors);
   WaitForFlyWheel waitForFlyWheel = new WaitForFlyWheel(shooterSystem, limelight);
   // buttons
+  JoystickButton humanOverRide = new JoystickButton(leftJoystick, Constants.HUMAN_OVERRIDE_BUTTON);
   JoystickButton limelightOnButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_ON_BUTTON);
   JoystickButton limelightoffButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_OFF_BUTTON);
   JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.TUNNEL_IN_BUTTON);
   JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.TUNNEL_OUT_BUTTON);
   JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_BUTTON);
   JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INTAKE_OUT_BUTTON);
+  JoystickButton angledOverRideButton = new JoystickButton(middleJoystick, Constants.ANGLED_OVERRIDE_BUTTON);
+  JoystickButton verticalOverRideButton =  new JoystickButton(rightJoystick, Constants.VERTICAL_OVERRIDE_BUTTON);
   
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -74,7 +78,15 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-
+    limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
+    limelightoffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
+    tunnelInButton.whenHeld(new SetTunnelSpeed(shooterSystem, Constants.TUNNEL_SPEED));
+    tunnelOutButton.whenHeld(new SetTunnelSpeed(shooterSystem, -Constants.TUNNEL_SPEED));
+    intakeInButton.whenHeld(new SetIntakeSpeed(shooterSystem, Constants.INTAKE_SPEED));
+    intakeOutButton.whenHeld(new SetIntakeSpeed(shooterSystem, -Constants.INTAKE_SPEED));
+    angledOverRideButton.whenHeld(new AngledHookMove(angledHooks, () -> middleJoystick.getRawAxis(Constants.UP_DOWN_AXIS)));
+    verticalOverRideButton.whenHeld(new VerticalHooksMove(verticalHooks, () -> rightJoystick.getRawAxis(Constants.UP_DOWN_AXIS)));
+    
   }
 
   private void begin() {

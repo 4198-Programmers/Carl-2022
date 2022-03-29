@@ -54,6 +54,12 @@ public class RobotContainer {
   WaitForFlyWheel waitForFlyWheel = new WaitForFlyWheel(shooterSystem, limelight);
   // buttons
   JoystickButton limelightOnButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_ON_BUTTON);
+  JoystickButton limelightoffButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_OFF_BUTTON);
+  JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.TUNNEL_IN_BUTTON);
+  JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.TUNNEL_OUT_BUTTON);
+  JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_BUTTON);
+  JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INTAKE_OUT_BUTTON);
+  
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 

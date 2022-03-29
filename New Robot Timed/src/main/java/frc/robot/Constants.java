@@ -34,6 +34,8 @@ public class Constants {
     public static final int UP_DOWN_AXIS = 0;
     public static final int LEFT_RIGHT_AXIS = 0;
     public static final double TUNNEL_SPEED = 0;
+    public static final int THROTTLE_AXIS = 0;
+    public static final int LIMELIGHT_ON_BUTTON = 0;
 
 }
    

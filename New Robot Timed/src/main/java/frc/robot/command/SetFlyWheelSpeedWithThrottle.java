@@ -4,15 +4,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ShooterSystem;
 
 public class SetFlyWheelSpeedWithThrottle extends CommandBase{
-    ShooterSystem shooterSystem;
     public interface FlyWheelSpeedRetriever{
         double getFlyWheelSpeed();
     }
-    public SetFlyWheelSpeedWithThrottle(ShooterSystem shooterSystem){
+    ShooterSystem shooterSystem;
+    FlyWheelSpeedRetriever speed;
+    public SetFlyWheelSpeedWithThrottle(ShooterSystem shooterSystem, FlyWheelSpeedRetriever speed){
         this.shooterSystem = shooterSystem;
+        this.speed = speed;
     }
     @Override
     public void execute() {
-
+        shooterSystem.setFlyWheelSpeed(speed.getFlyWheelSpeed());
     }
 }

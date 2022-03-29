@@ -20,6 +20,6 @@ public class ShooterSystem extends SubsystemBase{
         intakeMotor.set(speed);
     }
     public double getSpeed() {
-        return (f);
+        return(flyWheel.get());
     }
 }

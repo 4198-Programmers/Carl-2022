@@ -22,6 +22,9 @@ public class Constants {
     public static final double TARGET_HEIGHT_TOP_TO_GROUND = 0;
     public static final double LIMELIGHT_HEIGHT_TO_GROUND = 0;
     public static final double LIMELIGHT_ANGLE_FROM_GROUND = 0;
+    public static final int RIGHT_VERTICAL_HOOK_PORT = 0;
+    public static final int LEFT_VERTICAL_HOOK_PORT = 0;
+    public static final int ANGLED_HOOKS_PORT = 0;
 
 }
    

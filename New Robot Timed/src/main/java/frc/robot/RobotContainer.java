@@ -26,11 +26,13 @@ import frc.robot.Commands.Targeting;
 import frc.robot.Commands.MoveBalltoShooter;
 import frc.robot.Commands.SetTunnelSpeed;
 import frc.robot.Commands.TunnelStop;
+import frc.robot.Commands.Turn;
+import frc.robot.Commands.TurnForTenSeconds;
 import frc.robot.Commands.WaitForBallToEnterIntake;
 import frc.robot.Commands.MoveVerticalHooks;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
-import frc.robot.Subsystems.FeederSub;
+import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.VerticalHooks;
 import frc.robot.Subsystems.Limelight.LimelightMode;
 
@@ -45,7 +47,7 @@ public class RobotContainer {
   VerticalHooks verticalHooks;
   AngledHooks angledHooks;
   Limelight limelight;
-  FeederSub feederSub;
+  Intake intake;
   TunnelSub tunnelSub;
   Sensors sensors;
   // commands
@@ -61,8 +63,11 @@ public class RobotContainer {
     () -> middleJoystick.getRawAxis(Constants.THROTTLE_AXIS));
   Command taxiAndShoot = (new DriveForCertainDistance(driveTrain, Constants.WANTED_AUTO_DISTANCE))
       .alongWith((new MoveBallFromFeed(tunnelSub))
-      .alongWith(new FeederIn(feederSub)))
-      .andThen((new SetFlySpeed(shooterSystem)))
+      .alongWith(new FeederIn(intake)))
+      .alongWith(new WaitForBallToEnterIntake(intake, sensors))
+      .andThen(new Turn(driveTrain, Constants.AUTO_TURNING_DISTANCE))
+      .andThen(new DriveForCertainDistance(driveTrain, Constants.GO_TO_TARGET_DISTANCE))
+      .andThen(new SetFlySpeed(shooterSystem))
       .andThen(new WaitForFlyWheelSpeed(shooterSystem, limelight))
       .andThen(new MoveBalltoShooter(tunnelSub))
       .andThen((new WaitForBallToLeaveBot()))
@@ -71,32 +76,6 @@ public class RobotContainer {
       .alongWith((new WaitForBallToLeaveBot()))
       .andThen((new TunnelStop(tunnelSub)))
       .andThen(new StopFlyWheel(shooterSystem));
-  Command shootWithTargeting = (new Targeting(limelight, driveTrain))
-      .andThen(new WaitForBallToLeaveBot());
-  Command autoShoot = (new Targeting(limelight, driveTrain))
-      .andThen(new SetFlySpeed(shooterSystem))
-      .alongWith(new WaitForBallToEnterIntake(feederSub, sensors))
-      .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
-      .andThen(new SetTunnelSpeed(tunnelSub, Constants.TUNNEL_SPEED))
-      .alongWith(new WaitForBallToLeaveBot())
-      .alongWith(new MoveBallFromFeed(tunnelSub));
-  Command fourBallAuto = taxiAndShoot
-      .andThen(new Spin(driveTrain, Constants.FOUR_BALL_AUTO_DEGREES))
-      .andThen(new DriveForCertainDistance(driveTrain, Constants.WANTED_DISTANCE_FOR_FOUR_BALL_AUTO))
-      .alongWith(new FeederIn(feederSub))
-      .alongWith(new WaitForBallToEnterIntake(feederSub, sensors))
-      .andThen(new MoveBallFromFeed(tunnelSub))
-      .andThen(new FeederIn(feederSub))
-      .andThen(new Targeting(limelight, driveTrain))
-      .andThen(new SetFlySpeed(shooterSystem))
-      .andThen(new WaitForFlyWheelSpeed(shooterSystem, limelight))
-      .andThen(new MoveBalltoShooter(tunnelSub))
-      .andThen(new WaitForBallToLeaveBot())
-      .andThen(new WaitForFlyWheelSpeed(shooterSystem, limelight))
-      .andThen(new MoveBalltoShooter(tunnelSub))
-      .andThen(new WaitForBallToLeaveBot())
-      .andThen(new StopFlyWheel(shooterSystem))
-      .alongWith(new TunnelStop(tunnelSub));
   // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
@@ -118,7 +97,7 @@ public class RobotContainer {
   JoystickButton deathSpinButton = new JoystickButton(leftJoystick, Constants.DEATH_SPIN_BUTTON);
   JoystickButton humanOverRideButton = new JoystickButton(leftJoystick, Constants.HUMAN_OVERRIDE_BUTTON);
 
-
+  JoystickButton turnForTenSecondsButton = new JoystickButton(middleJoystick, Constants.TURN_FOR_TEN_SECONDS_BUTTON);
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -142,14 +121,13 @@ public class RobotContainer {
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
 
-    feederInButton.whenHeld(new FeederIn(feederSub), false);
-    feederOutButton.whenHeld(new FeederOut(feederSub), false);
+    feederInButton.whenHeld(new FeederIn(intake), false);
+    feederOutButton.whenHeld(new FeederOut(intake), false);
 
     tunnelInButton.whenHeld(new MoveBalltoShooter(tunnelSub), false);
     tunnelOutButton.whenHeld(new SetTunnelSpeed(tunnelSub, Constants.TUNNEL_SPEED), false);
 
- 
-
+    turnForTenSecondsButton.whenPressed(new TurnForTenSeconds(driveTrain, Constants.TURN_SPEED, Constants.TURN_TURNING_SPEED, Constants.TURN_MILLISECONDS));
 
     angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks,
         () -> rightJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
@@ -167,11 +145,9 @@ public class RobotContainer {
     m_chooser.addOption("Auto-Do not Move", doNotDrive);
     m_chooser.setDefaultOption("Taxi and Shoot Two Balls", taxiAndShoot);
     m_chooser.addOption("Taxi", offTarmac);
-    m_chooser.addOption("Four Ball Auto", fourBallAuto);
   }
 
   public Command getAutonomousCommand() {
     return m_chooser.getSelected();
   }
-
 }

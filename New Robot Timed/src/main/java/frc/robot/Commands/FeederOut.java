@@ -2,24 +2,23 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.Subsystems.FeederSub;
+import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Sensors;
 
 public class FeederOut extends CommandBase {
-    FeederSub feederSub;
+    Intake intake;
     Sensors sensors;
 
-    public FeederOut(FeederSub feederSub) {
-        this.feederSub = feederSub;
-        addRequirements(feederSub);
+    public FeederOut(Intake intake) {
+        this.intake = intake;
+        addRequirements(intake);
     }
-
     @Override
     public void execute() {
         if (sensors.isBallInFeed()) {
-            feederSub.intake(-(Constants.FEEDER_INTAKE_SPEED));
+            intake.intake(-(Constants.FEEDER_INTAKE_SPEED));
         } else {
-            feederSub.intake(0);
+            intake.intake(0);
         }
     }
 

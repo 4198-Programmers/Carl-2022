@@ -24,7 +24,7 @@ public class Spin extends CommandBase {
     @Override
     public void execute() {
         if (degrees < Maths.spinDistanceByDegree(degrees))
-            driveTrain.greenLight(-1, 0);
+            driveTrain.greenLight(0, -1);
         else if (degrees >= Maths.spinDistanceByDegree(degrees)) {
             driveTrain.greenLight(0, 0);
             youdone = true;

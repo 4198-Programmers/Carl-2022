@@ -10,31 +10,34 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase{
-    private CANSparkMax frontRightMotor = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_PORT, MotorType.kBrushless);
-    private CANSparkMax frontLeftMotor = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_PORT, MotorType.kBrushless);
-    private CANSparkMax backRightMotor = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_PORT, MotorType.kBrushless);
-    private CANSparkMax backLeftMotor = new CANSparkMax(Constants.BACK_LEFT_MOTOR_PORT, MotorType.kBrushless);
-    private RelativeEncoder frontRightMotorEncoder = frontRightMotor.getEncoder();
-    private RelativeEncoder frontLeftMotorEncoder = frontLeftMotor.getEncoder();
-    private RelativeEncoder backRightMotorEncoder = backRightMotor.getEncoder();
-    private RelativeEncoder bakcLeftMotorEncoder = backLeftMotor.getEncoder();
-    private MotorControllerGroup rightMotorControllerGroup = new MotorControllerGroup(frontRightMotor, backRightMotor);
-    private MotorControllerGroup leftMotorControllerGroup = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
-    DifferentialDrive allDrive = new DifferentialDrive(rightMotorControllerGroup, leftMotorControllerGroup);
-    public void resetPositon(){
-        frontRightMotorEncoder.setPosition(0);
-        frontLeftMotorEncoder.setPosition(0);
-        backRightMotorEncoder.setPosition(0);
-        bakcLeftMotorEncoder.setPosition(0);
+    CANSparkMax frontRightMotor = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_PORT, MotorType.kBrushless);
+    CANSparkMax frontLeftMotor = new CANSparkMax(Constants.FRONT_LEFT_MOTOR_PORT, MotorType.kBrushless);
+    CANSparkMax backRightMotor = new CANSparkMax(Constants.BACK_RIGHT_MOTOR_PORT, MotorType.kBrushless);
+    CANSparkMax backLeftMotor = new CANSparkMax(Constants.BACK_LEFT_MOTOR_PORT, MotorType.kBrushless);
+
+    RelativeEncoder frontRightEncoder = frontRightMotor.getEncoder();
+    RelativeEncoder frontLeftEncoder = frontLeftMotor.getEncoder();
+    RelativeEncoder backRightEncoder = backRightMotor.getEncoder();
+    RelativeEncoder backLeftEncoder = backLeftMotor.getEncoder();
+
+    MotorControllerGroup rightDrive = new MotorControllerGroup(frontRightMotor, backRightMotor);
+    MotorControllerGroup leftDrive = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
+    DifferentialDrive allDrive = new DifferentialDrive(leftDrive, rightDrive);
+
+    public void resetPosition(){
+        frontRightEncoder.setPosition(0);
+        frontLeftEncoder.setPosition(0);
+        backRightEncoder.setPosition(0);
+        backLeftEncoder.setPosition(0);
     }
     public double getPostion(){
-        double frontRightPosition = frontRightMotorEncoder.getPosition();
-        double frontLeftPosition = frontLeftMotorEncoder.getPosition();
-        double backRightPosition = backRightMotorEncoder.getPosition();
-        double backLeftPosition = bakcLeftMotorEncoder.getPosition();
-        return((frontRightPosition + frontLeftPosition + backRightPosition + backLeftPosition) / 4);
+        double frontRightPostion = frontRightEncoder.getPosition();
+        double frontLeftPosition = frontLeftEncoder.getPosition();
+        double backRightPosition = backRightEncoder.getPosition();
+        double backLeftPosition = backLeftEncoder.getPosition();
+        return((frontRightPostion + frontLeftPosition + backRightPosition + backLeftPosition) / 4);
     }
-    public void drive(double xAxis, double zRotation){
-        allDrive.arcadeDrive(xAxis * Constants.SPEED_MULTIPLIER, zRotation * Constants.SPEED_MULTIPLIER);
+    public void drive(double xSpeed, double zRotation){
+        allDrive.arcadeDrive(xSpeed, zRotation);
     }
 }

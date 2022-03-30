@@ -73,7 +73,7 @@ public class RobotContainer {
   MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(angleHooksSub);
   Targeting targeting = new Targeting(vroomVroomSub, visionSub);
   SetFlySpeed setFlySpeed = new SetFlySpeed(flyAndSensorsSub, midStick, visionSub, false, 0);
-  SetFlySpeedVelocity setFlySpeedVelocity = new SetFlySpeedVelocity(flyAndSensors, vision);
+  SetFlySpeedVelocity setFlySpeedVelocity = new SetFlySpeedVelocity(flyAndSensorsSub, visionSub);
   SetIntakeSpeedIn setIntakeSpeedIn = new SetIntakeSpeedIn(intakeSub);
   SetIntakeSpeedOut setIntakeSpeedOut = new SetIntakeSpeedOut(intakeSub);
   SetInternalMoveSpeedIn setInternalMoveSpeedIn = new SetInternalMoveSpeedIn(tunnelSub);

@@ -24,7 +24,8 @@ public final class Maths {
         double radiansForLaunch = Math.toRadians(Constants.SHOOTER_LAUNCH_ANGLE);
         double targetVelocityForFlywheel = Math.sqrt((-0.5 * (Constants.GRAVITATIONAL_VELOCITY) 
         * ((Math.pow(targetDistance / Math.cos(radiansForLaunch), 2)))) 
-        / (Constants.TARGET_HEIGHT - Constants.SHOOTER_HEIGHT_TO_GROUND - (targetDistance * Math.tan(radiansForLaunch))));
+        / (Constants.TARGET_HEIGHT - Constants.SHOOTER_HEIGHT_TO_GROUND 
+        - (targetDistance * Math.tan(radiansForLaunch))));
         System.out.println(targetVelocityForFlywheel);
         return targetVelocityForFlywheel;
 

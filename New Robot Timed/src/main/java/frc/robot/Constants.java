@@ -59,6 +59,7 @@ public class Constants {
     public static final double TARGET_HEIGHT = 108 * INCHES_TO_METERS; //in meters due to the conversion
     public static final double TARGET_RADIUS_INCHES = 24;
     public static final double SHOOTER_HEIGHT_TO_GROUND = 23.5 * INCHES_TO_METERS;
+    
 
     // public static final byte leftbuttonone = 1;
     // public static final byte leftbuttontwo = 2;

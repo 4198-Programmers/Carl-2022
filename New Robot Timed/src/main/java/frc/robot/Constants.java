@@ -23,7 +23,6 @@ public class Constants {
     public static final byte MID_STICK_PORT = 1;
     public static final byte RIGHT_STICK_PORT = 2;
 
-    public static final double VERT_HOOK_SPEED = 0.5;
     public static final double ANGLE_HOOK_SPEED = 0.5;
     public static final double INTAKE_FORWARD_SPEED = -1;
     public static final double FLYWHEEL_SPEED = 1;
@@ -41,8 +40,7 @@ public class Constants {
 
     // other
     public static final double WIDE_OFFSET_TOLERANCE = 3.75;
-    public static final double MID_OFFSET_TOLERANCE = 2.75;
-    public static final double SLIM_OFFSET_TOLERANCE = 1;
+    public static final double SLIM_OFFSET_TOLERANCE = 3;
     public static final double LIMELIGHT_OFF_PIPELINE_MODE = 0;
     public static final double LIMELIGHT_FULL_ON_PIPELINE_MODE = 1;
     public static final double WHEEL_DIAMTER = 5.875;
@@ -67,58 +65,25 @@ public class Constants {
     // public static final byte leftbuttonfour = 4;
     // public static final byte leftbuttonfive = 5;
     // left joystick buttons
-
-    // public static final byte leftbuttonthree = 4;
-    // public static final byte leftbuttonfour = 5;
-    // public static final byte leftbuttonsix = 6;
-    // public static final byte BALL_STATUS_BUTTON = 7;
-    // public static final byte leftbuttoneight = 8;
-    // public static final byte leftbuttonnine = 9;
-    // public static final byte leftbuttonten = 10;
-    //public static final byte HUMAN_OVERRIDE_BUTTON = 11;
-    public static final byte CRUEL_BUTTON = 12;
+    public static final byte HUMAN_OVERRIDE_LBUTTON = 11;
 
     // middle stick buttons
-    public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 1;
-    // public static final byte leftbuttonone = 1;
-    // public static final byte leftbuttontwo = 2;
-    // public static final byte leftbuttonthree = 3;
-    // public static final byte leftbuttonfour = 4;
-    // public static final byte leftbuttonfive = 5;
-    // public static final byte leftbuttonsix = 6;
-    // public static final byte leftbuttonseven = 7;
-    // public static final byte leftbuttoneight = 8;
-    // public static final byte leftbuttonnine = 9;
-    public static final byte FLYWHEEL_VELOCITY_TEST_BUTTON = 10;
-    public static final byte LIMELIGHT_OFF_BUTTON = 11;
-    public static final byte LIMELIGHT_ON_BUTTON = 12;
+    public static final byte TARGETING_LIMELIGHT_SIMULTANEOUSM = 1;
+    public static final byte ANGLE_JOYSTICK_MBUTTON = 2;
+    public static final byte LIMELIGHT_OFF_MBUTTON = 11;
+    public static final byte LIMELIGHT_ON_MBUTTON = 12;
 
-    public static final byte RIGHT_STICK_TRIGGER = 1;
-    public static final byte FLYWHEEL_VELOCITY_EQUATION_BUTTON = 1; //button when override is active
-    public static final byte HUMAN_OVERRIDE_BUTTON = 2;
-    public static final byte INTAKEIN_BUTTON = 4;
-    public static final byte YEET_THE_BALLS_OUT_THE_BACK_BUTTON = 5;
-    public static final byte ANGLE_HOOK_UP_BUTTON = 6;
-    public static final byte ANGLE_HOOK_DOWN_BUTTON = 7;
-    public static final byte LIMELIGHT_TARGETING_BUTTON = 8;
-    //public static final byte no = 9;
-    public static final byte VERT_HOOK_DOWN_BUTTON = 10;
-    public static final byte VERT_HOOK_UP_BUTTON = 11;
-    // public static final byte leftbuttoneleven = 12;
-    public static final double VERT_HOOK_DISTANCE_DOWN = -0;
-    public static final double ANGLED_HOOK_DEGREES_DOWN = -0;
-    // start of mostly right stick buttons
-    public static final byte FLYWHEEL_BUTTON = 1;
-    public static final byte QUOTE_AUTO_UNQUOTE_SHOOTING_BUTTON = 2;
-    public static final byte INTERNAL_MOVER_BACKWARDS_BUTTON = 3;
-    public static final byte FORCE_SPIT_BUTTON = 4;
-    public static final byte INTERNAL_MOVER_FORWARDS_BUTTON = 5;
-    public static final byte ANGLE_JOYSTICK_BUTTON = 6;
-    public static final byte INTAKE_IN_BUTTON = 7;
-    public static final byte INTAKE_OUT_BUTTON = 8;
-    //public static final byte ANGLE_HOOK_UP_BUTTON = 11;
-    //public static final byte ANGLE_HOOK_DOWN_BUTTON = 12;
-    //public static final byte VERT_HOOK_DOWN_BUTTON = 9;
-    //public static final byte VERT_HOOK_UP_BUTTON = 10;
+    // right stick buttons
+    public static final byte FLYWHEEL_RBUTTON = 1;
+    public static final byte QUOTE_AUTO_UNQUOTE_SHOOTING_RBUTTON = 2;
+    public static final byte INTERNAL_MOVER_BACKWARDS_RBUTTON = 3;
+    public static final byte FORCE_SPIT_RBUTTON = 4;
+    public static final byte INTERNAL_MOVER_FORWARDS_RBUTTON = 5;
+    public static final byte INTAKE_IN_RBUTTON = 7;
+    public static final byte INTAKE_OUT_RBUTTON = 8;
+    public static final byte ANGLE_HOOK_UP_RBUTTON = 11;
+    public static final byte ANGLE_HOOK_DOWN_RBUTTON = 12;
+    public static final byte VERT_HOOK_DOWN_RBUTTON = 9;
+    public static final byte VERT_HOOK_UP_RBUTTON = 10;
 
 }

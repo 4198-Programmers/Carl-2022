@@ -1,26 +1,29 @@
 package frc.robot.hookcommands;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.VertHooks;
 
 public class ReachVertHooksUp extends CommandBase {
     private VertHooks grabbers;
+    Joystick throttle;
     double distanceUp;
 
-    public ReachVertHooksUp(VertHooks vertHooksArg) {
-        grabbers = vertHooksArg;
+    public ReachVertHooksUp(VertHooks vertHooksSub, Joystick joystickArg) {
+        grabbers = vertHooksSub;
+        throttle = joystickArg;
         addRequirements(grabbers);
     }
 
     @Override
-    public void initialize() {
-        grabbers.resetHookPosition();
-    }
-
-    @Override
     public void execute() {
-        grabbers.moveVertHooks(Constants.VERT_HOOK_SPEED);
+        if (grabbers.vertHooksPos() >= -187) {
+            grabbers.moveVertHooks(-(1 - ((throttle.getRawAxis(3) + 1) / 2)));
+        } else {
+            grabbers.moveVertHooks(Constants.FREEZE);
+        }
+        System.out.println("hooks vert " + grabbers.vertHooksPos());
     }
 
     // @Override

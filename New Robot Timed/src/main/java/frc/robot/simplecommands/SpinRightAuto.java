@@ -4,16 +4,16 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class SpinAuto extends CommandBase {
+public class SpinRightAuto extends CommandBase {
     DriveTrain driver;
     double calculatedDistance;
     double degreesOfRotation;
     boolean youDone;
 
-    public SpinAuto(DriveTrain driveArg, double degrees) {
-        driver = driveArg;
+    public SpinRightAuto(DriveTrain vroomVroomSub, double degrees) {
+        driver = vroomVroomSub;
         degreesOfRotation = degrees;
-        addRequirements(driveArg);
+        addRequirements(vroomVroomSub);
     }
 
     @Override
@@ -23,7 +23,8 @@ public class SpinAuto extends CommandBase {
 
     @Override
     public void execute() {
-        double rotationsToSpin = Maths.spinDistanceByDegree(degreesOfRotation);
+        double rotationsToSpin = Maths.spinDistanceByDegree((degreesOfRotation - 10)); // subtracting 10 cause it turns
+                                                                                       // too far consistently
         double position = driver.findPosition();
 
         if (Math.abs(position) < Math.abs(rotationsToSpin)) // just reads the values, does not care about direction

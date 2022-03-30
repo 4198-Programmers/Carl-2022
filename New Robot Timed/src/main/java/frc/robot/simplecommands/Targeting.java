@@ -11,9 +11,9 @@ public class Targeting extends CommandBase {
     private Limelight visionT;
     double autoTime;
 
-    public Targeting(DriveTrain driveTrainArg, Limelight limelightArg) {
-        vroomVroomT = driveTrainArg;
-        visionT = limelightArg;
+    public Targeting(DriveTrain vroomVroomSub, Limelight visionSub) {
+        vroomVroomT = vroomVroomSub;
+        visionT = visionSub;
         addRequirements(vroomVroomT, visionT);
     }
 
@@ -25,24 +25,19 @@ public class Targeting extends CommandBase {
     @Override
     public void execute() {
         SmartDashboard.putNumber("Distance", visionT.distanceToTarget());
+        visionT.setPipeline(Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
 
-        if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.WIDE_OFFSET_TOLERANCE) {
+        if (visionT.xOffsetFromCenter() <= -Constants.WIDE_OFFSET_TOLERANCE) {
             vroomVroomT.greenLight(-0.25, 0);
             System.out.println("targeting left");
         } else if (visionT.xOffsetFromCenter() > Constants.WIDE_OFFSET_TOLERANCE) {
             vroomVroomT.greenLight(0.25, 0);
             System.out.println("targeting right");
-        } else if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.MID_OFFSET_TOLERANCE) {
+        } else if (visionT.xOffsetFromCenter() <= -Constants.SLIM_OFFSET_TOLERANCE) {
             vroomVroomT.greenLight(-0.15, 0);
             System.out.println("targeting left");
-        } else if (visionT.xOffsetFromCenter() > Constants.MID_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(0.15, 0);
-            System.out.println("targeting right");
-        } else if (!visionT.hasTarget() || visionT.xOffsetFromCenter() <= -Constants.SLIM_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(-0.075, 0);
-            System.out.println("targeting left");
         } else if (visionT.xOffsetFromCenter() > Constants.SLIM_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(0.075, 0);
+            vroomVroomT.greenLight(0.15, 0);
             System.out.println("targeting right");
         } else {
             vroomVroomT.greenLight(Constants.FREEZE, Constants.FREEZE);

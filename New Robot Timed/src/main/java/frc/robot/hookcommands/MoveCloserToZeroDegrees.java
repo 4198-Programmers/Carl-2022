@@ -7,8 +7,8 @@ import frc.robot.subsystems.AngleHooks;
 public class MoveCloserToZeroDegrees extends CommandBase {
     private AngleHooks arm;
 
-    public MoveCloserToZeroDegrees(AngleHooks angleHooksArg) {
-        arm = angleHooksArg;
+    public MoveCloserToZeroDegrees(AngleHooks angleHooksSub) {
+        arm = angleHooksSub;
         addRequirements(arm);
     }
     @Override
@@ -27,6 +27,5 @@ public class MoveCloserToZeroDegrees extends CommandBase {
     public boolean isFinished() {
         return true;
     }
-
 
 }

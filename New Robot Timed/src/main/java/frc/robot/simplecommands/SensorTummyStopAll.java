@@ -12,10 +12,10 @@ public class SensorTummyStopAll extends CommandBase {
     Intake intake;
     boolean finished;
 
-    public SensorTummyStopAll(FlyAndSensors sensorsArg, Tunnel tunnelArg, Intake intakeArg) {
-        flyAndSensors = sensorsArg;
-        tunnel = tunnelArg;
-        intake = intakeArg;
+    public SensorTummyStopAll(FlyAndSensors flyAndSensorsSub, Tunnel tunnelSub, Intake intakeSub) {
+        flyAndSensors = flyAndSensorsSub;
+        tunnel = tunnelSub;
+        intake = intakeSub;
         addRequirements(flyAndSensors, tunnel, intake);
     }
 

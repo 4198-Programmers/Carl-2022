@@ -4,13 +4,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class TaxiOffTarmacFast extends CommandBase{
+/** Autonomous movement used to exit the tarmac during Autonomous */
+public class AutoForwards extends CommandBase {
     private DriveTrain vroomVroomOT;
     boolean youDone;
     double distanceOff;
 
     /** Pulls in the current DriveTrain instance to use in the specific class */
-    public TaxiOffTarmacFast(DriveTrain vroomVroomSub, double travelDistance) {
+    public AutoForwards(DriveTrain vroomVroomSub, double travelDistance) {
         vroomVroomOT = vroomVroomSub;
         distanceOff = travelDistance;
         addRequirements(vroomVroomOT);
@@ -28,7 +29,7 @@ public class TaxiOffTarmacFast extends CommandBase{
 
         if (Math.abs(position) < Math.abs(rotations)) // just reads the values, does not care about direction
         {
-            vroomVroomOT.greenLight(0, 0.75);
+            vroomVroomOT.greenLight(0, 0.5);
             System.out.println(rotations);
         } else {
             vroomVroomOT.greenLight(0, 0);
@@ -42,5 +43,5 @@ public class TaxiOffTarmacFast extends CommandBase{
     public boolean isFinished() {
         return youDone;
     }
-    
+
 }

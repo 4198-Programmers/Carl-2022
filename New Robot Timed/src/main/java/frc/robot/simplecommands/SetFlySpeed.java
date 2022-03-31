@@ -29,8 +29,9 @@ public class SetFlySpeed extends CommandBase {
     }
 
     protected double catchWantedFlySpeed() {
-        // return joystick.getRawAxis(3);
-        return Maths.flyWheelSpeedByDistance(vision.distanceToTarget(), vision.hasTarget());
+        //return (-(joystick.getRawAxis(3)+1)/2);
+        // return -0.62;
+        return Maths.dakotaVelocity(vision.distanceToTarget());
     }
 
     @Override
@@ -45,24 +46,25 @@ public class SetFlySpeed extends CommandBase {
             if ((System.currentTimeMillis() - autoTime) <= spinUpTime) {
                 flyAndSensors.setFlySpeed(catchWantedFlySpeed());
                 autoFinished = false;
+                speed = flyAndSensors.getFlySpeed();
                 System.out.println("auto running");
             } else {
                 autoFinished = true;
                 System.out.println("auto finished");
             }
-        } else if (!vision.hasTarget()) {
-            flyAndSensors.setFlySpeed(-0.36);
-        } else {
+            // } else if (!vision.hasTarget()) {
+            // flyAndSensors.setFlySpeed(-0.36);
+            // } else {
             // if (joystick.getRawButton(10)) {
             // flyAndSensors.setFlySpeed(-1 * catchWantedFlySpeed());
-            // } else {
+        } else {
             flyAndSensors.setFlySpeed(catchWantedFlySpeed());
-            // }
             autoFinished = true;
             System.out.println("no auto");
+            SmartDashboard.putNumber("Fly Speed", -flyAndSensors.getFlySpeed());
+            speed = flyAndSensors.getFlySpeed();
         }
-        SmartDashboard.putNumber("Fly Speed", -flyAndSensors.getFlySpeed());
-        speed = flyAndSensors.getFlySpeed();
+
     }
 
     @Override

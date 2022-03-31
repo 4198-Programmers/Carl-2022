@@ -45,4 +45,27 @@ public final class Maths {
         return totalRotations;
     }
 
+    public static double dakotaVelocity(double YAngle){
+        double inchesToMeters = 0.0254;
+        double shooterLaunchAngle = -0;
+        double gravitationalVelocity = 9.81;
+        double targetHeightInMeters = inchesToMeters * Constants.TARGET_HEIGHT_TOP_TO_GROUND;
+        double shooterHeightToGroundMeters = 0.5969;
+        double maxFlywheelVelocity = 10;
+        double D = Constants.TARGET_HEIGHT_TOP_TO_GROUND;
+        double h = Constants.LIMELIGHT_HEIGHT_TO_GROUND;
+        double LLangle = 28.25;
+        double totalAngle = Math.tan(Math.toRadians(LLangle + YAngle));
+        double distance = (D - h) / (totalAngle);
+        double targetDistance = (distance + 24) * inchesToMeters;
+        double radiansForLaunch = Math.toRadians(shooterLaunchAngle);
+        double targetVelocityForFlywheel = Math.sqrt((-0.5 * (gravitationalVelocity) 
+        * ((Math.pow(targetDistance / Math.cos(radiansForLaunch), 2)))) 
+        / (targetHeightInMeters - shooterHeightToGroundMeters 
+        - (targetDistance * Math.tan(radiansForLaunch))));
+
+        double flywheelTargetSpeed = targetVelocityForFlywheel / maxFlywheelVelocity;
+        return flywheelTargetSpeed;
+    }
+
 }

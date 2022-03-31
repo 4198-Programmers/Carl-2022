@@ -20,11 +20,13 @@ import frc.robot.hookcommands.MoveCloserToZeroDegrees;
 import frc.robot.hookcommands.PullVertHooksIn;
 import frc.robot.hookcommands.ReachVertHooksUp;
 import frc.robot.hookcommands.ResetHooks;
+import frc.robot.hookcommands.VertHookJoystick;
 import frc.robot.simplecommands.DoNotMove;
 import frc.robot.simplecommands.InSensorCheck;
 import frc.robot.simplecommands.IntakeFeeder;
 import frc.robot.simplecommands.IntakeStop;
 import frc.robot.simplecommands.LowLoft;
+import frc.robot.simplecommands.OutSensorCheck;
 import frc.robot.simplecommands.PickLimelightMode;
 import frc.robot.simplecommands.ResetWheels;
 import frc.robot.simplecommands.SensorTummyStopAll;
@@ -34,16 +36,17 @@ import frc.robot.simplecommands.SetIntakeSpeedIn;
 import frc.robot.simplecommands.SetIntakeSpeedOut;
 import frc.robot.simplecommands.SetInternalMoveSpeedIn;
 import frc.robot.simplecommands.SetInternalMoveSpeedOut;
-import frc.robot.simplecommands.SpinLeftAuto;
-import frc.robot.simplecommands.SpinRightAuto;
+import frc.robot.simplecommands.AutoSpinLeft;
+import frc.robot.simplecommands.AutoSpinRight;
 import frc.robot.simplecommands.SpitBalls;
 import frc.robot.simplecommands.StableHooks;
 import frc.robot.simplecommands.StableIntestines;
 import frc.robot.simplecommands.StopFly;
 import frc.robot.simplecommands.Targeting;
-import frc.robot.simplecommands.TaxiOffTarmac;
-import frc.robot.simplecommands.TaxiOffTarmacFast;
-import frc.robot.simplecommands.TaxiOnTarmac;
+import frc.robot.simplecommands.AutoForwards;
+import frc.robot.simplecommands.AutoForwardsFast;
+import frc.robot.simplecommands.AutoBackwards;
+import frc.robot.simplecommands.AutoCurveCarver;
 import frc.robot.simplecommands.TimedInternalMoveIn;
 import frc.robot.simplecommands.TimedInternalMoveOut;
 import frc.robot.simplecommands.TunnelStop;
@@ -84,6 +87,7 @@ public class RobotContainer {
   TunnelStop tunnelStop = new TunnelStop(tunnelSub);
   IntakeStop intakeStop = new IntakeStop(intakeSub);
   AngledHookJoystick angledHookJoystick = new AngledHookJoystick(angleHooksSub, midStick, vroomVroomSub);
+  VertHookJoystick vertHookJoystick = new VertHookJoystick(vertHooksSub, rightStick);
   ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(vertHooksSub, rightStick);
   PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(vertHooksSub, rightStick);
   MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(angleHooksSub);
@@ -110,37 +114,54 @@ public class RobotContainer {
       () -> vroomVroomSub.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)), vroomVroomSub);
 
   Command taxiAndShoot = (new ResetWheels(vroomVroomSub))
-      .andThen(new TaxiOffTarmac(vroomVroomSub, 50))
+      .andThen(new AutoForwards(vroomVroomSub, 50))
       .andThen(new ResetWheels(vroomVroomSub))
-      .andThen(new SpinRightAuto(vroomVroomSub, 180))
+      .andThen(new AutoSpinRight(vroomVroomSub, 180))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 250, midStick))
       .andThen(new Targeting(vroomVroomSub, visionSub))
       .andThen(new SetInternalMoveSpeedOut(tunnelSub))
       .andThen(new DoNotMove(vroomVroomSub, flyAndSensorsSub));
 
-  // Command shooting = (new SetFlySpeed(flyAndSensorsSub, visionSub, true, 150, midStick))
-  //     .andThen(new SetInternalMoveSpeedOut(tunnelSub));
+  // Command shooting = (new SetFlySpeed(flyAndSensorsSub, visionSub, true, 150,
+  // midStick))
+  // .andThen(new SetInternalMoveSpeedOut(tunnelSub));
 
   Command taxiSides = (new ResetWheels(vroomVroomSub))
-      .andThen(new TaxiOffTarmac(vroomVroomSub, 50));
+      .andThen(new AutoForwards(vroomVroomSub, 50));
 
   Command taxiMid = new ResetWheels(vroomVroomSub)
-      .andThen(new TaxiOffTarmac(vroomVroomSub, 60));
+      .andThen(new AutoForwards(vroomVroomSub, 60));
+    
+  Command curveTest = new ResetWheels(vroomVroomSub)
+  .andThen(new AutoCurveCarver(vroomVroomSub, 40, 90));
+
+  Command shooting = new SetFlySpeed(flyAndSensorsSub, visionSub, true, 500, midStick)
+      .andThen(new SetInternalMoveSpeedIn(tunnelSub))
+      .andThen(new OutSensorCheck(flyAndSensorsSub, true))
+      .andThen(new InSensorCheck(flyAndSensorsSub, false))
+      .andThen(new TunnelStop(tunnelSub))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 500, midStick))
+      .andThen(new SetInternalMoveSpeedIn(tunnelSub));
 
   Command taxiTwoBallShootMidBall = (new ResetWheels(vroomVroomSub))
       .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new TaxiOnTarmac(vroomVroomSub, 2)))
+          .alongWith(new AutoBackwards(vroomVroomSub, 2)))
       .andThen(new ResetWheels(vroomVroomSub))
-      .andThen(new TaxiOffTarmac(vroomVroomSub, 60))
+      .andThen(new AutoForwards(vroomVroomSub, 60))
       .andThen(new TimedInternalMoveIn(tunnelSub, 250))
       .andThen(new InSensorCheck(flyAndSensorsSub, true)
           .raceWith(new WaitCommand(2)))
       .andThen((new IntakeStop(intakeSub))
           .alongWith(new ResetWheels(vroomVroomSub)))
-      .andThen((new SpinRightAuto(vroomVroomSub, 180))
+      .andThen((new AutoSpinLeft(vroomVroomSub, 120))
           .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
-      .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
-      .andThen(new Targeting(vroomVroomSub, visionSub))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new AutoCurveCarver(vroomVroomSub, 75, 125))
+      // .andThen(new PickLimelightMode(visionSub,
+      // Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+      // .andThen(new Targeting(vroomVroomSub, visionSub))
+      .andThen(new ResetWheels(vroomVroomSub))
+      .andThen(new AutoForwards(vroomVroomSub, 11))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
       .andThen(new SetIntakeSpeedIn(intakeSub))
       .andThen(new TimedInternalMoveIn(tunnelSub, 700))
@@ -155,15 +176,15 @@ public class RobotContainer {
 
   Command taxiFourBall = (new ResetWheels(vroomVroomSub))
       .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new TaxiOnTarmac(vroomVroomSub, 2)))
+          .alongWith(new AutoBackwards(vroomVroomSub, 2)))
       .andThen(new ResetWheels(vroomVroomSub))
-      .andThen((new TaxiOffTarmac(vroomVroomSub, 60))
+      .andThen((new AutoForwards(vroomVroomSub, 60))
           .alongWith(new TimedInternalMoveIn(tunnelSub, 250)))
       .andThen(new InSensorCheck(flyAndSensorsSub, true)
           .raceWith(new WaitCommand(2)))
       .andThen((new IntakeStop(intakeSub))
           .alongWith(new ResetWheels(vroomVroomSub)))
-      .andThen((new SpinRightAuto(vroomVroomSub, 180))
+      .andThen((new AutoSpinRight(vroomVroomSub, 180))
           .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
       .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
       .andThen(new Targeting(vroomVroomSub, visionSub))
@@ -178,10 +199,11 @@ public class RobotContainer {
       .andThen(new WaitCommand(1))
       .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
       .andThen(new PickLimelightMode(visionSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE))
+
       .andThen(new ResetWheels(vroomVroomSub))
-      .andThen(new SpinLeftAuto(vroomVroomSub, 155))
+      .andThen(new AutoSpinLeft(vroomVroomSub, 155))
       .andThen(new ResetWheels(vroomVroomSub))
-      .andThen((new TaxiOffTarmacFast(vroomVroomSub, 140))
+      .andThen((new AutoForwardsFast(vroomVroomSub, 140))
           .alongWith((new SetIntakeSpeedIn(intakeSub))
               .andThen(new InSensorCheck(flyAndSensorsSub, true))
               .andThen(new SetInternalMoveSpeedIn(tunnelSub))
@@ -234,9 +256,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     angleJoystickButton.whenHeld(angledHookJoystick, false);
     angleJoystickButton.whenInactive(driveSticks);
-    verticalHookUpBTN.whileHeld(reachVertHooksUp);
-    verticalHookDownBTN.whileHeld(pullVertHooksIn);
-    flywheelSpinUpBTN.whileHeld(setFlySpeed);
+    verticalHookUpBTN.whileHeld(vertHookJoystick, false);
+    // verticalHookDownBTN.whileHeld(pullVertHooksIn);
+    // flywheelSpinUpBTN.whileHeld(setFlySpeed);
+    flywheelSpinUpBTN.whenHeld(shooting);
     intakeInBTN.whileHeld(intakeFeeder);
     intakeOutBTN.whileHeld(setIntakeSpeedOut);
     internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);
@@ -247,7 +270,7 @@ public class RobotContainer {
 
     angleJoystickButton.whenReleased(angleStop);
     verticalHookUpBTN.whenReleased(hookStop);
-    verticalHookDownBTN.whenReleased(hookStop);
+    // verticalHookDownBTN.whenReleased(hookStop);
     flywheelSpinUpBTN.whenReleased(stopFly);
     intakeInBTN.whenReleased(intakeStop);
     intakeOutBTN.whenReleased(intakeStop);
@@ -267,6 +290,7 @@ public class RobotContainer {
     m_chooser.addOption("Taxi + Shoot One (R/M/L)", taxiAndShoot);
     m_chooser.setDefaultOption("Two Ball Auto (R/M/L)", taxiTwoBallShootMidBall);
     m_chooser.addOption("four", taxiFourBall);
+    m_chooser.addOption("curve", curveTest);
     SmartDashboard.putData("Auto choices", m_chooser);
 
   }

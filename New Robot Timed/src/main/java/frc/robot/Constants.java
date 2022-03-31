@@ -64,6 +64,7 @@ public static final int THROTTLE_AXIS = 3;
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
 
 //Middle Joystick
+    public static final int SHOOTER_BUTTON = 1;
     public static final int LIMELIGHT_ON_BUTTON = 11;
     public static final int LIMELIGHT_OFF_BUTTON = 12;
     public static final int ANGLED_OVERRIDE_BUTTON = 2;

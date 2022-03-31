@@ -4,8 +4,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Drive;
+import frc.robot.commands.SetFlyWheelSpeed;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.FlyWheel;
 
 
 public class RobotContainer {
@@ -14,9 +17,10 @@ public class RobotContainer {
   Joystick rightStick = new Joystick(Constants.RIGHT_JOYSTICK_PORT);
   // subsystems
   DriveTrain driveTrain;
+  FlyWheel flyWheel;
   // commands
-  Drive drive = new Drive(driveTrain, fowardSpeedRetriever, turningSpeedRetriever);
-
+  Drive drive = new Drive(driveTrain, () -> leftStick.getRawAxis(0), () -> middleStick.getRawAxis(1));
+  SetFlyWheelSpeed setFlyWheelSpeed = new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(3));
   // buttons
   
   
@@ -34,7 +38,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    
+    JoystickButton shooterButton = new JoystickButton(middleStick, Constants.SHOOTER_BUTTON);
     
   }
 

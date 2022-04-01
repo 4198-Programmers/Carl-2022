@@ -3,10 +3,10 @@ package frc.robot.Commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Sensors;
 
-public class WaitForBallToLeaveBot extends CommandBase {
+public class WaitForFlyWheelSensorToSeeBall extends CommandBase {
     Sensors sensors;
 
-    public WaitForBallToLeaveBot() {
+    public WaitForFlyWheelSensorToSeeBall() {
     }
 
     @Override

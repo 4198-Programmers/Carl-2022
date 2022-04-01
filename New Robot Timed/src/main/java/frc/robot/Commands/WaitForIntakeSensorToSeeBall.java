@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Sensors;
 
-public class WaitForBallToEnterIntake extends CommandBase{
+public class WaitForIntakeSensorToSeeBall extends CommandBase{
     Intake intake;
     Sensors sensors;
-    public WaitForBallToEnterIntake(Intake intake, Sensors sensors){
+    public WaitForIntakeSensorToSeeBall(Intake intake, Sensors sensors){
         this.sensors = sensors;
         this.intake = intake;
         addRequirements(intake);

@@ -14,8 +14,12 @@ public class SetFlySpeedWithThrottle extends CommandBase{
         this.flyWheelSpeedRetriever = flyWheelSpeedRetriever;
         addRequirements(shooterSystem);
     }
+
     @Override
     public void execute() {
         shooterSystem.setFlyWheelSpeed(flyWheelSpeedRetriever.getFlyWheelSpeed());
+        if(flyWheelSpeedRetriever.getFlyWheelSpeed() == -1){
+            shooterSystem.setFlyWheelSpeed(0.62);
+        }
     }
 }

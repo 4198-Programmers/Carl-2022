@@ -158,8 +158,9 @@ public class RobotContainer {
 
   private void begin() {
     m_chooser.addOption("Auto-Do not Move", new DoNotDrive(driveTrain));
-    m_chooser.setDefaultOption("Taxi and Shoot", taxiAndShoot);
+    m_chooser.setDefaultOption("Shoot Side Ball", taxiAndShoot);
     m_chooser.addOption("Taxi", new DriveForCertainDistance(driveTrain, Constants.WANTED_AUTO_DISTANCE));
+    m_chooser.addOption("Shoot Middle Ball", taxiAndShootMiddleBall);
   }
 
   public Command getAutonomousCommand() {

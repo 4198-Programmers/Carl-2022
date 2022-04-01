@@ -14,14 +14,14 @@ public class LowLoft extends CommandBase {
 
     @Override
     public void execute() {
-        flyAndSensors.setFlySpeed(-0.36);
+        flyAndSensors.setFlySpeed(-0.46);
         System.out.println("no auto");
     }
 
     @Override
     public boolean isFinished() {
         final double tolerance = 0.01;
-        double expectedFlywheelSpeed = -0.36;
+        double expectedFlywheelSpeed = -0.46;
         return (speed > expectedFlywheelSpeed - tolerance && speed < expectedFlywheelSpeed + tolerance);
 
     }

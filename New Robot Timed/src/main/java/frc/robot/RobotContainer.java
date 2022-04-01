@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -26,7 +27,7 @@ import frc.robot.simplecommands.InSensorCheck;
 import frc.robot.simplecommands.IntakeFeeder;
 import frc.robot.simplecommands.IntakeStop;
 import frc.robot.simplecommands.LowLoft;
-import frc.robot.simplecommands.OutSensorCheck;
+// import frc.robot.simplecommands.OutSensorCheck;
 import frc.robot.simplecommands.PickLimelightMode;
 import frc.robot.simplecommands.ResetWheels;
 import frc.robot.simplecommands.SensorTummyStopAll;
@@ -36,6 +37,7 @@ import frc.robot.simplecommands.SetIntakeSpeedIn;
 import frc.robot.simplecommands.SetIntakeSpeedOut;
 import frc.robot.simplecommands.SetInternalMoveSpeedIn;
 import frc.robot.simplecommands.SetInternalMoveSpeedOut;
+import frc.robot.simplecommands.Spin;
 import frc.robot.simplecommands.AutoSpinLeft;
 import frc.robot.simplecommands.AutoSpinRight;
 import frc.robot.simplecommands.SpitBalls;
@@ -137,17 +139,55 @@ public class RobotContainer {
 
   Command shooting = new SetFlySpeed(flyAndSensorsSub, visionSub, true, 500, midStick)
       .andThen(new SetInternalMoveSpeedIn(tunnelSub))
-      .andThen(new OutSensorCheck(flyAndSensorsSub, true))
-      .andThen(new InSensorCheck(flyAndSensorsSub, false))
+      .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 250, midStick))
       .andThen(new TunnelStop(tunnelSub))
       .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 500, midStick))
       .andThen(new SetInternalMoveSpeedIn(tunnelSub));
+
+  Command middleBallShoot = (new ResetWheels(vroomVroomSub))
+          .andThen((new SetIntakeSpeedIn(intakeSub))
+          .alongWith(new PrintCommand("SetIntakeSpeed" + System.currentTimeMillis()))
+                  .alongWith(new AutoBackwards(vroomVroomSub, 2))
+                  .alongWith(new PrintCommand("AutoBackwards" + System.currentTimeMillis())))
+          .andThen(new ResetWheels(vroomVroomSub))
+          .alongWith(new PrintCommand("ResetWheels" + System.currentTimeMillis()))
+          .andThen(new AutoForwards(vroomVroomSub, 60))
+          .alongWith(new PrintCommand("AutoForwards" + System.currentTimeMillis()))
+          .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+          .alongWith(new PrintCommand("TimedInternalMoveIn" + System.currentTimeMillis()))
+          .andThen(new InSensorCheck(flyAndSensorsSub, true))
+          .alongWith(new PrintCommand("InSensorCheck" + System.currentTimeMillis()))
+          .raceWith(new WaitCommand(2))
+          .andThen(new IntakeStop(intakeSub))
+          .alongWith(new PrintCommand("IntakeStop" + System.currentTimeMillis()))
+          .andThen(new ResetWheels(vroomVroomSub))
+          .alongWith(new PrintCommand("ResetWheels" + System.currentTimeMillis()))
+          .andThen(new Spin(vroomVroomSub, 180))
+          .alongWith(new PrintCommand("Spin" + System.currentTimeMillis()))
+          .andThen(new ResetWheels(vroomVroomSub))
+          .alongWith(new PrintCommand("ResetWheels" + System.currentTimeMillis()))
+          .andThen(new AutoForwards(vroomVroomSub, 65))
+          .alongWith(new PrintCommand("AutoForwards" + System.currentTimeMillis()))
+          .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
+          .alongWith(new PrintCommand("SetFlySpeed" + System.currentTimeMillis()))
+          .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+          .alongWith(new PrintCommand("TimedInternalMoveIn" + System.currentTimeMillis()))
+          .andThen(new WaitCommand(1))
+          .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+          .alongWith(new PrintCommand("TimedInternalMoveOut" + System.currentTimeMillis()))
+          .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
+          .alongWith(new PrintCommand("SetFlySpeed" + System.currentTimeMillis()))
+          .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+          .alongWith(new PrintCommand("TimedInternalMoveIn" + System.currentTimeMillis()))
+          .andThen(new WaitCommand(1))
+          .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
+          .alongWith(new PrintCommand("SensorTummyStopAll" + System.currentTimeMillis()));
 
   Command taxiTwoBallShootMidBall = (new ResetWheels(vroomVroomSub))
       .andThen((new SetIntakeSpeedIn(intakeSub))
           .alongWith(new AutoBackwards(vroomVroomSub, 2)))
       .andThen(new ResetWheels(vroomVroomSub))
-      .andThen(new AutoForwards(vroomVroomSub, 60))
+      .andThen(new AutoForwards(vroomVroomSub, 45))
       .andThen(new TimedInternalMoveIn(tunnelSub, 250))
       .andThen(new InSensorCheck(flyAndSensorsSub, true)
           .raceWith(new WaitCommand(2)))
@@ -258,8 +298,8 @@ public class RobotContainer {
     angleJoystickButton.whenInactive(driveSticks);
     verticalHookUpBTN.whileHeld(vertHookJoystick, false);
     // verticalHookDownBTN.whileHeld(pullVertHooksIn);
-    // flywheelSpinUpBTN.whileHeld(setFlySpeed);
-    flywheelSpinUpBTN.whenHeld(shooting);
+    flywheelSpinUpBTN.whileHeld(setFlySpeed);
+    //flywheelSpinUpBTN.whenHeld(shooting);
     intakeInBTN.whileHeld(intakeFeeder);
     intakeOutBTN.whileHeld(setIntakeSpeedOut);
     internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);
@@ -291,10 +331,10 @@ public class RobotContainer {
     m_chooser.setDefaultOption("Two Ball Auto (R/M/L)", taxiTwoBallShootMidBall);
     m_chooser.addOption("four", taxiFourBall);
     m_chooser.addOption("curve", curveTest);
+    m_chooser.addOption("Middle Ball Auto", taxiTwoBallShootMidBall);
+    m_chooser.addOption("Emily Middle Ball Auto", middleBallShoot);
     SmartDashboard.putData("Auto choices", m_chooser);
-
   }
-
   public Command getAutonomousCommand() {
     return m_chooser.getSelected();
   }

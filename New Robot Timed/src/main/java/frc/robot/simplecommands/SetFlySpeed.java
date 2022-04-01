@@ -3,7 +3,7 @@ package frc.robot.simplecommands;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Maths;
+//import frc.robot.Maths;
 import frc.robot.subsystems.FlyAndSensors;
 import frc.robot.subsystems.Limelight;
 
@@ -30,8 +30,8 @@ public class SetFlySpeed extends CommandBase {
 
     protected double catchWantedFlySpeed() {
         //return (-(joystick.getRawAxis(3)+1)/2);
-        // return -0.62;
-        return Maths.dakotaVelocity(vision.distanceToTarget());
+        return -0.62;
+        //return Maths.dakotaVelocity(vision.distanceToTarget());
     }
 
     @Override

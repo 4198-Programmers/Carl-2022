@@ -48,10 +48,11 @@ public class Constants {
     // Constants
     public static final double FEEDER_INTAKE_SPEED = -1;
     public static final double TUNNEL_SPEED = 0.75;
-    public static final double SPIN_BUTTON_DEGREES = 1;
+    public static final double AUTO_FLY_WHEEL_SPEED = 0.75;
     public static final double TURN_SPEED = 0.5;
-    public static final double TURN_TURNING_SPEED = 1;
+    public static final double TURN_TURNING_SPEED = 1;    
     public static final long TURN_MILLISECONDS = 10;
+    public static final double SPIN_BUTTON_DEGREES = 1;
     public static final double TAXI_AND_SHOOT_SPIN_DEGREES = 180;
     public static final double SPIN_DEGREES_TAXI_AND_SHOOT = 36;
     public static final double GO_TO_TARGET_DISTANCE = 20;
@@ -67,8 +68,6 @@ public class Constants {
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
     public static final int THROTTLE_OVERRIDE_BUTTON = 3;
     public static final int DEATH_SPIN_BUTTON = 11;
-
-
 
     // Middle Joystick
     public static final int TARGETING_BUTTON = 1;

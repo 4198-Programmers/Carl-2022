@@ -10,13 +10,14 @@ import frc.robot.Subsystems.ShooterSystem;
 import frc.robot.Subsystems.TunnelSub;
 import frc.robot.Commands.MoveAngledHooks;
 import frc.robot.Commands.MoveBallFromFeed;
+import frc.robot.Commands.AutoFlyWheelSpeed;
 import frc.robot.Commands.ChooseLimelightMode;
 import frc.robot.Commands.DoNotDrive;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
 import frc.robot.Commands.DriveForCertainDistance;
-import frc.robot.Commands.SetFlySpeed;
+import frc.robot.Commands.SetFlySpeedWithLimelight;
 import frc.robot.Commands.SetFlySpeedWithThrottle;
 import frc.robot.Commands.WaitForBallToLeaveBot;
 import frc.robot.Commands.WaitForFlyWheelSpeed;
@@ -25,7 +26,6 @@ import frc.robot.Commands.StopFlyWheel;
 import frc.robot.Commands.Targeting;
 import frc.robot.Commands.MoveBalltoShooter;
 import frc.robot.Commands.SetTunnelSpeed;
-import frc.robot.Commands.TunnelStop;
 import frc.robot.Commands.Turn;
 import frc.robot.Commands.TurnForTenSeconds;
 import frc.robot.Commands.WaitForBallToEnterIntake;
@@ -54,28 +54,23 @@ public class RobotContainer {
   Drive drive = new Drive(driveTrain,
       () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS),
       () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS));
-  Targeting targeting = new Targeting(limelight, driveTrain);
-  DoNotDrive doNotDrive = new DoNotDrive(driveTrain);
-  DriveForCertainDistance offTarmac = new DriveForCertainDistance(driveTrain, Constants.WANTED_AUTO_DISTANCE);
-  ChooseLimelightMode limelightModeOn = new ChooseLimelightMode(limelight, LimelightMode.forceOn);
-  ChooseLimelightMode limelightModeOff = new ChooseLimelightMode(limelight, LimelightMode.forceOff);
-  SetFlySpeedWithThrottle setFlySpeedWithThrottle = new SetFlySpeedWithThrottle(shooterSystem, 
-    () -> middleJoystick.getRawAxis(Constants.THROTTLE_AXIS));
+
   Command taxiAndShoot = (new DriveForCertainDistance(driveTrain, Constants.WANTED_AUTO_DISTANCE))
       .alongWith((new MoveBallFromFeed(tunnelSub))
       .alongWith(new FeederIn(intake)))
-      .alongWith(new WaitForBallToEnterIntake(intake, sensors))
+        .raceWith(new WaitForBallToEnterIntake(intake, sensors))
       .andThen(new Turn(driveTrain, Constants.AUTO_TURNING_DISTANCE))
       .andThen(new DriveForCertainDistance(driveTrain, Constants.GO_TO_TARGET_DISTANCE))
-      .andThen(new SetFlySpeed(shooterSystem))
-      .andThen(new WaitForFlyWheelSpeed(shooterSystem, limelight))
+      .andThen(new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
+      .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
       .andThen(new MoveBalltoShooter(tunnelSub))
-      .andThen((new WaitForBallToLeaveBot()))
-      .andThen(new WaitForFlyWheelSpeed(shooterSystem, limelight))
+        .raceWith((new WaitForBallToLeaveBot()))
+      .andThen(new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
+      .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
       .andThen(new MoveBalltoShooter(tunnelSub))
-      .alongWith((new WaitForBallToLeaveBot()))
-      .andThen((new TunnelStop(tunnelSub)))
+        .raceWith((new WaitForBallToLeaveBot()))
       .andThen(new StopFlyWheel(shooterSystem));
+      
   // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);
@@ -114,9 +109,11 @@ public class RobotContainer {
     targetingButton.whenHeld(new Targeting(limelight, driveTrain));
     targetingButton.whenReleased(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
 
-    shootingButton.whenHeld(new SetFlySpeed(shooterSystem), false);
-    shootingButton.and(humanOverRideButton).whileActiveContinuous(new SetFlySpeedWithThrottle(shooterSystem, 
-    ()-> middleJoystick.getRawAxis(Constants.THROTTLE_AXIS)));
+    shootingButton.and(humanOverRideButton).whileActiveContinuous
+      (new SetFlySpeedWithLimelight(shooterSystem), false);
+      
+    shootingButton.whenHeld(new SetFlySpeedWithThrottle(shooterSystem, 
+      ()-> middleJoystick.getRawAxis(Constants.THROTTLE_AXIS)));
 
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
@@ -131,6 +128,7 @@ public class RobotContainer {
 
     angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks,
         () -> rightJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
+
     angledOverRideButton.whenInactive(new Drive(driveTrain,
         () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS),
         () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
@@ -138,13 +136,14 @@ public class RobotContainer {
     verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks,
         () -> middleJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
 
-    deathSpinButton.and(humanOverRideButton).whileActiveContinuous(new Spin(driveTrain, Constants.SPIN_BUTTON_DEGREES));
+    deathSpinButton.and(humanOverRideButton).whileActiveContinuous
+        (new Spin(driveTrain, Constants.SPIN_BUTTON_DEGREES));
   }
 
   private void begin() {
-    m_chooser.addOption("Auto-Do not Move", doNotDrive);
+    m_chooser.addOption("Auto-Do not Move", new DoNotDrive(driveTrain));
     m_chooser.setDefaultOption("Taxi and Shoot Two Balls", taxiAndShoot);
-    m_chooser.addOption("Taxi", offTarmac);
+    m_chooser.addOption("Taxi", new DriveForCertainDistance(driveTrain, Constants.WANTED_AUTO_DISTANCE));
   }
 
   public Command getAutonomousCommand() {

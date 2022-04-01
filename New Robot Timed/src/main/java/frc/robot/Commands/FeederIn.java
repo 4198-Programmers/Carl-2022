@@ -23,9 +23,9 @@ public class FeederIn extends CommandBase {
         }
     }
 
-    @Override
-    public boolean isFinished() {
-        return (sensors.isBallInFeed());
-    }
+@Override
+public void end(boolean interrupted) {
+    intake.intake(0);
+}
 
 }

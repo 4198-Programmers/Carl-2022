@@ -16,4 +16,8 @@ public class MoveBalltoShooter extends CommandBase {
     public void execute() {
         tunnelSub.setSpeed(Constants.TUNNEL_SPEED);
     }
+    @Override
+    public void end(boolean interrupted) {
+        tunnelSub.setSpeed(0);
+    }
 }

@@ -5,11 +5,11 @@ import frc.robot.Maths;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.ShooterSystem;
 
-public class SetFlySpeed extends CommandBase {
+public class SetFlySpeedWithLimelight extends CommandBase {
     ShooterSystem shooterSystem;
     Limelight limelight;
 
-    public SetFlySpeed(ShooterSystem shooterSystem) {
+    public SetFlySpeedWithLimelight(ShooterSystem shooterSystem) {
         this.shooterSystem = shooterSystem;
         addRequirements(shooterSystem);
     }

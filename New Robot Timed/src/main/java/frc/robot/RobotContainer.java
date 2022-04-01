@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -146,42 +145,25 @@ public class RobotContainer {
 
   Command middleBallShoot = (new ResetWheels(vroomVroomSub))
           .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new PrintCommand("SetIntakeSpeed" + System.currentTimeMillis()))
-                  .alongWith(new AutoBackwards(vroomVroomSub, 2))
-                  .alongWith(new PrintCommand("AutoBackwards" + System.currentTimeMillis())))
+                  .alongWith(new AutoBackwards(vroomVroomSub, 2)))
           .andThen(new ResetWheels(vroomVroomSub))
-          .alongWith(new PrintCommand("ResetWheels" + System.currentTimeMillis()))
           .andThen(new AutoForwards(vroomVroomSub, 60))
-          .alongWith(new PrintCommand("AutoForwards" + System.currentTimeMillis()))
           .andThen(new TimedInternalMoveIn(tunnelSub, 250))
-          .alongWith(new PrintCommand("TimedInternalMoveIn" + System.currentTimeMillis()))
           .andThen(new InSensorCheck(flyAndSensorsSub, true))
-          .alongWith(new PrintCommand("InSensorCheck" + System.currentTimeMillis()))
           .raceWith(new WaitCommand(2))
           .andThen(new IntakeStop(intakeSub))
-          .alongWith(new PrintCommand("IntakeStop" + System.currentTimeMillis()))
           .andThen(new ResetWheels(vroomVroomSub))
-          .alongWith(new PrintCommand("ResetWheels" + System.currentTimeMillis()))
           .andThen(new Spin(vroomVroomSub, 180))
-          .alongWith(new PrintCommand("Spin" + System.currentTimeMillis()))
           .andThen(new ResetWheels(vroomVroomSub))
-          .alongWith(new PrintCommand("ResetWheels" + System.currentTimeMillis()))
           .andThen(new AutoForwards(vroomVroomSub, 65))
-          .alongWith(new PrintCommand("AutoForwards" + System.currentTimeMillis()))
           .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
-          .alongWith(new PrintCommand("SetFlySpeed" + System.currentTimeMillis()))
           .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-          .alongWith(new PrintCommand("TimedInternalMoveIn" + System.currentTimeMillis()))
           .andThen(new WaitCommand(1))
           .andThen(new TimedInternalMoveOut(tunnelSub, 250))
-          .alongWith(new PrintCommand("TimedInternalMoveOut" + System.currentTimeMillis()))
           .andThen(new SetFlySpeed(flyAndSensorsSub, visionSub, true, 750, midStick))
-          .alongWith(new PrintCommand("SetFlySpeed" + System.currentTimeMillis()))
           .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-          .alongWith(new PrintCommand("TimedInternalMoveIn" + System.currentTimeMillis()))
           .andThen(new WaitCommand(1))
-          .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
-          .alongWith(new PrintCommand("SensorTummyStopAll" + System.currentTimeMillis()));
+          .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub));
 
   Command taxiTwoBallShootMidBall = (new ResetWheels(vroomVroomSub))
       .andThen((new SetIntakeSpeedIn(intakeSub))

@@ -20,10 +20,12 @@ public class Spin extends CommandBase{
     }
     @Override
     public void execute() {
-        if(driveTrain.findPosition() < Maths.spinDistanceByDegree(degrees)){
-            driveTrain.greenLight(0, -1);
+        double rotationsToSpin = Maths.spinDistanceByDegree((degrees - 10));
+        double position = driveTrain.findPosition();
+        if(Math.abs(position) < rotationsToSpin){
+            driveTrain.greenLight(-1, 0);
         }
-        else if(driveTrain.findPosition() >= Maths.spinDistanceByDegree(degrees)){
+        else if(Math.abs(position) >= rotationsToSpin){
             driveTrain.greenLight(0, 0);
             youDone = true;
         }

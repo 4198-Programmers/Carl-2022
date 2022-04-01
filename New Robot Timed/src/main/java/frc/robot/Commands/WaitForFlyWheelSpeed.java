@@ -2,23 +2,20 @@ package frc.robot.Commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
-import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.ShooterSystem;
 
 public class WaitForFlyWheelSpeed extends CommandBase {
     ShooterSystem shooterSystem;
-    Limelight limelight;
+    double speed;
     Maths maths;
 
-    public WaitForFlyWheelSpeed(ShooterSystem shooterSystem, Limelight limelight) {
+    public WaitForFlyWheelSpeed(ShooterSystem shooterSystem, double speed) {
         this.shooterSystem = shooterSystem;
-        this.limelight = limelight;
+        this.speed = speed;
     }
 
     @Override
     public boolean isFinished() {
-        double speed = shooterSystem.getSpeed();
-        double distance = limelight.distancefromTarget();
-        return (speed == Maths.flyWheelSpeedByDistance(distance));
+        return( speed == shooterSystem.getSpeed());
     }
 }

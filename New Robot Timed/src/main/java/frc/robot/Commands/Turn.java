@@ -18,7 +18,7 @@ public class Turn extends CommandBase{
     @Override
     public void execute() {
         if(driveTrain.position() <= distance){
-            driveTrain.greenLight(0.5, 1);
+            driveTrain.greenLight(0, 0.5);
         }
     }
     @Override

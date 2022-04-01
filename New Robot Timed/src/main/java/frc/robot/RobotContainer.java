@@ -55,20 +55,21 @@ public class RobotContainer {
       () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS),
       () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS));
 
-  Command taxiAndShoot = (new DriveForCertainDistance(driveTrain, Constants.WANTED_AUTO_DISTANCE))
-      .alongWith((new MoveBallFromFeed(tunnelSub))
-      .alongWith(new FeederIn(intake)))
-        .raceWith(new WaitForBallToEnterIntake(intake, sensors))
-      .andThen(new Turn(driveTrain, Constants.AUTO_TURNING_DISTANCE))
-      .andThen(new DriveForCertainDistance(driveTrain, Constants.GO_TO_TARGET_DISTANCE))
+  Command taxiAndShoot = (new DriveForCertainDistance(driveTrain, -2))
+      .andThen(new DriveForCertainDistance(driveTrain, 45))
+      .alongWith((new MoveBallFromFeed(tunnelSub)))
+      .alongWith((new FeederIn(intake))
+          .raceWith(new WaitForBallToEnterIntake(intake, sensors)))
+      .andThen(new Turn(driveTrain, 180))
+      .andThen(new DriveForCertainDistance(driveTrain, 50))
       .andThen(new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
       .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
       .andThen(new MoveBalltoShooter(tunnelSub))
-        .raceWith((new WaitForBallToLeaveBot()))
+      .raceWith((new WaitForBallToLeaveBot()))
       .andThen(new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
       .alongWith(new WaitForFlyWheelSpeed(shooterSystem, limelight))
-      .andThen(new MoveBalltoShooter(tunnelSub))
-        .raceWith((new WaitForBallToLeaveBot()))
+      .andThen((new MoveBalltoShooter(tunnelSub))
+          .raceWith((new WaitForBallToLeaveBot())))
       .andThen(new StopFlyWheel(shooterSystem));
       
   // buttons
@@ -99,10 +100,6 @@ public class RobotContainer {
   public RobotContainer() {
     configureButtonBindings();
     begin();
-    // driveTrain.setDefaultCommand(new Drive(driveTrain, () ->
-    // leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS), () ->
-    // middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
-
   }
 
   private void configureButtonBindings() {
@@ -142,7 +139,7 @@ public class RobotContainer {
 
   private void begin() {
     m_chooser.addOption("Auto-Do not Move", new DoNotDrive(driveTrain));
-    m_chooser.setDefaultOption("Taxi and Shoot Two Balls", taxiAndShoot);
+    m_chooser.setDefaultOption("Taxi and Shoot", taxiAndShoot);
     m_chooser.addOption("Taxi", new DriveForCertainDistance(driveTrain, Constants.WANTED_AUTO_DISTANCE));
   }
 

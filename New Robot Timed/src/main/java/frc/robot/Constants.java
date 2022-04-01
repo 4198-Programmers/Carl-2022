@@ -55,8 +55,6 @@ public class Constants {
     public static final double SPIN_BUTTON_DEGREES = 1;
     public static final double TAXI_AND_SHOOT_SPIN_DEGREES = 180;
     public static final double SPIN_DEGREES_TAXI_AND_SHOOT = 36;
-    public static final double GO_TO_TARGET_DISTANCE = 20;
-    public static final double AUTO_TURNING_DISTANCE = 20;
 
     // Targeting Offsets
     public static final double X_OFFSET_TARGETING_TO_THE_RIGHT = 3.75;

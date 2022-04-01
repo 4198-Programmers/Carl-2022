@@ -22,7 +22,8 @@ public class RobotContainer {
   Drive drive = new Drive(driveTrain, () -> leftStick.getRawAxis(0), () -> middleStick.getRawAxis(1));
   SetFlyWheelSpeed setFlyWheelSpeed = new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(3));
   // buttons
-  
+  JoystickButton shooterButton = new JoystickButton(middleStick, Constants.SHOOTER_BUTTON);
+
   
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
@@ -38,8 +39,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    JoystickButton shooterButton = new JoystickButton(middleStick, Constants.SHOOTER_BUTTON);
-    
+    shooterButton.whenHeld(new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(3)));
   }
 
   private void begin() {

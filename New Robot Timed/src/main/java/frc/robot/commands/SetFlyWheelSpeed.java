@@ -18,4 +18,8 @@ public class SetFlyWheelSpeed extends CommandBase{
     public void execute() {
         flyWheel.setSpeed(flyWheelSpeedRetriever.getFlyWheelSpeed());
     }
+    @Override
+    public void end(boolean interrupted) {
+        flyWheel.setSpeed(0);
+    }
 }

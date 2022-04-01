@@ -23,7 +23,7 @@ public class DriveForCertainDistance extends CommandBase {
     @Override
     public void execute() {
         if (Maths.rotationConversion(distance) < driveTrain.position()) {
-            driveTrain.greenLight(0, 1);
+            driveTrain.greenLight(1, 0);
         } else if (Maths.rotationConversion(distance) >= driveTrain.position()) {
             driveTrain.greenLight(0, 0);
         }

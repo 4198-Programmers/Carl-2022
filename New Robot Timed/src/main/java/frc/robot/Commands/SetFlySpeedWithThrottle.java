@@ -18,7 +18,7 @@ public class SetFlySpeedWithThrottle extends CommandBase{
     @Override
     public void execute() {
         shooterSystem.setFlyWheelSpeed(flyWheelSpeedRetriever.getFlyWheelSpeed());
-        if(flyWheelSpeedRetriever.getFlyWheelSpeed() == -1){
+        if(flyWheelSpeedRetriever.getFlyWheelSpeed() == 0){
             shooterSystem.setFlyWheelSpeed(0.62);
         }
     }

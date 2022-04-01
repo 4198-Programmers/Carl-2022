@@ -15,6 +15,9 @@ public class Sensors extends SubsystemBase{
     public boolean isBallAtShooter(){
         return flyWheelSensor.get();
     }
+    public boolean hasBallBeenShot(){
+        return hasSensorSeenBall;
+    }
 
     @Override
     public void periodic() {

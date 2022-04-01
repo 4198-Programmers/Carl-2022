@@ -71,6 +71,13 @@ public class RobotContainer {
       .andThen((new MoveBalltoShooter(tunnelSub))
           .raceWith((new WaitForBallToLeaveBot())))
       .andThen(new StopFlyWheel(shooterSystem));
+
+  Command taxiAndShootMiddleBall = (new DriveForCertainDistance(driveTrain, -2))
+  .andThen(new DriveForCertainDistance(driveTrain, 45))
+  .alongWith((new FeederIn(intake))
+  .raceWith(new WaitForBallToEnterIntake(intake, sensors)))
+  .andThen(new Spin(driveTrain, 180))
+  
       
   // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);

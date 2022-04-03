@@ -7,28 +7,35 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class AngledHooks extends SubsystemBase{
+public class AngledHooks extends SubsystemBase {
     CANSparkMax angledHook = new CANSparkMax(Constants.ANGLED_HOOKS_PORT, MotorType.kBrushless);
     RelativeEncoder angledHookEncoder = angledHook.getEncoder();
 
-    public double hookPosition(){
+    public double hookPosition() {
         return angledHookEncoder.getPosition();
     }
-    private boolean canAngledHooksMoveUp(){
-        return(hookPosition() < Constants.ANGLED_HOOK_UPPER_LIMIT);
+
+    public void resetPosition() {
+        angledHookEncoder.setPosition(0);
     }
-    private boolean canAngledHooksMoveDown(){
-        return(hookPosition() > Constants.ANGLED_HOOK_LOWER_LIMIT);
+
+    private boolean canAngledHooksMoveUp() {
+        return (hookPosition() < Constants.ANGLED_HOOK_UPPER_LIMIT);
     }
-    public void moveHooks(double speed){
+
+    private boolean canAngledHooksMoveDown() {
+        return (hookPosition() > Constants.ANGLED_HOOK_LOWER_LIMIT);
+    }
+
+    public void moveHooks(double speed) {
         double effectiveSpeed = speed;
-        if(speed > 0){
-            if(!canAngledHooksMoveUp()){
+        if (speed > 0) {
+            if (!canAngledHooksMoveUp()) {
                 effectiveSpeed = 0;
             }
         }
-        if(speed < 0){
-            if(!canAngledHooksMoveDown()){
+        if (speed < 0) {
+            if (!canAngledHooksMoveDown()) {
                 effectiveSpeed = 0;
             }
         }

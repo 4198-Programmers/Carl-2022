@@ -7,16 +7,15 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Sensors;
 import frc.robot.Subsystems.ShooterSystem;
-import frc.robot.Subsystems.TunnelSub;
+import frc.robot.Subsystems.Tunnel;
 import frc.robot.Commands.MoveAngledHooks;
-import frc.robot.Commands.MoveBallFromFeed;
-import frc.robot.Commands.MoveBallToIntake;
 import frc.robot.Commands.AutoFlyWheelSpeed;
 import frc.robot.Commands.ChooseLimelightMode;
 import frc.robot.Commands.DoNotDrive;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
+import frc.robot.Commands.IntakeSensorDoesNotSeeBall;
 import frc.robot.Commands.DriveForCertainDistance;
 import frc.robot.Commands.SetFlySpeedWithLimelight;
 import frc.robot.Commands.SetFlySpeedWithThrottle;
@@ -25,11 +24,10 @@ import frc.robot.Commands.WaitForFlyWheelSpeed;
 import frc.robot.Commands.Spin;
 import frc.robot.Commands.StopFlyWheel;
 import frc.robot.Commands.Targeting;
-import frc.robot.Commands.MoveBalltoShooter;
 import frc.robot.Commands.SetTunnelSpeed;
 import frc.robot.Commands.Turn;
 import frc.robot.Commands.TurnForTenSeconds;
-import frc.robot.Commands.WaitForIntakeSensorToSeeBall;
+import frc.robot.Commands.IntakeSensorSeesBall;
 import frc.robot.Commands.MoveVerticalHooks;
 import frc.robot.Subsystems.AngledHooks;
 import frc.robot.Subsystems.DriveTrain;
@@ -50,7 +48,7 @@ public class RobotContainer {
   AngledHooks angledHooks;
   Limelight limelight;
   Intake intake;
-  TunnelSub tunnelSub;
+  Tunnel tunnel;
   Sensors sensors;
   // commands
   Drive drive = new Drive(driveTrain,
@@ -59,36 +57,37 @@ public class RobotContainer {
 
   Command taxiAndShoot = (new DriveForCertainDistance(driveTrain, -2))
       .andThen(new DriveForCertainDistance(driveTrain, 45))
-      .alongWith((new MoveBallFromFeed(tunnelSub)))
+      .alongWith((((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED)))
+        .raceWith(new IntakeSensorDoesNotSeeBall(sensors)))
       .alongWith((new FeederIn(intake))
-          .raceWith(new WaitForIntakeSensorToSeeBall(intake, sensors)))
+          .raceWith(new IntakeSensorSeesBall(sensors))))
       .andThen(new Turn(driveTrain, 180))
       .andThen(new DriveForCertainDistance(driveTrain, 50))
       .andThen(new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
       .alongWith(new WaitForFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
-      .andThen(new MoveBalltoShooter(tunnelSub))
+      .andThen(new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
       .raceWith((new WaitForFlyWheelSensorToSeeBall()))
-      .andThen((new MoveBallToIntake(tunnelSub, -Constants.TUNNEL_SPEED))
-          .raceWith(new WaitForIntakeSensorToSeeBall(intake, sensors)))
+      .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+          .raceWith(new IntakeSensorSeesBall(sensors)))
       .andThen(new WaitForFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
-      .andThen((new MoveBalltoShooter(tunnelSub))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
           .raceWith((new WaitForFlyWheelSensorToSeeBall())))
       .andThen(new StopFlyWheel(shooterSystem));
 
   Command taxiAndShootMiddleBall = (new DriveForCertainDistance(driveTrain, -2))
       .andThen(new DriveForCertainDistance(driveTrain, 45))
       .alongWith((new FeederIn(intake))
-          .raceWith(new WaitForIntakeSensorToSeeBall(intake, sensors)))
+          .raceWith(new IntakeSensorSeesBall(sensors)))
       .andThen(new Spin(driveTrain, 180))
       .andThen(new DriveForCertainDistance(driveTrain, 50))
       .alongWith((new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
           .raceWith(new WaitForFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED)))
-      .andThen((new MoveBalltoShooter(tunnelSub))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
           .raceWith(new WaitForFlyWheelSensorToSeeBall()))
-      .andThen((new MoveBallToIntake(tunnelSub, -Constants.TUNNEL_SPEED))
-        .raceWith(new WaitForIntakeSensorToSeeBall(intake, sensors)))
+      .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+        .raceWith(new IntakeSensorSeesBall(sensors)))
       .andThen(new WaitForFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
-      .andThen((new MoveBalltoShooter(tunnelSub))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
           .raceWith(new WaitForFlyWheelSensorToSeeBall()))
       .andThen(new AutoFlyWheelSpeed(shooterSystem, 0));
   // buttons
@@ -137,8 +136,8 @@ public class RobotContainer {
     feederInButton.whenHeld(new FeederIn(intake), false);
     feederOutButton.whenHeld(new FeederOut(intake), false);
 
-    tunnelInButton.whenHeld(new MoveBalltoShooter(tunnelSub), false);
-    tunnelOutButton.whenHeld(new SetTunnelSpeed(tunnelSub, Constants.TUNNEL_SPEED), false);
+    tunnelInButton.whenHeld(new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED), false);
+    tunnelOutButton.whenHeld(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED), false);
 
     turnForTenSecondsButton.whenPressed(new TurnForTenSeconds(driveTrain, Constants.TURN_SPEED, Constants.TURN_TURNING_SPEED, Constants.TURN_MILLISECONDS));
 

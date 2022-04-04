@@ -6,10 +6,10 @@ import frc.robot.Subsystems.Tunnel;
 public class SetTunnelSpeed extends CommandBase {
     Tunnel tunnel;
     double speed;
-    public SetTunnelSpeed(Tunnel tunnelSub, double speed) {
-        this.tunnel = tunnelSub;
+    public SetTunnelSpeed(Tunnel tunnel, double speed) {
+        this.tunnel = tunnel;
         this.speed = speed;
-        addRequirements(tunnelSub);
+        addRequirements(tunnel);
     }
 
     @Override

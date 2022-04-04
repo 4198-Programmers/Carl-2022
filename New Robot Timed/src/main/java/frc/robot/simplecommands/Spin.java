@@ -23,7 +23,7 @@ public class Spin extends CommandBase{
         double rotationsToSpin = Maths.spinDistanceByDegree((degrees - 10));
         double position = driveTrain.findPosition();
         if(Math.abs(position) < rotationsToSpin){
-            driveTrain.greenLight(-1, 0);
+            driveTrain.greenLight(1, 0);
         }
         else if(Math.abs(position) >= rotationsToSpin){
             driveTrain.greenLight(0, 0);

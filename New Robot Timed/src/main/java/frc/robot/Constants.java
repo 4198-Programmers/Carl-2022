@@ -24,10 +24,10 @@ public class Constants {
     public static final byte RIGHT_STICK_PORT = 2;
 
     public static final double ANGLE_HOOK_SPEED = 0.5;
-    public static final double INTAKE_FORWARD_SPEED = -1;
+    public static final double INTAKE_FORWARD_SPEED = -0.95;
     public static final double FLYWHEEL_SPEED = 1;
     public static final double INTERNAL_FEEDER_SPEED = 0.75;
-    public static final double INTAKE_REVERSE_SPEED = 1;
+    public static final double INTAKE_REVERSE_SPEED = 0.95;
     public static final double INTERNAL_FEEDER_REVERSE_SPEED = -0.75;
     public static final double DRIVE_SPEED_MULTIPLIER = 1;
     /** Wheel velocity = 0 */

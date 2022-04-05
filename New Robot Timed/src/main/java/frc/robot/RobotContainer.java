@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.RunCommand;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+//import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.hookcommands.AngleStop;
@@ -348,7 +348,7 @@ public class RobotContainer {
         angleJoystickButton.whenHeld(angledHookJoystick, false);
         angleJoystickButton.whenInactive(driveSticks);
         verticalHookUpBTN.whileHeld(vertHookJoystick, false);
-        // verticalHookDownBTN.whileHeld(pullVertHooksIn);
+        //verticalHookDownBTN.whileHeld();
         flywheelSpinUpBTN.whileHeld(setFlySpeed);
         // flywheelSpinUpBTN.whenHeld(shooting);
         intakeInBTN.whileHeld(intakeFeeder);

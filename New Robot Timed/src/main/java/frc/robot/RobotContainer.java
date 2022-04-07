@@ -98,6 +98,8 @@ public class RobotContainer {
   JoystickButton limelightOffButton = new JoystickButton(middleStick, Constants.LIMELIGHT_OFF_BUTTON);
   JoystickButton angledOverRideButton = new JoystickButton(middleStick, Constants.ANGLED_OVERRIDE_BUTTON);
   JoystickButton verticalOverRideButton = new JoystickButton(rightStick, Constants.VERTICAL_OVERRIDE_BUTTON);
+  JoystickButton lowLoftButton = new JoystickButton(rightStick, Constants.LOW_LOFT_BUTTON);
+  JoystickButton invertFlyWheelSpeed = new JoystickButton(rightStick, Constants.INVERT_FLY_WHEEL_SPEED_BUTTON);
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -123,6 +125,7 @@ public class RobotContainer {
         () -> middleStick.getRawAxis(Constants.LEFT_RIGHT_AXIS)));
     verticalOverRideButton
         .whenHeld(new MoveVerticalHooks(() -> rightStick.getRawAxis(Constants.UP_DOWN_AXIS), verticalHooks));
+      lowLoftButton.whenHeld(new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS), Constants.LOW_LOFT_SPEED));
   }
 
   private void begin() {

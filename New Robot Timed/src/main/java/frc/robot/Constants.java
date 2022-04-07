@@ -52,6 +52,7 @@ public class Constants {
     public static final double TUNNEL_SPEED = 0.75;
     public static final double INTAKE_SPEED = -1;
     public static final double FLY_WHEEL_SPEED = 0.63;
+    public static final double LOW_LOFT_SPEED = 0.5;
 
     public static final double AUTO_ROTATION = 0;
     public static final double AUTO_DRIVE_DISTANCE = 0;
@@ -70,10 +71,11 @@ public class Constants {
     public static final int ANGLED_OVERRIDE_BUTTON = 2;
 
     // Right Joystick
+    public static final int LOW_LOFT_BUTTON = 1;   
     public static final int VERTICAL_OVERRIDE_BUTTON = 2;
     public static final int INTAKE_OUT_BUTTON = 3;
     public static final int TUNNEL_OUT_BUTTON = 4;
     public static final int INTAKE_IN_BUTTON = 5;
     public static final int TUNNEL_IN_BUTTON = 6;
-    public static final double AUTO_DRIVE_DISTANCE_AFTER_SHOT = 0;
+    public static final int INVERT_FLY_WHEEL_SPEED_BUTTON = 7;
 }

@@ -16,8 +16,8 @@ public class Limelight extends SubsystemBase{
     private LimelightMode(double mode){
         this.mode = mode;
     }
-    protected GetMode(mode){
-        
+    protected double GetModeValue(){
+        return mode;
     }
     }
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -37,5 +37,7 @@ public class Limelight extends SubsystemBase{
     public double xOffset(){
        return tx.getDouble(0);
     }
-
+    public double pickLimelightMode(LimelightMode limelightMode){
+        limelightMode.
+    }
 }

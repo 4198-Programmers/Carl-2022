@@ -32,12 +32,21 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry ledMode = table.getEntry("ledMode");
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
-    NetworkTableEntry Pipeline = table.getEntry("pipeline");
+    NetworkTableEntry pipeline = table.getEntry("pipeline");
     
     public double xOffset(){
        return tx.getDouble(0);
     }
-    public double setPipelineMode(LimelightMode limelightMode){
-        Pipeline.
+    public void setPipelineMode(LimelightMode limelightMode){
+        pipeline.setDouble(limelightMode.GetModeValue());
+    }
+    public double getPipelineMode(LimelightMode limelightMode){
+        double mode = limelightMode.GetModeValue();
+        if(mode == 0){
+            limelightMode.forceOff;
+        }
+        if(mode == 1){
+            limelightMode.foreOn;
+        }
     }
 }

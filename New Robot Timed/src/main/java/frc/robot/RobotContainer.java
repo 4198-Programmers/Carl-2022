@@ -136,34 +136,34 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    targetingButton.whenHeld(new Targeting(limelight, driveTrain));
+    targetingButton.whileHeld(new Targeting(limelight, driveTrain));
     targetingButton.whenReleased(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
 
     shootingButton.and(humanOverRideButton).whileActiveContinuous
       (new SetFlySpeedWithLimelight(shooterSystem), false);
       
-    shootingButton.whenHeld(new SetFlySpeedWithThrottle(shooterSystem, 
+    shootingButton.whileHeld(new SetFlySpeedWithThrottle(shooterSystem, 
       ()-> middleJoystick.getRawAxis(Constants.THROTTLE_AXIS)));
 
     limelightOnButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimelightMode(limelight, LimelightMode.forceOff));
 
-    feederInButton.whenHeld(new FeederIn(intake), false);
-    feederOutButton.whenHeld(new FeederOut(intake), false);
+    feederInButton.whileHeld(new FeederIn(intake), false);
+    feederOutButton.whileHeld(new FeederOut(intake), false);
 
-    tunnelInButton.whenHeld(new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED), false);
-    tunnelOutButton.whenHeld(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED), false);
+    tunnelInButton.whileHeld(new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED), false);
+    tunnelOutButton.whileHeld(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED), false);
 
     turnForTenSecondsButton.whenPressed(new TurnForTenSeconds(driveTrain, Constants.TURN_SPEED, Constants.TURN_TURNING_SPEED, Constants.TURN_MILLISECONDS));
 
-    angledOverRideButton.whenHeld(new MoveAngledHooks(angledHooks,
+    angledOverRideButton.whileHeld(new MoveAngledHooks(angledHooks,
         () -> rightJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
 
     angledOverRideButton.whenInactive(new Drive(driveTrain,
         () -> leftJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS),
         () -> middleJoystick.getRawAxis(Constants.LEFT_AND_RIGHT_AXIS)));
 
-    verticalOverRideButton.whenHeld(new MoveVerticalHooks(verticalHooks,
+    verticalOverRideButton.whileHeld(new MoveVerticalHooks(verticalHooks,
         () -> middleJoystick.getRawAxis(Constants.UP_AND_DOWN_AXIS)), false);
 
     deathSpinButton.and(humanOverRideButton).whileActiveContinuous

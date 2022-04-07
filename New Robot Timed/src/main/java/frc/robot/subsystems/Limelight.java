@@ -10,7 +10,7 @@ public class Limelight extends SubsystemBase{
     public enum LimelightMode{
         forceOff(0),
         forceOn(1),
-        undefined(-1);
+        invalid(-1);
         private double mode;
 
     private LimelightMode(double mode){
@@ -42,11 +42,9 @@ public class Limelight extends SubsystemBase{
     }
     public double getPipelineMode(LimelightMode limelightMode){
         double mode = limelightMode.GetModeValue();
+        double pipeline = limelightMode.invalid;
         if(mode == 0){
-            limelightMode.forceOff;
-        }
-        if(mode == 1){
-            limelightMode.foreOn;
+            
         }
     }
 }

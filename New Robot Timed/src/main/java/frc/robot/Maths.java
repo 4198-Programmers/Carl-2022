@@ -2,7 +2,7 @@ package frc.robot;
 
 public final class Maths {
     public static double rotationConversion(double distanceInInches) {
-        double circumference = (Math.PI * (Constants.WHEEL_DIAMTER));
+        double circumference = 2 * (Math.PI * (Constants.WHEEL_DIAMTER));
         double rotations = ((distanceInInches / circumference));
         return rotations;
     }

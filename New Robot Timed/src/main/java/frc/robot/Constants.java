@@ -51,6 +51,7 @@ public class Constants {
 
     public static final double TUNNEL_SPEED = 0.75;
     public static final double INTAKE_SPEED = -1;
+    public static final double FLY_WHEEL_SPEED = 0.63;
 
     public static final double AUTO_ROTATION = 0;
     public static final double AUTO_DRIVE_DISTANCE = 0;
@@ -59,6 +60,7 @@ public class Constants {
     public static final double AUTO_ROTATION_AFTER_SHOT = 0;
 
     // Left Joystick
+    public static final int TARGETING_BUTTON = 1;
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
 
     // Middle Joystick

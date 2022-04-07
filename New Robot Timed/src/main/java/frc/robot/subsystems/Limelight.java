@@ -4,6 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase{
 
@@ -41,14 +42,17 @@ public class Limelight extends SubsystemBase{
         pipeline.setDouble(limelightMode.GetModeValue());
     }
     public LimelightMode getPipelineMode(LimelightMode limelightMode){
-        double mode = limelightMode.GetModeValue();
-        LimelightMode pipeline = limelightMode.invalid;
+        double mode = pipeline.getDouble(LimelightMode.invalid.GetModeValue());
+        LimelightMode pipeline = LimelightMode.invalid;
         if(mode == 0){
-            pipeline = limelightMode.forceOff;
+            pipeline = LimelightMode.forceOff;
         }
         if(mode == 1){
-            pipeline = limelightMode.forceOn;
+            pipeline = LimelightMode.forceOn;
         }
         return pipeline;
+    }
+    public double distanceFromTarget(){
+        return Maths.distanceFromTarget(ty.getDouble(0));
     }
 }

@@ -127,6 +127,8 @@ public class RobotContainer {
 
   private void begin() {
     SmartDashboard.putData("Auto choices", m_chooser);
+    m_chooser.addOption("Middle Ball Auto", middleBallAuto);
+    m_chooser.setDefaultOption("Side Ball Auto", sideBallAuto);
   }
 
   public Command getAutonomousCommand() {

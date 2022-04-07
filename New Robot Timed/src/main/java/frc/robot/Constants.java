@@ -54,20 +54,15 @@ public class Constants {
     public static final double FLY_WHEEL_SPEED = 0.63;
     public static final double LOW_LOFT_SPEED = 0.5;
 
-    public static final double AUTO_ROTATION = 0;
-    public static final double AUTO_DRIVE_DISTANCE = 0;
-
-    public static final double ONE_EIGHTY_DEGREES = 180;
-    public static final double AUTO_ROTATION_AFTER_SHOT = 0;
-
     // Left Joystick
     public static final int TARGETING_BUTTON = 1;
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
 
     // Middle Joystick
+    public static final int ANGLED_OVERRIDE_BUTTON = 2;    
     public static final int LIMELIGHT_ON_BUTTON = 11;
     public static final int LIMELIGHT_OFF_BUTTON = 12;
-    public static final int ANGLED_OVERRIDE_BUTTON = 2;
+
 
     // Right Joystick
     public static final int SHOOTER_BUTTON = 1;

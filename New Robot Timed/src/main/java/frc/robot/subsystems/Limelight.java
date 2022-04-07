@@ -7,14 +7,17 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Limelight extends SubsystemBase{
 
-    public enum ChooseLimelightMode{
+    public enum LimelightMode{
         forceOff(0),
         forceOn(1),
         undefined(-1);
         private double mode;
 
-    private ChooseLimelightMode(double mode){
+    private LimelightMode(double mode){
         this.mode = mode;
+    }
+    protected GetMode(mode){
+        
     }
     }
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");

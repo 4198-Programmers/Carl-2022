@@ -49,57 +49,61 @@ public class RobotContainer {
   Sensors sensors;
   // commands
   Command sideBallAuto = (new DriveForSpecificDistance(driveTrain, -2))
-    .andThen(new SetDrivePosition(driveTrain, 0))
-    .andThen((new DriveForSpecificDistance(driveTrain, 45))
-    .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED)
-    .raceWith(new WaitForBallAtShooter(sensors))))
-    .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-    .raceWith((new WaitForBallInSensor(sensors)))
-    .raceWith(new WaitCommand(2))))
-    .andThen(new SetDrivePosition(driveTrain, 0))
-    .andThen(new Spin(driveTrain, 180))
-    .andThen(new Target(limelight, driveTrain))
-    .andThen(new SetDrivePosition(driveTrain, 0))
-    .andThen(new DriveForSpecificDistance(driveTrain, 73))
-    .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-    .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-    .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-    .raceWith(new WaitForBallAtShooter(sensors))
-    .andThen(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-    .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-    .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-    .raceWith(new WaitForBallAtShooter(sensors)))
-    .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
-    
-    Command middleBallAuto = (new DriveForSpecificDistance(driveTrain, -2))
-    .andThen(new SetDrivePosition(driveTrain, 0))
-    .andThen((new Turn(driveTrain, 90))
-    .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-    .raceWith(new WaitForBallAtShooter(sensors)))
-    .andThen((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-    .raceWith(new WaitForBallInSensor(sensors))))
-    .andThen(new SetDrivePosition(driveTrain, 0))
-    .andThen((new Turn(driveTrain, -180))
-    .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))))
-    .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-    .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-    .raceWith(new WaitForBallAtShooter(sensors)))
-    .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
-    .raceWith(new WaitForBallInSensor(sensors))
-    .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-    .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-    .raceWith(new WaitForBallAtShooter(sensors)))
-    .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
-    
-      // MakeButtons
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen((new DriveForSpecificDistance(driveTrain, 45))
+          .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED)
+              .raceWith(new WaitForBallAtShooter(sensors))))
+          .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+              .raceWith((new WaitForBallInSensor(sensors)))
+              .raceWith(new WaitCommand(2))))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen(new Spin(driveTrain, 180))
+      .andThen(new Target(limelight, driveTrain))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen(new DriveForSpecificDistance(driveTrain, 73))
+      .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+      .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+          .raceWith(new WaitForBallAtShooter(sensors))
+          .andThen(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+      .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+          .raceWith(new WaitForBallAtShooter(sensors)))
+      .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+
+  Command middleBallAuto = (new DriveForSpecificDistance(driveTrain, -2))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen((new Turn(driveTrain, 90))
+          .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+              .raceWith(new WaitForBallAtShooter(sensors)))
+          .andThen((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+              .raceWith(new WaitForBallInSensor(sensors))))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen((new Turn(driveTrain, -180))
+          .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))))
+      .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+          .raceWith(new WaitForBallAtShooter(sensors)))
+      .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+          .raceWith(new WaitForBallInSensor(sensors))
+          .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+          .raceWith(new WaitForBallAtShooter(sensors)))
+      .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+
+  // MakeButtons
+  JoystickButton humanOverRideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
   JoystickButton targetingButton = new JoystickButton(leftStick, Constants.TARGETING_BUTTON);
-  JoystickButton shoootingButton = new JoystickButton(middleStick, Constants.SHOOTER_BUTTON);
+  JoystickButton shoootingButton = new JoystickButton(rightStick, Constants.SHOOTER_BUTTON);
   JoystickButton limelightOnButton = new JoystickButton(middleStick, Constants.LIMELIGHT_ON_BUTTON);
   JoystickButton limelightOffButton = new JoystickButton(middleStick, Constants.LIMELIGHT_OFF_BUTTON);
   JoystickButton angledOverRideButton = new JoystickButton(middleStick, Constants.ANGLED_OVERRIDE_BUTTON);
   JoystickButton verticalOverRideButton = new JoystickButton(rightStick, Constants.VERTICAL_OVERRIDE_BUTTON);
-  JoystickButton lowLoftButton = new JoystickButton(rightStick, Constants.LOW_LOFT_BUTTON);
-  JoystickButton invertFlyWheelSpeed = new JoystickButton(rightStick, Constants.INVERT_FLY_WHEEL_SPEED_BUTTON);
+  JoystickButton intakeInButton = new JoystickButton(rightStick, Constants.INTAKE_IN_BUTTON);
+  JoystickButton intakeOutButton = new JoystickButton(rightStick, Constants.INTAKE_OUT_BUTTON);
+  JoystickButton tunnelInButton = new JoystickButton(rightStick, Constants.TUNNEL_IN_BUTTON);
+  JoystickButton tunnelOutButton = new JoystickButton(rightStick, Constants.TUNNEL_OUT_BUTTON);
+  JoystickButton spitBalls = new JoystickButton(rightStick, Constants.SPIT_BALLS_BUTTON);
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -116,7 +120,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     targetingButton.whenHeld(new Target(limelight, driveTrain));
     shoootingButton
-        .whenHeld(new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS), Constants.FLY_WHEEL_SPEED));
+        .whenHeld(new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS),
+            Constants.FLY_WHEEL_SPEED));
     limelightOnButton.whenPressed(new ChooseLimeLightMode(limelight, LimelightMode.forceOn));
     limelightOffButton.whenPressed(new ChooseLimeLightMode(limelight, LimelightMode.forceOff));
     angledOverRideButton
@@ -125,7 +130,14 @@ public class RobotContainer {
         () -> middleStick.getRawAxis(Constants.LEFT_RIGHT_AXIS)));
     verticalOverRideButton
         .whenHeld(new MoveVerticalHooks(() -> rightStick.getRawAxis(Constants.UP_DOWN_AXIS), verticalHooks));
-      lowLoftButton.whenHeld(new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS), Constants.LOW_LOFT_SPEED));
+    shoootingButton.and(humanOverRideButton)
+        .whileActiveContinuous(new AutoFlyWheelSpeed(flyWheel, Constants.LOW_LOFT_SPEED));
+    intakeInButton.whenHeld(new SetIntakeSpeed(intake, Constants.INTAKE_SPEED));
+    intakeOutButton.whenHeld(new SetIntakeSpeed(intake, -Constants.INTAKE_SPEED));
+    tunnelInButton.whenHeld(new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED));
+    tunnelOutButton.whenHeld(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED));
+    spitBalls.whileHeld((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+        .alongWith(new SetIntakeSpeed(intake, -Constants.INTAKE_SPEED)));
   }
 
   private void begin() {

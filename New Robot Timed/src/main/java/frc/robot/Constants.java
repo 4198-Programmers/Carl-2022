@@ -65,17 +65,16 @@ public class Constants {
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
 
     // Middle Joystick
-    public static final int SHOOTER_BUTTON = 1;
     public static final int LIMELIGHT_ON_BUTTON = 11;
     public static final int LIMELIGHT_OFF_BUTTON = 12;
     public static final int ANGLED_OVERRIDE_BUTTON = 2;
 
     // Right Joystick
-    public static final int LOW_LOFT_BUTTON = 1;   
+    public static final int SHOOTER_BUTTON = 1;
     public static final int VERTICAL_OVERRIDE_BUTTON = 2;
     public static final int INTAKE_OUT_BUTTON = 3;
     public static final int TUNNEL_OUT_BUTTON = 4;
     public static final int INTAKE_IN_BUTTON = 5;
     public static final int TUNNEL_IN_BUTTON = 6;
-    public static final int INVERT_FLY_WHEEL_SPEED_BUTTON = 7;
+    public static final int SPIT_BALLS_BUTTON = 7;
 }

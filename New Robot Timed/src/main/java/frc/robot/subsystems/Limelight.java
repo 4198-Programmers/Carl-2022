@@ -40,9 +40,9 @@ public class Limelight extends SubsystemBase{
     public void setPipelineMode(LimelightMode limelightMode){
         pipeline.setDouble(limelightMode.GetModeValue());
     }
-    public double getPipelineMode(LimelightMode limelightMode){
+    public LimelightMode getPipelineMode(LimelightMode limelightMode){
         double mode = limelightMode.GetModeValue();
-         pipeline = limelightMode.invalid;
+        LimelightMode pipeline = limelightMode.invalid;
         if(mode == 0){
             pipeline = limelightMode.forceOff;
         }

@@ -10,10 +10,12 @@ import frc.robot.commands.DriveTrainCommands.Drive;
 import frc.robot.commands.DriveTrainCommands.DriveForSpecificDistance;
 import frc.robot.commands.DriveTrainCommands.SetDrivePosition;
 import frc.robot.commands.DriveTrainCommands.Spin;
+import frc.robot.commands.DriveTrainCommands.Turn;
 import frc.robot.commands.HookCommands.MoveAngledHooks;
 import frc.robot.commands.HookCommands.MoveVerticalHooks;
 import frc.robot.commands.LimelightCommands.ChooseLimeLightMode;
 import frc.robot.commands.LimelightCommands.Target;
+import frc.robot.commands.ShooterSystemCommands.AutoFlyWheelSpeed;
 import frc.robot.commands.ShooterSystemCommands.SetFlyWheelSpeed;
 import frc.robot.commands.ShooterSystemCommands.SetIntakeSpeed;
 import frc.robot.commands.ShooterSystemCommands.SetTunnelSpeed;
@@ -59,17 +61,35 @@ public class RobotContainer {
     .andThen(new Target(limelight, driveTrain))
     .andThen(new SetDrivePosition(driveTrain, 0))
     .andThen(new DriveForSpecificDistance(driveTrain, 73))
-    .andThen((new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS), Constants.FLY_WHEEL_SPEED)))
+    .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
     .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
     .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-    .raceWith(new WaitCommand(1)))
-    .andThen(new SetFlyWheelSpeed(flyWheel, () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS), Constants.FLY_WHEEL_SPEED))
+    .raceWith(new WaitForBallAtShooter(sensors))
+    .andThen(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
     .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
     .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-    .raceWith(new WaitCommand(1)))
-    .andThen((new SetTunnelSpeed(tunnel, 0))
-    .alongWith(new SetFlyWheelSpeed(flyWheel, ()-> middleStick.getRawAxis(Constants.THROTTLE_AXIS), 0)));
+    .raceWith(new WaitForBallAtShooter(sensors)))
+    .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
     
+    Command middleBallAuto = (new DriveForSpecificDistance(driveTrain, -2))
+    .andThen(new SetDrivePosition(driveTrain, 0))
+    .andThen((new Turn(driveTrain, 90))
+    .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+    .raceWith(new WaitForBallAtShooter(sensors)))
+    .andThen((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+    .raceWith(new WaitForBallInSensor(sensors))))
+    .andThen(new SetDrivePosition(driveTrain, 0))
+    .andThen((new Turn(driveTrain, -180))
+    .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))))
+    .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+    .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+    .raceWith(new WaitForBallAtShooter(sensors)))
+    .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+    .raceWith(new WaitForBallInSensor(sensors))
+    .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+    .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+    .raceWith(new WaitForBallAtShooter(sensors)))
+    .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
     
       // MakeButtons
   JoystickButton targetingButton = new JoystickButton(leftStick, Constants.TARGETING_BUTTON);

@@ -13,7 +13,9 @@ public class Sensors extends SubsystemBase {
     public boolean isBallInFeed() {
         return ballInSensor.get();
     }
-
+    public boolean isBallReadyToShoot(){
+        return ballOutSensor.get();
+    }
     public boolean isBallAtFlyWheel() {
         return ballOutSensor.get();
     }

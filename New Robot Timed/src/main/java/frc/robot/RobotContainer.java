@@ -3,6 +3,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Subsystems.Limelight;
 import frc.robot.Subsystems.Sensors;
@@ -15,6 +16,7 @@ import frc.robot.Commands.DoNotDrive;
 import frc.robot.Commands.Drive;
 import frc.robot.Commands.FeederIn;
 import frc.robot.Commands.FeederOut;
+import frc.robot.Commands.HasSensorSeenBall;
 import frc.robot.Commands.IntakeSensorDoesNotSeeBall;
 import frc.robot.Commands.DriveForCertainDistance;
 import frc.robot.Commands.SetFlySpeedWithLimelight;
@@ -22,11 +24,10 @@ import frc.robot.Commands.SetFlySpeedWithThrottle;
 import frc.robot.Commands.WaitForFlyWheelSensorToSeeBall;
 import frc.robot.Commands.WaitForFlyWheelSpeed;
 import frc.robot.Commands.Spin;
-import frc.robot.Commands.StopFlyWheel;
 import frc.robot.Commands.Targeting;
 import frc.robot.Commands.SetTunnelSpeed;
-import frc.robot.Commands.Turn;
 import frc.robot.Commands.TurnForTenSeconds;
+import frc.robot.Commands.WaitForBallToBeReadyToShoot;
 import frc.robot.Commands.IntakeSensorSeesBall;
 import frc.robot.Commands.MoveVerticalHooks;
 import frc.robot.Commands.ResetDriveTrain;
@@ -73,6 +74,35 @@ public class RobotContainer {
       .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
           .raceWith(new WaitForFlyWheelSensorToSeeBall()))
       .andThen(new AutoFlyWheelSpeed(shooterSystem, 0));
+
+  Command taxiAndShootMiddleBallReadyToShootSensor = (new DriveForCertainDistance(driveTrain, -2))
+  .andThen(new ResetDriveTrain(driveTrain))
+  .andThen((new DriveForCertainDistance(driveTrain, 45))
+  .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+  .raceWith(new WaitForBallToBeReadyToShoot(sensors)))
+  .alongWith((new FeederIn(intake))
+  .raceWith(new IntakeSensorSeesBall(sensors))))
+  .andThen(new ResetDriveTrain(driveTrain))
+  .andThen(new Spin(driveTrain, 145))
+  .andThen(new Targeting(limelight, driveTrain))
+  .andThen(new ResetDriveTrain(driveTrain))
+  .andThen((new DriveForCertainDistance(driveTrain, 73))
+  .alongWith(new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED)))
+  .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+  .raceWith(new HasSensorSeenBall(sensors)))
+  .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+  .raceWith((new WaitCommand(1))
+  .andThen(new HasSensorSeenBall(sensors))))
+  .andThen((new AutoFlyWheelSpeed(shooterSystem, Constants.AUTO_FLY_WHEEL_SPEED))
+  .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+  .raceWith(new IntakeSensorSeesBall(sensors))))
+  .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+  .raceWith((new WaitCommand(1))
+  .andThen(new HasSensorSeenBall(sensors))))
+  .andThen((new SetTunnelSpeed(tunnel, 0))
+  .alongWith(new AutoFlyWheelSpeed(shooterSystem, 0)));
+
+
   // buttons
   JoystickButton targetingButton = new JoystickButton(middleJoystick, Constants.TARGETING_BUTTON);
   JoystickButton shootingButton = new JoystickButton(rightJoystick, Constants.SHOOTING_BUTTON);

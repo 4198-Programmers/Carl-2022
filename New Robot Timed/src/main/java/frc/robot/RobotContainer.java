@@ -172,8 +172,8 @@ public class RobotContainer {
     limelightOffButton.whenPressed(new ChooseLimeLightMode(limelight, LimelightMode.forceOff));
     angledOverRideButton
         .whileHeld(new MoveAngledHooks(() -> middleStick.getRawAxis(Constants.UP_DOWN_AXIS), angledHooks));
-    angledOverRideButton.whenInactive(new Drive(driveTrain, () -> leftStick.getRawAxis(Constants.UP_DOWN_AXIS),
-        () -> middleStick.getRawAxis(Constants.LEFT_RIGHT_AXIS)));
+    angledOverRideButton.whenInactive(new Drive(driveTrain, () -> middleStick.getRawAxis(Constants.LEFT_RIGHT_AXIS),
+        () -> leftStick.getRawAxis(Constants.UP_DOWN_AXIS)));
     verticalOverRideButton
         .whileHeld(new MoveVerticalHooks(() -> rightStick.getRawAxis(Constants.UP_DOWN_AXIS), verticalHooks));
     shoootingButton.and(humanOverRideButton)

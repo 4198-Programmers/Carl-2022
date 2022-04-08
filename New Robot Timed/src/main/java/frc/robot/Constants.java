@@ -59,12 +59,10 @@ public class Constants {
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
     public static final int AUTO_CLIMB_BUTTON = 7;
 
-
     // Middle Joystick
-    public static final int ANGLED_OVERRIDE_BUTTON = 2;    
+    public static final int ANGLED_OVERRIDE_BUTTON = 2;
     public static final int LIMELIGHT_ON_BUTTON = 11;
     public static final int LIMELIGHT_OFF_BUTTON = 12;
-
 
     // Right Joystick
     public static final int SHOOTER_BUTTON = 1;

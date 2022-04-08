@@ -4,45 +4,52 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Sensors extends SubsystemBase{
+public class Sensors extends SubsystemBase {
     DigitalInput ballInSensor = new DigitalInput(Constants.BALL_IN_SENSOR_PORT);
     DigitalInput ballOutSensor = new DigitalInput(Constants.BALL_OUT_SENSOR_PORT);
     boolean ballIsAtShootSensor = false;
     boolean ballHasBeenSeenAtShooter = false;
     boolean ballIsAtIntakeSensor = false;
     boolean ballHasBeenSeenAtIntake = false;
-    public boolean isBallAtIntake(){
+
+    public boolean isBallAtIntake() {
         return ballInSensor.get();
     }
-    public boolean isBallAtShooter(){
+
+    public boolean isBallAtShooter() {
         return ballOutSensor.get();
     }
-    public boolean hasBallBeenSeenAtShooter(){
+
+    public boolean hasBallBeenSeenAtShooter() {
         return ballHasBeenSeenAtShooter;
     }
-    public boolean hasBallBeenSeenAtIntake(){
+
+    public boolean hasBallBeenSeenAtIntake() {
         return ballHasBeenSeenAtIntake;
     }
+
     @Override
     public void periodic() {
-        if(isBallAtShooter()){
+        if (isBallAtShooter()) {
             ballIsAtShootSensor = true;
         }
-        if(ballIsAtShootSensor){
+        if (ballIsAtShootSensor) {
             ballHasBeenSeenAtShooter = true;
         }
-        if(isBallAtIntake()){
+        if (isBallAtIntake()) {
             ballIsAtIntakeSensor = true;
         }
-        if(ballIsAtIntakeSensor){
+        if (ballIsAtIntakeSensor) {
             ballHasBeenSeenAtIntake = true;
         }
     }
-    public void forgetShooterBall(){
+
+    public void forgetShooterBall() {
         ballIsAtShootSensor = false;
         ballHasBeenSeenAtShooter = false;
     }
-    public void forgetIntakeBall(){
+
+    public void forgetIntakeBall() {
         ballIsAtIntakeSensor = false;
         ballHasBeenSeenAtIntake = false;
     }

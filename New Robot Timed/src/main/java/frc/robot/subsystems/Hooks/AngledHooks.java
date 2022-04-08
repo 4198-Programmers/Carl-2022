@@ -14,6 +14,9 @@ public class AngledHooks extends SubsystemBase{
     public void setPosition(double position){
         angledHookEncoder.setPosition(position);
     }
+    public double  getPosition(){
+        return angledHookEncoder.getPosition();
+    }
     protected boolean canAngledHooksMoveUp(){
         return angledHookEncoder.getPosition() > Constants.ANGLED_HOOK_UPPER_LIMIT;
     }

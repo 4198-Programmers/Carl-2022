@@ -15,10 +15,10 @@ public class AngledHooks extends SubsystemBase{
         angledHookEncoder.setPosition(position);
     }
     protected boolean canAngledHooksMoveUp(){
-        return angledHookEncoder.getPosition() < Constants.ANGLED_HOOK_UPPER_LIMIT;
+        return angledHookEncoder.getPosition() > Constants.ANGLED_HOOK_UPPER_LIMIT;
     }
     protected boolean canAngledHooksMoveDown(){
-        return angledHookEncoder.getPosition() > Constants.ANGLED_HOOK_LOWER_LIMIT;
+        return angledHookEncoder.getPosition() < Constants.ANGLED_HOOK_LOWER_LIMIT;
     }
     public void setSpeed(double speed){
         double effectiveSpeed = speed;

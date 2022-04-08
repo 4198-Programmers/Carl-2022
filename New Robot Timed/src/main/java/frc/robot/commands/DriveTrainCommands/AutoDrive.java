@@ -3,10 +3,10 @@ package frc.robot.commands.DriveTrainCommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class DriveForSpecificDistance extends CommandBase{
+public class AutoDrive extends CommandBase{
     DriveTrain driveTrain;
     double distance;
-    public DriveForSpecificDistance(DriveTrain driveTrain, double distance){
+    public AutoDrive(DriveTrain driveTrain, double distance){
         this.driveTrain = driveTrain;
         this.distance = distance;
          addRequirements(driveTrain);

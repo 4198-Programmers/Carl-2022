@@ -6,11 +6,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveTrainCommands.AutoDrive;
 import frc.robot.commands.DriveTrainCommands.Drive;
-import frc.robot.commands.DriveTrainCommands.DriveForSpecificDistance;
 import frc.robot.commands.DriveTrainCommands.SetDrivePosition;
 import frc.robot.commands.DriveTrainCommands.Spin;
 import frc.robot.commands.DriveTrainCommands.Turn;
+import frc.robot.commands.HookCommands.AutoVerticalHooks;
 import frc.robot.commands.HookCommands.MoveAngledHooks;
 import frc.robot.commands.HookCommands.MoveVerticalHooks;
 import frc.robot.commands.LimelightCommands.ChooseLimeLightMode;
@@ -50,9 +51,9 @@ public class RobotContainer {
   Limelight limelight;
   Sensors sensors;
   // commands
-  Command sideBallAutoWithTunnelSensor = (new DriveForSpecificDistance(driveTrain, -2))
+  Command sideBallAutoWithTunnelSensor = (new AutoDrive(driveTrain, -2))
       .andThen(new SetDrivePosition(driveTrain, 0))
-      .andThen((new DriveForSpecificDistance(driveTrain, 45))
+      .andThen((new AutoDrive(driveTrain, 45))
           .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED)
               .raceWith(new WaitForBallAtShooter(sensors))))
           .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
@@ -62,7 +63,7 @@ public class RobotContainer {
       .andThen(new Spin(driveTrain, 180))
       .andThen(new Target(limelight, driveTrain))
       .andThen(new SetDrivePosition(driveTrain, 0))
-      .andThen(new DriveForSpecificDistance(driveTrain, 73))
+      .andThen(new AutoDrive(driveTrain, 73))
       .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
       .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
       .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
@@ -73,7 +74,7 @@ public class RobotContainer {
           .raceWith(new WaitForBallAtShooter(sensors)))
       .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
-  Command middleBallAutoWithTunnelSensor = (new DriveForSpecificDistance(driveTrain, -2))
+  Command middleBallAutoWithTunnelSensor = (new AutoDrive(driveTrain, -2))
       .andThen(new SetDrivePosition(driveTrain, 0))
       .andThen((new Turn(driveTrain, 90))
           .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
@@ -93,9 +94,9 @@ public class RobotContainer {
           .raceWith(new WaitForBallAtShooter(sensors)))
       .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
-      Command sideBallAuto = (new DriveForSpecificDistance(driveTrain, -2))
+      Command sideBallAuto = (new AutoDrive(driveTrain, -2))
       .andThen(new SetDrivePosition(driveTrain, 0))
-      .andThen((new DriveForSpecificDistance(driveTrain, 45))
+      .andThen((new AutoDrive(driveTrain, 45))
       .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
       .raceWith(new WaitForBallToLeaveIntake(sensors)))
       .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
@@ -105,7 +106,7 @@ public class RobotContainer {
       .andThen(new Spin(driveTrain, 180))
       .andThen(new Target(limelight, driveTrain))
       .andThen(new SetDrivePosition(driveTrain, 0))
-      .andThen((new DriveForSpecificDistance(driveTrain, 73))
+      .andThen((new AutoDrive(driveTrain, 73))
       .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
       .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
       .raceWith(new WaitForBallToBeShot(sensors)))
@@ -117,7 +118,7 @@ public class RobotContainer {
       .raceWith(new WaitForBallToBeShot(sensors)))
       .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
-      Command middleBallAuto = (new DriveForSpecificDistance(driveTrain, -2))
+      Command middleBallAuto = (new AutoDrive(driveTrain, -2))
       .andThen(new SetDrivePosition(driveTrain, 0))
       .andThen((new Turn(driveTrain, 90))
       .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
@@ -136,6 +137,35 @@ public class RobotContainer {
       .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
       .raceWith(new WaitForBallToBeShot(sensors)))
       .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+
+      Command shootWithLeverChallenge = (new AutoDrive(driveTrain, -2))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen((new AutoDrive(driveTrain, 36))
+      .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+      .raceWith(new WaitForBallAtShooter(sensors)))
+      .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+      .raceWith(new WaitForBallInSensor(sensors))
+      .raceWith(new WaitCommand(2))))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen(new Spin(driveTrain, 180))
+      .andThen(new Target(limelight, driveTrain))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen((new AutoDrive(driveTrain, 48))
+      .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+      .raceWith(new WaitForBallInSensor(sensors)))
+      .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+      .raceWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))))
+      .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+      .raceWith(new WaitForBallToBeShot(sensors)))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen(new AutoDrive(driveTrain, -36))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen(new Spin(driveTrain, 90))
+      .andThen(new SetDrivePosition(driveTrain, 0))
+      .andThen((new AutoDrive(driveTrain, 84))
+      .alongWith(new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_UPPER_LIMIT)))
+      .andThen(new AutoVerticalHooks(verticalHooks, -1, -100));
+
 
   // MakeButtons
   JoystickButton humanOverRideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -188,8 +218,11 @@ public class RobotContainer {
 
   private void begin() {
     SmartDashboard.putData("Auto choices", m_chooser);
-    m_chooser.addOption("Middle Ball Auto", middleBallAutoWithTunnelSensor);
-    m_chooser.setDefaultOption("Side Ball Auto", sideBallAutoWithTunnelSensor);
+    m_chooser.addOption("Middle Ball Auto With Tunnel Sensor", middleBallAutoWithTunnelSensor);
+    m_chooser.setDefaultOption("Side Ball Auto With Tunnel Sensor", sideBallAutoWithTunnelSensor);
+    m_chooser.addOption("Middle Ball Auto", middleBallAuto);
+    m_chooser.addOption("Side Ball Auto", sideBallAuto);
+    m_chooser.addOption("LeverChallenge", shootWithLeverChallenge);
   }
 
   public Command getAutonomousCommand() {

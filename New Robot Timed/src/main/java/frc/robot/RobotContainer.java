@@ -217,7 +217,7 @@ public class RobotContainer {
             .andThen((new SetIntakeSpeedIn(intakeSub))
                     .alongWith(new AutoBackwards(vroomVroomSub, 2)))
             .andThen(new ResetWheels(vroomVroomSub))
-            .andThen(new AutoForwards(vroomVroomSub, 45))
+            .andThen(new AutoForwards(vroomVroomSub, 48))
             .andThen(new TimedInternalMoveIn(tunnelSub, 250))
             .andThen((new InSensorCheck(flyAndSensorsSub, true))
                     .raceWith(new WaitCommand(2)))

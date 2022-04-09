@@ -16,6 +16,6 @@ public class FlyWheel extends SubsystemBase {
     }
 
     public double getSpeed() {
-        return flyWheelMotorEncoder.getVelocity();
+        return flyWheelMotor.get();
     }
 }

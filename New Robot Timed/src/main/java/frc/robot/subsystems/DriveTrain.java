@@ -26,7 +26,7 @@ public class DriveTrain extends SubsystemBase {
         double flme = frontleftMotorEncoder.getPosition();
         double brme = backRightMotorEncoder.getPosition();
         double blme = backLeftMotorEncoder.getPosition();
-        return (Math.abs(frme + flme + brme + blme) / 4);
+        return ((frme + flme + brme + blme) / 4);
     }
 
     public void setPosition(double position) {

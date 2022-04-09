@@ -72,4 +72,5 @@ public class Constants {
     public static final int INTAKE_IN_BUTTON = 5;
     public static final int TUNNEL_IN_BUTTON = 6;
     public static final int SPIT_BALLS_BUTTON = 7;
+    public static final int DISTANCE_BETWEEN_CENTER_OF_THE_WHEELS = 0;
 }

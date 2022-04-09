@@ -7,6 +7,7 @@ public final class Maths {
         return rotations;
     }
 
+
     public static double distanceFromTarget(double YAngle) {
         double D = Constants.TARGET_HEIGHT_TOP_TO_GROUND;
         double h = Constants.LIMELIGHT_HEIGHT_TO_GROUND;
@@ -37,10 +38,13 @@ public final class Maths {
         // }
     }
 
-    public static double spinDistanceByDegree(double Degrees) {
-        double circleDistance = (Degrees / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;
+    public static double spinDistanceByDegree(double degrees) {
+        double circleDistance = (degrees / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;
         double wheelCircumference = (Math.PI * (Constants.WHEEL_DIAMTER));
         double totalRotations = ((circleDistance / wheelCircumference));
         return totalRotations;
+    }
+    public static double arcLength(double degrees, double radius){
+        return degrees * (radius) * (Math.PI / 180);
     }
 }

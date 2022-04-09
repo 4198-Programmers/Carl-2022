@@ -19,7 +19,7 @@ public class Limelight extends SubsystemBase {
             this.mode = mode;
         }
 
-        protected double GetModeValue() {
+        protected double getModeValue() {
             return mode;
         }
     }
@@ -43,16 +43,16 @@ public class Limelight extends SubsystemBase {
     }
 
     public void setPipelineMode(LimelightMode limelightMode) {
-        pipeline.setDouble(limelightMode.GetModeValue());
+        pipeline.setDouble(limelightMode.getModeValue());
     }
 
     public LimelightMode getPipelineMode(LimelightMode limelightMode) {
-        double mode = pipeline.getDouble(LimelightMode.invalid.GetModeValue());
+        double mode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
         LimelightMode pipeline = LimelightMode.invalid;
         if (mode == 0) {
             pipeline = LimelightMode.forceOff;
         }
-        if (mode == 1) {
+        else if (mode == 1) {
             pipeline = LimelightMode.forceOn;
         }
         return pipeline;

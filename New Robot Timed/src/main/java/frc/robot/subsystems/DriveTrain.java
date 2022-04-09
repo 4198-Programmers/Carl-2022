@@ -18,8 +18,9 @@ public class DriveTrain extends SubsystemBase {
     RelativeEncoder frontleftMotorEncoder = frontLeftMotor.getEncoder();
     RelativeEncoder backRightMotorEncoder = backRightMotor.getEncoder();
     RelativeEncoder backLeftMotorEncoder = backLeftMotor.getEncoder();
-    DifferentialDrive allDrive = new DifferentialDrive(new MotorControllerGroup(frontRightMotor, backRightMotor),
-            new MotorControllerGroup(frontLeftMotor, backLeftMotor));
+    MotorControllerGroup rightControllerGroup = new MotorControllerGroup(frontRightMotor, backRightMotor);
+    MotorControllerGroup leftControllerGroup = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
+    DifferentialDrive allDrive = new DifferentialDrive(rightControllerGroup, leftControllerGroup);
 
     public double getPosition() {
         double frme = frontRightMotorEncoder.getPosition();
@@ -27,6 +28,16 @@ public class DriveTrain extends SubsystemBase {
         double brme = backRightMotorEncoder.getPosition();
         double blme = backLeftMotorEncoder.getPosition();
         return ((frme + flme + brme + blme) / 4);
+    }
+    public double getRightVelocity(){
+        double frontRightVelocity = frontRightMotorEncoder.getVelocity();
+        double backRightVelocity = backRightMotorEncoder.getVelocity();
+        return (frontRightVelocity + backRightVelocity) / 2;
+    }
+    public double getLeftVelocity(){
+        double frontLeftVelocity = frontleftMotorEncoder.getVelocity();
+        double backLeftVelocity = backLeftMotorEncoder.getVelocity();
+        return(frontLeftVelocity + backLeftVelocity) / 2;
     }
 
     public void setPosition(double position) {

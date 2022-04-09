@@ -21,7 +21,7 @@ public class Spin extends CommandBase {
 
     @Override
     public void execute() {
-        driveTrain.drive(0, 1);
+        driveTrain.drive(1, 0);
     }
 
     @Override

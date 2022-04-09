@@ -20,7 +20,7 @@ public class AutoDrive extends CommandBase {
 
     @Override
     public void execute() {
-        driveTrain.drive(1, 0);
+        driveTrain.drive(0, 1);
     }
 
     @Override

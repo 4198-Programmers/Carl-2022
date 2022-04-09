@@ -42,15 +42,16 @@ public class RobotContainer {
         Joystick rightStick = new Joystick(Constants.RIGHT_JOYSTICK_PORT);
         // subsystems
         // Hooks
-        AngledHooks angledHooks;
-        VerticalHooks verticalHooks;
+        AngledHooks angledHooks = new AngledHooks();
+        VerticalHooks verticalHooks =  new VerticalHooks();
         // ShooterSystem
-        FlyWheel flyWheel;
-        Intake intake;
-        Tunnel tunnel;
-        DriveTrain driveTrain;
-        Limelight limelight;
-        Sensors sensors;
+        FlyWheel flyWheel = new FlyWheel();
+        Intake intake = new Intake();
+        Tunnel tunnel = new Tunnel();
+        //Others
+        DriveTrain driveTrain =  new DriveTrain();
+        Limelight limelight =  new Limelight();
+        Sensors sensors = new Sensors();
         // commands
         Command sideBallAutoWithTunnelSensor = (new AutoDrive(driveTrain, -2))
                         .andThen(new SetDrivePosition(driveTrain, 0))
@@ -139,35 +140,35 @@ public class RobotContainer {
                                         .raceWith(new WaitForBallToBeShot(sensors)))
                         .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
-        Command shootWithLeverChallenge = (new AutoDrive(driveTrain, -2))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, 36))
-                                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallAtShooter(sensors)))
-                                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-                                                        .raceWith(new WaitForBallInSensor(sensors))
-                                                        .raceWith(new WaitCommand(2))))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen(new Spin(driveTrain, 180))
-                        .andThen(new Target(limelight, driveTrain))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, 48))
-                                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallInSensor(sensors)))
-                                        .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
-                                                        .raceWith(new WaitForFlyWheel(flyWheel,
-                                                                        Constants.FLY_WHEEL_SPEED))))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallToBeShot(sensors)))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen(new AutoDrive(driveTrain, -36))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen(new Spin(driveTrain, 90))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, 84))
-                                        .alongWith(new AutoVerticalHooks(verticalHooks, 1,
-                                                        Constants.VERTICAL_HOOK_UPPER_LIMIT)))
-                        .andThen(new AutoVerticalHooks(verticalHooks, -1, -100));
+        // Command shootWithLeverChallenge = (new AutoDrive(driveTrain, -2))
+        //                 .andThen(new SetDrivePosition(driveTrain, 0))
+        //                 .andThen((new AutoDrive(driveTrain, 36))
+        //                                 .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+        //                                                 .raceWith(new WaitForBallAtShooter(sensors)))
+        //                                 .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+        //                                                 .raceWith(new WaitForBallInSensor(sensors))
+        //                                                 .raceWith(new WaitCommand(2))))
+        //                 .andThen(new SetDrivePosition(driveTrain, 0))
+        //                 .andThen(new Spin(driveTrain, 180))
+        //                 .andThen(new Target(limelight, driveTrain))
+        //                 .andThen(new SetDrivePosition(driveTrain, 0))
+        //                 .andThen((new AutoDrive(driveTrain, 48))
+        //                                 .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+        //                                                 .raceWith(new WaitForBallInSensor(sensors)))
+        //                                 .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+        //                                                 .raceWith(new WaitForFlyWheel(flyWheel,
+        //                                                                 Constants.FLY_WHEEL_SPEED))))
+        //                 .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+        //                                 .raceWith(new WaitForBallToBeShot(sensors)))
+        //                 .andThen(new SetDrivePosition(driveTrain, 0))
+        //                 .andThen(new AutoDrive(driveTrain, -36))
+        //                 .andThen(new SetDrivePosition(driveTrain, 0))
+        //                 .andThen(new Spin(driveTrain, 90))
+        //                 .andThen(new SetDrivePosition(driveTrain, 0))
+        //                 .andThen((new AutoDrive(driveTrain, 84))
+        //                                 .alongWith(new AutoVerticalHooks(verticalHooks, 1,
+        //                                                 Constants.VERTICAL_HOOK_UPPER_LIMIT)))
+        //                 .andThen(new AutoVerticalHooks(verticalHooks, -1, -100));
 
         Command autoClimb = ((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
                         .alongWith(new AutoAngledHooks(angledHooks, -1, Constants.ANGLED_HOOK_LOWER_LIMIT)))
@@ -267,7 +268,7 @@ public class RobotContainer {
                 m_chooser.setDefaultOption("Side Ball Auto With Tunnel Sensor", sideBallAutoWithTunnelSensor);
                 m_chooser.addOption("Middle Ball Auto", middleBallAuto);
                 m_chooser.addOption("Side Ball Auto", sideBallAuto);
-                m_chooser.addOption("LeverChallenge", shootWithLeverChallenge);
+                //m_chooser.addOption("LeverChallenge", shootWithLeverChallenge);
         }
 
         public Command getAutonomousCommand() {

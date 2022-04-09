@@ -21,7 +21,7 @@ public class Turn extends CommandBase {
 
     @Override
     public void execute() {
-        driveTrain.drive(0, 0.5);
+        driveTrain.drive(0.5, 0);
     }
 
     @Override

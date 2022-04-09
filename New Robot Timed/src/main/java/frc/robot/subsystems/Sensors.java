@@ -10,11 +10,11 @@ public class Sensors extends SubsystemBase {
     private boolean ballHasBeenSeenAtShooter = false;
     private boolean ballHasBeenSeenAtIntake = false;
 
-    private boolean isBallAtIntake() {
+    public boolean isBallAtIntake() {
         return ballInSensor.get();
     }
 
-    private boolean isBallAtShooter() {
+    public boolean isBallAtShooter() {
         return ballOutSensor.get();
     }
 

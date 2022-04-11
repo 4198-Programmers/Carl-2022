@@ -56,9 +56,9 @@ public class Constants {
     public static final double LOW_LOFT_SPEED = 0.5;
 
     // Left Joystick
-    public static final int HUMAN_OVERRIDE_BUTTON = 2;
     public static final int AUTO_CLIMB_BUTTON = 7;
-
+    public static final int HUMAN_OVERRIDE_BUTTON = 8;
+    
     // Middle Joystick
     public static final int TARGETING_BUTTON = 1;
     public static final int ANGLED_OVERRIDE_BUTTON = 2;

@@ -22,7 +22,7 @@ public class SetFlyWheelSpeed extends CommandBase {
 
     @Override
     public void execute() {
-        if (speedRetriever.getSpeed() != -1) {
+        if (speedRetriever.getSpeed() != -1) { //TODO make sure that When this is tested that drive knows about the speedRetriever and how it works.
             flyWheel.setSpeed(speedRetriever.getSpeed());
         } else {
             flyWheel.setSpeed(speed);

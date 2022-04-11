@@ -50,93 +50,148 @@ public class RobotContainer {
         DriveTrain driveTrain =  new DriveTrain();
         Limelight limelight =  new Limelight();
         Sensors sensors = new Sensors();
+
         // commands
         Command sideBallAutoWithTunnelSensor = (new AutoDrive(driveTrain, -2, -1, 0))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, 45, 1, 0))
-                                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED)
-                                                        .raceWith(new WaitForBallAtShooter(sensors))))
-                                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-                                                        .raceWith((new WaitForBallInSensor(sensors)))
-                                                        .raceWith(new WaitCommand(2))))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(180), 0, 1))
-                        .andThen(new Target(limelight, driveTrain))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen(new AutoDrive(driveTrain, 73, 1, 0))
-                        .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-                        .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallAtShooter(sensors))
-                                        .andThen(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-                        .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallAtShooter(sensors)))
-                        .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, 50, 1, 0))
+                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED)
+                                .raceWith(new WaitForBallAtShooter(sensors))))
+                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+                                .raceWith((new WaitForBallInSensor(sensors)))
+                                .raceWith(new WaitCommand(2))))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(180), 0, 1))
+                .andThen(new Target(limelight, driveTrain))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen(new AutoDrive(driveTrain, 75, 1, 0))
+                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                .andThen(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallAtShooter(sensors)))
+                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallAtShooter(sensors)))
+                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
         Command middleBallAutoWithTunnelSensor = (new AutoDrive(driveTrain, -2, -1, 0))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, Maths.arcLength(90, 30), 0, 0.5))
-                                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallAtShooter(sensors)))
-                                        .andThen((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-                                                        .raceWith(new WaitForBallInSensor(sensors))))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, Maths.arcLength(-180, 30), 0, 0.5))
-                                        .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))))
-                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallAtShooter(sensors)))
-                        .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallInSensor(sensors))
-                                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallAtShooter(sensors)))
-                        .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, Maths.spinDistanceByDegree(90), 0, 0.5))
+                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallAtShooter(sensors)))
+                .andThen((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+                        .raceWith(new WaitForBallInSensor(sensors))))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, Maths.spinDistanceByDegree(270), 0, 0.5))
+                        .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallAtShooter(sensors)))
+                .andThen((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallInSensor(sensors))
+                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallAtShooter(sensors)))
+                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
         Command sideBallAuto = (new AutoDrive(driveTrain, -2, -1, 0))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, 45, 1, 0))
-                                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallToLeaveIntake(sensors)))
-                                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-                                                        .raceWith(new WaitForBallInSensor(sensors))
-                                                        .raceWith(new WaitCommand(2))))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(180), 0, 1))
-                        .andThen(new Target(limelight, driveTrain))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, 73, 1, 0))
-                                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallToBeShot(sensors)))
-                        .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
-                                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-                                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallInSensor(sensors))))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallToBeShot(sensors)))
-                        .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, 50, 1, 0))
+                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallToLeaveIntake(sensors)))
+                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+                                .raceWith(new WaitForBallInSensor(sensors))
+                                .raceWith(new WaitCommand(2))))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(180), 0, 1))
+                .andThen(new Target(limelight, driveTrain))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, 75, 1, 0))
+                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallInSensor(sensors))))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
         Command middleBallAuto = (new AutoDrive(driveTrain, -2, -1, 0))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, Maths.arcLength(90, 30), 0, 0.5))
-                                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallToLeaveIntake(sensors)))
-                                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-                                                        .raceWith(new WaitForBallInSensor(sensors))
-                                                        .raceWith(new WaitCommand(2))))
-                        .andThen(new SetDrivePosition(driveTrain, 0))
-                        .andThen((new AutoDrive(driveTrain, Maths.arcLength(270, 30), 0, 0.5))
-                                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
-                                        .alongWith(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED)))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallToBeShot(sensors)))
-                        .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
-                                        .alongWith(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED)))
-                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                        .raceWith(new WaitForBallToBeShot(sensors)))
-                        .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, Maths.arcLength(90, 30), 0, 0.5))
+                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallToLeaveIntake(sensors)))
+                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+                                .raceWith(new WaitForBallInSensor(sensors))
+                                .raceWith(new WaitCommand(2))))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, Maths.spinDistanceByDegree(270), 0, 0.5))
+                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED)))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED)))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+
+        Command sideBallAutoWithFutureSensor = (new AutoDrive(driveTrain, -2, -1, 0))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, 50, 1, 0))
+                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallToLeaveIntake(sensors))))
+                .andThen((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+                        .raceWith(new WaitForBallInSensor(sensors))
+                        .raceWith(new WaitCommand(2)))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(180), 0, 1))
+                .andThen(new Target(limelight, driveTrain))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, 75, 1, 0))
+                        .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                                .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallInSensor(sensors))))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallInSensor(sensors))))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+
+        Command middleBallWithFutureSensor = (new AutoDrive(driveTrain, -2, -1, 0))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, Maths.spinDistanceByDegree(90), 0, 0.5))
+                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallToLeaveIntake(sensors)))
+                        .andThen((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
+                                .raceWith(new WaitForBallInSensor(sensors))
+                                .raceWith(new WaitCommand(2))))
+                .andThen(new SetDrivePosition(driveTrain, 0))
+                .andThen((new AutoDrive(driveTrain, Maths.spinDistanceByDegree(270), 0, 0.5))
+                        .alongWith((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                                .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallToLeaveIntake(sensors))))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
+                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+                                .raceWith(new WaitForBallInSensor(sensors))))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+
 
         // Command shootWithLeverChallenge = (new AutoDrive(driveTrain, -2))
         //                 .andThen(new SetDrivePosition(driveTrain, 0))
@@ -168,42 +223,34 @@ public class RobotContainer {
         //                                                 Constants.VERTICAL_HOOK_UPPER_LIMIT)))
         //                 .andThen(new AutoVerticalHooks(verticalHooks, -1, -100));
 
-        Command autoClimb = ((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
-                        .alongWith(new AutoAngledHooks(angledHooks, -1, Constants.ANGLED_HOOK_LOWER_LIMIT)))
-                                        .andThen(new AutoVerticalHooks(verticalHooks, -1,
-                                                        Constants.VERTICAL_HOOK_LOWER_LIMIT))
-                                        .andThen((new AutoAngledHooks(angledHooks, 1,
-                                                        Constants.ANGLED_HOOK_UPPER_LIMIT))
-                                                                        .alongWith(new AutoVerticalHooks(verticalHooks,
-                                                                                        1,
-                                                                                        Constants.VERTICAL_HOOK_UPPER_LIMIT)))
-                                        .andThen(new AutoAngledHooks(angledHooks, -1, -70))
-                                        .andThen((new AutoVerticalHooks(verticalHooks, -1,
-                                                        Constants.VERTICAL_HOOK_LOWER_LIMIT))
-                                                                        .alongWith(new AutoAngledHooks(angledHooks, -1,
-                                                                                        Constants.ANGLED_HOOK_LOWER_LIMIT)))
-                                        .andThen((new AutoAngledHooks(angledHooks, 1,
-                                                        Constants.ANGLED_HOOK_UPPER_LIMIT))
-                                                                        .alongWith(new AutoVerticalHooks(verticalHooks,
-                                                                                        1,
-                                                                                        Constants.VERTICAL_HOOK_UPPER_LIMIT)))
-                                        .andThen(new AutoAngledHooks(angledHooks, -1, -70))
-                                        .andThen((new AutoVerticalHooks(verticalHooks, -1,
-                                                        Constants.VERTICAL_HOOK_LOWER_LIMIT))
-                                                                        .alongWith(new AutoAngledHooks(angledHooks, -1,
-                                                                                        Constants.ANGLED_HOOK_LOWER_LIMIT)));
+
+        Command autoClimb = 
+        (new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
+        .andThen(new SetDrivePosition(driveTrain, 0))
+        .andThen(new AutoDrive(driveTrain, 20, 1, 0))
+        .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
+                .alongWith(new AutoAngledHooks(angledHooks, 1, Constants.ANGLED_HOOK_LOWER_LIMIT)))
+        .andThen((new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
+                .alongWith(new AutoAngledHooks(angledHooks, -0.75, Constants.ANGLED_HOOK_UPPER_LIMIT)))
+        .andThen(new AutoAngledHooks(angledHooks, 1, -70))
+        .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
+                .alongWith(new AutoAngledHooks(angledHooks, 0.5, Constants.ANGLED_HOOK_LOWER_LIMIT)))
+                .andThen((new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
+                .alongWith(new AutoAngledHooks(angledHooks, -0.75, Constants.ANGLED_HOOK_UPPER_LIMIT)))
+        .andThen(new AutoAngledHooks(angledHooks, 1, -70))
+        .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
+                .alongWith(new AutoAngledHooks(angledHooks, 0.5, Constants.ANGLED_HOOK_LOWER_LIMIT)));
 
         Command autoShoot = ((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
                         .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED)))
-                                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallToBeShot(sensors)))
-                                        .andThen(((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallInSensor(sensors)))
-                                                                        .alongWith(new AutoFlyWheelSpeed(flyWheel,
-                                                                                        Constants.FLY_WHEEL_SPEED)))
-                                        .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                                        .raceWith(new WaitForBallToBeShot(sensors)))
-                                        .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen(((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallInSensor(sensors)))
+                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
+                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
+                        .raceWith(new WaitForBallToBeShot(sensors)))
+                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
         // MakeButtons
         JoystickButton humanOverRideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -234,30 +281,27 @@ public class RobotContainer {
 
         private void configureButtonBindings() {
                 targetingButton.whileHeld(new Target(limelight, driveTrain));
-                shoootingButton
-                                .whileHeld(new SetFlyWheelSpeed(flyWheel,
-                                                () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS),
-                                                Constants.FLY_WHEEL_SPEED));
+                shoootingButton.whileHeld(new SetFlyWheelSpeed(flyWheel,
+                        () -> middleStick.getRawAxis(Constants.THROTTLE_AXIS),
+                        Constants.FLY_WHEEL_SPEED));
                 limelightOnButton.whenPressed(new ChooseLimeLightMode(limelight, LimelightMode.forceOn));
                 limelightOffButton.whenPressed(new ChooseLimeLightMode(limelight, LimelightMode.forceOff));
-                angledOverRideButton
-                                .whileHeld(new MoveAngledHooks(() -> middleStick.getRawAxis(Constants.UP_DOWN_AXIS),
-                                                angledHooks));
-                angledOverRideButton.whenInactive(
-                                new Drive(driveTrain, () -> middleStick.getRawAxis(Constants.LEFT_RIGHT_AXIS),
-                                                () -> leftStick.getRawAxis(Constants.UP_DOWN_AXIS)));
-                verticalOverRideButton
-                                .whileHeld(new MoveVerticalHooks(() -> rightStick.getRawAxis(Constants.UP_DOWN_AXIS),
-                                                verticalHooks));
-                shoootingButton.and(humanOverRideButton)
-                                .whileActiveContinuous(autoShoot);
+                angledOverRideButton.whileHeld(new MoveAngledHooks(
+                        () -> middleStick.getRawAxis(Constants.UP_DOWN_AXIS),
+                        angledHooks));
+                angledOverRideButton.whenInactive(new Drive(driveTrain, 
+                        () -> middleStick.getRawAxis(Constants.LEFT_RIGHT_AXIS),
+                        () -> leftStick.getRawAxis(Constants.UP_DOWN_AXIS)));
+                verticalOverRideButton.whileHeld(new MoveVerticalHooks(
+                        () -> rightStick.getRawAxis(Constants.UP_DOWN_AXIS),verticalHooks));
+                shoootingButton.and(humanOverRideButton).whileActiveContinuous(autoShoot);
                 intakeInButton.whileHeld(new SetIntakeSpeed(intake, Constants.INTAKE_SPEED));
                 intakeOutButton.whileHeld(new SetIntakeSpeed(intake, -Constants.INTAKE_SPEED));
                 tunnelInButton.whileHeld(new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED));
                 tunnelOutButton.whileHeld(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED));
                 autoClimbButton.and(humanOverRideButton).whileActiveContinuous(autoClimb);
                 spitBalls.whileHeld((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
-                                .alongWith(new SetIntakeSpeed(intake, -Constants.INTAKE_SPEED)));
+                        .alongWith(new SetIntakeSpeed(intake, -Constants.INTAKE_SPEED)));
         }
 
         private void begin() {
@@ -266,6 +310,8 @@ public class RobotContainer {
                 m_chooser.setDefaultOption("Side Ball Auto With Tunnel Sensor", sideBallAutoWithTunnelSensor);
                 m_chooser.addOption("Middle Ball Auto", middleBallAuto);
                 m_chooser.addOption("Side Ball Auto", sideBallAuto);
+                m_chooser.addOption("Middle Ball Auto With Future Sensor", middleBallWithFutureSensor);
+                m_chooser.addOption("Side Ball Auto With Future Sensor", sideBallAutoWithFutureSensor);
                 //m_chooser.addOption("LeverChallenge", shootWithLeverChallenge);
         }
 

@@ -9,7 +9,7 @@ import frc.robot.subsystems.Limelight.LimelightMode;
 public class Target extends CommandBase {
     Limelight limelight;
     DriveTrain driveTrain;
-
+    double speed;
     public Target(Limelight limelight, DriveTrain driveTrain) {
         this.limelight = limelight;
         this.driveTrain = driveTrain;
@@ -19,21 +19,28 @@ public class Target extends CommandBase {
     @Override
     public void initialize() {
         limelight.setPipelineMode(LimelightMode.forceOn);
+        speed = 0;
     }
 
     @Override
     public void execute() {
-        if (limelight.xOffset() > Constants.WIDE_X_OFFSET) {
-            driveTrain.drive(0, 0.5);
-        }
-        if (limelight.xOffset() < -Constants.WIDE_X_OFFSET) {
-            driveTrain.drive(0, -0.5);
-        }
         if (limelight.xOffset() < Constants.WIDE_X_OFFSET) {
-            if (limelight.xOffset() > -Constants.WIDE_X_OFFSET) {
-                driveTrain.drive(0, 0.25);
+            if(limelight.xOffset() < Constants.SLIM_X_OFFSET){
+                speed = -0.25;
+            }
+            else{
+                speed = -0.5;
             }
         }
+        if (limelight.xOffset() > -Constants.WIDE_X_OFFSET) {
+            if(limelight.xOffset() > -Constants.SLIM_X_OFFSET){
+                speed = 0.25;
+                }
+            }
+            else{
+                speed = 0.5;
+            }
+        driveTrain.drive(speed, 0);
     }
 
     @Override

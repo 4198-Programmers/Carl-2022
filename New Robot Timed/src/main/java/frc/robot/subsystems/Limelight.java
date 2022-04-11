@@ -25,7 +25,7 @@ public class Limelight extends SubsystemBase {
     }
 
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx"); // TODO math to convert to inches SOON
+    NetworkTableEntry tx = table.getEntry("tx"); 
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv");
     NetworkTableEntry ta = table.getEntry("ta");
@@ -45,6 +45,9 @@ public class Limelight extends SubsystemBase {
     public void setPipelineMode(LimelightMode limelightMode) {
         pipeline.setDouble(limelightMode.getModeValue());
     }
+    public boolean hasTarget(){
+        return tv.getBoolean(false);
+        }
 
     public LimelightMode getPipelineMode(LimelightMode limelightMode) {
         double mode = pipeline.getDouble(LimelightMode.invalid.getModeValue());

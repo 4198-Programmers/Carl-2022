@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -34,6 +35,8 @@ public class Sensors extends SubsystemBase {
         if (isBallAtIntake()) {
             ballHasBeenSeenAtIntake = true;
         }
+        SmartDashboard.putBoolean("Ball At Intake", isBallAtIntake());
+        SmartDashboard.putBoolean("Ball At Shooter", isBallAtShooter());
     }
 
     public void forgetShooterBall() {

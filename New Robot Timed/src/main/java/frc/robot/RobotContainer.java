@@ -95,52 +95,6 @@ public class RobotContainer {
                         .raceWith(new WaitForBallAtShooter(sensors)))
                 .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
-        Command sideBallAuto = (new AutoDrive(driveTrain, -2, -1, 0))
-                .andThen(new SetDrivePosition(driveTrain, 0))
-                .andThen((new AutoDrive(driveTrain, 50, 1, 0))
-                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                .raceWith(new WaitForBallToLeaveIntake(sensors)))
-                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-                                .raceWith(new WaitForBallInSensor(sensors))
-                                .raceWith(new WaitCommand(2))))
-                .andThen(new SetDrivePosition(driveTrain, 0))
-                .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(180), 0, 1))
-                .andThen(new Target(limelight, driveTrain))
-                .andThen(new SetDrivePosition(driveTrain, 0))
-                .andThen((new AutoDrive(driveTrain, 75, 1, 0))
-                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED)))
-                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                        .raceWith(new WaitForBallToBeShot(sensors)))
-                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .alongWith((new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED))
-                                .raceWith(new WaitForBallInSensor(sensors))))
-                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                        .raceWith(new WaitForBallToBeShot(sensors)))
-                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
-
-        Command middleBallAuto = (new AutoDrive(driveTrain, -2, -1, 0))
-                .andThen(new SetDrivePosition(driveTrain, 0))
-                .andThen((new AutoDrive(driveTrain, Maths.arcLength(90, 30), 0, 0.5))
-                        .alongWith((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                                .raceWith(new WaitForBallToLeaveIntake(sensors)))
-                        .alongWith((new SetIntakeSpeed(intake, Constants.INTAKE_SPEED))
-                                .raceWith(new WaitForBallInSensor(sensors))
-                                .raceWith(new WaitCommand(2))))
-                .andThen(new SetDrivePosition(driveTrain, 0))
-                .andThen((new AutoDrive(driveTrain, Maths.spinDistanceByDegree(270), 0, 0.5))
-                        .alongWith(new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .alongWith(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED)))
-                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                        .raceWith(new WaitForBallToBeShot(sensors)))
-                .andThen((new AutoFlyWheelSpeed(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .alongWith(new WaitForFlyWheel(flyWheel, Constants.FLY_WHEEL_SPEED))
-                        .alongWith(new SetTunnelSpeed(tunnel, -Constants.TUNNEL_SPEED)))
-                .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
-                        .raceWith(new WaitForBallToBeShot(sensors)))
-                .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
-
         Command sideBallAutoWithFutureSensor = (new AutoDrive(driveTrain, -2, -1, 0))
                 .andThen(new SetDrivePosition(driveTrain, 0))
                 .andThen((new AutoDrive(driveTrain, 50, 1, 0))
@@ -232,12 +186,12 @@ public class RobotContainer {
                 .alongWith(new AutoAngledHooks(angledHooks, 1, Constants.ANGLED_HOOK_LOWER_LIMIT)))
         .andThen((new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, -0.75, Constants.ANGLED_HOOK_UPPER_LIMIT)))
-        .andThen(new AutoAngledHooks(angledHooks, 1, -70))
+        .andThen(new AutoAngledHooks(angledHooks, 1, Constants.ANGLED_HOOK_LOWER_LIMIT - 30))
         .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, 0.5, Constants.ANGLED_HOOK_LOWER_LIMIT)))
                 .andThen((new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, -0.75, Constants.ANGLED_HOOK_UPPER_LIMIT)))
-        .andThen(new AutoAngledHooks(angledHooks, 1, -70))
+        .andThen(new AutoAngledHooks(angledHooks, 1, Constants.ANGLED_HOOK_LOWER_LIMIT - 30))
         .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, 0.5, Constants.ANGLED_HOOK_LOWER_LIMIT)));
 
@@ -266,6 +220,7 @@ public class RobotContainer {
         JoystickButton tunnelOutButton = new JoystickButton(rightStick, Constants.TUNNEL_OUT_BUTTON);
         JoystickButton spitBalls = new JoystickButton(rightStick, Constants.SPIT_BALLS_BUTTON);
         JoystickButton autoClimbButton = new JoystickButton(leftStick, Constants.AUTO_CLIMB_BUTTON);
+        
         // other
         private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -308,8 +263,6 @@ public class RobotContainer {
                 SmartDashboard.putData("Auto choices", m_chooser);
                 m_chooser.addOption("Middle Ball Auto With Tunnel Sensor", middleBallAutoWithTunnelSensor);
                 m_chooser.setDefaultOption("Side Ball Auto With Tunnel Sensor", sideBallAutoWithTunnelSensor);
-                m_chooser.addOption("Middle Ball Auto", middleBallAuto);
-                m_chooser.addOption("Side Ball Auto", sideBallAuto);
                 m_chooser.addOption("Middle Ball Auto With Future Sensor", middleBallWithFutureSensor);
                 m_chooser.addOption("Side Ball Auto With Future Sensor", sideBallAutoWithFutureSensor);
                 //m_chooser.addOption("LeverChallenge", shootWithLeverChallenge);

@@ -24,21 +24,22 @@ public class Target extends CommandBase {
 
     @Override
     public void execute() {
-        if (limelight.xOffset() < Constants.WIDE_X_OFFSET) {
-            if(limelight.xOffset() < Constants.SLIM_X_OFFSET){
-                speed = -0.25;
-            }
-            else{
-                speed = -0.5;
-            }
+        if(limelight.hasTarget() == false){
+            speed = 0.75;
         }
-        if (limelight.xOffset() > -Constants.WIDE_X_OFFSET) {
-            if(limelight.xOffset() > -Constants.SLIM_X_OFFSET){
-                speed = 0.25;
+        else if(limelight.xOffset() > Constants.WIDE_X_OFFSET){
+            speed = -0.75;
+        }
+        else if(limelight.xOffset() < -Constants.WIDE_X_OFFSET){
+            speed = 0.75;
+        }
+        else if(limelight.xOffset() < Constants.WIDE_X_OFFSET){
+            if(limelight.xOffset() > -Constants.WIDE_X_OFFSET){
+                speed = -0.5;
                 }
-            }
-            else{
-                speed = 0.5;
+                else{
+                    speed = 0.5;
+                }
             }
         driveTrain.drive(speed, 0);
     }

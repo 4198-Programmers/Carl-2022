@@ -34,6 +34,7 @@ public class Constants {
     // Constants
     public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5;
     public static final double WHEEL_DIAMTER = 5.875;
+    public static final int DISTANCE_BETWEEN_CENTER_OF_THE_WHEELS = 0;  //TODO find this value
 
     public static final double TARGET_HEIGHT_TOP_TO_GROUND = 104;
     public static final double LIMELIGHT_HEIGHT_TO_GROUND = 25;
@@ -55,11 +56,11 @@ public class Constants {
     public static final double LOW_LOFT_SPEED = 0.5;
 
     // Left Joystick
-    public static final int TARGETING_BUTTON = 1;
     public static final int HUMAN_OVERRIDE_BUTTON = 2;
     public static final int AUTO_CLIMB_BUTTON = 7;
 
     // Middle Joystick
+    public static final int TARGETING_BUTTON = 1;
     public static final int ANGLED_OVERRIDE_BUTTON = 2;
     public static final int LIMELIGHT_ON_BUTTON = 11;
     public static final int LIMELIGHT_OFF_BUTTON = 12;
@@ -72,5 +73,4 @@ public class Constants {
     public static final int INTAKE_IN_BUTTON = 5;
     public static final int TUNNEL_IN_BUTTON = 6;
     public static final int SPIT_BALLS_BUTTON = 7;
-    public static final int DISTANCE_BETWEEN_CENTER_OF_THE_WHEELS = 0;
 }

@@ -208,7 +208,7 @@ public class RobotContainer {
 
         // MakeButtons
         JoystickButton humanOverRideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
-        JoystickButton targetingButton = new JoystickButton(leftStick, Constants.TARGETING_BUTTON);
+        JoystickButton targetingButton = new JoystickButton(middleStick, Constants.TARGETING_BUTTON);
         JoystickButton shoootingButton = new JoystickButton(rightStick, Constants.SHOOTER_BUTTON);
         JoystickButton limelightOnButton = new JoystickButton(middleStick, Constants.LIMELIGHT_ON_BUTTON);
         JoystickButton limelightOffButton = new JoystickButton(middleStick, Constants.LIMELIGHT_OFF_BUTTON);

@@ -147,6 +147,24 @@ public class RobotContainer {
                 .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
 
 
+        Command middleBallAutoAndBackUp = middleBallAutoWithTunnelSensor
+        .andThen(new SetDrivePosition(driveTrain, 0))
+        .andThen(new AutoDrive(driveTrain, -4, -1, 0))
+        .andThen(new SetDrivePosition(driveTrain, 0))
+        .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(180), 0, 1))
+        .andThen(new SetDrivePosition(driveTrain, 0))
+        .andThen(sideBallAutoWithTunnelSensor);
+
+        Command sideBallAutoAndMiddleBackUp = sideBallAutoWithTunnelSensor
+        .andThen(new SetDrivePosition(driveTrain, 0))
+        .andThen(new AutoDrive(driveTrain, -4, -1, 0))
+        .andThen(new SetDrivePosition(driveTrain, 0))
+        .andThen(new AutoDrive(driveTrain, Maths.spinDistanceByDegree(90), 0, -1))
+        .andThen(new SetDrivePosition(driveTrain, 0))
+        .andThen(middleBallAutoWithTunnelSensor);
+
+
+
         // Command shootWithLeverChallenge = (new AutoDrive(driveTrain, -2))
         //                 .andThen(new SetDrivePosition(driveTrain, 0))
         //                 .andThen((new AutoDrive(driveTrain, 36))
@@ -205,6 +223,8 @@ public class RobotContainer {
                 .andThen((new SetTunnelSpeed(tunnel, Constants.TUNNEL_SPEED))
                         .raceWith(new WaitForBallToBeShot(sensors)))
                 .andThen(new AutoFlyWheelSpeed(flyWheel, 0));
+
+
 
         // MakeButtons
         JoystickButton humanOverRideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_BUTTON);
@@ -265,6 +285,8 @@ public class RobotContainer {
                 m_chooser.setDefaultOption("Side Ball Auto With Tunnel Sensor", sideBallAutoWithTunnelSensor);
                 m_chooser.addOption("Middle Ball Auto With Future Sensor", middleBallWithFutureSensor);
                 m_chooser.addOption("Side Ball Auto With Future Sensor", sideBallAutoWithFutureSensor);
+                m_chooser.addOption("Side Ball Auto With Middle Ball", sideBallAutoAndMiddleBackUp);
+                m_chooser.addOption("Middle Ball Auto With Side Ball", middleBallAutoAndBackUp);
                 //m_chooser.addOption("LeverChallenge", shootWithLeverChallenge);
         }
 

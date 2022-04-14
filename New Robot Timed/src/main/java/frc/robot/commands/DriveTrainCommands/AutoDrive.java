@@ -28,7 +28,7 @@ public class AutoDrive extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return driveTrain.getPosition() >= distance;
+        return Math.abs(driveTrain.getPosition()) >= Math.abs(distance);
     }
 
     @Override

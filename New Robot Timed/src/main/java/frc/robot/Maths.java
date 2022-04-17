@@ -39,12 +39,23 @@ public final class Maths {
     }
 
     public static double spinDistanceByDegree(double degrees) {
-        double circleDistance = (degrees / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;
+        double circleDistance = (getAngle(degrees) / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;
         double wheelCircumference = (Math.PI * (Constants.WHEEL_DIAMTER));
         double totalRotations = ((circleDistance / wheelCircumference));
         return totalRotations;
     }
     public static double arcLength(double degrees, double radius){
         return degrees * (radius) * (Math.PI / 180);
+    }
+    public static double getAngle(double degrees){
+        double radians = Math.toRadians(degrees);
+        double angle = radians;
+        while(angle > Math.PI){
+            angle -= 2 * Math.PI;
+        }
+        while(angle < -Math.PI){
+            angle += 2 * Math.PI;
+        }
+        return Math.toDegrees(angle);
     }
 }

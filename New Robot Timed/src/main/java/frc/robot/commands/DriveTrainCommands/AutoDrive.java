@@ -6,13 +6,13 @@ import frc.robot.subsystems.DriveTrain;
 public class AutoDrive extends CommandBase {
     DriveTrain driveTrain;
     double distance;
-    double forwardSpeed;
-    double turningSpeed;
-    public AutoDrive(DriveTrain driveTrain, double distance, double forwardSpeed, double turningSpeed) {
+    double leftSpeed;
+    double rightSpeed;
+    public AutoDrive(DriveTrain driveTrain, double distance, double leftSpeed, double rightSpeed) {
         this.driveTrain = driveTrain;
         this.distance = distance;
-        this.forwardSpeed = forwardSpeed;
-        this.turningSpeed = turningSpeed;
+        this.leftSpeed = leftSpeed;
+        this.rightSpeed = rightSpeed;
         addRequirements(driveTrain);
     }
 
@@ -23,7 +23,7 @@ public class AutoDrive extends CommandBase {
 
     @Override
     public void execute() {
-        driveTrain.drive(turningSpeed, forwardSpeed);
+        driveTrain.allSpeed(leftSpeed, rightSpeed);
     }
 
     @Override
@@ -33,6 +33,6 @@ public class AutoDrive extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        driveTrain.drive(0, 0);
+        driveTrain.allSpeed(0, 0);
     }
 }

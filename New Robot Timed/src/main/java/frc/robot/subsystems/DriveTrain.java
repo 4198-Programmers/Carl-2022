@@ -29,15 +29,17 @@ public class DriveTrain extends SubsystemBase {
         double blme = backLeftMotorEncoder.getPosition();
         return ((frme + flme + brme + blme) / 4);
     }
-    public double getRightVelocity(){
-        double frontRightVelocity = frontRightMotorEncoder.getVelocity();
-        double backRightVelocity = backRightMotorEncoder.getVelocity();
-        return (frontRightVelocity + backRightVelocity) / 2;
+
+    public double  rightSpeed(double speed){
+        rightControllerGroup.set(speed);
+        return rightControllerGroup.get();
     }
-    public double getLeftVelocity(){
-        double frontLeftVelocity = frontleftMotorEncoder.getVelocity();
-        double backLeftVelocity = backLeftMotorEncoder.getVelocity();
-        return(frontLeftVelocity + backLeftVelocity) / 2;
+    public double leftSpeed(double speed){
+        leftControllerGroup.set(speed);
+        return leftControllerGroup.get();
+    }
+    public void allSpeed(double leftspeed, double rightspeed){
+        allDrive.tankDrive(leftSpeed(leftspeed), rightSpeed(rightspeed));
     }
 
     public void setPosition(double position) {

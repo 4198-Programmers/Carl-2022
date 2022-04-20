@@ -11,7 +11,8 @@ import frc.robot.commands.MoveRampHooksBackwards;
 import frc.robot.commands.MoveRampHooksForward;
 import frc.robot.commands.NeoDrift;
 import frc.robot.commands.Regurgitation;
-import frc.robot.commands.Shooting;
+import frc.robot.commands.ShootingHigh;
+import frc.robot.commands.ShootingLow;
 import frc.robot.commands.TokyoDrift;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.LadderHooks;
@@ -40,7 +41,7 @@ public class RobotContainer {
   // commands
   TokyoDrift tokyoDrift = new TokyoDrift(leftShaft.getRawAxis(1), middleShaft.getRawAxis(0), gasGasGas);
   NeoDrift neoDrift = new NeoDrift(gasGasGas);
-  Shooting shooting = new Shooting(ripple);
+  ShootingHigh shootingHigh = new ShootingHigh(ripple);
   Digestion digestion = new Digestion(internals);
   Indigestion indigestion = new Indigestion(internals);
   MoveLadderHooksForward moveLadderHooksForward = new MoveLadderHooksForward(upwards);
@@ -49,6 +50,7 @@ public class RobotContainer {
   Regurgitation regurgitation = new Regurgitation(consumer);
   MoveRampHooksForward moveRampHooksForward = new MoveRampHooksForward(onwards);
   MoveRampHooksBackwards moveRampHooksBackwards = new MoveRampHooksBackwards(onwards);
+  ShootingLow shootingLow = new ShootingLow(ripple);
 
   // buttons
   JoystickButton shootingButton = new JoystickButton(rightShaft, Constants.SHOOTING_BUTTON);
@@ -69,7 +71,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    shootingButton.whileActiveContinuous(shooting);
+    shootingButton.whileActiveContinuous(shootingHigh);
     digestionButton.whileActiveContinuous(digestion);
     indigestionButton.whileActiveContinuous(indigestion);
     mouthButton.whileActiveContinuous(consumption);
@@ -78,6 +80,7 @@ public class RobotContainer {
     ladderHooksButton.and(overrideButton).whileActiveContinuous(moveLadderHooksBackwards);
     rampHooksButton.whileActiveContinuous(moveRampHooksForward);
     rampHooksButton.and(overrideButton).whileActiveContinuous(moveRampHooksBackwards);
+    shootingButton.and(overrideButton).whileActiveContinuous(shootingLow);
   }
 
   public Command getAutonomousCommand() {

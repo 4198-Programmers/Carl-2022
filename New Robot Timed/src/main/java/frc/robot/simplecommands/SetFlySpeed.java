@@ -30,7 +30,7 @@ public class SetFlySpeed extends CommandBase {
 
     protected double catchWantedFlySpeed() {
         // return joystick.getRawAxis(3);
-        return Maths.flyWheelSpeedByDistance(vision.distanceToTarget(), vision.hasTarget());
+        return Maths.flyWheelSpeedByDistance(vision.distanceToTarget());
     }
 
     @Override

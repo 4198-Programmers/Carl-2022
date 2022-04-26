@@ -8,6 +8,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.simplecommands.MoveBackward;
+import frc.robot.simplecommands.MoveForward;
 
 public class DriveTrain extends SubsystemBase {
     private CANSparkMax frontR = new CANSparkMax(Constants.FRONT_RIGHT_MOTOR_DEVICE_ID, MotorType.kBrushless);
@@ -23,6 +25,10 @@ public class DriveTrain extends SubsystemBase {
     private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontL, backL);
 
     private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
+    private DriveTrain vroomVroomSub;
+
+    private MoveForward moveForward = new MoveForward(vroomVroomSub);
+    private MoveBackward moveBackward = new MoveBackward(vroomVroomSub);
 
     public DriveTrain() {
         frontLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
@@ -58,8 +64,37 @@ public class DriveTrain extends SubsystemBase {
      * @param zRotate
      */
     public void greenLight(double zRotate, double xAxis) {
-
         allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * zRotate, Constants.DRIVE_SPEED_MULTIPLIER * xAxis);
+        if(zRotate == 0 && xAxis == 0) {
+            double frontLEncoder = frontLEnc.getPosition();
+            double frontREncoder = frontLEnc.getPosition();
+            double backLEncoder = frontLEnc.getPosition();
+            double backREncoder = frontLEnc.getPosition();
+            if(frontLEncoder > frontLEnc.getPosition()) {
+                moveForward.execute();
+            }
+            else if(frontLEncoder < frontLEnc.getPosition()) {
+                moveBackward.execute();
+            }
+            else if(frontREncoder > frontREnc.getPosition()) {
+                    moveBackward.execute();
+            }
+            else if(frontREncoder < frontREnc.getPosition()) {
+                moveBackward.execute();
+            }
+            else if(backLEncoder > backLEnc.getPosition()) {
+                moveBackward.execute();
+            }
+            else if(backLEncoder < backLEnc.getPosition()) {
+                moveBackward.execute();
+            }
+            else if(backREncoder > backREnc.getPosition()) {
+                moveBackward.execute();
+            }
+            else if(backREncoder < backREnc.getPosition()) {
+                moveBackward.execute();
+            }
+        }
     }
 
 }

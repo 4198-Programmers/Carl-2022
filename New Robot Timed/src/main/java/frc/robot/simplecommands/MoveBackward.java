@@ -21,6 +21,11 @@ public class MoveBackward extends CommandBase{
     private RelativeEncoder backREnc = backR.getEncoder();
     private RelativeEncoder backLEnc = backL.getEncoder();
 
+    double frontLEncoder;
+    double frontREncoder;
+    double backLEncoder;
+    double backREncoder;
+
     public MoveBackward(DriveTrain vroomVroomSub) {
         driver = vroomVroomSub;
         addRequirements(vroomVroomSub);
@@ -28,7 +33,10 @@ public class MoveBackward extends CommandBase{
 
     @Override
     public void initialize() {
-
+        frontLEncoder = frontLEnc.getPosition();
+        frontREncoder = frontREnc.getPosition();
+        backLEncoder = backLEnc.getPosition();
+        backREncoder = backREnc.getPosition();
     }
 
     @Override
@@ -41,10 +49,10 @@ public class MoveBackward extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        double encCurrentPosition = Math.abs(frontLEnc.getPosition());
-        encCurrentPosition += Math.abs(frontREnc.getPosition());
-        encCurrentPosition += Math.abs(backREnc.getPosition());
-        encCurrentPosition += Math.abs(backLEnc.getPosition());
+        double encCurrentPosition = Math.abs(frontLEncoder);
+        encCurrentPosition += Math.abs(frontREncoder);
+        encCurrentPosition += Math.abs(backREncoder);
+        encCurrentPosition += Math.abs(backLEncoder);
         encCurrentPosition /= 4d;
         isFinished = (driver.findPosition() == encCurrentPosition);
         return isFinished;

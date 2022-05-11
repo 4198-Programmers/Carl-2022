@@ -17,10 +17,6 @@ public class MoveVerticalHooks extends CommandBase {
         addRequirements(verticalHooks);
     }
 
-    @Override
-    public void initialize() {
-        verticalHooks.setPosition(0);
-    }
 
     @Override
     public void execute() {

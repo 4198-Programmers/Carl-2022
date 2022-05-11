@@ -28,13 +28,13 @@ public class VerticalHooks extends SubsystemBase {
     }
 
     private boolean canVerticalHooksMoveUp() {
-        return getVerticalHookPostion() > Constants.VERTICAL_HOOK_UPPER_LIMIT;
+        return getVerticalHookPostion() < Constants.VERTICAL_HOOK_UPPER_LIMIT;
     }
 
     private boolean canVerticalHooksMoveDown() {
-        return getVerticalHookPostion() < Constants.VERTICAL_HOOK_LOWER_LIMIT;
+        return getVerticalHookPostion() > Constants.VERTICAL_HOOK_LOWER_LIMIT;
     }
-
+    
     // doin ur mom lol - Oren
     public void setSpeed(double speed) {
         double effectiveSpeed = speed;

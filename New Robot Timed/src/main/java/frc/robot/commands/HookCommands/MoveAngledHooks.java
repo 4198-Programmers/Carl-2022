@@ -18,11 +18,6 @@ public class MoveAngledHooks extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        angledHooks.setPosition(0);
-    }
-
-    @Override
     public void execute() {
         angledHooks.setSpeed(angledHookSpeedRetriever.getSpeed());
     }

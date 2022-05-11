@@ -43,11 +43,11 @@ public class Constants {
     public static final double LIMELIGHT_HEIGHT_TO_GROUND = 25;
     public static final double LIMELIGHT_ANGLE_FROM_GROUND = 65;
 
-    public static final double VERTICAL_HOOK_UPPER_LIMIT = 187;
-    public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_UPPER_LIMIT = 177;
+    public static final double VERTICAL_HOOK_LOWER_LIMIT = 4;
 
-    public static final double ANGLED_HOOK_UPPER_LIMIT = 97;
-    public static final double ANGLED_HOOK_LOWER_LIMIT = -20; // TODO update ANGLED_HOOK_LOWER_LIMIT
+    public static final double ANGLED_HOOK_UPPER_LIMIT = -97;
+    public static final double ANGLED_HOOK_LOWER_LIMIT = 17; 
 
     public static final double WIDE_X_OFFSET = 3.75;
     public static final double SLIM_X_OFFSET = 3;

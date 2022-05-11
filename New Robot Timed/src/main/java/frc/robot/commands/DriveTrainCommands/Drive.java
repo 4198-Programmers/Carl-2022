@@ -22,5 +22,10 @@ public class Drive extends CommandBase {
     @Override
     public void execute() {
         driveTrain.drive(forwardRetriever.getDriveSpeed(), turningRetriever.getDriveSpeed());
+        System.out.println("Drive");
+    }
+    @Override
+    public void end(boolean interrupted) {
+        driveTrain.drive(0, 0);
     }
 }

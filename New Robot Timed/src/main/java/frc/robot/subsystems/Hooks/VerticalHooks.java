@@ -38,12 +38,12 @@ public class VerticalHooks extends SubsystemBase {
     // doin ur mom lol - Oren
     public void setSpeed(double speed) {
         double effectiveSpeed = speed;
-        if (speed > 0) {
+        if (speed < 0) {
             if (!canVerticalHooksMoveUp()) {
                 effectiveSpeed = 0;
             }
         }
-        if (speed < 0) {
+        if (speed > 0) {
             if (!canVerticalHooksMoveDown()) {
                 effectiveSpeed = 0;
             }

@@ -30,12 +30,12 @@ public class AngledHooks extends SubsystemBase {
 
     public void setSpeed(double speed) {
         double effectiveSpeed = speed;
-        if (speed > 0) {
+        if (speed < 0) {
             if (!canAngledHooksMoveUp()) {
                 effectiveSpeed = 0;
             }
         }
-        if (speed < 0) {
+        if (speed > 0) {
             if (!canAngledHooksMoveDown()) {
                 effectiveSpeed = 0;
             }

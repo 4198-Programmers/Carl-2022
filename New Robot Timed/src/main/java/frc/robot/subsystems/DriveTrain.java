@@ -64,11 +64,6 @@ public class DriveTrain extends SubsystemBase {
      * @param zRotate
      */
     public void greenLight(double zRotate, double xAxis) {
-        System.out.println("I'm Moving" + System.currentTimeMillis());
-        System.out.println("FR Status" + frontR.getLastError());
-        System.out.println("FL Status" + frontL.getLastError());
-        System.out.println("BR Status" + backR.getLastError());
-        System.out.println("BL Status" + backL.getLastError());
         allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * zRotate, Constants.DRIVE_SPEED_MULTIPLIER * xAxis);
     }
 

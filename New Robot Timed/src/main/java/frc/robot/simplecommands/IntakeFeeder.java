@@ -21,23 +21,18 @@ public class IntakeFeeder extends CommandBase {
 
     @Override
     public void initialize() {
-        done = false;
     }
 
     @Override
     public void execute() {
         intake.setIntakeSpeed(Constants.INTAKE_FORWARD_SPEED);
         if (sensor.ballIn() && !sensor.ballOut()) {
+            System.out.println("if");
             tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
         } else {
+            System.out.println("else");
             tunnel.setMoverSpeed(Constants.FREEZE);
         }
-        done = true;
-    }
-
-    @Override
-    public boolean isFinished() {
-        return done;
     }
 
 }

@@ -1,5 +1,8 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.geometry.Translation2d;
+
 public class Constants {
 
     // Axis
@@ -34,7 +37,7 @@ public class Constants {
     // Constants
     public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5;
     public static final double WHEEL_DIAMTER = 5.875;
-    public static final int DISTANCE_BETWEEN_CENTER_OF_THE_WHEELS = 0;  //TODO find this value
+   // public static final int DISTANCE_BETWEEN_CENTER_OF_THE_WHEELS = 0;  //TODO find this value
 
     public static final double TARGET_HEIGHT_TOP_TO_GROUND = 104;
     public static final double LIMELIGHT_HEIGHT_TO_GROUND = 25;
@@ -73,4 +76,11 @@ public class Constants {
     public static final int INTAKE_IN_BUTTON = 5;
     public static final int TUNNEL_IN_BUTTON = 6;
     public static final int SPIT_BALLS_BUTTON = 7;
+    public static final double LENGTH_OF_THE_ROBOT = 0;
+    public static final double WIDTH_OF_THE_ROBOT = 0;
+    public static final double DISTANCE_OF_WHEELS_TO_CENTER = 0;
+    public static final double ANGLE_OF_WHEELS_TO_CENTER = 0;
+    public static final Translation2d Starting_position_long_ways = null;
+    public static final Rotation2d Starting_position_Short_ways = null;
+    public static final double RELATIVESPEED = 0;
 }

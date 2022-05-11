@@ -197,17 +197,14 @@ public class RobotContainer {
 
 
         Command autoClimb = 
-        (new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
-        .andThen(new SetDrivePosition(driveTrain, 0))
-        .andThen(new AutoDrive(driveTrain, 20, 1, 0))
-        .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
+        ((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, 1, Constants.ANGLED_HOOK_LOWER_LIMIT)))
         .andThen((new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, -0.75, Constants.ANGLED_HOOK_UPPER_LIMIT)))
         .andThen(new AutoAngledHooks(angledHooks, 1, Constants.ANGLED_HOOK_LOWER_LIMIT - 30))
         .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, 0.5, Constants.ANGLED_HOOK_LOWER_LIMIT)))
-                .andThen((new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
+        .andThen((new AutoVerticalHooks(verticalHooks, -1, Constants.VERTICAL_HOOK_UPPER_LIMIT))
                 .alongWith(new AutoAngledHooks(angledHooks, -0.75, Constants.ANGLED_HOOK_UPPER_LIMIT)))
         .andThen(new AutoAngledHooks(angledHooks, 1, Constants.ANGLED_HOOK_LOWER_LIMIT - 30))
         .andThen((new AutoVerticalHooks(verticalHooks, 1, Constants.VERTICAL_HOOK_LOWER_LIMIT))

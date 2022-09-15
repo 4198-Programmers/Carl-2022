@@ -1,17 +1,17 @@
 package frc.robot.simpleCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.driveTrain;
+import frc.robot.subsystems.DriveTrain;
 
-public class drive extends CommandBase{
+public class Drive extends CommandBase{
     public interface drivespeedRetriever{
         double getSpeed();
     }
-    driveTrain drivetrain;
+    DriveTrain drivetrain;
     drivespeedRetriever forwardDriveSpeedRetriever;
     drivespeedRetriever sideDriveSpeedRetriever;
 
-    public drive(drivespeedRetriever forwardDriveSpeedRetriever, drivespeedRetriever sideDriveSpeedRetriever, driveTrain drivetrain){
+    public Drive(drivespeedRetriever forwardDriveSpeedRetriever, drivespeedRetriever sideDriveSpeedRetriever, DriveTrain drivetrain){
         this.forwardDriveSpeedRetriever = forwardDriveSpeedRetriever;
         this.sideDriveSpeedRetriever = sideDriveSpeedRetriever;
         this.drivetrain = drivetrain;
@@ -19,6 +19,6 @@ public class drive extends CommandBase{
     }
     @Override
     public void execute() {
-        drivetrain.drive(forwardDriveSpeedRetriever.getSpeed(), sideDriveSpeedRetriever.getSpeed());
+        DriveTrain.drive(forwardDriveSpeedRetriever.getSpeed(), sideDriveSpeedRetriever.getSpeed());
     }
 }

@@ -4,6 +4,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -20,7 +21,8 @@ public class driveTrain extends SubsystemBase{
 
     MotorControllerGroup rightDrive = new MotorControllerGroup(frontRightMotor, backRightMotor);
     MotorControllerGroup leftDrive = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
-    MotorControllerGroup allDrive = new MotorControllerGroup(rightDrive, leftDrive);
+   // MotorControllerGroup allDrive = new MotorControllerGroup(rightDrive, leftDrive);
+    DifferentialDrive allDrive = 
     public void drive(double xspeed, double zrotation){
         allDrive.arcadeDrive(xspeed, zrotation);
     }

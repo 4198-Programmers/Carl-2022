@@ -2,7 +2,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.driveTrain;
+import frc.robot.simpleCommands.drive;
+import frc.robot.subsystems.DriveTrain;
 
 
 public class RobotContainer {
@@ -11,7 +12,7 @@ Joystick middleJoystick = new Joystick(Constants.MID_STICK_PORT);
 Joystick rightJoystick = new Joystick(Constants.RIGHT_STICK_PORT);
 
   // subsystems
-driveTrain drivetrain;
+DriveTrain drivetrain;
 
   // ungrouped commands
 
@@ -26,7 +27,7 @@ driveTrain drivetrain;
   public void initialize() {
     configureButtonBindings();
     begin();
-        drive.setDefaultCommand(new drive(()->leftJoystick.getRawAxis(0), ()-> middleJoystick.getRawAxis(1), driveTrain));
+        drivetrain.setDefaultCommand(new drive(()->leftJoystick.getRawAxis(0), ()-> middleJoystick.getRawAxis(1), DriveTrain));
   }
 
   private void configureButtonBindings() {

@@ -25,7 +25,7 @@ Joystick rightJoystick = new Joystick(Constants.RIGHT_STICK_PORT);
   public void initialize() {
     configureButtonBindings();
     begin();
-
+        driveTrain.setDefaultCommand(new Drive(leftJoystick.getRawAxis(1), middleJoystick.getRawAxis(2), driveTrain));
   }
 
   private void configureButtonBindings() {

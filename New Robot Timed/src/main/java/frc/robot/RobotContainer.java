@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.simpleCommands.Drive;
 import frc.robot.simpleCommands.HookCommands.AngledHookSpeed;
+import frc.robot.simpleCommands.HookCommands.VerticalHooksSpeed;
 import frc.robot.simpleCommands.ShooterSystemCommands.ForwardIntakeSpeed;
 import frc.robot.simpleCommands.ShooterSystemCommands.ForwardTunnelSpeed;
 import frc.robot.simpleCommands.ShooterSystemCommands.ReverseIntakeSpeed;
@@ -15,6 +16,7 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.FlyWheel;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Tunnel;
+import frc.robot.subsystems.VerticalHooks;
 
 
 public class RobotContainer {
@@ -28,6 +30,7 @@ Intake intake = new Intake();
 Tunnel tunnel = new Tunnel();
 FlyWheel flyWheel = new FlyWheel();
 AngledHooks angledHooks = new AngledHooks();
+VerticalHooks verticalHooks = new VerticalHooks();
   // ungrouped commands
 
   // command groups
@@ -45,16 +48,13 @@ JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.INTE
 JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_BACKWARDS_RBUTTON);
 JoystickButton flyWheelButton = new JoystickButton(rightJoystick, Constants.FLYWHEEL_RBUTTON);
 JoystickButton angledButton = new JoystickButton(rightJoystick, Constants.ANGLED_BUTTON);
+JoystickButton verticalButton = new JoystickButton(middleJoystick, Constants.VERTICAL_HOOK_BUTTON);
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public void initialize() {
     configureButtonBindings();
     begin();
-        drivetrain.setDefaultCommand(new Drive(
-                  ()->leftJoystick.getRawAxis(0), 
-                  ()-> middleJoystick.getRawAxis(1), 
-                  drivetrain));
   }
 
   private void configureButtonBindings() {
@@ -64,6 +64,11 @@ tunnelInButton.whenHeld(forwardTunnelSpeed);
 tunnelOutButton.whenHeld(reverseTunnelSpeed);
 flyWheelButton.whenHeld(setFlyWheelSpeed);
 angledButton.whileHeld(new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(1)));
+verticalButton.whenHeld(new VerticalHooksSpeed(verticalHooks, ()-> middleJoystick.getRawAxis(0)));
+verticalButton.whenInactive(new Drive(
+  ()->leftJoystick.getRawAxis(0), 
+  ()->middleJoystick.getRawAxis(1), 
+  drivetrain));
 }
 
   private void begin() {

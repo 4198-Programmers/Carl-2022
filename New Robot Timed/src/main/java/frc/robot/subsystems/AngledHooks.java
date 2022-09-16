@@ -31,4 +31,7 @@ public class AngledHooks extends SubsystemBase{
         angledHookMotor.set(estimatedspeed);
 
     }
+    public void forgetangledposition(){
+        angledHookEncoder.setPosition(0);
+    }
 }

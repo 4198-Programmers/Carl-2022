@@ -1,6 +1,7 @@
 package frc.robot.simpleCommands.HookCommands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.AngledHooks;
 
 public class AngledHookSpeed extends CommandBase{
@@ -17,5 +18,9 @@ public class AngledHookSpeed extends CommandBase{
     @Override
     public void execute() {
         angledHooks.setAngledHookSpeed(angledhookSpeedRetriever.getangledspeed());
+    }
+    @Override
+    public void end(boolean interrupted) {
+        angledHooks.setAngledHookSpeed(Constants.FREEZE);
     }
 }

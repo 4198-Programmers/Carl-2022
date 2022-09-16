@@ -52,7 +52,7 @@ public class Constants {
 
     // middle stick buttons
     public static final byte TARGETING_LIMELIGHT_SIMULTANEOUSM = 1;
-    public static final byte ANGLE_JOYSTICK_MBUTTON = 2;
+    public static final byte VERTICAL_HOOK_BUTTON = 2;
     public static final byte LIMELIGHT_OFF_MBUTTON = 11;
     public static final byte LIMELIGHT_ON_MBUTTON = 12;
 
@@ -70,5 +70,7 @@ public class Constants {
     public static final byte VERT_HOOK_UP_RBUTTON = 10;
     public static final double ANGLED_HOOK_UPPER_LIMIT = 0;
     public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_UPPER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
 
 }

@@ -2,8 +2,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.simpleCommands.Drive;
+import frc.robot.simpleCommands.ShooterSystemCommands.ForwardIntakeSpeed;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Tunnel;
 
 
 public class RobotContainer {
@@ -13,14 +17,16 @@ Joystick rightJoystick = new Joystick(Constants.RIGHT_STICK_PORT);
 
   // subsystems
 DriveTrain drivetrain;
-
+Intake intake;
+Tunnel tunnel;
   // ungrouped commands
 
   // command groups
-
+ForwardIntakeSpeed forwardIntakeSpeed;
 
   //Buttons
-
+JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_RBUTTON);
+JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INTAKE_OUT_RBUTTON);
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -34,7 +40,7 @@ DriveTrain drivetrain;
   }
 
   private void configureButtonBindings() {
-
+intakeInButton.whenHeld(forwardIntakeSpeed);
   }
 
   private void begin() {

@@ -33,4 +33,11 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
     NetworkTableEntry pipeline = table.getEntry("pipeline");
+
+    public double xOffset(){
+        return tx.getDouble(0);
+    }
+    public double chooseLimelightMode(){
+        
+    }
 }

@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Limelight extends SubsystemBase{
 
     public enum limelightMode{
-        invalid,
-        forceon,
-        forceoff;
+        invalid(-1),
+        forceon(1),
+        forceoff(2);
+
 
     }
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");

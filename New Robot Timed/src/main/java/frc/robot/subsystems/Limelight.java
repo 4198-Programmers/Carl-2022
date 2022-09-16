@@ -4,6 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Limelight extends SubsystemBase {
 
@@ -59,8 +60,14 @@ public class Limelight extends SubsystemBase {
         }
         return pipeline;
     }
+    public static double distanceFromTarget() {
+        double D = Constants.TARGET_HEIGHT_TOP_TO_GROUND;
+        double h = Constants.LIMELIGHT_HEIGHT_TO_GROUND;
+        double LLangle = Constants.LIMELIGHT_ANGLE_FROM_GROUND;
+        double totalAngle = Math.tan(Math.toRadians(LLangle + tyAngle));
 
-    public double distanceFromTarget() {
+        double distance = (D - h) / (totalAngle);
 
+        return distance;
     }
 }

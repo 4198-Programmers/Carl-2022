@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.simpleCommands.Drive;
 import frc.robot.simpleCommands.ShooterSystemCommands.ForwardIntakeSpeed;
+import frc.robot.simpleCommands.ShooterSystemCommands.ReverseIntakeSpeed;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Tunnel;
@@ -16,13 +17,14 @@ Joystick middleJoystick = new Joystick(Constants.MID_STICK_PORT);
 Joystick rightJoystick = new Joystick(Constants.RIGHT_STICK_PORT);
 
   // subsystems
-DriveTrain drivetrain;
-Intake intake;
-Tunnel tunnel;
+DriveTrain drivetrain = new DriveTrain();
+Intake intake = new Intake();
+Tunnel tunnel = new Tunnel();
   // ungrouped commands
 
   // command groups
-ForwardIntakeSpeed forwardIntakeSpeed;
+ForwardIntakeSpeed forwardIntakeSpeed = new ForwardIntakeSpeed(intake);
+ReverseIntakeSpeed reverseIntakeSpeed = new ReverseIntakeSpeed(intake);
 
   //Buttons
 JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_RBUTTON);
@@ -41,6 +43,7 @@ JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INT
 
   private void configureButtonBindings() {
 intakeInButton.whenHeld(forwardIntakeSpeed);
+intakeOutButton.whenHeld(reverseIntakeSpeed);
   }
 
   private void begin() {

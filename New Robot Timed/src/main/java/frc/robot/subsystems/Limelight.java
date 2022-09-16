@@ -5,21 +5,24 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Limelight extends SubsystemBase{
+public class Limelight extends SubsystemBase {
 
-    public enum limelightMode{
-        invalid(-1),
-        forceon(1),
-        forceoff(2);
+    public enum LimelightMode {
+        forceOff(0),
+        forceOn(1),
+        invalid(-1);
+
         private double mode;
-        limelightMode(double mode){
+
+        private LimelightMode(double mode) {
             this.mode = mode;
         }
-        double getMode(){
+
+        protected double getModeValue() {
             return mode;
         }
-
     }
+
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
     NetworkTableEntry tx = table.getEntry("tx"); 
     NetworkTableEntry ty = table.getEntry("ty");
@@ -34,7 +37,30 @@ public class Limelight extends SubsystemBase{
     NetworkTableEntry stream = table.getEntry("stream");
     NetworkTableEntry pipeline = table.getEntry("pipeline");
 
-    public double xOffset(){
+    public double xOffset() {
         return tx.getDouble(0);
+    }
+
+    public void setPipelineMode(LimelightMode limelightMode) {
+        pipeline.setDouble(limelightMode.getModeValue());
+    }
+    public boolean hasTarget(){
+        return tv.getBoolean(false);
+        }
+
+    public LimelightMode getPipelineMode(LimelightMode limelightMode) {
+        double mode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
+        LimelightMode pipeline = LimelightMode.invalid;
+        if (mode == 0) {
+            pipeline = LimelightMode.forceOff;
+        }
+        else if (mode == 1) {
+            pipeline = LimelightMode.forceOn;
+        }
+        return pipeline;
+    }
+
+    public double distanceFromTarget() {
+
     }
 }

@@ -19,6 +19,6 @@ public class Drive extends CommandBase{
     }
     @Override
     public void execute() {
-        DriveTrain.drive(forwardDriveSpeedRetriever.getSpeed(), sideDriveSpeedRetriever.getSpeed());
+        DriveTrain.alldrive(forwardDriveSpeedRetriever.getSpeed(), sideDriveSpeedRetriever.getSpeed());
     }
 }

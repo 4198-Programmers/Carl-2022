@@ -10,16 +10,31 @@ public class Sensors extends SubsystemBase{
     boolean intakeSensorSeenBall = false;
     boolean outtakeSensorSeenBall = false;
 
-    public void isBallAtIntake(){
-        intakeSensor.get();
+    public boolean isBallAtIntake(){
+       return intakeSensor.get();
     }
-    public void isBallAtOuttake(){
-        outtakeSensor.get();
+    public boolean isBallAtOuttake(){
+       return outtakeSensor.get();
     }
     public boolean hasinSensorSeenBall(){
         return intakeSensorSeenBall;
     }
     public boolean hasoutSensorSeenBall(){
         return outtakeSensorSeenBall;
+    }
+    @Override
+    public void periodic() {
+        if(isBallAtIntake()){
+            intakeSensorSeenBall = true;
+        }
+        if(isBallAtOuttake()){
+            outtakeSensorSeenBall = true;
+        }
+    }
+    public void forgetintakeBall(){
+        intakeSensorSeenBall = false;
+    }
+    public void forgetOuttakeBall(){
+        outtakeSensorSeenBall = false;
     }
 }

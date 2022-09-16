@@ -11,7 +11,13 @@ public class Limelight extends SubsystemBase{
         invalid(-1),
         forceon(1),
         forceoff(2);
-
+        private double mode;
+        limelightMode(double mode){
+            this.mode = mode;
+        }
+        double getMode(){
+            return mode;
+        }
 
     }
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");

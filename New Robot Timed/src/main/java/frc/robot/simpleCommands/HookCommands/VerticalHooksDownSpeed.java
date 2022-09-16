@@ -4,20 +4,15 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.VerticalHooks;
 
-public class VerticalHooksSpeed extends CommandBase{
+public class VerticalHooksDownSpeed extends CommandBase{
     VerticalHooks verticalHooks;
-    public interface SpeedRetriever{
-        double getvertspeed();
-    }
-    SpeedRetriever vertSpeedRetriever;
-    public VerticalHooksSpeed(VerticalHooks verticalHooks, SpeedRetriever vertSpeedRetriever){
+    public VerticalHooksDownSpeed(VerticalHooks verticalHooks){
         this.verticalHooks = verticalHooks;
-        this.vertSpeedRetriever = vertSpeedRetriever;
         addRequirements(verticalHooks);
     }
     @Override
     public void execute() {
-        verticalHooks.setVerticalhookSpeed(vertSpeedRetriever.getvertspeed());
+        verticalHooks.setVerticalhookSpeed(-Constants.VERTICAL_HOOK_SPEED);
     }
     @Override
     public void end(boolean interrupted) {

@@ -26,4 +26,18 @@ public class DriveTrain extends SubsystemBase{
     public void alldrive(double xspeed, double zrotation){
         allDrive.arcadeDrive(xspeed, zrotation);
     }
+    public void autoDrive(double rightspeed, double leftspeed){
+        rightDrive.set(rightspeed);
+        leftDrive.set(leftspeed);
+    }
+    public double getRightposition(){
+       double freP = frontRightEncoder.getPosition();
+       double brep = backRightEncoder.getPosition();
+       return (freP + brep)/2;
+    }
+    public double getLeftPosition(){
+        double flep = frontLeftEncoder.getPosition();
+        double blep = backLeftEncoder.getPosition();
+        return (flep + blep)/2;
+    }
 }

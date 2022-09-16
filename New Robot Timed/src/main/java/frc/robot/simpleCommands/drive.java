@@ -8,17 +8,17 @@ public class Drive extends CommandBase{
         double getSpeed();
     }
     DriveTrain drivetrain;
-    drivespeedRetriever forwardDriveSpeedRetriever;
-    drivespeedRetriever sideDriveSpeedRetriever;
+    drivespeedRetriever forwardRetriever;
+    drivespeedRetriever sideRetriever;
 
-    public Drive(drivespeedRetriever forwardDriveSpeedRetriever, drivespeedRetriever sideDriveSpeedRetriever, DriveTrain drivetrain){
-        this.forwardDriveSpeedRetriever = forwardDriveSpeedRetriever;
-        this.sideDriveSpeedRetriever = sideDriveSpeedRetriever;
+    public Drive(drivespeedRetriever forwardRetriever, drivespeedRetriever sideRetriever, DriveTrain drivetrain){
+        this.forwardRetriever = forwardRetriever;
+        this.sideRetriever = sideRetriever;
         this.drivetrain = drivetrain;
         addRequirements(drivetrain);
     }
     @Override
     public void execute() {
-        drivetrain.alldrive(forwardDriveSpeedRetriever.getSpeed(), sideDriveSpeedRetriever.getSpeed());
+        drivetrain.alldrive(forwardRetriever.getSpeed(), sideRetriever.getSpeed());
     }
 }

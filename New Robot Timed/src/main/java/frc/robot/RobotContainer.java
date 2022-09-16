@@ -44,7 +44,7 @@ JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INT
 JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_FORWARDS_RBUTTON);
 JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_BACKWARDS_RBUTTON);
 JoystickButton flyWheelButton = new JoystickButton(rightJoystick, Constants.FLYWHEEL_RBUTTON);
-JoystickButton overRideButton = new JoystickButton(rightJoystick, Constants.HUMAN_OVERRIDE_LBUTTON);
+JoystickButton angledButton = new JoystickButton(rightJoystick, Constants.ANGLED_BUTTON);
   // other
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -63,7 +63,7 @@ intakeOutButton.whenHeld(reverseIntakeSpeed);
 tunnelInButton.whenHeld(forwardTunnelSpeed);
 tunnelOutButton.whenHeld(reverseTunnelSpeed);
 flyWheelButton.whenHeld(setFlyWheelSpeed);
-overRideButton.and(
+angledButton.whileHeld(new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(1)));
 }
 
   private void begin() {

@@ -40,7 +40,7 @@ ReverseIntakeSpeed reverseIntakeSpeed = new ReverseIntakeSpeed(intake);
 ForwardTunnelSpeed forwardTunnelSpeed = new ForwardTunnelSpeed(tunnel);
 ReverseTunnelSpeed reverseTunnelSpeed = new ReverseTunnelSpeed(tunnel);
 SetFlyWheelSpeed setFlyWheelSpeed = new SetFlyWheelSpeed(flyWheel);
-AngledHookSpeed angledHookSpeed = new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(1));
+AngledHookSpeed angledHookSpeed = new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(0));
 VerticalHooksUpSpeed verticalHooksUpSpeed = new VerticalHooksUpSpeed(verticalHooks);
 VerticalHooksDownSpeed verticalHooksDownSpeed = new VerticalHooksDownSpeed(verticalHooks);
 

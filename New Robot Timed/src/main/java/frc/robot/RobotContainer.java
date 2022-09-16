@@ -68,8 +68,8 @@ intakeOutButton.whenHeld(reverseIntakeSpeed);
 tunnelInButton.whenHeld(forwardTunnelSpeed);
 tunnelOutButton.whenHeld(reverseTunnelSpeed);
 flyWheelButton.whenHeld(setFlyWheelSpeed);
-angledButton.whileHeld(new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(1)));
-verticalUpButton.whileHeld(verticalHooksUpSpeed);
+angledButton.whenHeld(new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(1)));
+verticalUpButton.whenHeld(verticalHooksUpSpeed);
 verticalDownButton.whenHeld(verticalHooksDownSpeed);
 }
 

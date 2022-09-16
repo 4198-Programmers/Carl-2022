@@ -3,12 +3,27 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//import frc.robot.Maths;
-
 public class Limelight extends SubsystemBase {
+    public enum LimelightMode {
+        forceOff(0),
+        forceOn(1),
+        invalid(-1);
+
+        private double mode;
+
+        private LimelightMode(double mode) {
+            this.mode = mode;
+        }
+
+        protected double getModeValue() {
+            return mode;
+        }
+    }
+
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tx = table.getEntry("tx"); // TODO math to convert to inches SOON
+    NetworkTableEntry tx = table.getEntry("tx"); 
     NetworkTableEntry ty = table.getEntry("ty");
     NetworkTableEntry tv = table.getEntry("tv");
     NetworkTableEntry ta = table.getEntry("ta");
@@ -19,29 +34,29 @@ public class Limelight extends SubsystemBase {
     NetworkTableEntry ledMode = table.getEntry("ledMode");
     NetworkTableEntry camMode = table.getEntry("camMode");
     NetworkTableEntry stream = table.getEntry("stream");
-    NetworkTableEntry Pipeline = table.getEntry("pipeline");
+    NetworkTableEntry pipeline = table.getEntry("pipeline");
 
-    public double xOffsetFromCenter() {
-        /** Default is 1 to cause robot to spin to find target */
-        return tx.getDouble(1);
+    public double xOffset() {
+        return tx.getDouble(0);
     }
 
-    public boolean hasTarget() {
-        return tv.getDouble(0) == 1;
+    public void setPipelineMode(LimelightMode limelightMode) {
+        pipeline.setDouble(limelightMode.getModeValue());
     }
+    public boolean hasTarget(){
+        SmartDashboard.putBoolean("Has Target", tv.getBoolean(false));
+        return tv.getBoolean(false);
+        }
 
-    public double distanceToTarget() {
-        double yAngle = ty.getDouble(0);
-        // double distance = Maths.distanceFromTarget(yAngle);
-        // return distance;
-        return yAngle;
-    }
-
-    public void setPipeline(double pipe) {
-        Pipeline.setDouble(pipe);
-    }
-
-    public double getPipeline() {
-        return Pipeline.getDouble(-1);
+    public LimelightMode getPipelineMode(LimelightMode limelightMode) {
+        double mode = pipeline.getDouble(LimelightMode.invalid.getModeValue());
+        LimelightMode pipeline = LimelightMode.invalid;
+        if (mode == 0) {
+            pipeline = LimelightMode.forceOff;
+        }
+        else if (mode == 1) {
+            pipeline = LimelightMode.forceOn;
+        }
+        return pipeline;
     }
 }

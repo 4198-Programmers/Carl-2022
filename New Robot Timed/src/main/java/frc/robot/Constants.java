@@ -52,13 +52,13 @@ public class Constants {
 
     // middle stick buttons
     public static final byte TARGETING_LIMELIGHT_SIMULTANEOUSM = 1;
-    public static final byte ANGLE_JOYSTICK_MBUTTON = 2;
+    public static final byte VERTICAL_HOOK_BUTTON = 2;
     public static final byte LIMELIGHT_OFF_MBUTTON = 11;
     public static final byte LIMELIGHT_ON_MBUTTON = 12;
 
     // right stick buttons
     public static final byte FLYWHEEL_RBUTTON = 1;
-    public static final byte QUOTE_AUTO_UNQUOTE_SHOOTING_RBUTTON = 2;
+    public static final byte ANGLED_BUTTON = 2;
     public static final byte INTERNAL_MOVER_BACKWARDS_RBUTTON = 3;
     public static final byte FORCE_SPIT_RBUTTON = 4;
     public static final byte INTERNAL_MOVER_FORWARDS_RBUTTON = 5;
@@ -68,5 +68,12 @@ public class Constants {
     public static final byte ANGLE_HOOK_DOWN_RBUTTON = 12;
     public static final byte VERT_HOOK_DOWN_RBUTTON = 9;
     public static final byte VERT_HOOK_UP_RBUTTON = 10;
+
+    
+    public static final double ANGLED_HOOK_UPPER_LIMIT = 0;
+    public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_UPPER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_SPEED = 0;
 
 }

@@ -27,7 +27,10 @@ DriveTrain drivetrain;
   public void initialize() {
     configureButtonBindings();
     begin();
-        drivetrain.setDefaultCommand(new Drive(()->leftJoystick.getRawAxis(0), ()-> middleJoystick.getRawAxis(1), drivetrain));
+        drivetrain.setDefaultCommand(new Drive(
+                  ()->leftJoystick.getRawAxis(0), 
+                  ()-> middleJoystick.getRawAxis(1), 
+                  drivetrain));
   }
 
   private void configureButtonBindings() {

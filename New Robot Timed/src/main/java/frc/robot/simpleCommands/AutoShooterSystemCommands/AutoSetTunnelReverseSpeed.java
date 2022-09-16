@@ -8,6 +8,10 @@ import frc.robot.subsystems.Tunnel;
 public class AutoSetTunnelReverseSpeed extends CommandBase{
     Tunnel tunnel;
     Sensors sensors;
+    public AutoSetTunnelReverseSpeed(Tunnel tunnel){
+        this.tunnel = tunnel;
+        addRequirements(tunnel);
+    }
     @Override
     public void execute() {
         tunnel.setTunnelSpeed(Constants.INTERNAL_FEEDER_REVERSE_SPEED);

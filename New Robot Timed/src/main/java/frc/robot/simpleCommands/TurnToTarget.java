@@ -6,35 +6,35 @@ import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Limelight;
 
 public class TurnToTarget extends CommandBase{
-    DriveTrain driveTrain;
+    DriveTrain drivetrain;
     Limelight limelight;
 
-    public TurnToTarget(DriveTrain driveTrain, Limelight limelight){
-        this.driveTrain = driveTrain;
+    public TurnToTarget(DriveTrain drivetrain, Limelight limelight){
+        this.drivetrain = drivetrain;
         this.limelight = limelight;
-        addRequirements(driveTrain, limelight);
+        addRequirements(drivetrain, limelight);
     }
     @Override
     public void initialize() {
-        driveTrain.setDrivePosition(0);
+        drivetrain.setDrivePosition(0);
         limelight.setPipeline(3); // pipeline 3 = forceOn
     }
     @Override
     public void execute() {
     if(limelight.xOffset() > Constants.WIDE_OFFSET_TOLERANCE){
-            driveTrain.autoDrive(0.5, 0);
+        drivetrain.autoDrive(0.5, 0);
     }
     else if(limelight.xOffset() < -Constants.WIDE_OFFSET_TOLERANCE){
-        driveTrain.autoDrive(0, 0.5);
+        drivetrain.autoDrive(0, 0.5);
     }
     else if(limelight.xOffset() > Constants.SLIM_OFFSET_TOLERANCE){
-        driveTrain.autoDrive(0.25, 0);
+        drivetrain.autoDrive(0.25, 0);
     }
     else if(limelight.xOffset() < -Constants.SLIM_OFFSET_TOLERANCE){
-        driveTrain.autoDrive(0, 0.25);
+        drivetrain.autoDrive(0, 0.25);
     }
     else{
-        driveTrain.autoDrive(1, 0);
+        drivetrain.autoDrive(1, 0);
     }
 }
 @Override
@@ -43,7 +43,7 @@ public boolean isFinished() {
 }
 @Override
 public void end(boolean interrupted) {
-    driveTrain.autoDrive(0, 0);
+    drivetrain.autoDrive(0, 0);
     limelight.setPipeline(1);  //  pipeline 1 = forceoff
 }
 }

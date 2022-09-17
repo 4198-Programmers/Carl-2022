@@ -5,6 +5,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -42,5 +43,9 @@ public class VerticalHooks extends SubsystemBase{
     public void resetvertposition(){
         vertiaclOGEncoder.setPosition(0);
         verticalFollowerEncoder.setPosition(0);
+    }
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("Vertical Hooks Position", (vertiaclOGEncoder.getPosition()+verticalFollowerEncoder.getPosition())/2);
     }
 }

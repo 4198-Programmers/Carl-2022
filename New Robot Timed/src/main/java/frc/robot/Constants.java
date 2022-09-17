@@ -48,26 +48,21 @@ public class Constants {
     public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5; // 23.5 inches is distance between sheels
 
     // left joystick buttons
-    public static final byte HUMAN_OVERRIDE_LBUTTON = 11;
 
     // middle stick buttons
-    public static final byte TARGETING_LIMELIGHT_SIMULTANEOUSM = 1;
-    public static final byte VERTICAL_HOOK_BUTTON = 2;
-    public static final byte LIMELIGHT_OFF_MBUTTON = 11;
-    public static final byte LIMELIGHT_ON_MBUTTON = 12;
+    public static final int LIMELIGHT_TARGETING_BUTTON = 1;
+
 
     // right stick buttons
-    public static final byte FLYWHEEL_RBUTTON = 1;
-    public static final byte ANGLED_BUTTON = 2;
-    public static final byte INTERNAL_MOVER_BACKWARDS_RBUTTON = 3;
-    public static final byte FORCE_SPIT_RBUTTON = 4;
-    public static final byte INTERNAL_MOVER_FORWARDS_RBUTTON = 5;
-    public static final byte INTAKE_IN_RBUTTON = 7;
-    public static final byte INTAKE_OUT_RBUTTON = 8;
-    public static final byte ANGLE_HOOK_UP_RBUTTON = 11;
-    public static final byte ANGLE_HOOK_DOWN_RBUTTON = 12;
-    public static final byte VERT_HOOK_DOWN_RBUTTON = 9;
-    public static final byte VERT_HOOK_UP_RBUTTON = 10;
+    public static final int FLYWHEEL_BUTTON = 1;
+    public static final int ANGLED_BUTTON = 2;
+    public static final int INTAKE_IN_BUTTON = 3;
+    public static final int INTAKE_OUT_BUTTON = 5;
+    public static final int INTERNAL_MOVER_FORWARDS_BUTTON = 4;
+    public static final int INTERNAL_MOVER_BACKWARDS_BUTTON = 6;
+    public static final int VERT_HOOK_DOWN_BUTTON = 9;
+    public static final int VERT_HOOK_UP_BUTTON = 10;
+
 
     
     public static final double ANGLED_HOOK_UPPER_LIMIT = 250;
@@ -75,5 +70,6 @@ public class Constants {
     public static final double VERTICAL_HOOK_UPPER_LIMIT = 250;
     public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
     public static final double VERTICAL_HOOK_SPEED = 1;
+    
 
 }

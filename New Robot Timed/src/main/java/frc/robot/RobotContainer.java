@@ -4,14 +4,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.simpleCommands.Drive;
-import frc.robot.simpleCommands.HookCommands.AngledHookSpeed;
-import frc.robot.simpleCommands.HookCommands.VerticalHooksDownSpeed;
-import frc.robot.simpleCommands.HookCommands.VerticalHooksUpSpeed;
-import frc.robot.simpleCommands.ShooterSystem.ForwardTunnelSpeed;
-import frc.robot.simpleCommands.ShooterSystemCommands.ForwardIntakeSpeed;
-import frc.robot.simpleCommands.ShooterSystemCommands.ReverseIntakeSpeed;
-import frc.robot.simpleCommands.ShooterSystemCommands.ReverseTunnelSpeed;
-import frc.robot.simpleCommands.ShooterSystemCommands.SetFlyWheelSpeed;
+import frc.robot.simpleCommands.ShooterSystem.ForwardIntake;
+import frc.robot.simpleCommands.ShooterSystem.ForwardTunnel;
+import frc.robot.simpleCommands.ShooterSystem.ReverseIntake;
+import frc.robot.simpleCommands.ShooterSystem.ReverseTunnel;
+import frc.robot.simpleCommands.ShooterSystem.SetFlyWheelSpeed;
 import frc.robot.subsystems.AngledHooks;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.FlyWheel;
@@ -36,13 +33,13 @@ VerticalHooks verticalHooks = new VerticalHooks();
 
   // command groups
 ForwardIntake forwardIntake = new ForwardIntake(intake);
-ReverseIntakeSpeed reverseIntakeSpeed = new ReverseIntakeSpeed(intake);
-ForwardTunnelSpeed forwardTunnelSpeed = new ForwardTunnelSpeed(tunnel);
-ReverseTunnelSpeed reverseTunnelSpeed = new ReverseTunnelSpeed(tunnel);
-SetFlyWheelSpeed setFlyWheelSpeed = new SetFlyWheelSpeed(flyWheel);
-AngledHookSpeed angledHookSpeed = new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(0));
-VerticalHooksUpSpeed verticalHooksUpSpeed = new VerticalHooksUpSpeed(verticalHooks);
-VerticalHooksDownSpeed verticalHooksDownSpeed = new VerticalHooksDownSpeed(verticalHooks);
+ReverseIntake reverseIntake = new ReverseIntake(intake);
+ForwardTunnel forwardTunnel = new ForwardTunnel(tunnel);
+ReverseTunnel reverseTunnel = new ReverseTunnel(tunnel);
+SetFlyWheelSpeed setFlyWheel = new SetFlyWheelSpeed(flyWheel);
+AngledHook angledHook = new AngledHook(angledHooks, ()->rightJoystick.getRawAxis(0));
+VerticalHooksUp verticalHooksUp = new VerticalHooksUp(verticalHooks);
+VerticalHooksDown verticalHooksDown = new VerticalHooksDown(verticalHooks);
 
   //Buttons
 JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_RBUTTON);
@@ -64,13 +61,13 @@ JoystickButton verticalDownButton = new JoystickButton(rightJoystick, Constants.
 
   private void configureButtonBindings() {
 intakeInButton.whenHeld(forwardIntake);
-intakeOutButton.whenHeld(reverseIntakeSpeed);
-tunnelInButton.whenHeld(forwardTunnelSpeed);
-tunnelOutButton.whenHeld(reverseTunnelSpeed);
-flyWheelButton.whenHeld(setFlyWheelSpeed);
-angledButton.whenHeld(new AngledHookSpeed(angledHooks, ()->rightJoystick.getRawAxis(1)));
-verticalUpButton.whenHeld(verticalHooksUpSpeed);
-verticalDownButton.whenHeld(verticalHooksDownSpeed);
+intakeOutButton.whenHeld(reverseIntake);
+tunnelInButton.whenHeld(forwardTunnel);
+tunnelOutButton.whenHeld(reverseTunnel);
+flyWheelButton.whenHeld(setFlyWheel);
+angledButton.whenHeld(new AngledHook(angledHooks, ()->rightJoystick.getRawAxis(1)));
+verticalUpButton.whenHeld(verticalHooksUp);
+verticalDownButton.whenHeld(verticalHooksDown);
 }
 
   private void begin() {

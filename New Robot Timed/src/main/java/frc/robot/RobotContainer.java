@@ -35,7 +35,7 @@ VerticalHooks verticalHooks = new VerticalHooks();
   // ungrouped commands
 
   // command groups
-ForwardIntakeSpeed forwardIntakeSpeed = new ForwardIntakeSpeed(intake);
+ForwardIntake forwardIntake = new ForwardIntake(intake);
 ReverseIntakeSpeed reverseIntakeSpeed = new ReverseIntakeSpeed(intake);
 ForwardTunnelSpeed forwardTunnelSpeed = new ForwardTunnelSpeed(tunnel);
 ReverseTunnelSpeed reverseTunnelSpeed = new ReverseTunnelSpeed(tunnel);
@@ -63,7 +63,7 @@ JoystickButton verticalDownButton = new JoystickButton(rightJoystick, Constants.
   }
 
   private void configureButtonBindings() {
-intakeInButton.whenHeld(forwardIntakeSpeed);
+intakeInButton.whenHeld(forwardIntake);
 intakeOutButton.whenHeld(reverseIntakeSpeed);
 tunnelInButton.whenHeld(forwardTunnelSpeed);
 tunnelOutButton.whenHeld(reverseTunnelSpeed);

@@ -25,12 +25,12 @@ public class AngledHooks extends SubsystemBase{
     }
     public void setAngledHookSpeed(double speed){
         double estimatedspeed = speed;
-        if(speed < 0 && isangledpastupperlimit()){
-            estimatedspeed = 0;
-        }
-        if(speed > 0 && isangledpastlowerlimit()){
-            estimatedspeed = 0;
-        }
+        // if(speed < 0 && isangledpastupperlimit()){
+        //     estimatedspeed = 0;
+        // }
+        // if(speed > 0 && isangledpastlowerlimit()){
+        //     estimatedspeed = 0;
+        // }
         angledHookMotor.set(estimatedspeed);
 
     }

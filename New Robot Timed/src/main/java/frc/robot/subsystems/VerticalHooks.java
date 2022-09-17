@@ -30,12 +30,12 @@ public class VerticalHooks extends SubsystemBase{
     }
     public void setVerticalhookSpeed(double speed){
         double estimatedspeed = speed;
-        if(speed>0 && isverticalhookspastupperlimit()){
-            estimatedspeed = 0;
-        }
-        if(speed<0 && isverticalhookspastlowerlimit()){
-            estimatedspeed = 0;
-        }
+        // if(speed>0 && isverticalhookspastupperlimit()){
+        //     estimatedspeed = 0;
+        // }
+        // if(speed<0 && isverticalhookspastlowerlimit()){
+        //     estimatedspeed = 0;
+        // }
 
         verticalHooks.set(estimatedspeed);
     }

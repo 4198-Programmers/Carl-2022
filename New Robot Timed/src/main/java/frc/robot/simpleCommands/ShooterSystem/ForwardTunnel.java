@@ -1,4 +1,4 @@
-package frc.robot.simpleCommands.ShooterSystemCommands;
+package frc.robot.simpleCommands.ShooterSystem;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;

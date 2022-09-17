@@ -60,6 +60,8 @@ JoystickButton verticalDownButton = new JoystickButton(rightJoystick, Constants.
     configureButtonBindings();
     begin();
     drivetrain.setDefaultCommand(new Drive(()->leftJoystick.getRawAxis(0), ()->middleJoystick.getRawAxis(1), drivetrain));
+    verticalHooks.resetvertposition();
+    angledHooks.resetangledposition();
   }
 
   private void configureButtonBindings() {

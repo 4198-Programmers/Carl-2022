@@ -15,10 +15,10 @@ public class AngledHooks extends SubsystemBase{
     }
 
     public boolean isangledpastupperlimit(){
-        return getangledhookdistance() < Constants.ANGLED_HOOK_UPPER_LIMIT;
+        return getangledhookdistance() > Constants.ANGLED_HOOK_UPPER_LIMIT;
     }
     public boolean isangledpastlowerlimit(){
-        return getangledhookdistance() > Constants.ANGLED_HOOK_LOWER_LIMIT;
+        return getangledhookdistance() < Constants.ANGLED_HOOK_LOWER_LIMIT;
     }
     public double getAngledHookPosition(){
         return angledHookEncoder.getPosition();
@@ -34,7 +34,7 @@ public class AngledHooks extends SubsystemBase{
         angledHookMotor.set(estimatedspeed);
 
     }
-    public void forgetangledposition(){
+    public void resetangledposition(){
         angledHookEncoder.setPosition(0);
     }
 }

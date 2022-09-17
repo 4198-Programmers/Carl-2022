@@ -18,10 +18,10 @@ public class VerticalHooks extends SubsystemBase{
     RelativeEncoder verticalFollowerEncoder = verticalFollowerHookMotor.getEncoder();
 
     public boolean isverticalhookspastupperlimit(){
-        return ((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) < Constants.VERTICAL_HOOK_UPPER_LIMIT;
+        return ((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) > Constants.VERTICAL_HOOK_UPPER_LIMIT;
     }
     public boolean isverticalhookspastlowerlimit(){
-        return((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) > Constants.VERTICAL_HOOK_LOWER_LIMIT;
+        return((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) < Constants.VERTICAL_HOOK_LOWER_LIMIT;
     }
     public double getverticalHookPosition(){
         double OgHook = vertiaclOGEncoder.getPosition();

@@ -21,9 +21,9 @@ import frc.robot.subsystems.VerticalHooks;
 
 
 public class RobotContainer {
-Joystick leftJoystick = new Joystick(Constants.LEFT_STICK_PORT);
-Joystick middleJoystick = new Joystick(Constants.MID_STICK_PORT);
-Joystick rightJoystick = new Joystick(Constants.RIGHT_STICK_PORT);
+Joystick leftJoystick = new Joystick(1);
+Joystick middleJoystick = new Joystick(2);
+Joystick rightJoystick = new Joystick(3);
 
   // subsystems
 DriveTrain drivetrain = new DriveTrain();
@@ -53,7 +53,7 @@ JoystickButton flyWheelButton = new JoystickButton(rightJoystick, Constants.FLYW
 JoystickButton angledButton = new JoystickButton(rightJoystick, Constants.ANGLED_BUTTON);
 JoystickButton verticalUpButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_UP_RBUTTON);
 JoystickButton verticalDownButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_DOWN_RBUTTON);
-  // other
+  // others
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public void initialize() {

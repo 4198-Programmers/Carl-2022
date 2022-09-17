@@ -23,6 +23,11 @@ public class VerticalHooks extends SubsystemBase{
     public boolean isverticalhookspastlowerlimit(){
         return((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) < Constants.VERTICAL_HOOK_LOWER_LIMIT;
     }
+    public double getverticalHookPosition(){
+        double OgHook = vertiaclOGEncoder.getPosition();
+        double folHook = verticalFollowerEncoder.getPosition();
+        return (OgHook + folHook)/2;
+    }
     public void setVerticalhookSpeed(double speed){
         double estimatedspeed = speed;
         if(speed>0 && isverticalhookspastupperlimit()){

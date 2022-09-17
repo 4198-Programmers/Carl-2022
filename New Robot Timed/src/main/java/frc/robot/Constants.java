@@ -70,10 +70,10 @@ public class Constants {
     public static final byte VERT_HOOK_UP_RBUTTON = 10;
 
     
-    public static final double ANGLED_HOOK_UPPER_LIMIT = 0;
+    public static final double ANGLED_HOOK_UPPER_LIMIT = 250;
     public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
-    public static final double VERTICAL_HOOK_UPPER_LIMIT = 0;
+    public static final double VERTICAL_HOOK_UPPER_LIMIT = 250;
     public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
-    public static final double VERTICAL_HOOK_SPEED = 0;
+    public static final double VERTICAL_HOOK_SPEED = 1;
 
 }

@@ -18,6 +18,7 @@ public class AngledHook extends CommandBase{
     @Override
     public void execute() {
         angledHooks.setAngledHookSpeed(angledhookSpeedRetriever.getangledspeed());
+        System.out.println(angledHooks.getAngledHookPosition());
     }
     @Override
     public void end(boolean interrupted) {

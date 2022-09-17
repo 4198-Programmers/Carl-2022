@@ -20,6 +20,9 @@ public class AngledHooks extends SubsystemBase{
     public boolean isangledpastlowerlimit(){
         return getangledhookdistance() > Constants.ANGLED_HOOK_LOWER_LIMIT;
     }
+    public double getAngledHookPosition(){
+        return angledHookEncoder.getPosition();
+    }
     public void setAngledHookSpeed(double speed){
         double estimatedspeed = speed;
         if(speed > 0 && isangledpastupperlimit()){

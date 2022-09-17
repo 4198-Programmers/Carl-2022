@@ -40,4 +40,10 @@ public class DriveTrain extends SubsystemBase{
         double blep = backLeftEncoder.getPosition();
         return (flep + blep)/2;
     }
+    public void setDrivePosition(double position){
+        frontRightEncoder.setPosition(position);
+        frontLeftEncoder.setPosition(position);
+        backRightEncoder.setPosition(position);
+        backLeftEncoder.setPosition(position);
+    }
 }

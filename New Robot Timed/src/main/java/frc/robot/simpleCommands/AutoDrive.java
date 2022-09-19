@@ -4,29 +4,29 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutoDrive extends CommandBase{
-    DriveTrain driveTrain;
+    DriveTrain drivetrain;
     double rightdistanceRequired;
     double leftdistanceRequired;
     double rightspeed;
     double leftspeed;
-    public AutoDrive(DriveTrain driveTrain, double rightdistanceRequired, double leftdistanceRequired, double rightspeed, double leftspeed){
-        this.driveTrain = driveTrain;
+    public AutoDrive(DriveTrain drivetrain, double rightdistanceRequired, double leftdistanceRequired, double rightspeed, double leftspeed){
+        this.drivetrain = drivetrain;
         this.rightdistanceRequired = rightdistanceRequired;
         this.leftdistanceRequired = leftdistanceRequired;
         this.rightspeed = rightspeed;
         this.leftspeed = leftspeed;
-        addRequirements(driveTrain);
+        addRequirements(drivetrain);
     }
     @Override
     public void execute() {
-        driveTrain.autoDrive(rightspeed, leftspeed);
+        drivetrain.autoDrive(rightspeed, leftspeed);
     }
     @Override
     public boolean isFinished() {
-        return driveTrain.getRightposition() >= rightdistanceRequired && driveTrain.getLeftPosition() >= leftdistanceRequired;
+        return Math.abs(drivetrain.getRightposition()) >= rightdistanceRequired && Math.abs(drivetrain.getLeftPosition()) >= leftdistanceRequired;
     }
     @Override
     public void end(boolean interrupted) {
-        driveTrain.autoDrive(0, 0);
+        drivetrain.autoDrive(0, 0);
     }
 }

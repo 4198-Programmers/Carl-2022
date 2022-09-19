@@ -3,6 +3,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.simpleCommands.AutoDrive;
 import frc.robot.simpleCommands.Drive;
 import frc.robot.simpleCommands.TurnToTarget;
 import frc.robot.simpleCommands.HookCommands.AngledHook;
@@ -45,6 +46,7 @@ AngledHook angledHook = new AngledHook(angledHooks, ()->rightJoystick.getRawAxis
 VerticalHooksUp verticalHooksUp = new VerticalHooksUp(verticalHooks);
 VerticalHooksDown verticalHooksDown = new VerticalHooksDown(verticalHooks);
 TurnToTarget turnToTarget = new TurnToTarget(drivetrain, limelight);
+AutoDrive turnLeft = new AutoDrive(drivetrain, Maths.spinDistanceByDegree(90), Maths.spinDistanceByDegree(90), 1, -1);
   // command groups
 
 
@@ -60,6 +62,8 @@ JoystickButton verticalUpButton = new JoystickButton(rightJoystick, Constants.VE
 JoystickButton verticalDownButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_DOWN_BUTTON);
   //MiddleJoystickButtons
 JoystickButton limelightTargetingButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_TARGETING_BUTTON);
+  //LeftJoystickButtons
+JoystickButton testButton = new JoystickButton(leftJoystick, Constants.TEST_BUTTON);
   // others
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 

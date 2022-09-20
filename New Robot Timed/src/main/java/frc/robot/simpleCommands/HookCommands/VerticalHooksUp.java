@@ -12,7 +12,8 @@ public class VerticalHooksUp extends CommandBase{
     }
     @Override
     public void execute() {
-        verticalHooks.setVerticalhookSpeed(Constants.VERTICAL_HOOK_SPEED);
+        verticalHooks.setVerticalhookSpeed(-Constants.VERTICAL_HOOK_SPEED);
+        System.out.println(verticalHooks.getverticalHookPosition());
     }
     @Override
     public void end(boolean interrupted) {

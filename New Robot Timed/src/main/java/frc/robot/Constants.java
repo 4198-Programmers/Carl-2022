@@ -65,11 +65,11 @@ public class Constants {
 
 
     
-    public static final double ANGLED_HOOK_UPPER_LIMIT = 250;
-    public static final double ANGLED_HOOK_LOWER_LIMIT = 0;
-    public static final double VERTICAL_HOOK_UPPER_LIMIT = 250;
+    public static final double ANGLED_HOOK_UPPER_LIMIT = -72;
+    public static final double ANGLED_HOOK_LOWER_LIMIT = 20;
+    public static final double VERTICAL_HOOK_UPPER_LIMIT = -194;
     public static final double VERTICAL_HOOK_LOWER_LIMIT = 0;
-    public static final double VERTICAL_HOOK_SPEED = 1;
+    public static final double VERTICAL_HOOK_SPEED = 0.5;
     
 
 }

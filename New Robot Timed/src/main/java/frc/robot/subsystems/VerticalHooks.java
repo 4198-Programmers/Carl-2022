@@ -19,10 +19,10 @@ public class VerticalHooks extends SubsystemBase{
     RelativeEncoder verticalFollowerEncoder = verticalFollowerHookMotor.getEncoder();
 
     public boolean isverticalhookspastupperlimit(){
-        return ((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) > Constants.VERTICAL_HOOK_UPPER_LIMIT;
+        return ((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) < Constants.VERTICAL_HOOK_UPPER_LIMIT;
     }
     public boolean isverticalhookspastlowerlimit(){
-        return((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) < Constants.VERTICAL_HOOK_LOWER_LIMIT;
+        return((vertiaclOGEncoder.getPosition() + verticalFollowerEncoder.getPosition())/2) > Constants.VERTICAL_HOOK_LOWER_LIMIT;
     }
     public double getverticalHookPosition(){
         double OgHook = vertiaclOGEncoder.getPosition();
@@ -31,12 +31,12 @@ public class VerticalHooks extends SubsystemBase{
     }
     public void setVerticalhookSpeed(double speed){
         double estimatedspeed = speed;
-        // if(speed>0 && isverticalhookspastupperlimit()){
-        //     estimatedspeed = 0;
-        // }
-        // if(speed<0 && isverticalhookspastlowerlimit()){
-        //     estimatedspeed = 0;
-        // }
+        if(speed<0 && isverticalhookspastupperlimit()){
+            estimatedspeed = 0;
+        }
+        if(speed>0 && isverticalhookspastlowerlimit()){
+            estimatedspeed = 0;
+        }
 
         verticalHooks.set(estimatedspeed);
     }

@@ -52,14 +52,14 @@ AutoDrive turnLeft = new AutoDrive(drivetrain, Maths.spinDistanceByDegree(90), M
 
   //Buttons
     //RightJoystickButtons
-JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_BUTTON);
-JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INTAKE_OUT_BUTTON);
-JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
-JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_BACKWARDS_BUTTON);
 JoystickButton flyWheelButton = new JoystickButton(rightJoystick, Constants.FLYWHEEL_BUTTON);
 JoystickButton angledButton = new JoystickButton(rightJoystick, Constants.ANGLED_BUTTON);
-JoystickButton verticalUpButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_UP_BUTTON);
+JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_BUTTON);
+JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
+JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INTAKE_OUT_BUTTON);
+JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_BACKWARDS_BUTTON);
 JoystickButton verticalDownButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_DOWN_BUTTON);
+JoystickButton verticalUpButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_UP_BUTTON);
     //MiddleJoystickButtons
 JoystickButton limelightTargetingButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_TARGETING_BUTTON);
     //LeftJoystickButtons

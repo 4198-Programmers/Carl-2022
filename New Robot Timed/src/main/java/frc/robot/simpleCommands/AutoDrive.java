@@ -18,6 +18,10 @@ public class AutoDrive extends CommandBase{
         addRequirements(drivetrain);
     }
     @Override
+    public void initialize() {
+        drivetrain.setDrivePosition(0);
+    }
+    @Override
     public void execute() {
         drivetrain.autoDrive(rightspeed, leftspeed);
     }

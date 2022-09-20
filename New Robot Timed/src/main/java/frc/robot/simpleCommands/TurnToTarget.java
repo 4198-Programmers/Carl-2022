@@ -33,13 +33,14 @@ public class TurnToTarget extends CommandBase{
     else if(limelight.xOffset() <= -Constants.SLIM_OFFSET_TOLERANCE){
         drivetrain.alldrive(-0.15, 0);
     }
-    else if(!limelight.hasTarget()){
+    else if(limelight.hasTarget() == 0){
         drivetrain.alldrive(0.5, 0);
+        System.out.println(limelight.hasTarget());
     }
 }
 @Override
 public boolean isFinished() {
-    return limelight.xOffset() > -Constants.SLIM_OFFSET_TOLERANCE && limelight.xOffset() < Constants.SLIM_OFFSET_TOLERANCE;
+    return limelight.xOffset() >= -Constants.SLIM_OFFSET_TOLERANCE && limelight.xOffset() <= Constants.SLIM_OFFSET_TOLERANCE;
 }
 @Override
 public void end(boolean interrupted) {

@@ -51,6 +51,7 @@ TurnToTarget turnToTarget = new TurnToTarget(drivetrain, limelight);
   // command groups
 Command turnLeft = new resetDriveposition(drivetrain).andThen(new AutoDrive(drivetrain, Maths.rotationConversion(180), -0.5, 0));
 Command turnRight = new resetDriveposition(drivetrain).andThen(new AutoDrive(drivetrain, Maths.rotationConversion(180), 0.5, 0));
+Command target = new TurnToTarget(drivetrain, limelight).andThen(new TurnLimeLightOff(limelight, 0));
 
   //Buttons
     //RightJoystickButtons

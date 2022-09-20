@@ -23,12 +23,12 @@ public class Limelight extends SubsystemBase{
     public double xOffset(){
         return tx.getDouble(1);
     }
-    public boolean hasTarget(){
-        return tv.getBoolean(false);
+    public double hasTarget(){
+        return tv.getDouble(0);
     }
     @Override
     public void periodic() {
-        SmartDashboard.putBoolean("Has Target", hasTarget());
+        SmartDashboard.putNumber("Has Target", hasTarget());
     }
     
 }

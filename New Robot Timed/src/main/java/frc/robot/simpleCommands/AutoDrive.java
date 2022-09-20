@@ -22,6 +22,7 @@ public class AutoDrive extends CommandBase{
     @Override
     public void execute() {
         drivetrain.alldrive(xspeed, zrotation);
+        System.out.println(drivetrain.getPosition());
     }
     @Override
     public boolean isFinished() {

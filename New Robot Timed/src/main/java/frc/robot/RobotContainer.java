@@ -46,7 +46,7 @@ AngledHook angledHook = new AngledHook(angledHooks, ()->rightJoystick.getRawAxis
 VerticalHooksUp verticalHooksUp = new VerticalHooksUp(verticalHooks);
 VerticalHooksDown verticalHooksDown = new VerticalHooksDown(verticalHooks);
 TurnToTarget turnToTarget = new TurnToTarget(drivetrain, limelight);
-AutoDrive turnLeft = new AutoDrive(drivetrain, Maths.rotationConversion(90), -0.5, 0);
+AutoDrive turnLeft = new AutoDrive(drivetrain, Maths.rotationConversion(180), -0.5, 0);
   // command groups
 
 

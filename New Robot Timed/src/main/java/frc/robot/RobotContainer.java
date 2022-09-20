@@ -51,7 +51,7 @@ AutoDrive turnLeft = new AutoDrive(drivetrain, Maths.spinDistanceByDegree(90), M
 
 
   //Buttons
-  //RightJoystickButtons
+    //RightJoystickButtons
 JoystickButton intakeInButton = new JoystickButton(rightJoystick, Constants.INTAKE_IN_BUTTON);
 JoystickButton intakeOutButton = new JoystickButton(rightJoystick, Constants.INTAKE_OUT_BUTTON);
 JoystickButton tunnelInButton = new JoystickButton(rightJoystick, Constants.INTERNAL_MOVER_FORWARDS_BUTTON);
@@ -60,9 +60,9 @@ JoystickButton flyWheelButton = new JoystickButton(rightJoystick, Constants.FLYW
 JoystickButton angledButton = new JoystickButton(rightJoystick, Constants.ANGLED_BUTTON);
 JoystickButton verticalUpButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_UP_BUTTON);
 JoystickButton verticalDownButton = new JoystickButton(rightJoystick, Constants.VERT_HOOK_DOWN_BUTTON);
-  //MiddleJoystickButtons
+    //MiddleJoystickButtons
 JoystickButton limelightTargetingButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_TARGETING_BUTTON);
-  //LeftJoystickButtons
+    //LeftJoystickButtons
 JoystickButton testButton = new JoystickButton(leftJoystick, Constants.TEST_BUTTON);
   // others
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();

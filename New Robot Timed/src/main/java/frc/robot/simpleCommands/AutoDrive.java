@@ -5,29 +5,28 @@ import frc.robot.subsystems.DriveTrain;
 
 public class AutoDrive extends CommandBase{
     DriveTrain drivetrain;
-    double rightdistanceRequired;
-    double leftdistanceRequired;
-    double rightspeed;
-    double leftspeed;
-    public AutoDrive(DriveTrain drivetrain, double rightdistanceRequired, double leftdistanceRequired, double rightspeed, double leftspeed){
+    double distanceRequired;
+    double xspeed;
+    double zrotation;
+    public AutoDrive(DriveTrain drivetrain, double distanceRequired, double xspeed, double zrotation){
         this.drivetrain = drivetrain;
-        this.rightdistanceRequired = rightdistanceRequired;
-        this.leftdistanceRequired = leftdistanceRequired;
-        this.rightspeed = rightspeed;
-        this.leftspeed = leftspeed;
+        this.distanceRequired = distanceRequired;
+        this.xspeed = xspeed;
+        this.zrotation = zrotation;
         addRequirements(drivetrain);
-    }
-    @Override
+}
+        @Override
     public void initialize() {
         drivetrain.setDrivePosition(0);
     }
     @Override
     public void execute() {
-        drivetrain.autoDrive(rightspeed, leftspeed);
+        drivetrain.alldrive(xspeed, zrotation);
     }
     @Override
     public boolean isFinished() {
-        return Math.abs(drivetrain.getRightposition()) >= rightdistanceRequired && Math.abs(drivetrain.getLeftPosition()) >= leftdistanceRequired;
+        return Math.abs(drivetrain.getPosition()) >= distanceRequired;
+        
     }
     @Override
     public void end(boolean interrupted) {

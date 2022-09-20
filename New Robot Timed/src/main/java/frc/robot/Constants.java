@@ -48,7 +48,7 @@ public class Constants {
     public static final double MIDDLE_CIRCLE_CIRCUMFERENCE = (Math.PI) * 23.5; // 23.5 inches is distance between sheels
 
     // left joystick buttons
-    public static final int TEST_BUTTON = 7;
+    public static final int TEST_BUTTON = 1;
 
     // middle stick buttons
     public static final int LIMELIGHT_TARGETING_BUTTON = 1;

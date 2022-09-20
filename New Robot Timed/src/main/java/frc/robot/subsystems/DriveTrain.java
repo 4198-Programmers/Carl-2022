@@ -30,15 +30,12 @@ public class DriveTrain extends SubsystemBase{
         rightDrive.set(rightspeed);
         leftDrive.set(leftspeed);
     }
-    public double getRightposition(){
+    public double getPosition(){
        double freP = frontRightEncoder.getPosition();
        double brep = backRightEncoder.getPosition();
-       return (freP + brep)/2;
-    }
-    public double getLeftPosition(){
-        double flep = frontLeftEncoder.getPosition();
-        double blep = backLeftEncoder.getPosition();
-        return (flep + blep)/2;
+       double flep = frontLeftEncoder.getPosition();
+       double blep = backLeftEncoder.getPosition();
+       return (freP + brep + flep + blep)/2;
     }
     public void setDrivePosition(double position){
         frontRightEncoder.setPosition(position);

@@ -21,7 +21,7 @@ public class Limelight extends SubsystemBase{
         return pipeline.getDouble(-1);
     }
     public double xOffset(){
-        return tx.getDouble(0);
+        return tx.getDouble(1);
     }
     public boolean hasTarget(){
         return tv.getBoolean(false);

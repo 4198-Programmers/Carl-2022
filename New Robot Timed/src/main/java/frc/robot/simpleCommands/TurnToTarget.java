@@ -21,18 +21,20 @@ public class TurnToTarget extends CommandBase{
     }
     @Override
     public void execute() {
-    limelight.setPipeline(1);
-    if(limelight.xOffset() > Constants.WIDE_OFFSET_TOLERANCE){
-        drivetrain.alldrive(0.5, 0);
-    }
-    else if(limelight.xOffset() < -Constants.WIDE_OFFSET_TOLERANCE){
-        drivetrain.alldrive(-0.5, 0);
-    }
-    else if(limelight.xOffset() > Constants.SLIM_OFFSET_TOLERANCE){
+    if(limelight.xOffset() >= Constants.WIDE_OFFSET_TOLERANCE){
         drivetrain.alldrive(0.25, 0);
     }
-    else if(limelight.xOffset() < -Constants.SLIM_OFFSET_TOLERANCE){
+    else if(limelight.xOffset() <= -Constants.WIDE_OFFSET_TOLERANCE){
         drivetrain.alldrive(-0.25, 0);
+    }
+    else if(limelight.xOffset() >= Constants.SLIM_OFFSET_TOLERANCE){
+        drivetrain.alldrive(0.15, 0);
+    }
+    else if(limelight.xOffset() <= -Constants.SLIM_OFFSET_TOLERANCE){
+        drivetrain.alldrive(-0.15, 0);
+    }
+    else if(!limelight.hasTarget()){
+        drivetrain.alldrive(0.5, 0);
     }
 }
 @Override

@@ -5,7 +5,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.simpleCommands.AutoDrive;
 import frc.robot.simpleCommands.Drive;
+import frc.robot.simpleCommands.TurnLimeLightOff;
 import frc.robot.simpleCommands.TurnToTarget;
+import frc.robot.simpleCommands.resetDriveposition;
 import frc.robot.simpleCommands.HookCommands.AngledHook;
 import frc.robot.simpleCommands.HookCommands.VerticalHooksDown;
 import frc.robot.simpleCommands.HookCommands.VerticalHooksUp;
@@ -24,9 +26,9 @@ import frc.robot.subsystems.VerticalHooks;
 
 
 public class RobotContainer {
-Joystick leftJoystick = new Joystick(1);
-Joystick middleJoystick = new Joystick(2);
-Joystick rightJoystick = new Joystick(3);
+Joystick middleJoystick = new Joystick(1);
+Joystick leftJoystick = new Joystick(0);
+Joystick rightJoystick = new Joystick(2);
 
   // subsystems
 DriveTrain drivetrain = new DriveTrain();
@@ -46,9 +48,9 @@ AngledHook angledHook = new AngledHook(angledHooks, ()->rightJoystick.getRawAxis
 VerticalHooksUp verticalHooksUp = new VerticalHooksUp(verticalHooks);
 VerticalHooksDown verticalHooksDown = new VerticalHooksDown(verticalHooks);
 TurnToTarget turnToTarget = new TurnToTarget(drivetrain, limelight);
-AutoDrive turnLeft = new AutoDrive(drivetrain, Maths.rotationConversion(180), -0.5, 0);
   // command groups
-
+Command turnLeft = new resetDriveposition(drivetrain).andThen(new AutoDrive(drivetrain, Maths.rotationConversion(180), -0.5, 0));
+Command turnRight = new resetDriveposition(drivetrain).andThen(new AutoDrive(drivetrain, Maths.rotationConversion(180), 0.5, 0));
 
   //Buttons
     //RightJoystickButtons
@@ -64,14 +66,16 @@ JoystickButton verticalUpButton = new JoystickButton(rightJoystick, Constants.VE
 JoystickButton limelightTargetingButton = new JoystickButton(middleJoystick, Constants.LIMELIGHT_TARGETING_BUTTON);
     //LeftJoystickButtons
 JoystickButton testButton = new JoystickButton(leftJoystick, Constants.TEST_BUTTON);
+JoystickButton limelightoffButton = new JoystickButton(leftJoystick, 7);
+JoystickButton limelightOnButton = new JoystickButton(leftJoystick, 8);
   // others
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
   public void initialize() {
     configureButtonBindings();
     begin();
-    drivetrain.setDefaultCommand(new Drive( ()->leftJoystick.getRawAxis(0), 
-                                            ()->middleJoystick.getRawAxis(1), 
+    drivetrain.setDefaultCommand(new Drive( ()->middleJoystick.getRawAxis(0), 
+                                            ()->leftJoystick.getRawAxis(1), 
                                             drivetrain));
     verticalHooks.resetvertposition();
     angledHooks.resetangledposition();
@@ -89,7 +93,9 @@ verticalDownButton.whenHeld(verticalHooksDown);
 limelightTargetingButton.whenHeld(turnToTarget);
 
 
-testButton.whenPressed(turnLeft);
+testButton.whenPressed(turnRight);
+limelightoffButton.whenPressed(new TurnLimeLightOff(limelight, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
+limelightOnButton.whenPressed(new TurnLimeLightOff(limelight, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE));
 }
 
   private void begin() {

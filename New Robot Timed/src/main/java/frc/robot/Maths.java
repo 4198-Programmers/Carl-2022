@@ -28,7 +28,7 @@ public final class Maths {
     }
 
     public static double spinDistanceByDegree(double Degrees) {
-        double circleDistance = (Degrees / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;
+        double circleDistance = ((2 * Degrees) / 360) * Constants.MIDDLE_CIRCLE_CIRCUMFERENCE;
         double wheelCircumference = (Math.PI * (Constants.WHEEL_DIAMTER));
         double totalRotations = ((circleDistance / wheelCircumference));
         return totalRotations;

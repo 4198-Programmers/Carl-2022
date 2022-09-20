@@ -17,24 +17,22 @@ public class TurnToTarget extends CommandBase{
     @Override
     public void initialize() {
         drivetrain.setDrivePosition(0);
-        limelight.setPipeline(3); // pipeline 3 = forceOn
+        limelight.setPipeline(1);
     }
     @Override
     public void execute() {
+    limelight.setPipeline(1);
     if(limelight.xOffset() > Constants.WIDE_OFFSET_TOLERANCE){
-        drivetrain.autoDrive(0.5, 0);
+        drivetrain.alldrive(0.5, 0);
     }
     else if(limelight.xOffset() < -Constants.WIDE_OFFSET_TOLERANCE){
-        drivetrain.autoDrive(0, 0.5);
+        drivetrain.alldrive(-0.5, 0);
     }
     else if(limelight.xOffset() > Constants.SLIM_OFFSET_TOLERANCE){
-        drivetrain.autoDrive(0.25, 0);
+        drivetrain.alldrive(0.25, 0);
     }
     else if(limelight.xOffset() < -Constants.SLIM_OFFSET_TOLERANCE){
-        drivetrain.autoDrive(0, 0.25);
-    }
-    else{
-        drivetrain.autoDrive(1, 0);
+        drivetrain.alldrive(-0.25, 0);
     }
 }
 @Override
@@ -43,7 +41,6 @@ public boolean isFinished() {
 }
 @Override
 public void end(boolean interrupted) {
-    drivetrain.autoDrive(0, 0);
-    limelight.setPipeline(1);  //  pipeline 1 = forceoff
+    drivetrain.alldrive(0, 0);
 }
 }

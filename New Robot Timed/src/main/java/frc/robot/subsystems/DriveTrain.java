@@ -9,49 +9,61 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
+public class DriveTrain extends SubsystemBase {
+    private CANSparkMax frontR = new CANSparkMax(Constants.FR_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax frontL = new CANSparkMax(Constants.FL_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax backR = new CANSparkMax(Constants.BR_MOTOR_ID, MotorType.kBrushless);
+    private CANSparkMax backL = new CANSparkMax(Constants.BL_MOTOR_ID, MotorType.kBrushless);
+    private RelativeEncoder frontREnc = frontR.getEncoder();
+    private RelativeEncoder frontLEnc = frontL.getEncoder();
+    private RelativeEncoder backREnc = backR.getEncoder();
+    private RelativeEncoder backLEnc = backL.getEncoder();
 
-public class DriveTrain extends SubsystemBase{
-    private CANSparkMax frMotor = new CANSparkMax(Constants.FR_MOTOR_ID, MotorType.kBrushless);
-    private CANSparkMax flMotor = new CANSparkMax(Constants.FL_MOTOR_ID, MotorType.kBrushless);
-    private CANSparkMax brMotor = new CANSparkMax(Constants.BR_MOTOR_ID, MotorType.kBrushless);
-    private CANSparkMax blMotor = new CANSparkMax(Constants.BL_MOTOR_ID, MotorType.kBrushless);
-    private RelativeEncoder frMotorEnc = frMotor.getEncoder();
-    private RelativeEncoder flMotorEnc = flMotor.getEncoder();
-    private RelativeEncoder brMotorEnc = brMotor.getEncoder();
-    private RelativeEncoder blMotorEnc = brMotor.getEncoder();
+    private MotorControllerGroup rightSideDrive = new MotorControllerGroup(frontR, backR);
+    private MotorControllerGroup leftSideDrive = new MotorControllerGroup(frontL, backL);
 
-    MotorControllerGroup rightSide = new MotorControllerGroup(frMotor, brMotor);
-    MotorControllerGroup leftSide = new MotorControllerGroup(flMotor, blMotor);
-
-    DifferentialDrive dejaVu = new DifferentialDrive(leftSide, rightSide);
-
-    private double convert;
+    private DifferentialDrive allDrive = new DifferentialDrive(leftSideDrive, rightSideDrive);
 
     public DriveTrain() {
-        frMotorEnc.setPositionConversionFactor(convert);
-        flMotorEnc.setPositionConversionFactor(convert);
-        brMotorEnc.setPositionConversionFactor(convert);
-        blMotorEnc.setPositionConversionFactor(convert);
+        frontLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        frontREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        backLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+        backREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+
+        frontL.setOpenLoopRampRate(0.1);
+        frontR.setOpenLoopRampRate(0.1);
+        backL.setOpenLoopRampRate(0.1);
+        backR.setOpenLoopRampRate(0.1);
     }
-    
+
+    /** Sets encoder positions to 0 */
     public void resetPosition() {
-
-        frMotorEnc.setPositionConversionFactor(0);
-        flMotorEnc.setPositionConversionFactor(0);
-        brMotorEnc.setPositionConversionFactor(0);
-        blMotorEnc.setPositionConversionFactor(0);
-
+        frontLEnc.setPosition(0d);
+        frontREnc.setPosition(0d);
+        backLEnc.setPosition(0d);
+        backREnc.setPosition(0d);
     }
 
-    public double whereAmI() {
-
-        return (frMotorEnc.getPosition() + flMotorEnc.getPosition() + brMotorEnc.getPosition() + blMotorEnc.getPosition()) / 4;
-
+    public double findPosition() {
+        double encCurrentPosition = Math.abs(frontLEnc.getPosition());
+        encCurrentPosition += Math.abs(frontREnc.getPosition());
+        encCurrentPosition += Math.abs(backREnc.getPosition());
+        encCurrentPosition += Math.abs(backLEnc.getPosition());
+        return encCurrentPosition / 4d;
     }
 
-    public void tokyo(double xAxis, double zAxis) {
-
-        dejaVu.arcadeDrive(xAxis, zAxis);
+    /**
+     * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot.
+     * Negative values of xAxis
+     * will move backwards, negative values of the zRotation will rotate
+     * counter-clockwise.
+     * Joysticks allow these to be control by controller axes
+     * 
+     * @param xAxis
+     * @param zRotate
+     */
+    public void greenLight(double zRotate, double xAxis) {
+        allDrive.arcadeDrive(zRotate, xAxis);
     }
 
 }

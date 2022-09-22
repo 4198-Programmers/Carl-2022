@@ -29,5 +29,7 @@ public final class Constants {
     public static final int LADDER_HOOKS_BUTTON = 7;
     public static final int RAMP_HOOKS_BUTTON = 8;
 
-    public static final double JAKE_WHEELS = 6;
+    public static final double JAKE_WHEELS = 5.75;
+    public static final double WHEEL_CONVERSION_FACTOR = 12.75;
+    public static final double DRIVE_SPEED_MULTIPLIER = 1;
 }

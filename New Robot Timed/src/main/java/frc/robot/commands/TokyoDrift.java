@@ -22,7 +22,7 @@ public class TokyoDrift extends CommandBase {
 
     @Override
     public void execute() {
-        runningInThe90s.tokyo(sideToSide, straightLine);
+        runningInThe90s.greenLight(sideToSide, straightLine);
     }
 
 }

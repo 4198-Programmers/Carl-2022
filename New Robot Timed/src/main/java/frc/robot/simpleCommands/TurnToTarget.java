@@ -17,21 +17,12 @@ public class TurnToTarget extends CommandBase{
     @Override
     public void initialize() {
         drivetrain.setDrivePosition(0);
-<<<<<<< Updated upstream
-        limelight.setPipeline(1);
-    }
-    @Override
-    public void execute() {
-    if(limelight.xOffset() >= Constants.WIDE_OFFSET_TOLERANCE){
-        drivetrain.alldrive(0.25, 0);
-=======
         limelight.setPipeline(1); // pipeline 1 = forceOn
     }
     @Override
     public void execute() {
     if(limelight.xOffset() > Constants.WIDE_OFFSET_TOLERANCE){
-        drivetrain.autoDrive(0.25, 0);
->>>>>>> Stashed changes
+        drivetrain.alldrive(0.25, 0);
     }
     else if(limelight.xOffset() <= -Constants.WIDE_OFFSET_TOLERANCE){
         drivetrain.alldrive(-0.25, 0);
@@ -49,19 +40,10 @@ public class TurnToTarget extends CommandBase{
 }
 @Override
 public boolean isFinished() {
-<<<<<<< Updated upstream
-    return limelight.xOffset() >= -Constants.SLIM_OFFSET_TOLERANCE && limelight.xOffset() <= Constants.SLIM_OFFSET_TOLERANCE;
-}
-@Override
-public void end(boolean interrupted) {
-    drivetrain.alldrive(0, 0);
-=======
-    return limelight.xOffset() > -Constants.SLIM_OFFSET_TOLERANCE && limelight.xOffset() < Constants.SLIM_OFFSET_TOLERANCE && limelight.hasTarget() == true;
+    return limelight.xOffset() > -Constants.SLIM_OFFSET_TOLERANCE && limelight.xOffset() < Constants.SLIM_OFFSET_TOLERANCE && limelight.hasTarget() == 1;
 }
 @Override
 public void end(boolean interrupted) {
     drivetrain.autoDrive(0, 0);
-    limelight.setPipeline(0);  //pipe 0 = forceoff
->>>>>>> Stashed changes
 }
 }

@@ -241,7 +241,8 @@ public class RobotContainer {
       .andThen(new TimedInternalMoveOut(tunnelSub, 250))
       .andThen(new TimedInternalMoveIn(tunnelSub, 700))
       .andThen(new WaitCommand(1))
-      .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub));
+      .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
+      .andThen(new StopFly(flyAndSensorsSub));
 
   Command taxiTwoBallShootMidBall = (new ResetWheels(driveTrainSub))
       .andThen((new SetIntakeSpeedIn(intakeSub))

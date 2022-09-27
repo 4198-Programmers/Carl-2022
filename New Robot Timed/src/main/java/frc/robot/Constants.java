@@ -59,10 +59,10 @@ public class Constants {
     // right stick buttons
     public static final byte FLYWHEEL_RBUTTON = 1;
     public static final byte QUOTE_AUTO_UNQUOTE_SHOOTING_RBUTTON = 2;
-    public static final byte INTERNAL_MOVER_BACKWARDS_RBUTTON = 3;
+    public static final byte INTERNAL_MOVER_BACKWARDS_RBUTTON = 6;
     public static final byte FORCE_SPIT_RBUTTON = 4;
-    public static final byte INTERNAL_MOVER_FORWARDS_RBUTTON = 5;
-    public static final byte INTAKE_IN_RBUTTON = 7;
+    public static final byte INTERNAL_MOVER_FORWARDS_RBUTTON = 3;
+    public static final byte INTAKE_IN_RBUTTON = 5;
     public static final byte INTAKE_OUT_RBUTTON = 8;
     public static final byte ANGLE_HOOK_UP_RBUTTON = 11;
     public static final byte ANGLE_HOOK_DOWN_RBUTTON = 12;

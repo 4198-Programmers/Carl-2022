@@ -4,12 +4,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
+/** {@link IntakeStop} Specifically sets Intake to 0 */
 public class IntakeStop extends CommandBase {
     private Intake intake;
     boolean done;
 
-    public IntakeStop(Intake intakeSub) {
-        intake = intakeSub;
+    /** {@link IntakeStop} Specifically sets Intake to 0 */
+    public IntakeStop(Intake intakeArg) {
+        intake = intakeArg;
         addRequirements(intake);
     }
 
@@ -28,5 +30,4 @@ public class IntakeStop extends CommandBase {
     public boolean isFinished() {
         return done;
     }
-
 }

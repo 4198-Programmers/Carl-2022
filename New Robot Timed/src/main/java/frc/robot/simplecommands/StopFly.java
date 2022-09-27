@@ -4,29 +4,30 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.FlyAndSensors;
 
+/** {@link StopFly} Sets just the FlyWheel speed to 0 */
 public class StopFly extends CommandBase {
-    boolean done;
-    private FlyAndSensors fly;
+    boolean youDone;
+    FlyAndSensors flyWheel;
 
-    public StopFly(FlyAndSensors flyAndSensorsSub) {
-        fly = flyAndSensorsSub;
-        addRequirements(fly);
+    /** {@link StopFly} Sets just the FlyWheel speed to 0 */
+    public StopFly(FlyAndSensors flyAndSensorsArg) {
+        flyWheel = flyAndSensorsArg;
+        addRequirements(flyWheel);
     }
 
     @Override
     public void initialize() {
-        done = false;
+        youDone = false;
     }
 
     @Override
     public void execute() {
-        fly.setFlySpeed(Constants.FREEZE);
-        done = true;
+        flyWheel.setFlySpeed(Constants.FREEZE);
+        youDone = true;
     }
 
     @Override
     public boolean isFinished() {
-        return done;
+        return youDone;
     }
-
 }

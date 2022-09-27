@@ -3,12 +3,14 @@ package frc.robot.simplecommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FlyAndSensors;
 
+/** {@link LowLoft} Sets FlyWheel speed to toss balls into lower goal */
 public class LowLoft extends CommandBase {
-    private FlyAndSensors flyAndSensors;
+    FlyAndSensors flyAndSensors;
     double speed;
 
-    public LowLoft(FlyAndSensors flyAndSensorsSub) {
-        flyAndSensors = flyAndSensorsSub;
+    /** {@link LowLoft} Sets FlyWheel speed to toss balls into lower goal */
+    public LowLoft(FlyAndSensors flyAndSensorsArg) {
+        flyAndSensors = flyAndSensorsArg;
         addRequirements(flyAndSensors);
     }
 
@@ -25,5 +27,4 @@ public class LowLoft extends CommandBase {
         return (speed > expectedFlywheelSpeed - tolerance && speed < expectedFlywheelSpeed + tolerance);
 
     }
-
 }

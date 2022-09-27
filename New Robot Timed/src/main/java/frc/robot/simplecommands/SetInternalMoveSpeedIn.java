@@ -4,29 +4,36 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Tunnel;
 
+/**
+ * {@link SetInternalMoveSpeedIn} Sets tunnel speed to move balls towards the
+ * FlyWheel
+ */
 public class SetInternalMoveSpeedIn extends CommandBase {
-    private Tunnel tunnel;
-    boolean done;
+    Tunnel tunnel;
+    boolean youDone;
 
-    public SetInternalMoveSpeedIn(Tunnel tunnelSub) {
-        tunnel = tunnelSub;
+    /**
+     * {@link SetInternalMoveSpeedIn} Sets tunnel speed to move balls towards the
+     * FlyWheel
+     */
+    public SetInternalMoveSpeedIn(Tunnel tunnelArg) {
+        tunnel = tunnelArg;
         addRequirements(tunnel);
     }
 
     @Override
     public void initialize() {
-        done = false;
+        youDone = false;
     }
 
     @Override
     public void execute() {
         tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
-        done = true;
+        youDone = true;
     }
 
     @Override
     public boolean isFinished() {
-        return done;
+        return youDone;
     }
-
 }

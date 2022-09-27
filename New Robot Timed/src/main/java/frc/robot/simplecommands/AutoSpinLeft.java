@@ -4,16 +4,24 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
+/**
+ * {@link AutoSpinLeft} Takes in degrees out of 360 to turn the robot that far
+ * to the left oriented with the Intake as the 'front'
+ */
 public class AutoSpinLeft extends CommandBase {
-    DriveTrain driver;
+    DriveTrain driveTrain;
     double calculatedDistance;
     double degreesOfRotation;
     boolean youDone;
 
-    public AutoSpinLeft(DriveTrain vroomVroomSub, double degrees) {
-        driver = vroomVroomSub;
+    /**
+     * {@link AutoSpinLeft} Takes in degrees out of 360 to turn the robot that far
+     * to the left oriented with the Intake as the 'front'
+     */
+    public AutoSpinLeft(DriveTrain driveTrainArg, double degrees) {
+        driveTrain = driveTrainArg;
         degreesOfRotation = degrees;
-        addRequirements(vroomVroomSub);
+        addRequirements(driveTrain);
     }
 
     @Override
@@ -23,18 +31,16 @@ public class AutoSpinLeft extends CommandBase {
 
     @Override
     public void execute() {
-        double rotationsToSpin = Maths.spinDistanceByDegree((degreesOfRotation - 10)); // subtracting 10 cause it turns
-                                                                                       // too far consistently
-        double position = driver.findPosition();
+        double rotationsToSpin = Maths.spinDistanceByDegree((degreesOfRotation - 10)); // subtracting 10 cause it turns too far consistently
+        double position = driveTrain.findPosition();
 
         if (Math.abs(position) < Math.abs(rotationsToSpin)) // just reads the values, does not care about direction
         {
-            driver.greenLight(-0.5, 0);
+            driveTrain.greenLight(-0.5, 0);
         } else {
-            driver.greenLight(0, 0);
+            driveTrain.greenLight(0, 0);
             youDone = true;
             System.out.println("Successfully Completed");
-
         }
     }
 
@@ -42,5 +48,4 @@ public class AutoSpinLeft extends CommandBase {
     public boolean isFinished() {
         return youDone;
     }
-
 }

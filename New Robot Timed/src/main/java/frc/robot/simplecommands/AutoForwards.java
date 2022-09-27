@@ -4,17 +4,23 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-/** Autonomous movement used to exit the tarmac during Autonomous */
+/**
+ * {@link AutoForwards} Move the robot straight forward according to user input.
+ * Forwards is to 'Taxi Off Tarmac'
+ */
 public class AutoForwards extends CommandBase {
-    private DriveTrain vroomVroomOT;
+    DriveTrain driveTrain;
     boolean youDone;
-    double distanceOff;
+    double distanceOff; // distance in inches to travel off the tarmac
 
-    /** Pulls in the current DriveTrain instance to use in the specific class */
-    public AutoForwards(DriveTrain vroomVroomSub, double travelDistance) {
-        vroomVroomOT = vroomVroomSub;
+    /**
+     * {@link AutoForwards} Move the robot straight forward according to user input.
+     * Forwards is to 'Taxi Off Tarmac'
+     */
+    public AutoForwards(DriveTrain driveTrainArg, double travelDistance) {
+        driveTrain = driveTrainArg;
         distanceOff = travelDistance;
-        addRequirements(vroomVroomOT);
+        addRequirements(driveTrain);
     }
 
     @Override
@@ -25,14 +31,14 @@ public class AutoForwards extends CommandBase {
     @Override
     public void execute() {
         double rotations = Maths.rotationConversion(distanceOff);
-        double position = vroomVroomOT.findPosition();
+        double position = driveTrain.findPosition();
 
         if (Math.abs(position) < Math.abs(rotations)) // just reads the values, does not care about direction
         {
-            vroomVroomOT.greenLight(0, 0.5);
+            driveTrain.greenLight(0, 0.5);
             System.out.println(rotations);
         } else {
-            vroomVroomOT.greenLight(0, 0);
+            driveTrain.greenLight(0, 0);
             youDone = true;
             System.out.println("Successfully Completed");
 

@@ -4,16 +4,23 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
+/**
+ * {@link AutoBackwards} Takes in a distance from the user to move straight
+ * backwards, as well as the current DriveTrainSub
+ */
 public class AutoBackwards extends CommandBase {
-    private DriveTrain vroomVroomOT;
+    DriveTrain driveTrain;
     boolean youDone;
     double distanceOff;
 
-    /** Pulls in the current DriveTrain instance to use in the specific class */
-    public AutoBackwards(DriveTrain vroomVroomSub, double travelDistance) {
-        vroomVroomOT = vroomVroomSub;
+    /**
+     * {@link AutoBackwards} Takes in a distance from the user to move straight
+     * backwards, as well as the current DriveTrainSub
+     */
+    public AutoBackwards(DriveTrain driveTrainArg, double travelDistance) {
+        driveTrain = driveTrainArg;
         distanceOff = travelDistance;
-        addRequirements(vroomVroomOT);
+        addRequirements(driveTrain);
     }
 
     @Override
@@ -24,16 +31,15 @@ public class AutoBackwards extends CommandBase {
     @Override
     public void execute() {
         double rotations = Maths.rotationConversion(distanceOff);
-        double position = vroomVroomOT.findPosition();
+        double position = driveTrain.findPosition();
 
         if (Math.abs(position) < Math.abs(rotations)) // just reads the values, does not care about direction
         {
-            vroomVroomOT.greenLight(0, -0.25);
+            driveTrain.greenLight(0, -0.25);
         } else {
-            vroomVroomOT.greenLight(0, 0);
+            driveTrain.greenLight(0, 0);
             youDone = true;
             System.out.println("Successfully Completed");
-
         }
     }
 

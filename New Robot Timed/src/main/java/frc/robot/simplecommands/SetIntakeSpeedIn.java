@@ -4,31 +4,32 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
+/** {@link SetIntakeSpeedIn} Sets Intake to push balls further into the robot */
 public class SetIntakeSpeedIn extends CommandBase {
-    private Intake intake;
-    boolean done;
+    Intake intake;
+    boolean youDone;
     double autoTime;
 
-    public SetIntakeSpeedIn(Intake intakeSub) {
-        intake = intakeSub;
+    /** {@link SetIntakeSpeedIn} Sets Intake to push balls further into the robot */
+    public SetIntakeSpeedIn(Intake intakeArg) {
+        intake = intakeArg;
         addRequirements(intake);
     }
 
     @Override
     public void initialize() {
-        done = false;
+        youDone = false;
         autoTime = System.currentTimeMillis();
     }
 
     @Override
     public void execute() {
         intake.setIntakeSpeed(Constants.INTAKE_FORWARD_SPEED);
-        done = true;
+        youDone = true;
     }
 
     @Override
     public boolean isFinished() {
-        return (done && (System.currentTimeMillis() - autoTime) >= 250);
+        return (youDone && (System.currentTimeMillis() - autoTime) >= 250);
     }
-
 }

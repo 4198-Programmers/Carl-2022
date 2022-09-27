@@ -4,11 +4,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
+/**
+ * {@link SetIntakeSpeedOut} Sets the Intake speed to push balls out of the
+ * robot
+ */
 public class SetIntakeSpeedOut extends CommandBase {
-    private Intake intake;
+    Intake intake;
 
-    public SetIntakeSpeedOut(Intake intakeSub) {
-        intake = intakeSub;
+    /**
+     * {@link SetIntakeSpeedOut} Sets the Intake speed to push balls out of the
+     * robot
+     */
+    public SetIntakeSpeedOut(Intake intakeArg) {
+        intake = intakeArg;
         addRequirements(intake);
     }
 
@@ -16,5 +24,4 @@ public class SetIntakeSpeedOut extends CommandBase {
     public void execute() {
         intake.setIntakeSpeed(Constants.INTAKE_REVERSE_SPEED);
     }
-
 }

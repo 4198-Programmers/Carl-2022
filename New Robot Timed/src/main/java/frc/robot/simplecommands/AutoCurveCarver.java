@@ -4,18 +4,28 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Maths;
 import frc.robot.subsystems.DriveTrain;
 
-public class AutoCurveCarver extends CommandBase{
-    DriveTrain driver;
+/**
+ * {@link AutoCurveCarver} Works to curve instead of travelling directly to a
+ * point
+ * Still in testing phases, does not work consistently
+ */
+public class AutoCurveCarver extends CommandBase {
+    DriveTrain driveTrain;
     double calculatedDistance;
     double degreesOfRotation;
     double travelDistance;
     boolean youDone;
 
-    public AutoCurveCarver(DriveTrain vroomVroomSub, double distance, double degrees) {
-        driver = vroomVroomSub;
+    /**
+     * {@link AutoCurveCarver} Works to curve instead of travelling directly to a
+     * point
+     * Still in testing phases, does not work consistently
+     */
+    public AutoCurveCarver(DriveTrain driveTrainArg, double distance, double degrees) {
+        driveTrain = driveTrainArg;
         degreesOfRotation = degrees;
         travelDistance = distance;
-        addRequirements(vroomVroomSub);
+        addRequirements(driveTrain);
     }
 
     @Override
@@ -28,13 +38,13 @@ public class AutoCurveCarver extends CommandBase{
         double rotationsToSpin = Maths.spinDistanceByDegree((degreesOfRotation - 10)); // subtracting 10 cause it turns
         double rotationsToMove = Maths.rotationConversion(travelDistance);
         double rotations = Math.abs(rotationsToMove) + Math.abs(rotationsToSpin);
-        double position = driver.findPosition();
+        double position = driveTrain.findPosition();
 
         if (Math.abs(position) < rotations) // just reads the values, does not care about direction
         {
-            driver.greenLight(-0.3, 0.5);
+            driveTrain.greenLight(-0.3, 0.5);
         } else {
-            driver.greenLight(0, 0);
+            driveTrain.greenLight(0, 0);
             youDone = true;
             System.out.println("Successfully Completed");
 
@@ -45,5 +55,5 @@ public class AutoCurveCarver extends CommandBase{
     public boolean isFinished() {
         return youDone;
     }
-    
+
 }

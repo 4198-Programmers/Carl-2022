@@ -19,7 +19,7 @@ public class DriveCommandXbox extends CommandBase {
 
     @Override
     public void execute() {
-        drive.drive(controller.getRawAxis(0), controller.getRawAxis(1));
+        drive.drive(controller.getLeftY(), controller.getRightX());
         // TODO Auto-generated method stub
     }
 

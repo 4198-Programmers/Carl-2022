@@ -1,27 +1,27 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.BRRR;
+import frc.robot.subsystems.Drivetrain;
 
-public class MORELEGSGONOMORE extends CommandBase {
-    private final BRRR ZOOMYGONOMORE;
-    private boolean ENDIT;
+public class AutoStop extends CommandBase {
+    private final Drivetrain drivetrain;
+    private boolean end;
 
-    public MORELEGSGONOMORE(BRRR zoomy) {
-        ZOOMYGONOMORE = zoomy;
+    public AutoStop(Drivetrain drivetrain) {
+        this.drivetrain = drivetrain;
         // Use addRequirements() here to declare subsystem dependencies.
-        addRequirements(zoomy);
+        addRequirements(drivetrain);
     }
 
     @Override
     public void initialize() {
-        ZOOMYGONOMORE.AMNESIA();
+        drivetrain.Reset();
     }
 
     @Override
     public void execute() {
-        ZOOMYGONOMORE.GOGOGOBRRR(0, 0);
-        ENDIT = true;
+        drivetrain.Movement(0, 0);
+        end = true;
     }
 
     @Override
@@ -31,6 +31,6 @@ public class MORELEGSGONOMORE extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return ENDIT;
+        return end;
     }
 }

@@ -16,7 +16,7 @@ package frc.robot;
  * wherever the
  * constants are needed, to reduce verbosity.
  */
-public final class GUDNumbers {
+public final class Constants {
 
     // motor insersion locations definitely
     public static final byte FRONT_LEFT_INSERTION_THINGY = 3;
@@ -24,16 +24,15 @@ public final class GUDNumbers {
     public static final byte BACK_LEFT_INSERTION_THINGY = 1;
     public static final byte BACK_RIGHT_INSERTION_THINGY = 2;
 
-    // joystick insersion locations definitely
-    public static final byte WIGGLE_INSERT_LOCATION = 0;
-    public static final byte WIGGLE_WIGGLE_INSERT_LOCATION = 1;
-    public static final byte WIGGLE_WIGGLE_WIGGLE_INSERT_LOCATION = 2;
+    // joystick insersion locations
+    public static final byte LEFT_JOYSTICK_ID = 0;
+    public static final byte MID_JOYSTICK_ID = 1;
+    public static final byte RIGHT_JOYSTICK_ID = 2;
 
     // motor crisis
-    public static final double WHEEL_SIZE_CRISIS = 1/12.75;
-    public static final double WHEEL_SIZE = 5.875;
-    public static final double WHEEL_GO_ZOOM_ZOOM = 2;
-    public static final double WHEEL_GO_ZOOM = 1;
+    public static final double WHEEL_CONVERSION_FACTOR = 1/12.75;
+    public static final double WHEEL_DIAMETER = 5.875;
+    public static final double WHEEL_SPEED = 0.75;
 
     // joysticks
 
@@ -70,11 +69,11 @@ public final class GUDNumbers {
     // public static final byte TARGETING_LIMELIGHT_SIMULTANEOUS = 3;
     // public static final byte INTAKEIN_BUTTON = 4;
     // public static final byte YEET_THE_BALLS_OUT_THE_BACK_BUTTON = 5;
-    public static final byte MOVE_LEGS_GO_AMNESIA = 6;
-    public static final byte MOVE_LEGS_GO_BRRR = 7;
-    public static final byte MOVE_LEGS_GO_BZZZ = 8;
+    public static final byte RESET = 6;
+    public static final byte ROTATE_AUTO_BUTTON_ID = 7;
+    public static final byte FORWARD_AUTO_BUTTON_ID = 8;
     // public static final byte LIMELIGHT_TARGETING_BUTTON = 8;
-    public static final byte MOVE_LEGS_GO_NO_MORE = 9;
+    public static final byte AUTO_STOP_BUTTON_ID = 9;
     // public static final byte VERT_HOOK_DOWN_BUTTON = 10;
     // public static final byte VERT_HOOK_UP_BUTTON = 11;
     // // public static final byte leftbuttoneleven = 12;

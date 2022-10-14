@@ -7,9 +7,9 @@ import frc.robot.subsystems.AngleHooks;
 import frc.robot.subsystems.DriveTrain;
 
 public class AngledHookJoystick extends CommandBase {
-    private AngleHooks climberHC;
+    private AngleHooks angleHooks;
     private Joystick hookAxisStick;
-    DriveTrain vroomVroom;
+    DriveTrain driveTrain;
     boolean done;
     double axis;
 
@@ -17,27 +17,27 @@ public class AngledHookJoystick extends CommandBase {
      * Allows driver to manually controll specifics
      * (angled hooks angle)
      */
-    public AngledHookJoystick(AngleHooks angleHooksSub, Joystick controllingJoystick, DriveTrain vroomVroomSub) {
-        climberHC = angleHooksSub;
+    public AngledHookJoystick(AngleHooks angleHooksSub, Joystick controllingJoystick, DriveTrain driveTrainSub) {
+        angleHooks = angleHooksSub;
         hookAxisStick = controllingJoystick;
-        vroomVroom = vroomVroomSub;
-        addRequirements(climberHC);
+        driveTrain = driveTrainSub;
+        addRequirements(angleHooks);
     }
 
     @Override
     public void execute() {
         axis = -hookAxisStick.getRawAxis(0);
-        vroomVroom.greenLight(0, 0);
+        driveTrain.greenLight(0, 0);
 
-        if (climberHC.anglePosition() >= -97 && (axis < 0)) { // makes sure you do not over run
-            climberHC.moveAngledHooks(axis);
+        if (angleHooks.anglePosition() >= -97 && (axis < 0)) { // makes sure you do not over run
+            angleHooks.moveAngledHooks(axis);
         } else if (axis >= 0) {
-            climberHC.moveAngledHooks(axis);
+            angleHooks.moveAngledHooks(axis);
         } else {
-            climberHC.moveAngledHooks(Constants.FREEZE);
+            angleHooks.moveAngledHooks(Constants.FREEZE);
         }
         done = true;
-        System.out.println("angle position " + climberHC.anglePosition());
+        System.out.println("angle position " + angleHooks.anglePosition());
     }
 
 }

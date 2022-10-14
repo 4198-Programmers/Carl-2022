@@ -5,16 +5,16 @@ import frc.robot.Constants;
 import frc.robot.subsystems.AngleHooks;
 
 public class MoveCloserToZeroDegrees extends CommandBase {
-    private AngleHooks arm;
+    private AngleHooks angleHooks;
 
     public MoveCloserToZeroDegrees(AngleHooks angleHooksSub) {
-        arm = angleHooksSub;
-        addRequirements(arm);
+        angleHooks = angleHooksSub;
+        addRequirements(angleHooks);
     }
 
     @Override
     public void execute() {
-        arm.moveAngledHooks(Constants.ANGLE_HOOK_SPEED);
+        angleHooks.moveAngledHooks(Constants.ANGLE_HOOK_SPEED);
     }
 
 }

@@ -6,29 +6,29 @@ import frc.robot.Constants;
 import frc.robot.subsystems.VertHooks;
 
 public class ReachVertHooksUp extends CommandBase {
-    private VertHooks grabbers;
+    private VertHooks vertHooks;
     Joystick throttle;
     double distanceUp;
 
     public ReachVertHooksUp(VertHooks vertHooksSub, Joystick joystickArg) {
-        grabbers = vertHooksSub;
+        vertHooks = vertHooksSub;
         throttle = joystickArg;
-        addRequirements(grabbers);
+        addRequirements(vertHooks);
     }
 
     @Override
     public void execute() {
-        if (grabbers.vertHooksPos() >= -187) {
-            grabbers.moveVertHooks(-(1 - ((throttle.getRawAxis(3) + 1) / 2)));
+        if (vertHooks.vertHooksPos() >= -187) {
+            vertHooks.moveVertHooks(-(1 - ((throttle.getRawAxis(3) + 1) / 2)));
         } else {
-            grabbers.moveVertHooks(Constants.FREEZE);
+            vertHooks.moveVertHooks(Constants.FREEZE);
         }
-        System.out.println("hooks vert " + grabbers.vertHooksPos());
+        System.out.println("hooks vert " + vertHooks.vertHooksPos());
     }
 
     // @Override
     // public boolean isFinished() {
-    // double height = grabbers.getVerticalHookHeight();
+    // double height = vertHooks.getVerticalHookHeight();
     // return height >= distanceUp;
     // }
 

@@ -6,15 +6,25 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Limelight;
 
+/**
+ * {@link Targeting} Uses limelight to spin the robot to center on the VISIBLE
+ * targets
+ */
+// If targeting is not working be sure to check that the robot can actually see
+// the targets at 10.41.98.11:5800 while connected to the limelight
 public class Targeting extends CommandBase {
-    private DriveTrain vroomVroomT;
-    private Limelight visionT;
+    DriveTrain driveTrain;
+    Limelight limelight;
     double autoTime;
 
-    public Targeting(DriveTrain vroomVroomSub, Limelight visionSub) {
-        vroomVroomT = vroomVroomSub;
-        visionT = visionSub;
-        addRequirements(vroomVroomT, visionT);
+    /**
+     * {@link Targeting} Uses limelight to spin the robot to center on the VISIBLE
+     * targets
+     */
+    public Targeting(DriveTrain driveTrainArg, Limelight limelightArg) {
+        driveTrain = driveTrainArg;
+        limelight = limelightArg;
+        addRequirements(driveTrain, limelight);
     }
 
     @Override
@@ -24,23 +34,23 @@ public class Targeting extends CommandBase {
 
     @Override
     public void execute() {
-        SmartDashboard.putNumber("Distance", visionT.distanceToTarget());
-        visionT.setPipeline(Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
+        SmartDashboard.putNumber("Distance", limelight.distanceToTarget());
+        limelight.setPipeline(Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
 
-        if (visionT.xOffsetFromCenter() <= -Constants.WIDE_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(-0.25, 0);
+        if (limelight.xOffsetFromCenter() <= -Constants.WIDE_OFFSET_TOLERANCE) {
+            driveTrain.greenLight(-0.25, 0);
             System.out.println("targeting left");
-        } else if (visionT.xOffsetFromCenter() > Constants.WIDE_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(0.25, 0);
+        } else if (limelight.xOffsetFromCenter() > Constants.WIDE_OFFSET_TOLERANCE) {
+            driveTrain.greenLight(0.25, 0);
             System.out.println("targeting right");
-        } else if (visionT.xOffsetFromCenter() <= -Constants.SLIM_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(-0.15, 0);
+        } else if (limelight.xOffsetFromCenter() <= -Constants.SLIM_OFFSET_TOLERANCE) {
+            driveTrain.greenLight(-0.15, 0);
             System.out.println("targeting left");
-        } else if (visionT.xOffsetFromCenter() > Constants.SLIM_OFFSET_TOLERANCE) {
-            vroomVroomT.greenLight(0.15, 0);
+        } else if (limelight.xOffsetFromCenter() > Constants.SLIM_OFFSET_TOLERANCE) {
+            driveTrain.greenLight(0.15, 0);
             System.out.println("targeting right");
         } else {
-            vroomVroomT.greenLight(Constants.FREEZE, Constants.FREEZE);
+            driveTrain.greenLight(Constants.FREEZE, Constants.FREEZE);
             System.out.println("I got time");
         }
 
@@ -48,8 +58,8 @@ public class Targeting extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (visionT.hasTarget() && visionT.xOffsetFromCenter() >= -Constants.SLIM_OFFSET_TOLERANCE
-                && visionT.xOffsetFromCenter() < Constants.SLIM_OFFSET_TOLERANCE
+        return (limelight.hasTarget() && limelight.xOffsetFromCenter() >= -Constants.SLIM_OFFSET_TOLERANCE
+                && limelight.xOffsetFromCenter() < Constants.SLIM_OFFSET_TOLERANCE
                 && (System.currentTimeMillis() - autoTime) >= 1500);
     }
 }

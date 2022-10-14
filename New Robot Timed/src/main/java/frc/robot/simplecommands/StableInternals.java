@@ -6,15 +6,17 @@ import frc.robot.subsystems.FlyAndSensors;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Tunnel;
 
-public class StableIntestines extends CommandBase {
+/** {@link StableInternals} Sets FlyWheel, Tunnel, and Intake speeds to 0 */
+public class StableInternals extends CommandBase {
     private FlyAndSensors flyAndSensors;
     private Tunnel tunnel;
     private Intake intake;
 
-    public StableIntestines(FlyAndSensors flyAndSensorsSub, Tunnel tunnelSub, Intake intakeSub) {
-        flyAndSensors = flyAndSensorsSub;
-        tunnel = tunnelSub;
-        intake = intakeSub;
+    /** {@link StableInternals} Sets FlyWheel, Tunnel, and Intake speeds to 0 */
+    public StableInternals(FlyAndSensors flyAndSensorsArg, Tunnel tunnelArg, Intake intakeArg) {
+        flyAndSensors = flyAndSensorsArg;
+        tunnel = tunnelArg;
+        intake = intakeArg;
         addRequirements(flyAndSensors, tunnel, intake);
     }
 

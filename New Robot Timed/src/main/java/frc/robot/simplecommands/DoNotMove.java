@@ -5,25 +5,21 @@ import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.FlyAndSensors;
 
-/** stops any and all motors */
+/** {@link DoNotMove} stops motors to the DriveTrain and the FlyWheel */
 public class DoNotMove extends CommandBase {
-    /** still vroomVroom from robot, just used in this class(DNM) */
-    private DriveTrain vroomVroom;
-    private FlyAndSensors flyAndSensors;
+    DriveTrain driveTrain;
+    FlyAndSensors flyAndSensors;
 
-    /**
-     * Pulls in the current DriveTrain and Shooter instances to use in the specific
-     * class
-     */
-    public DoNotMove(DriveTrain vroomVroomSub, FlyAndSensors flyAndSensorsSub) {
-        vroomVroom = vroomVroomSub;
-        flyAndSensors = flyAndSensorsSub;
-        addRequirements(vroomVroom, flyAndSensors);
+/** {@link DoNotMove} stops motors to the DriveTrain and the FlyWheel */
+    public DoNotMove(DriveTrain driveTrainArg, FlyAndSensors flyAndSensorsArg) {
+        driveTrain = driveTrainArg;
+        flyAndSensors = flyAndSensorsArg;
+        addRequirements(driveTrain, flyAndSensors);
     }
 
     @Override
     public void execute() {
-        vroomVroom.greenLight(Constants.FREEZE, Constants.FREEZE);
+        driveTrain.greenLight(Constants.FREEZE, Constants.FREEZE);
         flyAndSensors.setFlySpeed(Constants.FREEZE);
     }
 

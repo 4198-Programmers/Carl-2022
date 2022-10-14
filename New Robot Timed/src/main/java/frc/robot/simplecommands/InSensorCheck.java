@@ -3,15 +3,23 @@ package frc.robot.simplecommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FlyAndSensors;
 
+/**
+ * {@link InSensorCheck} Used for the sensor closer to the Intake, used as a
+ * pause/wait until the sensor reads as true
+ */
 public class InSensorCheck extends CommandBase {
     FlyAndSensors sensors;
     Boolean inBallStatus;
     boolean wantBall;
 
-    public InSensorCheck(FlyAndSensors flyAndSensorsSub, boolean wantBallArg) {
-        sensors = flyAndSensorsSub;
+    /**
+     * {@link InSensorCheck} Used for the sensor closer to the Intake, used as a
+     * pause/wait until the sensor reads as true
+     */
+    public InSensorCheck(FlyAndSensors flyAndSensorsArg, boolean wantBallArg) {
+        sensors = flyAndSensorsArg;
         wantBall = wantBallArg;
-        addRequirements(flyAndSensorsSub);
+        addRequirements(sensors);
     }
 
     @Override

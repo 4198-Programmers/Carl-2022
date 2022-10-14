@@ -4,15 +4,24 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Tunnel;
 
+/**
+ * {@link TimedInternalMoveOut} Pushes balls towards the intake for a set amount
+ * of
+ * MILLIseconds
+ */
 public class TimedInternalMoveOut extends CommandBase {
-    private Tunnel tunnel;
-    boolean done;
+    Tunnel tunnel;
+    boolean youDone;
     double autoTime;
     double timeToRun;
 
-    /** Enter time in milliseconds */
-    public TimedInternalMoveOut(Tunnel tunnelSub, double timeWant) {
-        tunnel = tunnelSub;
+    /**
+     * {@link TimedInternalMoveOut} Pushes balls towards the intake for a set amount
+     * of
+     * MILLIseconds
+     */
+    public TimedInternalMoveOut(Tunnel tunnelArg, double timeWant) {
+        tunnel = tunnelArg;
         timeToRun = timeWant;
         addRequirements(tunnel);
     }
@@ -20,7 +29,7 @@ public class TimedInternalMoveOut extends CommandBase {
     @Override
     public void initialize() {
         autoTime = System.currentTimeMillis();
-        done = false;
+        youDone = false;
     }
 
     @Override
@@ -29,13 +38,12 @@ public class TimedInternalMoveOut extends CommandBase {
             tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_REVERSE_SPEED);
         } else {
             tunnel.setMoverSpeed(Constants.FREEZE);
-            done = true;
+            youDone = true;
         }
     }
 
     @Override
     public boolean isFinished() {
-        return done;
+        return youDone;
     }
-
 }

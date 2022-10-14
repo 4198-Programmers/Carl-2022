@@ -4,15 +4,22 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Tunnel;
 
+/**
+ * {@link TimedInternalMoveIn} Pushes balls towards the flywheel for a set
+ * amount of MILLIseconds
+ */
 public class TimedInternalMoveIn extends CommandBase {
-    private Tunnel tunnel;
+    Tunnel tunnel;
     boolean done;
     double autoTime;
     double timeToRun;
 
-    /** Enter time in milliseconds */
-    public TimedInternalMoveIn(Tunnel tunnelSub, double timeWant) {
-        tunnel = tunnelSub;
+    /**
+     * {@link TimedInternalMoveIn} Pushes balls towards the flywheel for a set
+     * amount of MILLIseconds
+     */
+    public TimedInternalMoveIn(Tunnel tunnelArg, double timeWant) {
+        tunnel = tunnelArg;
         timeToRun = timeWant;
         addRequirements(tunnel);
     }
@@ -37,5 +44,4 @@ public class TimedInternalMoveIn extends CommandBase {
     public boolean isFinished() {
         return done;
     }
-
 }

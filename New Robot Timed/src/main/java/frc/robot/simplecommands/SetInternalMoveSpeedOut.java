@@ -4,11 +4,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Tunnel;
 
+/**
+ * {@link SetInternalMoveSpeedOut} Sets the tunnel to move balls towards the
+ * Intake
+ */
 public class SetInternalMoveSpeedOut extends CommandBase {
-    private Tunnel tunnel;
+    Tunnel tunnel;
 
-    public SetInternalMoveSpeedOut(Tunnel tunnelSub) {
-        tunnel = tunnelSub;
+    /**
+     * {@link SetInternalMoveSpeedOut} Sets the tunnel to move balls towards the
+     * Intake
+     */
+    public SetInternalMoveSpeedOut(Tunnel tunnelArg) {
+        tunnel = tunnelArg;
         addRequirements(tunnel);
     }
 
@@ -16,5 +24,4 @@ public class SetInternalMoveSpeedOut extends CommandBase {
     public void execute() {
         tunnel.setMoverSpeed(-Constants.INTERNAL_FEEDER_SPEED);
     }
-
 }

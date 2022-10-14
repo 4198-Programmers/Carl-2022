@@ -4,7 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Maths;
+//import frc.robot.Maths;
 
 public class Limelight extends SubsystemBase {
     NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
@@ -32,8 +32,9 @@ public class Limelight extends SubsystemBase {
 
     public double distanceToTarget() {
         double yAngle = ty.getDouble(0);
-        double distance = Maths.distanceFromTarget(yAngle);
-        return distance;
+        // double distance = Maths.distanceFromTarget(yAngle);
+        // return distance;
+        return yAngle;
     }
 
     public void setPipeline(double pipe) {

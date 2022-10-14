@@ -29,6 +29,11 @@ public class DriveTrain extends SubsystemBase {
         frontREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
         backLEnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
         backREnc.setPositionConversionFactor(1 / Constants.WHEEL_CONVERSION_FACTOR);
+
+        frontL.setOpenLoopRampRate(0.1);
+        frontR.setOpenLoopRampRate(0.1);
+        backL.setOpenLoopRampRate(0.1);
+        backR.setOpenLoopRampRate(0.1);
     }
 
     /** Sets encoder positions to 0 */
@@ -47,6 +52,7 @@ public class DriveTrain extends SubsystemBase {
         return encCurrentPosition / 4d;
     }
 
+
     /**
      * Assigns two speeds to the xAxis of the Robot and the Rotation of the Robot.
      * Negative values of xAxis
@@ -58,7 +64,6 @@ public class DriveTrain extends SubsystemBase {
      * @param zRotate
      */
     public void greenLight(double zRotate, double xAxis) {
-
         allDrive.arcadeDrive(Constants.DRIVE_SPEED_MULTIPLIER * zRotate, Constants.DRIVE_SPEED_MULTIPLIER * xAxis);
     }
 

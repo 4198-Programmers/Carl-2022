@@ -10,11 +10,13 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.GripPipelineRed;
 
+/** {@link RedFollower} Unused red ball finding camera program */
 public class RedFollower extends CommandBase {
     private GripPipelineRed redDetect = new GripPipelineRed();
     UsbCamera camera = CameraServer.startAutomaticCapture();
     CvSink sink = new CvSink("Sink Name");
 
+    /** {@link RedFollower} Unused red ball finding camera program */
     public RedFollower(UsbCamera cameraArg) {
         camera = cameraArg;
     }
@@ -32,5 +34,4 @@ public class RedFollower extends CommandBase {
             }
         }
     }
-
 }

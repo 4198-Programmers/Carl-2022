@@ -3,24 +3,31 @@ package frc.robot.simplecommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Limelight;
 
+/**
+ * {@link PickLimelightMode} User inputs Limelight mode they wish to set, values
+ * can be found in {@link Constants}
+ */
 public class PickLimelightMode extends CommandBase {
-    private Limelight visionSLM;
+    Limelight limelight;
     double mode;
 
-    public PickLimelightMode(Limelight visionSub, double modeArg) {
-        visionSLM = visionSub;
+    /**
+     * {@link PickLimelightMode} User inputs Limelight mode they wish to set, values
+     * can be found in {@link Constants}
+     */
+    public PickLimelightMode(Limelight limelightArg, double modeArg) {
+        limelight = limelightArg;
         mode = modeArg;
-        addRequirements(visionSLM);
+        addRequirements(limelight);
     }
 
     @Override
     public void execute() {
-        visionSLM.setPipeline(mode);
+        limelight.setPipeline(mode);
     }
 
     @Override
     public boolean isFinished() {
-        return (visionSLM.getPipeline() == mode);
+        return (limelight.getPipeline() == mode);
     }
-
 }

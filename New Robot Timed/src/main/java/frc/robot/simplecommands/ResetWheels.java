@@ -3,26 +3,34 @@ package frc.robot.simplecommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
+/**
+ * {@link ResetWheels} Sets the wheels current position to 0 on the encoders to
+ * use other commands
+ */
 public class ResetWheels extends CommandBase {
-    private DriveTrain driver;
+    DriveTrain driveTrain;
 
-    public ResetWheels(DriveTrain vroomVroomSub) {
-        driver = vroomVroomSub;
-        addRequirements(vroomVroomSub);
+    /**
+     * {@link ResetWheels} Sets the wheels current position to 0 on the encoders to
+     * use other commands
+     */
+    public ResetWheels(DriveTrain driveTrainArg) {
+        driveTrain = driveTrainArg;
+        addRequirements(driveTrain);
     }
 
     @Override
     public void initialize() {
-        driver.resetPosition();
+        driveTrain.resetPosition();
     }
 
     @Override
     public void execute() {
-        driver.resetPosition();
+        driveTrain.resetPosition();
     }
 
     @Override
     public boolean isFinished() {
-        return (driver.findPosition() <= 0.025);
+        return (driveTrain.findPosition() <= 0.025);
     }
 }

@@ -6,15 +6,22 @@ import frc.robot.subsystems.FlyAndSensors;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Tunnel;
 
+/**
+ * {@link IntakeFeeder} Uses sensors to intake two balls to the Tunnel
+ */
 public class IntakeFeeder extends CommandBase {
     Intake intake;
     Tunnel tunnel;
     FlyAndSensors sensor;
+    boolean done;
 
-    public IntakeFeeder(Intake intakeSub, Tunnel tunnelSub, FlyAndSensors flyAndSensorsSub) {
-        intake = intakeSub;
-        tunnel = tunnelSub;
-        sensor = flyAndSensorsSub;
+    /**
+     * {@link IntakeFeeder} Uses sensors to intake two balls to the Tunnel 
+     */
+    public IntakeFeeder(Intake intakeArg, Tunnel tunnelArg, FlyAndSensors flyAndSensorsArg) {
+        intake = intakeArg;
+        tunnel = tunnelArg;
+        sensor = flyAndSensorsArg;
         addRequirements(intake, tunnel);
     }
 
@@ -22,10 +29,11 @@ public class IntakeFeeder extends CommandBase {
     public void execute() {
         intake.setIntakeSpeed(Constants.INTAKE_FORWARD_SPEED);
         if (sensor.ballIn() && !sensor.ballOut()) {
+            System.out.println("if");
             tunnel.setMoverSpeed(Constants.INTERNAL_FEEDER_SPEED);
         } else {
+            System.out.println("else");
             tunnel.setMoverSpeed(Constants.FREEZE);
         }
     }
-
 }

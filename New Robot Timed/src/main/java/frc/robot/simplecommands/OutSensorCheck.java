@@ -3,15 +3,25 @@ package frc.robot.simplecommands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.FlyAndSensors;
 
+/**
+ * {@link OutSensorCheck} User inputs true/false for if they want a ball to the
+ * reading on the sensor closest to the FlyWheel, command acts as a pause until
+ * condition is met
+ */
 public class OutSensorCheck extends CommandBase {
     FlyAndSensors sensors;
     Boolean outBallStatus;
     boolean wantBall;
 
-    public OutSensorCheck(FlyAndSensors flyAndSensorsSub, boolean wantBallArg) {
-        sensors = flyAndSensorsSub;
+    /**
+     * {@link OutSensorCheck} User inputs true/false for if they want a ball to the
+     * reading on the sensor closest to the FlyWheel, command acts as a pause until
+     * condition is met
+     */
+    public OutSensorCheck(FlyAndSensors flyAndSensorsArg, boolean wantBallArg) {
+        sensors = flyAndSensorsArg;
         wantBall = wantBallArg;
-        addRequirements(flyAndSensorsSub);
+        addRequirements(sensors);
     }
 
     @Override
@@ -32,5 +42,4 @@ public class OutSensorCheck extends CommandBase {
     public boolean isFinished() {
         return (wantBall == outBallStatus);
     }
-
 }

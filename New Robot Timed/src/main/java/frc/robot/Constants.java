@@ -24,4 +24,18 @@ public class Constants {
     public static final int BACK_RIGHT_MOTOR_ID = 0;
     public static final double LENGTH = 0;
     public static final double WIDTH = 0;
+    public static final int DRIVE_MOTOR = 0;
+    public static final int TURNING_MOTOR = 0;
+    public static final class ModuleConstants{
+        public static final double kWheelDiameterMeters = 0; //get units in inches and then convert to meters using Units.inchesToMeter(in);
+        public static final double kDriveMotorGearRatio = 0;//get gear ratio
+        public static final double kTurningMotorGearRatio = 0; //get gear ratio
+        public static final double kDriveEncoderRot2Meter = kDriveMotorGearRatio * Math.PI * kWheelDiameterMeters;
+        public static final double kTurningEncoderRot2Rad = kTurningMotorGearRatio *2* Math.PI;
+        public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter/60;
+        public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad/60;
+        public static final double kPTurning = 0;
+        public static final String absoluteEncoderId = null;
+
+    }
 }

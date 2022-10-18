@@ -26,6 +26,10 @@ public class Constants {
     public static final double WIDTH = 0;
     public static final int DRIVE_MOTOR = 0;
     public static final int TURNING_MOTOR = 0;
+    public static final double kp = 0;
+    public static final double ki = 0;
+    public static final double kd = 0;
+    public static final String absoluteEncoderPort = null;
     public static final class ModuleConstants{
         public static final double kWheelDiameterMeters = 0; //get units in inches and then convert to meters using Units.inchesToMeter(in);
         public static final double kDriveMotorGearRatio = 0;//get gear ratio

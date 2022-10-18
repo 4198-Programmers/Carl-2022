@@ -9,9 +9,9 @@ Joystick leftJoystick = new Joystick(0);
 Joystick rightJoystick = new Joystick(2);
 
   // subsystems
-
+SwerveDriveBase swerveDriveBase;
   // ungrouped commands
-
+SwerveDrive swerveDrive = new SwerveDrive(trajectory, pose, kinematics, leftJoystick.getRawAxis(1), middleJoystick.getRawAxis(0), leftJoystick.getRawAxis(3), desiredRotation, outputModuleStates, swerveDriveBase);
   // command groups
 
   //Buttons

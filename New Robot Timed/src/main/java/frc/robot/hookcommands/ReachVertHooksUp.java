@@ -18,12 +18,12 @@ public class ReachVertHooksUp extends CommandBase {
 
     @Override
     public void execute() {
-        if (grabbers.vertHooksPos() >= -187) {
+        if (grabbers.vertHooksPosition() >= -187) {
             grabbers.moveVertHooks(-(1 - ((throttle.getRawAxis(3) + 1) / 2)));
         } else {
             grabbers.moveVertHooks(Constants.FREEZE);
         }
-        System.out.println("hooks vert " + grabbers.vertHooksPos());
+        System.out.println("hooks vert " + grabbers.vertHooksPosition());
     }
 
     // @Override

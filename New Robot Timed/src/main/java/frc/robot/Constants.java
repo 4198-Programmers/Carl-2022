@@ -69,4 +69,12 @@ public class Constants {
     public static final byte VERT_HOOK_DOWN_RBUTTON = 9;
     public static final byte VERT_HOOK_UP_RBUTTON = 10;
 
+    // hook constants
+    public static final double ANGLE_HOOK_LOWER_LIMIT = 0;
+    public static final double ANGLE_HOOK_UPPER_LIMIT = 0;
+    public static final double ANGLE_HOOK_VERT_HOOK_ON_POINT = 0;
+    public static final double VERT_HOOK_LOWER_LIMIT = 0;
+    public static final double VERT_HOOK_UPPER_LIMIT = 0; 
+    public static final double VERT_HOOK_HOOK_ON_LIMIT = 0; 
+    public static final double VERT_HOOK_SPEED = 0;
 }

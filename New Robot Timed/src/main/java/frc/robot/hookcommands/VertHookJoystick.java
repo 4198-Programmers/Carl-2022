@@ -26,7 +26,7 @@ public class VertHookJoystick extends CommandBase{
     public void execute() {
         axis = hookAxisStick.getRawAxis(1);
 
-        if (climberHC.vertHooksPos() >= -187 && (axis < 0)) { // makes sure you do not over run
+        if (climberHC.vertHooksPosition() >= -187 && (axis < 0)) { // makes sure you do not over run
             climberHC.moveVertHooks(axis);
         } else if (axis >= 0) {
             climberHC.moveVertHooks(axis);
@@ -34,7 +34,7 @@ public class VertHookJoystick extends CommandBase{
             climberHC.moveVertHooks(Constants.FREEZE);
         }
         done = true;
-        System.out.println("angle position " + climberHC.vertHooksPos());
+        System.out.println("angle position " + climberHC.vertHooksPosition());
     }
 
     

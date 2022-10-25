@@ -19,7 +19,7 @@ public class PullVertHooksIn extends CommandBase {
     @Override
     public void execute() {
         grab.moveVertHooks((1 - ((throttle.getRawAxis(3) + 1) / 2)));
-        System.out.println("vert hooks " + grab.vertHooksPos());
+        System.out.println("vert hooks " + grab.vertHooksPosition());
     }
 
     // @Override

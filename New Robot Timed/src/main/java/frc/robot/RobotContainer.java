@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.hookcommands.AngleStop;
 import frc.robot.hookcommands.AngledHookJoystick;
+import frc.robot.hookcommands.AutoAngleHooksIn;
 import frc.robot.hookcommands.HookStop;
 import frc.robot.hookcommands.MoveCloserToNinetyDegrees;
 import frc.robot.hookcommands.MoveCloserToZeroDegrees;
@@ -106,7 +107,7 @@ public class RobotContainer {
   LowLoft lowLoft = new LowLoft(flyAndSensorsSub);
   Targeting targeting = new Targeting(driveTrainSub, limelightSub);
   SpitBalls spitBalls = new SpitBalls(intakeSub, tunnelSub);
-
+  
   // command groups
   Command limelightTargeting = (new Targeting(driveTrainSub, limelightSub))
       .andThen(new WaitCommand(1))
@@ -270,6 +271,9 @@ public class RobotContainer {
       .andThen(new WaitCommand(1))
       .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
       .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
+
+Command autoClimb = (new AutoVertHooksOut(angleHooksSub, Constants.VERT_HOOK_UPPER_LIMIT)
+)
 
   // Command taxiFourBall = (new ResetWheels(driveTrainSub))
   // .andThen((new SetIntakeSpeedIn(intakeSub))

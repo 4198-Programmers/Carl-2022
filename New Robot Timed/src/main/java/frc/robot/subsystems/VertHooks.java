@@ -33,7 +33,7 @@ public class VertHooks extends SubsystemBase {
     // return Maths.motorConversion((Math.abs(vertHookLeadEncoder.getPosition()) +
     // Math.abs(vertHookFollowerEnc.getPosition()))/2);
     // }
-    public double vertHooksPos() {
+    public double vertHooksPosition() {
         return (vertHookFollowerEnc.getPosition() + vertHookLeadEncoder.getPosition()) / 2;
     }
 

@@ -49,6 +49,7 @@ public class Constants {
 
     // left joystick buttons
     public static final byte HUMAN_OVERRIDE_LBUTTON = 11;
+    public static final byte AUTO_CLIMB_BUTTON = 12;
 
     // middle stick buttons
     public static final byte TARGETING_LIMELIGHT_SIMULTANEOUSM = 1;
@@ -69,12 +70,19 @@ public class Constants {
     public static final byte VERT_HOOK_DOWN_RBUTTON = 9;
     public static final byte VERT_HOOK_UP_RBUTTON = 10;
 
-    // hook constants
-    public static final double ANGLE_HOOK_LOWER_LIMIT = 0;
-    public static final double ANGLE_HOOK_UPPER_LIMIT = 0;
-    public static final double ANGLE_HOOK_VERT_HOOK_ON_POINT = 0;
+    // hook encoder constants
+    public static final double VERT_HOOK_SPEED = 0; //Vertical Hook Speed
+    public static final double ANGLE_HOOK_LOWER_LIMIT = 0; //Lower limit for angled hooks
+    public static final double ANGLE_HOOK_UPPER_LIMIT = 0; //Upper limit for angled hooks
+    public static final double ANGLE_HOOK_VERT_HOOK_ON_POINT = 0; //The point after hooking on to the bar in the beginning with the vertical hooks where the angled hooks are hooked on. 
     public static final double VERT_HOOK_LOWER_LIMIT = 0;
     public static final double VERT_HOOK_UPPER_LIMIT = 0; 
-    public static final double VERT_HOOK_HOOK_ON_LIMIT = 0; 
-    public static final double VERT_HOOK_SPEED = 0;
+    public static final double VERT_HOOK_HOOK_ON_POINT = 0; 
+    public static final double ANGLE_HOOK_HOOK_ON_POINT = 0;
+    public static final double VERT_HOOK_LEAN_POINT = 0;
+    public static final double ANGLE_HOOK_LOWER_HOOK_ON_POINT = 0;
+    public static final double ANGLE_HOOK_UPPER_HOOK_ON_POINT = 0;
+    public static final double ANGLE_HOOK_LEAN_ON_LIMIT = 0;
+    public static final double VERT_HOOK_NEXT_BAR_POINT = 0;
+    public static final double VERT_HOOK_NEXT_BAR_POINT_2 = 0;
 }

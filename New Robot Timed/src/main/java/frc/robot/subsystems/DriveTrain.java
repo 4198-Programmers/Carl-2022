@@ -43,4 +43,10 @@ public class DriveTrain extends SubsystemBase{
         backRightEncoder.setPosition(position);
         backLeftEncoder.setPosition(position);
     }
+    public void driveforcertaindistance(double xspeed, double zrotation, double distance){
+        setDrivePosition(0);
+        while(Math.abs(getPosition()) < distance){
+            allDrive.arcadeDrive(xspeed, zrotation);
+        }
+    }
 }

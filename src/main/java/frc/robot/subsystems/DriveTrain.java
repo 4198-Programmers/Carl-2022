@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Maths;
 
 public class DriveTrain extends SubsystemBase
  {
@@ -48,10 +49,10 @@ public void resetposition(){
 }
 
 public double findposition(){
-    double encCurrentPosition = Math.abs(encoderFrontRight.getPosition());
-    encCurrentPosition += Math.abs(encoderFrontLeft.getPosition());
-    encCurrentPosition += Math.abs(encoderBackRight.getPosition());
-    encCurrentPosition += Math.abs(encoderBackLeft.getPosition());
+    double encCurrentPosition = Maths.abs(encoderFrontRight.getPosition());
+    encCurrentPosition += Maths.abs(encoderFrontLeft.getPosition());
+    encCurrentPosition += Maths.abs(encoderBackRight.getPosition());
+    encCurrentPosition += Maths.abs(encoderBackLeft.getPosition());
     return encCurrentPosition /4d;
 }
 

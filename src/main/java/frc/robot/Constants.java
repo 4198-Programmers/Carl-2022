@@ -27,6 +27,10 @@ public final class Constants {
     public static int LEFT_JOYSTICK_ID = 1;
     public static int MIDDLE_JOYSTICK_ID = 2;
     public static int RIGHT_JOYSTICK_ID = 3;
+    
+    public static final double JAKE_WHEELS = 5.75;
+
+
 
     public static String drive = "Drive";
 

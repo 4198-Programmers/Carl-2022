@@ -23,7 +23,7 @@ public class Constants {
     public static final byte MID_STICK_PORT = 1;
     public static final byte RIGHT_STICK_PORT = 2;
 
-    public static final double ANGLE_HOOK_SPEED = 0.5;
+    
     public static final double INTAKE_FORWARD_SPEED = -0.75;
     public static final double FLYWHEEL_SPEED = 1;
     public static final double INTERNAL_FEEDER_SPEED = 0.75;
@@ -71,18 +71,30 @@ public class Constants {
     public static final byte VERT_HOOK_UP_RBUTTON = 10;
 
     // hook encoder constants
-    public static final double VERT_HOOK_SPEED = 0; //Vertical Hook Speed
-    public static final double ANGLE_HOOK_LOWER_LIMIT = 0; //Lower limit for angled hooks
+    public static final double ANGLE_HOOK_SPEED = 0.2;
+    public static final double VERT_HOOK_SPEED = 0.2; //Vertical Hook Speed
+    
+    public static final double ANGLE_HOOK_LOWER_LIMIT = -97; //Lower limit for angled hooks
     public static final double ANGLE_HOOK_UPPER_LIMIT = 0; //Upper limit for angled hooks
-    public static final double ANGLE_HOOK_VERT_HOOK_ON_POINT = 0; //The point after hooking on to the bar in the beginning with the vertical hooks where the angled hooks are hooked on. 
+
     public static final double VERT_HOOK_LOWER_LIMIT = 0;
-    public static final double VERT_HOOK_UPPER_LIMIT = 0; 
-    public static final double VERT_HOOK_HOOK_ON_POINT = 0; 
-    public static final double ANGLE_HOOK_HOOK_ON_POINT = 0;
-    public static final double VERT_HOOK_LEAN_POINT = 0;
-    public static final double ANGLE_HOOK_LOWER_HOOK_ON_POINT = 0;
-    public static final double ANGLE_HOOK_UPPER_HOOK_ON_POINT = 0;
-    public static final double ANGLE_HOOK_LEAN_ON_LIMIT = 0;
-    public static final double VERT_HOOK_NEXT_BAR_POINT = 0;
-    public static final double VERT_HOOK_NEXT_BAR_POINT_2 = 0;
+    public static final double VERT_HOOK_UPPER_LIMIT = -187; 
+    
+
+    //Auto Climb Steps
+    public static final double VERT_HOOKS_STEP_1 = VERT_HOOK_UPPER_LIMIT;
+    public static final double ANGLE_HOOKS_STEP_2 = ANGLE_HOOK_UPPER_LIMIT;
+    public static final double VERT_HOOKS_STEP_3 = VERT_HOOK_LOWER_LIMIT;
+    public static final double ANGLE_HOOKS_STEP_4 = 0;
+    public static final double VERT_HOOKS_STEP_5 = 0;
+    public static final double ANGLE_HOOKS_STEP_6 = 0;
+    public static final double VERT_HOOKS_STEP_7 = VERT_HOOK_UPPER_LIMIT;
+    public static final double ANGLE_HOOKS_STEP_8 = 0;
+    public static final double VERT_HOOKS_STEP_9 = 0;
+    public static final double ANGLE_HOOKS_STEP_10 = ANGLE_HOOK_LOWER_LIMIT;
+    public static final double VERT_HOOKS_STEP_10 = VERT_HOOK_UPPER_LIMIT;
+    public static final double ANGLE_HOOKS_STEP_11 = ANGLE_HOOK_UPPER_LIMIT;
+    public static final double VERT_HOOKS_STEP_11 = VERT_HOOK_LOWER_LIMIT;
+
+    
 }

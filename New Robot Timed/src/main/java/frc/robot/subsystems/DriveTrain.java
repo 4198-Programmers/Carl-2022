@@ -31,10 +31,10 @@ public class DriveTrain extends SubsystemBase{
         leftDrive.set(leftspeed);
     }
     public double getPosition(){
-       double freP = frontRightEncoder.getPosition();
-       double brep = backRightEncoder.getPosition();
-       double flep = frontLeftEncoder.getPosition();
-       double blep = backLeftEncoder.getPosition();
+       double freP = frontRightEncoder.getPosition(); //frep - front right encoder position
+       double brep = backRightEncoder.getPosition();  //brep - back right encoder position
+       double flep = frontLeftEncoder.getPosition();  //flep - front left encoder position
+       double blep = backLeftEncoder.getPosition();   //blep - back left encoder position
        return (freP + brep + flep + blep)/2;
     }
     public void setDrivePosition(double position){
@@ -42,11 +42,5 @@ public class DriveTrain extends SubsystemBase{
         frontLeftEncoder.setPosition(position);
         backRightEncoder.setPosition(position);
         backLeftEncoder.setPosition(position);
-    }
-    public void driveforcertaindistance(double xspeed, double zrotation, double distance){
-        setDrivePosition(0);
-        while(Math.abs(getPosition()) < distance){
-            allDrive.arcadeDrive(xspeed, zrotation);
-        }
     }
 }

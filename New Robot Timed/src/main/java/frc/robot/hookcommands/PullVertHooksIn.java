@@ -5,26 +5,26 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.VertHooks;
 
 public class PullVertHooksIn extends CommandBase {
-    VertHooks grab;
+    VertHooks vertHooks;
     Joystick throttle;
     // private double distanceDown;
 
     public PullVertHooksIn(VertHooks vertHooksSub, Joystick joystickArg) {
-        grab = vertHooksSub;
+        vertHooks = vertHooksSub;
         throttle = joystickArg;
-        addRequirements(grab);
+        addRequirements(vertHooks);
 
     }
 
     @Override
     public void execute() {
-        grab.moveVertHooks((1 - ((throttle.getRawAxis(3) + 1) / 2)));
-        System.out.println("vert hooks " + grab.vertHooksPosition());
+        vertHooks.moveVertHooks((1 - ((throttle.getRawAxis(3) + 1) / 2)));
+        System.out.println("vert hooks " + vertHooks.vertHooksPos());
     }
 
     // @Override
     // public boolean isFinished() {
-    // double height = grab.getVerticalHookHeight();
+    // double height = vertHooks.getVerticalHookHeight();
     // return height >= distanceDown;
     // }
 }

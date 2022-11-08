@@ -7,7 +7,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.VertHooks;
 
 public class VertHookJoystick extends CommandBase{
-    private VertHooks climberHC;
+    private VertHooks vertHooks;
     private Joystick hookAxisStick;
     boolean done;
     double axis;
@@ -17,24 +17,25 @@ public class VertHookJoystick extends CommandBase{
      * (angled hooks angle)
      */
     public VertHookJoystick(VertHooks angleHooksSub, Joystick controllingJoystick) {
-        climberHC = angleHooksSub;
+        vertHooks = angleHooksSub;
         hookAxisStick = controllingJoystick;
-        addRequirements(climberHC);
+        addRequirements(vertHooks);
     }
 
     @Override
     public void execute() {
         axis = hookAxisStick.getRawAxis(1);
+        System.out.println(vertHooks.vertHooksPos());
 
-        if (climberHC.vertHooksPosition() >= -187 && (axis < 0)) { // makes sure you do not over run
-            climberHC.moveVertHooks(axis);
-        } else if (axis >= 0) {
-            climberHC.moveVertHooks(axis);
+        if (vertHooks.vertHooksPos() >= -187 && (axis < 0)) { // makes sure you do not over run
+            vertHooks.moveVertHooks(axis);
+        } else if (vertHooks.vertHooksPos() < 0 && axis >= 0) {
+            vertHooks.moveVertHooks(axis);
         } else {
-            climberHC.moveVertHooks(Constants.FREEZE);
+            vertHooks.moveVertHooks(Constants.FREEZE);
         }
         done = true;
-        System.out.println("angle position " + climberHC.vertHooksPosition());
+        System.out.println("angle position " + vertHooks.vertHooksPos());
     }
 
     

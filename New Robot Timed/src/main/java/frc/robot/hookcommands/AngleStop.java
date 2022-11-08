@@ -5,7 +5,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.AngleHooks;
 
 public class AngleStop extends CommandBase {
-    private AngleHooks intake;
+    private AngleHooks angleHooks;
     boolean done;
 
     @Override
@@ -14,13 +14,13 @@ public class AngleStop extends CommandBase {
     }
 
     public AngleStop(AngleHooks angleHooksSub) {
-        intake = angleHooksSub;
+        angleHooks = angleHooksSub;
         addRequirements(angleHooksSub);
     }
 
     @Override
     public void execute() {
-        intake.moveAngledHooks(Constants.FREEZE);
+        angleHooks.moveAngledHooks(Constants.FREEZE);
         done = true;
     }
 

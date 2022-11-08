@@ -36,8 +36,8 @@ public class SetFlySpeed extends CommandBase {
     }
 
     protected double catchWantedFlySpeed() {
-        // return (-(joystick.getRawAxis(3)+1)/2); //Joystick set for testing
-        return -0.62; // Basic set for auto
+        return (-(joystick.getRawAxis(3)+1)/2); //Joystick set for testing
+        // return -0.62; // Basic set for auto
         // return Maths.dakotaVelocity(limelight.distanceToTarget()); //Math by Dakota
     }
 

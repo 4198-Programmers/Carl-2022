@@ -6,6 +6,10 @@ public class Maths {
         double rotations = distance / circumference;
         return rotations;
         
+    }
+
+    public static double abs(double position) {
+        return 0;
     } 
     
 }

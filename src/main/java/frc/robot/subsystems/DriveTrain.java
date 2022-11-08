@@ -59,4 +59,7 @@ public double findposition(){
 public void drive(double zRotate, double xAxis){
     alldrive.arcadeDrive(Constants.DRIVE_SPEED * zRotate, Constants.DRIVE_SPEED * xAxis);
 }
+
+public void setPosition(int i) {
+}
 }

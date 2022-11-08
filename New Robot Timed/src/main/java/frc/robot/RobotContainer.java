@@ -275,7 +275,9 @@ public class RobotContainer {
       .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
       .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
 
-Command autoClimb = (new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_1)
+Command autoClimb = 
+    //pt 1: Beginning steps
+    (new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_1)
     .andThen(new AutoForwards(driveTrainSub, 5))
     .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_2))
     .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
@@ -285,21 +287,26 @@ Command autoClimb = (new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STE
     .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
     .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
     .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOK_UPPER_LIMIT))
-        .alongWith(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOK_NEXT_BAR_POINT_2))
-    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOK_LOWER_LIMIT))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOK_HOOK_ON_POINT))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOK_POSITION_3))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOK_LOWER_LIMIT))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOK_UPPER_LIMIT))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOK_LEAN_ON_LIMIT))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOK_LOWER_LIMIT))
-        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOK_NEXT_BAR_POINT))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOK_UPPER_LIMIT))
-        .alongWith(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOK_NEXT_BAR_POINT_2))
-    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOK_LOWER_LIMIT))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOK_HOOK_ON_POINT))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOK_POSITION_3)));
+    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
+        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10))
+    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
+    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11))
+    //pt 2: Repeat steps 3-11
+    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
+    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
+    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_5))
+    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_6))
+    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
+    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
+    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
+    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
+        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10))
+    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
+    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11))
+    //pt 3: Final Steps repeat 3 and 4, then do step 12
+    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
+    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
+    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_12)));
 
   // Command taxiFourBall = (new ResetWheels(driveTrainSub))
   // .andThen((new SetIntakeSpeedIn(intakeSub))
@@ -398,6 +405,7 @@ Command autoClimb = (new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STE
     limelightOnThenTargetBTN.whenHeld(limelightTargeting);
     spitBTN.whileHeld(spitBalls);
     shootingBTN.whileHeld(vertHookJoystick, false);
+    
     autoClimbButton.whileHeld(autoClimb);
 
     angleJoystickButton.whenReleased(angleStop);

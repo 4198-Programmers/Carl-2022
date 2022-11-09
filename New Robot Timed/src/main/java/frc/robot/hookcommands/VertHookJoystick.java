@@ -27,7 +27,7 @@ public class VertHookJoystick extends CommandBase{
         axis = hookAxisStick.getRawAxis(1);
         System.out.println(vertHooks.vertHooksPosition());
 
-        if (vertHooks.vertHooksPosition() >= -187 && (axis < 0)) { // makes sure you do not over run
+        if (vertHooks.vertHooksPosition() >= Constants.VERT_HOOK_UPPER_LIMIT && (axis < 0)) { // makes sure you do not over run
             vertHooks.moveVertHooks(axis);
         } else if (vertHooks.vertHooksPosition() < 0 && axis >= 0) {
             vertHooks.moveVertHooks(axis);

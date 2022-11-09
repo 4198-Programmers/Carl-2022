@@ -78,7 +78,7 @@ public class Constants {
     public static final double ANGLE_HOOK_UPPER_LIMIT = 20; //Upper limit for angled hooks
 
     public static final double VERT_HOOK_LOWER_LIMIT = 0;
-    public static final double VERT_HOOK_UPPER_LIMIT = -187; 
+    public static final double VERT_HOOK_UPPER_LIMIT = -150; //-187 
     
 
     //Auto Climb Steps

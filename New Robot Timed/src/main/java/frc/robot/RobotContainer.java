@@ -48,6 +48,7 @@ import frc.robot.simplecommands.SpitBalls;
 import frc.robot.simplecommands.StableHooks;
 import frc.robot.simplecommands.StableInternals;
 import frc.robot.simplecommands.StopFly;
+import frc.robot.simplecommands.StopHooks;
 import frc.robot.simplecommands.Targeting;
 import frc.robot.simplecommands.AutoForwards;
 import frc.robot.simplecommands.AutoBackwards;
@@ -64,402 +65,405 @@ import frc.robot.subsystems.FlyAndSensors;
 import frc.robot.subsystems.Intake;
 
 public class RobotContainer {
-  Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
-  Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
-  Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
+    Joystick leftStick = new Joystick(Constants.LEFT_STICK_PORT);
+    Joystick midStick = new Joystick(Constants.MID_STICK_PORT);
+    Joystick rightStick = new Joystick(Constants.RIGHT_STICK_PORT);
 
-  // subsystems
-  DriveTrain driveTrainSub = new DriveTrain();
-  FlyAndSensors flyAndSensorsSub = new FlyAndSensors();
-  VertHooks vertHooksSub = new VertHooks();
-  AngleHooks angleHooksSub = new AngleHooks();
-  Limelight limelightSub = new Limelight();
-  Tunnel tunnelSub = new Tunnel();
-  Intake intakeSub = new Intake();
+    // subsystems
+    DriveTrain driveTrainSub = new DriveTrain();
+    FlyAndSensors flyAndSensorsSub = new FlyAndSensors();
+    VertHooks vertHooksSub = new VertHooks();
+    AngleHooks angleHooksSub = new AngleHooks();
+    Limelight limelightSub = new Limelight();
+    Tunnel tunnelSub = new Tunnel();
+    Intake intakeSub = new Intake();
 
-  UsbCamera floorCamera = CameraServer.startAutomaticCapture();
-  CvSink cvSink = CameraServer.getVideo();
-  CvSource stream = CameraServer.putVideo("Intake View", 1280, 720);
+    UsbCamera floorCamera = CameraServer.startAutomaticCapture();
+    CvSink cvSink = CameraServer.getVideo();
+    CvSource stream = CameraServer.putVideo("Intake View", 1280, 720);
 
-  // ungrouped commands
-  // RealizeBall realizeBall = new RealizeBall(floorCamera);
-  DoNotMove doNotMove = new DoNotMove(driveTrainSub, flyAndSensorsSub);
-  StableHooks stableHooks = new StableHooks(vertHooksSub, angleHooksSub);
-  StableInternals StableInternals = new StableInternals(flyAndSensorsSub, tunnelSub, intakeSub);
-  StopFly stopFly = new StopFly(flyAndSensorsSub);
-  HookStop hookStop = new HookStop(vertHooksSub);
-  AngleStop angleStop = new AngleStop(angleHooksSub);
-  TunnelStop tunnelStop = new TunnelStop(tunnelSub);
-  IntakeStop intakeStop = new IntakeStop(intakeSub);
-  AngledHookJoystick angledHookJoystick = new AngledHookJoystick(angleHooksSub, midStick, driveTrainSub);
-  VertHookJoystick vertHookJoystick = new VertHookJoystick(vertHooksSub, rightStick);
-  ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(vertHooksSub, rightStick);
-  PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(vertHooksSub, rightStick);
-  MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(angleHooksSub);
-  MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(angleHooksSub);
-  SetFlySpeed setFlySpeed = new SetFlySpeed(flyAndSensorsSub, limelightSub, false, 0, midStick);
-  SetIntakeSpeedIn setIntakeSpeedIn = new SetIntakeSpeedIn(intakeSub);
-  SetIntakeSpeedOut setIntakeSpeedOut = new SetIntakeSpeedOut(intakeSub);
-  SetInternalMoveSpeedIn setInternalMoveSpeedIn = new SetInternalMoveSpeedIn(tunnelSub);
-  SetInternalMoveSpeedOut setInternalMoveSpeedOut = new SetInternalMoveSpeedOut(tunnelSub);
-  IntakeFeeder intakeFeeder = new IntakeFeeder(intakeSub, tunnelSub, flyAndSensorsSub);
-  PickLimelightMode setLimelightModeOff = new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
-  PickLimelightMode setLimelightModeOn = new PickLimelightMode(limelightSub,
-      Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
-  ResetHooks resetHooks = new ResetHooks(angleHooksSub, vertHooksSub);
-  LowLoft lowLoft = new LowLoft(flyAndSensorsSub);
-  Targeting targeting = new Targeting(driveTrainSub, limelightSub);
-  SpitBalls spitBalls = new SpitBalls(intakeSub, tunnelSub);
-  
-  // command groups
-  Command limelightTargeting = (new Targeting(driveTrainSub, limelightSub))
-      .andThen(new WaitCommand(1))
-      .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE));
+    // ungrouped commands
+    // RealizeBall realizeBall = new RealizeBall(floorCamera);
+    DoNotMove doNotMove = new DoNotMove(driveTrainSub, flyAndSensorsSub);
+    StableHooks stableHooks = new StableHooks(vertHooksSub, angleHooksSub);
+    StopHooks stopHooks = new StopHooks(vertHooksSub, angleHooksSub);
+    StableInternals StableInternals = new StableInternals(flyAndSensorsSub, tunnelSub, intakeSub);
+    StopFly stopFly = new StopFly(flyAndSensorsSub);
+    HookStop hookStop = new HookStop(vertHooksSub);
+    AngleStop angleStop = new AngleStop(angleHooksSub);
+    TunnelStop tunnelStop = new TunnelStop(tunnelSub);
+    IntakeStop intakeStop = new IntakeStop(intakeSub);
+    AngledHookJoystick angledHookJoystick = new AngledHookJoystick(angleHooksSub, midStick, driveTrainSub);
+    VertHookJoystick vertHookJoystick = new VertHookJoystick(vertHooksSub, rightStick);
+    ReachVertHooksUp reachVertHooksUp = new ReachVertHooksUp(vertHooksSub, rightStick);
+    PullVertHooksIn pullVertHooksIn = new PullVertHooksIn(vertHooksSub, rightStick);
+    MoveCloserToNinetyDegrees moveCloserToNinetyDegrees = new MoveCloserToNinetyDegrees(angleHooksSub);
+    MoveCloserToZeroDegrees moveCloserToZeroDegrees = new MoveCloserToZeroDegrees(angleHooksSub);
+    SetFlySpeed setFlySpeed = new SetFlySpeed(flyAndSensorsSub, limelightSub, false, 0, midStick);
+    SetIntakeSpeedIn setIntakeSpeedIn = new SetIntakeSpeedIn(intakeSub);
+    SetIntakeSpeedOut setIntakeSpeedOut = new SetIntakeSpeedOut(intakeSub);
+    SetInternalMoveSpeedIn setInternalMoveSpeedIn = new SetInternalMoveSpeedIn(tunnelSub);
+    SetInternalMoveSpeedOut setInternalMoveSpeedOut = new SetInternalMoveSpeedOut(tunnelSub);
+    IntakeFeeder intakeFeeder = new IntakeFeeder(intakeSub, tunnelSub, flyAndSensorsSub);
+    PickLimelightMode setLimelightModeOff = new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE);
+    PickLimelightMode setLimelightModeOn = new PickLimelightMode(limelightSub,
+            Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE);
+    ResetHooks resetHooks = new ResetHooks(angleHooksSub, vertHooksSub);
+    LowLoft lowLoft = new LowLoft(flyAndSensorsSub);
+    Targeting targeting = new Targeting(driveTrainSub, limelightSub);
+    SpitBalls spitBalls = new SpitBalls(intakeSub, tunnelSub);
 
-  RunCommand driveSticks = new RunCommand(
-      () -> driveTrainSub.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)),
-      driveTrainSub);
+    // command groups
+    Command limelightTargeting = (new Targeting(driveTrainSub, limelightSub))
+            .andThen(new WaitCommand(1))
+            .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE));
 
-  Command taxiSides = (new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 50));
+    RunCommand driveSticks = new RunCommand(
+            () -> driveTrainSub.greenLight(midStick.getRawAxis(0), (-1) * leftStick.getRawAxis(1)),
+            driveTrainSub);
 
-  Command shooting = new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick)
-      .andThen(new SetInternalMoveSpeedIn(tunnelSub))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 250, midStick))
-      .andThen(new TunnelStop(tunnelSub))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick))
-      .andThen(new SetInternalMoveSpeedIn(tunnelSub));
+    Command taxiSides = (new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 50));
 
-  Command midBallRightMacFourBall = (new ResetWheels(driveTrainSub))
-      .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new AutoBackwards(driveTrainSub, 2)))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 45))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 250))
-      .andThen(new InSensorCheck(flyAndSensorsSub, true)
-          .raceWith(new WaitCommand(2)))
-      .andThen((new IntakeStop(intakeSub))
-          .alongWith(new ResetWheels(driveTrainSub)))
-      .andThen((new AutoSpinLeft(driveTrainSub, 120))
-          .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoCurveCarver(driveTrainSub, 75, 125))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 11))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
-      .andThen(new SetIntakeSpeedIn(intakeSub))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new IntakeStop(intakeSub))
-      .andThen(new TimedInternalMoveOut(tunnelSub, 250))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 600, midStick))
-      .andThen(new SetIntakeSpeedIn(intakeSub))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
-      .andThen(new WaitCommand(1))
-      .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
-      .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoBackwards(driveTrainSub, 15))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoSpinLeft(driveTrainSub, 90))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 80));
+    Command shooting = new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick)
+            .andThen(new SetInternalMoveSpeedIn(tunnelSub))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 250, midStick))
+            .andThen(new TunnelStop(tunnelSub))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick))
+            .andThen(new SetInternalMoveSpeedIn(tunnelSub));
 
-  Command rightBallRightMacFourBall = (new ResetWheels(driveTrainSub))
-      .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new AutoBackwards(driveTrainSub, 2)))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 45))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 250))
-      .andThen((new InSensorCheck(flyAndSensorsSub, true))
-          .raceWith(new WaitCommand(2)))
-      .andThen(new IntakeStop(intakeSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new Spin(driveTrainSub, 145))
-      .andThen(new Targeting(driveTrainSub, limelightSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen((new AutoForwards(driveTrainSub, 73))
-          .alongWith(new PickLimelightMode(limelightSub,
-              Constants.LIMELIGHT_OFF_PIPELINE_MODE)))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new TimedInternalMoveOut(tunnelSub, 250))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new WaitCommand(1))
-      .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoBackwards(driveTrainSub, 15))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoSpinLeft(driveTrainSub, 90))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 80));
+    Command midBallRightMacFourBall = (new ResetWheels(driveTrainSub))
+            .andThen((new SetIntakeSpeedIn(intakeSub))
+                    .alongWith(new AutoBackwards(driveTrainSub, 2)))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 45))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+            .andThen(new InSensorCheck(flyAndSensorsSub, true)
+                    .raceWith(new WaitCommand(2)))
+            .andThen((new IntakeStop(intakeSub))
+                    .alongWith(new ResetWheels(driveTrainSub)))
+            .andThen((new AutoSpinLeft(driveTrainSub, 120))
+                    .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoCurveCarver(driveTrainSub, 75, 125))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 11))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
+            .andThen(new SetIntakeSpeedIn(intakeSub))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new IntakeStop(intakeSub))
+            .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 600, midStick))
+            .andThen(new SetIntakeSpeedIn(intakeSub))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
+            .andThen(new WaitCommand(1))
+            .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
+            .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoBackwards(driveTrainSub, 15))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoSpinLeft(driveTrainSub, 90))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 80));
 
-  Command leftBallLeftMacFourBall = (new ResetWheels(driveTrainSub))
-      .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new AutoBackwards(driveTrainSub, 2)))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 45))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 250))
-      .andThen((new InSensorCheck(flyAndSensorsSub, true))
-          .raceWith(new WaitCommand(2)))
-      .andThen(new IntakeStop(intakeSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new Spin(driveTrainSub, 145))
-      .andThen(new Targeting(driveTrainSub, limelightSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen((new AutoForwards(driveTrainSub, 73))
-          .alongWith(new PickLimelightMode(limelightSub,
-              Constants.LIMELIGHT_OFF_PIPELINE_MODE)))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick))
-      .andThen(new TimedInternalMoveOut(tunnelSub, 250))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new WaitCommand(1))
-      .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoBackwards(driveTrainSub, 15))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoSpinRight(driveTrainSub, 120))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 100));
+    Command rightBallRightMacFourBall = (new ResetWheels(driveTrainSub))
+            .andThen((new SetIntakeSpeedIn(intakeSub))
+                    .alongWith(new AutoBackwards(driveTrainSub, 2)))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 45))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+            .andThen((new InSensorCheck(flyAndSensorsSub, true))
+                    .raceWith(new WaitCommand(2)))
+            .andThen(new IntakeStop(intakeSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new Spin(driveTrainSub, 145))
+            .andThen(new Targeting(driveTrainSub, limelightSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen((new AutoForwards(driveTrainSub, 73))
+                    .alongWith(new PickLimelightMode(limelightSub,
+                            Constants.LIMELIGHT_OFF_PIPELINE_MODE)))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new WaitCommand(1))
+            .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoBackwards(driveTrainSub, 15))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoSpinLeft(driveTrainSub, 90))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 80));
 
-  Command rightLeftBallShoot = (new ResetWheels(driveTrainSub))
-      .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new AutoBackwards(driveTrainSub, 2)))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 48))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 250))
-      .andThen((new InSensorCheck(flyAndSensorsSub, true))
-          .raceWith(new WaitCommand(2)))
-      .andThen(new IntakeStop(intakeSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new Spin(driveTrainSub, 145))
-      .andThen(new Targeting(driveTrainSub, limelightSub))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen((new AutoForwards(driveTrainSub, 73))
-          .alongWith(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE)))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick))
-      .andThen(new TimedInternalMoveOut(tunnelSub, 250))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new WaitCommand(1))
-      .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
-      .andThen(new StopFly(flyAndSensorsSub));
+    Command leftBallLeftMacFourBall = (new ResetWheels(driveTrainSub))
+            .andThen((new SetIntakeSpeedIn(intakeSub))
+                    .alongWith(new AutoBackwards(driveTrainSub, 2)))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 45))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+            .andThen((new InSensorCheck(flyAndSensorsSub, true))
+                    .raceWith(new WaitCommand(2)))
+            .andThen(new IntakeStop(intakeSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new Spin(driveTrainSub, 145))
+            .andThen(new Targeting(driveTrainSub, limelightSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen((new AutoForwards(driveTrainSub, 73))
+                    .alongWith(new PickLimelightMode(limelightSub,
+                            Constants.LIMELIGHT_OFF_PIPELINE_MODE)))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick))
+            .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new WaitCommand(1))
+            .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoBackwards(driveTrainSub, 15))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoSpinRight(driveTrainSub, 120))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 100));
 
-  Command taxiTwoBallShootMidBall = (new ResetWheels(driveTrainSub))
-      .andThen((new SetIntakeSpeedIn(intakeSub))
-          .alongWith(new AutoBackwards(driveTrainSub, 2)))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 45))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 250))
-      .andThen(new InSensorCheck(flyAndSensorsSub, true)
-          .raceWith(new WaitCommand(2)))
-      .andThen((new IntakeStop(intakeSub))
-          .alongWith(new ResetWheels(driveTrainSub)))
-      .andThen((new AutoSpinLeft(driveTrainSub, 120))
-          .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoCurveCarver(driveTrainSub, 75, 125))
-      .andThen(new ResetWheels(driveTrainSub))
-      .andThen(new AutoForwards(driveTrainSub, 11))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
-      .andThen(new SetIntakeSpeedIn(intakeSub))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-      .andThen(new IntakeStop(intakeSub))
-      .andThen(new TimedInternalMoveOut(tunnelSub, 250))
-      .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 600, midStick))
-      .andThen(new SetIntakeSpeedIn(intakeSub))
-      .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
-      .andThen(new WaitCommand(1))
-      .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
-      .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
+    Command rightLeftBallShoot = (new ResetWheels(driveTrainSub))
+            .andThen((new SetIntakeSpeedIn(intakeSub))
+                    .alongWith(new AutoBackwards(driveTrainSub, 2)))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 48))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+            .andThen((new InSensorCheck(flyAndSensorsSub, true))
+                    .raceWith(new WaitCommand(2)))
+            .andThen(new IntakeStop(intakeSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new Spin(driveTrainSub, 145))
+            .andThen(new Targeting(driveTrainSub, limelightSub))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen((new AutoForwards(driveTrainSub, 73))
+                    .alongWith(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE)))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 500, midStick))
+            .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new WaitCommand(1))
+            .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
+            .andThen(new StopFly(flyAndSensorsSub));
 
-Command autoClimb = 
-    //pt 1: Beginning steps
-    (new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_1)
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoBackwards(driveTrainSub, 5))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_2))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_5))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_6))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen((new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
-        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10)))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen((new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
-        .alongWith(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11)))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    //pt 2: Repeat steps 3-11
-    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_5))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_6))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen((new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
-        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10)))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen((new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
-        .alongWith(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11)))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    //pt 3: Final Steps repeat 3 and 4, then do step 12
-    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_12))
-    .andThen(new StableHooks(vertHooksSub, angleHooksSub)));
+    Command taxiTwoBallShootMidBall = (new ResetWheels(driveTrainSub))
+            .andThen((new SetIntakeSpeedIn(intakeSub))
+                    .alongWith(new AutoBackwards(driveTrainSub, 2)))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 45))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 250))
+            .andThen(new InSensorCheck(flyAndSensorsSub, true)
+                    .raceWith(new WaitCommand(2)))
+            .andThen((new IntakeStop(intakeSub))
+                    .alongWith(new ResetWheels(driveTrainSub)))
+            .andThen((new AutoSpinLeft(driveTrainSub, 120))
+                    .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoCurveCarver(driveTrainSub, 75, 125))
+            .andThen(new ResetWheels(driveTrainSub))
+            .andThen(new AutoForwards(driveTrainSub, 11))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
+            .andThen(new SetIntakeSpeedIn(intakeSub))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+            .andThen(new IntakeStop(intakeSub))
+            .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+            .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 600, midStick))
+            .andThen(new SetIntakeSpeedIn(intakeSub))
+            .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
+            .andThen(new WaitCommand(1))
+            .andThen(new SensorStopInternals(flyAndSensorsSub, tunnelSub, intakeSub))
+            .andThen(new PickLimelightMode(limelightSub, Constants.LIMELIGHT_OFF_PIPELINE_MODE));
 
-  // Command taxiFourBall = (new ResetWheels(driveTrainSub))
-  // .andThen((new SetIntakeSpeedIn(intakeSub))
-  // .alongWith(new AutoBackwards(driveTrainSub, 2)))
-  // .andThen(new ResetWheels(driveTrainSub))
-  // .andThen((new AutoForwards(driveTrainSub, 60))
-  // .alongWith(new TimedInternalMoveIn(tunnelSub, 250)))
-  // .andThen(new InSensorCheck(flyAndSensorsSub, true)
-  // .raceWith(new WaitCommand(2)))
-  // .andThen((new IntakeStop(intakeSub))
-  // .alongWith(new ResetWheels(driveTrainSub)))
-  // .andThen((new AutoSpinRight(driveTrainSub, 180))
-  // .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
-  // .andThen(new PickLimelightMode(limelightSub,
-  // Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
-  // .andThen(new Targeting(driveTrainSub, limelightSub))
-  // .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750, midStick))
-  // .andThen(new SetIntakeSpeedIn(intakeSub))
-  // .andThen(new TimedInternalMoveIn(tunnelSub, 700))
-  // .andThen(new IntakeStop(intakeSub))
-  // .andThen(new TimedInternalMoveOut(tunnelSub, 250))
-  // .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 600, midStick))
-  // .andThen(new SetIntakeSpeedIn(intakeSub))
-  // .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
-  // .andThen(new WaitCommand(1))
-  // .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
-  // .andThen(new PickLimelightMode(limelightSub,
-  // Constants.LIMELIGHT_OFF_PIPELINE_MODE))
-  // .andThen(new ResetWheels(driveTrainSub))
-  // .andThen(new AutoSpinLeft(driveTrainSub, 155))
-  // .andThen(new ResetWheels(driveTrainSub))
-  // .andThen((new AutoForwardsFast(driveTrainSub, 140))
-  // .alongWith((new SetIntakeSpeedIn(intakeSub))
-  // .andThen(new InSensorCheck(flyAndSensorsSub, true))
-  // .andThen(new SetInternalMoveSpeedIn(tunnelSub))
-  // .andThen(new InSensorCheck(flyAndSensorsSub, false))
-  // .andThen(new TunnelStop(tunnelSub))))
-  // .andThen((new WaitCommand(10)));
-  //
-  // buttons
-  JoystickButton overrideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_LBUTTON);
-  JoystickButton verticalHookUpBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_RBUTTON);
-  JoystickButton verticalHookDownBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_RBUTTON);
-  JoystickButton intakeInBTN = new JoystickButton(rightStick, Constants.INTAKE_IN_RBUTTON);
-  JoystickButton intakeOutBTN = new JoystickButton(rightStick, Constants.INTAKE_OUT_RBUTTON);
-  JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_RBUTTON);
-  JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_RBUTTON);
-  JoystickButton internalFeederOutBTN = new JoystickButton(rightStick,
-      Constants.INTERNAL_MOVER_BACKWARDS_RBUTTON);
-  JoystickButton spitBTN = new JoystickButton(rightStick, Constants.FORCE_SPIT_RBUTTON);
-  JoystickButton shootingBTN = new JoystickButton(rightStick, Constants.QUOTE_AUTO_UNQUOTE_SHOOTING_RBUTTON);
-  JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_MBUTTON);
-  JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_MBUTTON);
-  JoystickButton limelightOnThenTargetBTN = new JoystickButton(midStick,
-      Constants.TARGETING_LIMELIGHT_SIMULTANEOUSM);
-  JoystickButton angleJoystickButton = new JoystickButton(midStick, Constants.ANGLE_JOYSTICK_MBUTTON);
-  JoystickButton autoClimbButton = new JoystickButton(leftStick, Constants.AUTO_CLIMB_BUTTON);
+    Command autoClimb =
+            // pt 1: Beginning steps
+            (new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_1)
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoBackwards(driveTrainSub, 5))
+                    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_2))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_5))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_6))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen((new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
+                            .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10)))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen((new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
+                            .alongWith((new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11)))
+                            .andThen(new StopHooks(vertHooksSub, angleHooksSub)))
+                    // pt 2: Repeat steps 3-11
+                    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_5))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_6))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen((new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
+                            .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10)))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen((new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
+                            .alongWith(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11)))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    // pt 3: Final Steps repeat 3 and 4, then do step 12
+                    .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub))
+                    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_12))
+                    .andThen(new StopHooks(vertHooksSub, angleHooksSub)));
 
-  // other
-  private final SendableChooser<Command> m_chooser = new SendableChooser<>();
+    // Command taxiFourBall = (new ResetWheels(driveTrainSub))
+    // .andThen((new SetIntakeSpeedIn(intakeSub))
+    // .alongWith(new AutoBackwards(driveTrainSub, 2)))
+    // .andThen(new ResetWheels(driveTrainSub))
+    // .andThen((new AutoForwards(driveTrainSub, 60))
+    // .alongWith(new TimedInternalMoveIn(tunnelSub, 250)))
+    // .andThen(new InSensorCheck(flyAndSensorsSub, true)
+    // .raceWith(new WaitCommand(2)))
+    // .andThen((new IntakeStop(intakeSub))
+    // .alongWith(new ResetWheels(driveTrainSub)))
+    // .andThen((new AutoSpinRight(driveTrainSub, 180))
+    // .alongWith(new TimedInternalMoveOut(tunnelSub, 100)))
+    // .andThen(new PickLimelightMode(limelightSub,
+    // Constants.LIMELIGHT_FULL_ON_PIPELINE_MODE))
+    // .andThen(new Targeting(driveTrainSub, limelightSub))
+    // .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 750,
+    // midStick))
+    // .andThen(new SetIntakeSpeedIn(intakeSub))
+    // .andThen(new TimedInternalMoveIn(tunnelSub, 700))
+    // .andThen(new IntakeStop(intakeSub))
+    // .andThen(new TimedInternalMoveOut(tunnelSub, 250))
+    // .andThen(new SetFlySpeed(flyAndSensorsSub, limelightSub, true, 600,
+    // midStick))
+    // .andThen(new SetIntakeSpeedIn(intakeSub))
+    // .andThen(new TimedInternalMoveIn(tunnelSub, 1000))
+    // .andThen(new WaitCommand(1))
+    // .andThen(new SensorTummyStopAll(flyAndSensorsSub, tunnelSub, intakeSub))
+    // .andThen(new PickLimelightMode(limelightSub,
+    // Constants.LIMELIGHT_OFF_PIPELINE_MODE))
+    // .andThen(new ResetWheels(driveTrainSub))
+    // .andThen(new AutoSpinLeft(driveTrainSub, 155))
+    // .andThen(new ResetWheels(driveTrainSub))
+    // .andThen((new AutoForwardsFast(driveTrainSub, 140))
+    // .alongWith((new SetIntakeSpeedIn(intakeSub))
+    // .andThen(new InSensorCheck(flyAndSensorsSub, true))
+    // .andThen(new SetInternalMoveSpeedIn(tunnelSub))
+    // .andThen(new InSensorCheck(flyAndSensorsSub, false))
+    // .andThen(new TunnelStop(tunnelSub))))
+    // .andThen((new WaitCommand(10)));
+    //
+    // buttons
+    JoystickButton overrideButton = new JoystickButton(leftStick, Constants.HUMAN_OVERRIDE_LBUTTON);
+    JoystickButton verticalHookUpBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_UP_RBUTTON);
+    JoystickButton verticalHookDownBTN = new JoystickButton(rightStick, Constants.VERT_HOOK_DOWN_RBUTTON);
+    JoystickButton intakeInBTN = new JoystickButton(rightStick, Constants.INTAKE_IN_RBUTTON);
+    JoystickButton intakeOutBTN = new JoystickButton(rightStick, Constants.INTAKE_OUT_RBUTTON);
+    JoystickButton flywheelSpinUpBTN = new JoystickButton(rightStick, Constants.FLYWHEEL_RBUTTON);
+    JoystickButton internalFeederInBTN = new JoystickButton(rightStick, Constants.INTERNAL_MOVER_FORWARDS_RBUTTON);
+    JoystickButton internalFeederOutBTN = new JoystickButton(rightStick,
+            Constants.INTERNAL_MOVER_BACKWARDS_RBUTTON);
+    JoystickButton spitBTN = new JoystickButton(rightStick, Constants.FORCE_SPIT_RBUTTON);
+    JoystickButton shootingBTN = new JoystickButton(rightStick, Constants.QUOTE_AUTO_UNQUOTE_SHOOTING_RBUTTON);
+    JoystickButton limelightOffBTN = new JoystickButton(midStick, Constants.LIMELIGHT_OFF_MBUTTON);
+    JoystickButton limelightOnBTN = new JoystickButton(midStick, Constants.LIMELIGHT_ON_MBUTTON);
+    JoystickButton limelightOnThenTargetBTN = new JoystickButton(midStick,
+            Constants.TARGETING_LIMELIGHT_SIMULTANEOUSM);
+    JoystickButton angleJoystickButton = new JoystickButton(midStick, Constants.ANGLE_JOYSTICK_MBUTTON);
+    JoystickButton autoClimbButton = new JoystickButton(leftStick, Constants.AUTO_CLIMB_BUTTON);
 
-  public void initialize() {
-    configureButtonBindings();
-    begin();
-    driveTrainSub.setDefaultCommand(driveSticks);
-    vertHooksSub.setDefaultCommand(stableHooks);
-    angleHooksSub.setDefaultCommand(stableHooks);
-    flyAndSensorsSub.setDefaultCommand(StableInternals);
-    resetHooks.execute();
+    // other
+    private final SendableChooser<Command> m_chooser = new SendableChooser<>();
 
-    CommandScheduler.getInstance().onCommandExecute((command) -> {
-      if (!command.getName().equals("RunCommand") && !command.getName().equals("StableHooks")
-          && !command.getName().equals("StableInternals")) {
-        System.out.println("running command " + command.getName());
-      }
-    });
-    CommandScheduler.getInstance().onCommandFinish((command) -> {
-      System.out.println("finished command " + command.getName());
-    });
-    CommandScheduler.getInstance().onCommandInterrupt((command) -> {
-      System.out.println("interrupted command " + command.getName());
-    });
-  }
+    public void initialize() {
+        configureButtonBindings();
+        begin();
+        driveTrainSub.setDefaultCommand(driveSticks);
+        vertHooksSub.setDefaultCommand(stableHooks);
+        angleHooksSub.setDefaultCommand(stableHooks);
+        flyAndSensorsSub.setDefaultCommand(StableInternals);
+        resetHooks.execute();
 
-  private void configureButtonBindings() {
-    angleJoystickButton.whenHeld(angledHookJoystick, false);
-    angleJoystickButton.whenInactive(driveSticks);
-    // verticalHookUpBTN.whileHeld(vertHookJoystick, false);
-    // verticalHookDownBTN.whileHeld();
-    flywheelSpinUpBTN.whileHeld(setFlySpeed);
-    // flywheelSpinUpBTN.whenHeld(shooting);
-    intakeInBTN.whileHeld(intakeFeeder);
-    intakeOutBTN.whileHeld(setIntakeSpeedOut);
-    internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);
-    internalFeederOutBTN.whileHeld(setInternalMoveSpeedOut);
-    limelightOnThenTargetBTN.whenHeld(limelightTargeting);
-    spitBTN.whileHeld(spitBalls);
-    shootingBTN.whileHeld(vertHookJoystick, false);
-    
-    autoClimbButton.whileHeld(autoClimb);
+        CommandScheduler.getInstance().onCommandExecute((command) -> {
+            if (!command.getName().equals("RunCommand") && !command.getName().equals("StableHooks")
+                    && !command.getName().equals("StableInternals")) {
+                System.out.println("running command " + command.getName());
+            }
+        });
+        CommandScheduler.getInstance().onCommandFinish((command) -> {
+            System.out.println("finished command " + command.getName());
+        });
+        CommandScheduler.getInstance().onCommandInterrupt((command) -> {
+            System.out.println("interrupted command " + command.getName());
+        });
+    }
 
-    angleJoystickButton.whenReleased(angleStop);
-    shootingBTN.whenReleased(hookStop);
-    // verticalHookDownBTN.whenReleased(hookStop);
-    flywheelSpinUpBTN.whenReleased(stopFly);
-    intakeInBTN.whenReleased(intakeStop);
-    intakeOutBTN.whenReleased(intakeStop);
-    internalFeederInBTN.whenReleased(tunnelStop);
-    internalFeederOutBTN.whenReleased(tunnelStop);
-    limelightOnThenTargetBTN.whenReleased(setLimelightModeOff);
+    private void configureButtonBindings() {
+        angleJoystickButton.whenHeld(angledHookJoystick, false);
+        angleJoystickButton.whenInactive(driveSticks);
+        // verticalHookUpBTN.whileHeld(vertHookJoystick, false);
+        // verticalHookDownBTN.whileHeld();
+        flywheelSpinUpBTN.whileHeld(setFlySpeed);
+        // flywheelSpinUpBTN.whenHeld(shooting);
+        intakeInBTN.whileHeld(intakeFeeder);
+        intakeOutBTN.whileHeld(setIntakeSpeedOut);
+        internalFeederInBTN.whileHeld(setInternalMoveSpeedIn);
+        internalFeederOutBTN.whileHeld(setInternalMoveSpeedOut);
+        limelightOnThenTargetBTN.whenHeld(limelightTargeting);
+        spitBTN.whileHeld(spitBalls);
+        shootingBTN.whileHeld(vertHookJoystick, false);
 
-    limelightOffBTN.whenPressed(setLimelightModeOff);
-    limelightOnBTN.whenPressed(setLimelightModeOn);
-  }
+        autoClimbButton.whileHeld(autoClimb);
 
-  private void begin() {
-    // m_chooser.setDefaultOption("Default- Frozen", doNotMove);
-    m_chooser.addOption("Only Taxi (R/M/L)", taxiSides);
-    m_chooser.addOption("Two Ball Auto (M)", taxiTwoBallShootMidBall);
-    // m_chooser.addOption("Four Ball", taxiFourBall);
-    m_chooser.setDefaultOption("Two Ball Auto (R/L)", rightLeftBallShoot);
-    m_chooser.addOption("Four Ball Auto (L)", leftBallLeftMacFourBall);
-    m_chooser.addOption("Four Ball Auto (M)", midBallRightMacFourBall);
-    m_chooser.addOption("Four Ball Auto (R)", rightBallRightMacFourBall);
-    Shuffleboard.getTab("User Access").add("Auto", m_chooser);
-  }
+        angleJoystickButton.whenReleased(angleStop);
+        shootingBTN.whenReleased(hookStop);
+        // verticalHookDownBTN.whenReleased(hookStop);
+        flywheelSpinUpBTN.whenReleased(stopFly);
+        intakeInBTN.whenReleased(intakeStop);
+        intakeOutBTN.whenReleased(intakeStop);
+        internalFeederInBTN.whenReleased(tunnelStop);
+        internalFeederOutBTN.whenReleased(tunnelStop);
+        limelightOnThenTargetBTN.whenReleased(setLimelightModeOff);
 
-  public Command getAutonomousCommand() {
-    return m_chooser.getSelected();
-  }
+        limelightOffBTN.whenPressed(setLimelightModeOff);
+        limelightOnBTN.whenPressed(setLimelightModeOn);
+    }
+
+    private void begin() {
+        // m_chooser.setDefaultOption("Default- Frozen", doNotMove);
+        m_chooser.addOption("Only Taxi (R/M/L)", taxiSides);
+        m_chooser.addOption("Two Ball Auto (M)", taxiTwoBallShootMidBall);
+        // m_chooser.addOption("Four Ball", taxiFourBall);
+        m_chooser.setDefaultOption("Two Ball Auto (R/L)", rightLeftBallShoot);
+        m_chooser.addOption("Four Ball Auto (L)", leftBallLeftMacFourBall);
+        m_chooser.addOption("Four Ball Auto (M)", midBallRightMacFourBall);
+        m_chooser.addOption("Four Ball Auto (R)", rightBallRightMacFourBall);
+        Shuffleboard.getTab("User Access").add("Auto", m_chooser);
+    }
+
+    public Command getAutonomousCommand() {
+        return m_chooser.getSelected();
+    }
 
 }

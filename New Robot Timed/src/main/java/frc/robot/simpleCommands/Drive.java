@@ -7,6 +7,7 @@ public class Drive extends CommandBase{
     public interface drivespeedRetriever{
         double getSpeed();
     }
+
     DriveTrain drivetrain;
     drivespeedRetriever forwardRetriever;
     drivespeedRetriever sideRetriever;
@@ -15,7 +16,7 @@ public class Drive extends CommandBase{
         this.forwardRetriever = forwardRetriever;
         this.sideRetriever = sideRetriever;
         this.drivetrain = drivetrain;
-        addRequirements(drivetrain);
+        addRequirements(drivetrain); 
     }
     @Override
     public void execute() {

@@ -25,17 +25,17 @@ public class VertHookJoystick extends CommandBase{
     @Override
     public void execute() {
         axis = hookAxisStick.getRawAxis(1);
-        System.out.println(vertHooks.vertHooksPos());
+        System.out.println(vertHooks.vertHooksPosition());
 
-        if (vertHooks.vertHooksPos() >= -187 && (axis < 0)) { // makes sure you do not over run
+        if (vertHooks.vertHooksPosition() >= -187 && (axis < 0)) { // makes sure you do not over run
             vertHooks.moveVertHooks(axis);
-        } else if (vertHooks.vertHooksPos() < 0 && axis >= 0) {
+        } else if (vertHooks.vertHooksPosition() < 0 && axis >= 0) {
             vertHooks.moveVertHooks(axis);
         } else {
             vertHooks.moveVertHooks(Constants.FREEZE);
         }
         done = true;
-        System.out.println("angle position " + vertHooks.vertHooksPos());
+        System.out.println("angle position " + vertHooks.vertHooksPosition());
     }
 
     

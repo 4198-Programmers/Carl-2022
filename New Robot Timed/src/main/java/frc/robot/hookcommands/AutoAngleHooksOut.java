@@ -17,12 +17,12 @@ public class AutoAngleHooksOut extends CommandBase{
 
     @Override
     public void execute() {
-        arm.moveAngledHooks(Constants.ANGLE_HOOK_SPEED);
+        arm.moveAngledHooks(-Constants.ANGLE_HOOK_SPEED);
         position = arm.anglePosition();
     }
 
     @Override
     public boolean isFinished() {
-        return position >= limit;
+        return position <= limit;
     }
 }

@@ -17,7 +17,7 @@ public class AutoVertHooksIn extends CommandBase{
 
     @Override
     public void execute() {
-        grabbers.moveVertHooks(-Constants.VERT_HOOK_SPEED);
+        grabbers.moveVertHooks(Constants.VERT_HOOK_SPEED);
         position = grabbers.vertHooksPosition();
     }
 

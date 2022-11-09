@@ -26,7 +26,7 @@ public class AngledHookJoystick extends CommandBase {
 
     @Override
     public void execute() {
-        axis = -hookAxisStick.getRawAxis(0);
+        axis = hookAxisStick.getRawAxis(1);
         driveTrain.greenLight(0, 0);
 
         if (angleHooks.anglePosition() >= -97 && (axis < 0)) { // makes sure you do not over run

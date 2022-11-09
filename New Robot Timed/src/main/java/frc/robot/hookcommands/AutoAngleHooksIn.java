@@ -23,6 +23,6 @@ public class AutoAngleHooksIn extends CommandBase{
     
     @Override
     public boolean isFinished() {
-        return position <= limit;
+        return position >= limit;
     }
 }

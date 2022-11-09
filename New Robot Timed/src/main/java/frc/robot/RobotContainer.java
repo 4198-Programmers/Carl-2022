@@ -279,7 +279,7 @@ public class RobotContainer {
 Command autoClimb = 
     //pt 1: Beginning steps
     (new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_1)
-    .andThen(new AutoForwards(driveTrainSub, 5))
+    .andThen(new AutoBackwards(driveTrainSub, 5))
     .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_2))
     .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
     .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
@@ -288,10 +288,10 @@ Command autoClimb =
     .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
     .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
     .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
-        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11))
+    .andThen((new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
+        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10)))
+    .andThen((new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
+        .alongWith(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11)))
     //pt 2: Repeat steps 3-11
     .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
     .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))
@@ -300,10 +300,10 @@ Command autoClimb =
     .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_7))
     .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_8))
     .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_9))
-    .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
-        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10))
-    .andThen(new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
-    .andThen(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11))
+    .andThen((new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_10))
+        .alongWith(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_10)))
+    .andThen((new AutoVertHooksOut(vertHooksSub, Constants.VERT_HOOKS_STEP_11))
+        .alongWith(new AutoAngleHooksIn(angleHooksSub, Constants.ANGLE_HOOKS_STEP_11)))
     //pt 3: Final Steps repeat 3 and 4, then do step 12
     .andThen(new AutoVertHooksIn(vertHooksSub, Constants.VERT_HOOKS_STEP_3))
     .andThen(new AutoAngleHooksOut(angleHooksSub, Constants.ANGLE_HOOKS_STEP_4))

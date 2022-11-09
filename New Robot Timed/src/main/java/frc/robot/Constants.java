@@ -75,7 +75,7 @@ public class Constants {
     public static final double VERT_HOOK_SPEED = 0.5; //Vertical Hook Speed
     
     public static final double ANGLE_HOOK_LOWER_LIMIT = -97; //Lower limit for angled hooks
-    public static final double ANGLE_HOOK_UPPER_LIMIT = 0; //Upper limit for angled hooks
+    public static final double ANGLE_HOOK_UPPER_LIMIT = 20; //Upper limit for angled hooks
 
     public static final double VERT_HOOK_LOWER_LIMIT = 0;
     public static final double VERT_HOOK_UPPER_LIMIT = -187; 

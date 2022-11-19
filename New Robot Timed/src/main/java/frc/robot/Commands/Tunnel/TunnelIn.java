@@ -21,11 +21,4 @@ public class TunnelIn extends CommandBase {
         shootingthing.tunnelSpeed(speed);
 
     }
-
-    @Override
-    public void end(boolean interrupted) {
-        
-        shootingthing.tunnelSpeed(0);
-
-    }
 }

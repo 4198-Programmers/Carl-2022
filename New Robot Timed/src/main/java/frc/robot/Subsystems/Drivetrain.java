@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.Subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -32,7 +32,24 @@ public class Drivetrain extends SubsystemBase {
     }
 
     public double findPosition(){
-
-        
+        return((frontLMEnc.getPosition() + frontRMEnc.getPosition() + backLMEnc.getPosition() + backRMEnc.getPosition())/4);
     }
+
+    public void resetPosition(){
+        
+        frontLMEnc.setPosition(0);
+        frontRMEnc.setPosition(0);
+        backLMEnc.setPosition(0);
+        backRMEnc.setPosition(0);
+
+    }
+
+    public void oliverscrazycoolautocodedotcom(double rightSpeed, double leftSpeed){
+
+        leftMotors.set(leftSpeed);
+        rightMotors.set(rightSpeed);
+
+    }
+
+    
 }

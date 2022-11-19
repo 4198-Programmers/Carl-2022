@@ -29,5 +29,9 @@ public class Constants {
     public static final double LOWER_LIMIT = 0;
     public static final int FOLLOWER_HOOK_ID = 0;
     public static final int VERTICAL_HOOK_ID = 0;
+    public static final double UPPER_VERT_LIMIT = 0;
+    public static final double LOWER_VERT_LIMIT = 0;
+    public static final int VERT_HOOKS_BUTTON = 0;
+    public static final int ANGLE_HOOKS_BUTTON = 0;
     
 }

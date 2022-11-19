@@ -9,10 +9,12 @@ import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.IntakeSpeed;
 import frc.robot.Commands.ShootCommand;
 import frc.robot.Commands.TunnelSpeed;
+import frc.robot.Subsystems.AnglesHooks;
 import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Subsystems.IntakeThing;
 import frc.robot.Subsystems.ShootingThing;
 import frc.robot.Subsystems.TunnelThing;
+import frc.robot.Subsystems.VerticalHooks;
 import frc.robot.Commands.AutoDrive;
 
 
@@ -27,6 +29,8 @@ public class RobotContainer {
   IntakeThing intakething;
   TunnelThing tunnelthing;
   ShootCommand shootcommand;
+  AnglesHooks angleshooks;
+  VerticalHooks verticalHooks;
 
   // ungrouped commands
   
@@ -38,6 +42,7 @@ public class RobotContainer {
   TunnelSpeed tunnelout = new TunnelSpeed(Constants.TUNNEL_SPEED_NOT_ID, -1, tunnelthing);
   ShootCommand shootin = new ShootCommand(Constants.SHOOT_SPEED_NOT_ID, -1, shootingthing);
 
+
   // command groups
 //RunCommand drivesticks = new RunCommand(()-> drivetrain.driveBoy(middleJoystick.getRawAxis(0), leftJoystick.getRawAxis(1)), drivetrain);
   //Buttons
@@ -48,6 +53,9 @@ public class RobotContainer {
   JoystickButton tunnelOutButton = new JoystickButton(rightJoystick, Constants.TUNNEL_OUT_BUTTON_ID);
   JoystickButton shootOutButton = new JoystickButton(rightJoystick, Constants.SHOOT_OUT_BUTTON_ID);
   JoystickButton shootInButton = new JoystickButton(rightJoystick, Constants.SHOOT_IN_BUTTON_ID);
+  JoystickButton vertHooksButton = new JoystickButton(rightJoystick, Constants.VERT_HOOKS_BUTTON);
+  JoystickButton angleHooksButton = new JoystickButton(middleJoystick, Constants.ANGLE_HOOKS_BUTTON);
+  
   
   // others
   private final SendableChooser<Command> m_chooser = new SendableChooser<>();

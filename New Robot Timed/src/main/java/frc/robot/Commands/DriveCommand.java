@@ -4,7 +4,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Subsystems.Drivetrain;
 
 public class DriveCommand extends CommandBase {
-    
+    /**This is a recipe.  As long as the thing it is called with has everything in the recipe, it can be used.  
+     * The same ingrediants can use multiple resipes as long as they can complete every part of the recipe.
+     */
     public interface speedRetriever{
 
         double getSpeed();

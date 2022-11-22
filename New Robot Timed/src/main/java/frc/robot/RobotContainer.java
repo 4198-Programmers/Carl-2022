@@ -8,6 +8,10 @@ Another note:
   If you are unsure if someone would understand, comment on it.  
   Make a comment(like this one) and explain what it means.
 
+  Also make sure to keep things organized. You want to make sure that you can find everything easily.  Put things in
+  folders to keep things that share characteristics together.  Or you can keep things seperated through comments and
+  group constants together.
+
 If you have any questions, do not be afraid to ask me.  I will help you figure it out and if I don't know, I will
 figure it out with you.
 */

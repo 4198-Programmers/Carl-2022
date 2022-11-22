@@ -8,13 +8,17 @@ import frc.Constants;
 import frc.robot.Commands.DriveCommand;
 import frc.robot.Commands.IntakeSpeed;
 import frc.robot.Commands.ShootCommand;
+import frc.robot.Commands.StopAngledHooks;
 import frc.robot.Commands.TunnelSpeed;
+import frc.robot.Commands.VertHooksCommand;
+import frc.robot.Commands.VerticalHookStop;
 import frc.robot.Subsystems.AnglesHooks;
 import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Subsystems.IntakeThing;
 import frc.robot.Subsystems.ShootingThing;
 import frc.robot.Subsystems.TunnelThing;
 import frc.robot.Subsystems.VerticalHooks;
+import frc.robot.Commands.AngleHookCommand;
 import frc.robot.Commands.AutoDrive;
 
 
@@ -29,7 +33,7 @@ public class RobotContainer {
   IntakeThing intakething;
   TunnelThing tunnelthing;
   ShootCommand shootcommand;
-  AnglesHooks angleshooks;
+  AnglesHooks anglesHooks;
   VerticalHooks verticalHooks;
 
   // ungrouped commands
@@ -75,6 +79,12 @@ public class RobotContainer {
     tunnelOutButton.whileHeld(tunnelout);
     shootOutButton.whileHeld(shootout);
     shootInButton.whileHeld(shootin);
+
+    vertHooksButton.whenHeld(new VertHooksCommand(()->middleJoystick.getRawAxis(1), verticalHooks), false);
+    angleHooksButton.whenHeld(new AngleHookCommand(anglesHooks, ()->rightJoystick.getRawAxis(1)), false);
+
+    vertHooksButton.whenReleased(new VerticalHookStop(verticalHooks));
+    angleHooksButton.whenReleased(new StopAngledHooks(anglesHooks));
    
 
 }

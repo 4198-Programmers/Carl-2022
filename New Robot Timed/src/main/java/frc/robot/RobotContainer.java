@@ -49,7 +49,7 @@ public class RobotContainer {
   IntakeSpeed intakeout = new IntakeSpeed(intakething, Constants.INTAKE_SPEED_NOT_ID, -1);
   TunnelSpeed tunnelout = new TunnelSpeed(Constants.TUNNEL_SPEED_NOT_ID, -1, tunnelthing);
   ShootCommand shootin = new ShootCommand(Constants.SHOOT_SPEED_NOT_ID, -1, shootingthing);
-  AutoDriveGoCrazyGoStupid forbiddenCommand = new AutoDriveGoCrazyGoStupid(3, Drivetrain noot = new Drivetrain());
+  AutoDriveGoCrazyGoStupid forbiddenCommand = new AutoDriveGoCrazyGoStupid(3, drivetrain);
   AutoDriveForward forwardAuto = new AutoDriveForward(5, drivetrain);
 
 
@@ -65,6 +65,8 @@ public class RobotContainer {
   JoystickButton shootInButton = new JoystickButton(rightJoystick, Constants.SHOOT_IN_BUTTON_ID);
   JoystickButton vertHooksButton = new JoystickButton(rightJoystick, Constants.VERT_HOOKS_BUTTON);
   JoystickButton angleHooksButton = new JoystickButton(middleJoystick, Constants.ANGLE_HOOKS_BUTTON);
+  JoystickButton forbiddenCommandButton = new JoystickButton(rightJoystick, Constants.SILLY_COMMAND_BUTTON_ID);
+  JoystickButton forwardCommandButton = new JoystickButton(rightJoystick ,Constants.FORWARD_COMMAND_BUTTON_ID);
   
   
   
@@ -92,6 +94,9 @@ public class RobotContainer {
 
     vertHooksButton.whenReleased(new VerticalHookStop(verticalHooks));
     angleHooksButton.whenReleased(new StopAngledHooks(anglesHooks));
+
+    forbiddenCommandButton.whenPressed(forbiddenCommand);
+    forwardCommandButton.whenPressed(forwardAuto);
    
 
 }

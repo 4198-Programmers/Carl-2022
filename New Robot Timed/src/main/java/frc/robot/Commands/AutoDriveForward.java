@@ -21,7 +21,7 @@ public class AutoDriveForward extends CommandBase {
     Timer timer;
     double time;
     
-    public void AutoDrive(double time, Drivetrain drivetrain){
+    public AutoDriveForward(double time, Drivetrain drivetrain){
 
         this.time = time;
         this.drivetrain = drivetrain;

@@ -10,7 +10,7 @@ public class AutoDriveGoCrazyGoStupid extends CommandBase {
     Timer timer;
     double time;
 
-    public void AutoDrive(double time, Drivetrain drivetrain){
+    public AutoDriveGoCrazyGoStupid(double time, Drivetrain drivetrain){
         this.time = time;
         this.drivetrain = drivetrain;
         addRequirements(drivetrain);

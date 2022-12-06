@@ -55,4 +55,6 @@ public class Constants {
     //Angles Limits
     public static final double OUTER_LIMIT = 0;
     public static final double LOWER_LIMIT = 0;
+    public static final int SILLY_COMMAND_BUTTON_ID = 0;
+    public static final int FORWARD_COMMAND_BUTTON_ID = 0;
 }

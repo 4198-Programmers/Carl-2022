@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.sql.Time;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -20,6 +22,8 @@ import frc.robot.Subsystems.TunnelThing;
 import frc.robot.Subsystems.VerticalHooks;
 import frc.robot.Commands.AngleHookCommand;
 import frc.robot.Commands.AutoDrive;
+import frc.robot.Commands.AutoDriveForward;
+import frc.robot.Commands.AutoDriveGoCrazyGoStupid;
 
 
 public class RobotContainer {
@@ -45,6 +49,8 @@ public class RobotContainer {
   IntakeSpeed intakeout = new IntakeSpeed(intakething, Constants.INTAKE_SPEED_NOT_ID, -1);
   TunnelSpeed tunnelout = new TunnelSpeed(Constants.TUNNEL_SPEED_NOT_ID, -1, tunnelthing);
   ShootCommand shootin = new ShootCommand(Constants.SHOOT_SPEED_NOT_ID, -1, shootingthing);
+  AutoDriveGoCrazyGoStupid forbiddenCommand = new AutoDriveGoCrazyGoStupid(3, Drivetrain noot = new Drivetrain());
+  AutoDriveForward forwardAuto = new AutoDriveForward(5, drivetrain);
 
 
   // command groups
@@ -59,6 +65,7 @@ public class RobotContainer {
   JoystickButton shootInButton = new JoystickButton(rightJoystick, Constants.SHOOT_IN_BUTTON_ID);
   JoystickButton vertHooksButton = new JoystickButton(rightJoystick, Constants.VERT_HOOKS_BUTTON);
   JoystickButton angleHooksButton = new JoystickButton(middleJoystick, Constants.ANGLE_HOOKS_BUTTON);
+  
   
   
   // others

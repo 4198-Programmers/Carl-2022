@@ -6,23 +6,38 @@ import frc.robot.subsystems.DriveTrain;
 
 
 public class DriveCommand extends CommandBase {
-    Joystick straight;
-    Joystick sidetoside;
+    private double straight;
+    private double sidetoside;
+    private double travelDistance;
+
 
     private DriveTrain drive;
 
-    public DriveCommand(Joystick straight,Joystick sidetoside,DriveTrain drive)
+    public DriveCommand(DriveTrain drive,double sidetoside, double straight,double travelDistance)
     {
         this.straight = straight;
         this.sidetoside = sidetoside;
         this.drive = drive;
+        this.travelDistance = travelDistance; 
         addRequirements(drive);
+    }
+
+    public DriveCommand(Joystick leftJoystick, Joystick middlejoystick, DriveTrain driveTrain) {
     }
 
     @Override
     public void execute() {
-        drive.drive(sidetoside.getRawAxis(0), straight.getRawAxis(1));
+        drive.drive(sidetoside, straight);
         // TODO Auto-generated method stub
     }
 
+    @Override
+    public boolean isFinished() {
+        return DriveTrain.getPosition() >= travelDistance; 
+    }
+
+    @Override
+    public void initialize(){
+        driveTrain.resetposition();
+    }
 }

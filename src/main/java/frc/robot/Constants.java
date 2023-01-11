@@ -13,22 +13,25 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public static int FRONT_RIGHT_DEVICE_ID = 3;
-    public static int FRONT_LEFT_DEVICE_ID = 4;
-    public static int BACK_RIGHT_DEVICE_ID = 1;
-    public static int BACK_LEFT_DEVICE_ID = 2;
+    public static final int FRONT_RIGHT_DEVICE_ID = 3;
+    public static final int FRONT_LEFT_DEVICE_ID = 4;
+    public static final int BACK_RIGHT_DEVICE_ID = 1;
+    public static final int BACK_LEFT_DEVICE_ID = 2;
 
-    public static double CONVERSION_FACTOR = 1/12.75;
+    public static final double CONVERSION_FACTOR = 1/12.75;
 
-    public static double LOOP_RAMP_RATE = 0.1;
+    public static final double LOOP_RAMP_RATE = 0.1;
 
-    public static double DRIVE_SPEED = 1;
+    public static final double DRIVE_SPEED = 1;
 
-    public static int LEFT_JOYSTICK_ID = 1;
-    public static int MIDDLE_JOYSTICK_ID = 2;
-    public static int RIGHT_JOYSTICK_ID = 3;
+    public static final int LEFT_JOYSTICK_ID = 1;
+    public static final int MIDDLE_JOYSTICK_ID = 2;
+    public static final int RIGHT_JOYSTICK_ID = 3;
 
     public static String drive = "Drive";
 
+    public static final double WIDTH_OF_JAKE = 6.88976378;
+    public static final double RADIUS_WHEELS = 4.94188591; 
+    public static final double JAKE_WHEELS = 2.36220472;
     }
 

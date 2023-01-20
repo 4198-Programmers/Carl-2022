@@ -6,8 +6,8 @@ package frc.robot;
 
 public final class Constants {
 
-    public static final byte PRIMARY_MOTOR_ID = 10;
-    public static final byte SECONDARY_MOTOR_ID = 12;
+    public static final byte PRIMARY_MOTOR_ID = 0;
+    public static final byte SECONDARY_MOTOR_ID = 1;
 
     public static final byte PRIMARY_MOTOR_TEST_JOYSTICK_PORT = 0;
     public static final byte SECONDARY_MOTOR_TEST_JOYSTICK_PORT = 1;

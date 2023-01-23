@@ -20,5 +20,7 @@ public final class Constants {
     public static final byte TURRET_ARM_DOWN_BUTTON = 4;
     public static final byte TURRET_ROTATE_LEFT_BUTTON = 5;
     public static final byte TURRET_ROTATE_RIGHT_BUTTON = 6;
+    public static final byte PINCHER_PNEUMATIC_PINCH_IN_BUTTON = 7;
+    public static final byte PINCHER_PNEUMATIC_PINCH_OUT_BUTTON = 8;
 
 }

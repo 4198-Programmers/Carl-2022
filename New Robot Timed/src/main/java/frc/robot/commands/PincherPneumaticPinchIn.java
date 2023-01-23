@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.PincherPneumatic;
 
@@ -16,7 +17,7 @@ public class PincherPneumaticPinchIn extends CommandBase {
 
     @Override
     public void execute() {
-        pincherPneumatic.pincerSolenoidActivate(true);
+        pincherPneumatic.pincerSolenoidActivate(Value.kForward);
     }
 
 }

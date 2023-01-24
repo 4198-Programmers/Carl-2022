@@ -19,6 +19,7 @@ public final class Constants {
     public static int BACK_LEFT_DEVICE_ID = 2;
 
     public static double CONVERSION_FACTOR = 1/12.75;
+    public static double CONVERSION = //???
 
     public static double LOOP_RAMP_RATE = 0.1;
 
@@ -30,7 +31,10 @@ public final class Constants {
     
     public static final double JAKE_WHEELS = 5.75;
 
-
+    public static int BOTTOM_ID = 10;
+    public static int LEG_ID = 11;
+    public static int ARM_ID = 12;
+    public static int HAND_ID = 13;
 
     public static String drive = "Drive";
 

@@ -9,7 +9,7 @@ public class AutoCommand extends CommandBase{
     private boolean complete = false;
     public AutoCommand(DriveTrain driveTrain){
         this.driveTrain = driveTrain;
-
+        addRequirements(driveTrain);
     }
 
     @Override

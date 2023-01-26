@@ -1,22 +1,17 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class TurretRotationMotor extends SubsystemBase {
 
-    private CANSparkMax turretRotationMotor = new CANSparkMax(Constants.TURRET_ROTATION_MOTOR_ID, MotorType.kBrushless);
+    private TalonSRX turretRotationMotor = new TalonSRX(Constants.TURRET_ROTATION_MOTOR_ID);
 
-    public TurretRotationMotor() {
-
-        turretRotationMotor.setOpenLoopRampRate(0.1);
-
-    }
+   
 
     public void turretRotationMotorActivate(double speed) {
-        turretRotationMotor.set(speed);
+        turretRotationMotor.set(TalonSRXControlMode.PercentOutput, speed);
     }
 }

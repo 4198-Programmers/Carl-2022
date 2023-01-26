@@ -1,23 +1,17 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import com.ctre.phoenix.motorcontrol.TalonSRXControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class PincherMotor extends SubsystemBase {
 
-    private CANSparkMax pincherMotor = new CANSparkMax(Constants.PINCHER_MOTOR_ID, MotorType.kBrushless);
+    private TalonSRX pincherMotor = new TalonSRX(Constants.PINCHER_MOTOR_ID);
 
-    public PincherMotor() {
-
-        pincherMotor.setOpenLoopRampRate(0.1);
-
-    }
 
     public void pincherMotorActivate(double speed) {
-        pincherMotor.set(speed);
+        pincherMotor.set(TalonSRXControlMode.PercentOutput, speed);
     }
 
 }
